@@ -1,0 +1,40 @@
+import { createRouter, createWebHashHistory } from "vue-router";
+
+import catalogoRouter from '@/modules/catalogo/router'
+
+const routes = [
+    {
+        path: '/',
+        name: 'home',
+        component: () => import(/* webpackChunkName: "home" */ '@/pages/Home'),
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: () => import(/* webpackChunkName: "about" */ '@/pages/About'),
+    },
+    {
+        path: '/profile',
+        name: 'profile',
+        component: () => import(/* webpackChunkName: "profile" */ '@/modules/auth/pages/PerfilCliente'),
+    },
+    {
+        path: '/catalogo',
+        ...catalogoRouter
+    },
+    {
+        // Cualquier Path que no sea ningino de los declarados iria al AboutPage
+        path: '/:pathMatch(.*)*',
+        name: 'notFound',
+        component: () => import(/* webpackChunkName: "NoPageFound" */ '@/modules/shared/pages/NoPageFound'),
+        // redirect: '/home'
+    },
+]
+
+
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes,
+})
+
+export default router
