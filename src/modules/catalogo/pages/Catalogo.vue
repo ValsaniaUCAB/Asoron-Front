@@ -1,15 +1,14 @@
 <template>
     <div>Soy Catalogo</div>
-    <h1 v-if="!ronList">Cargando... Por favor Espere</h1>
-    <div v-else>
-        <div class="prod mx-5">Productos
+    <div>
+        <div class="mx-5">Productos
             <div class="px-2 pt-2">
-                <input type="text" class="form-control" placeholder="Buscar Entrada" v-model="term">
+                <input type="text" placeholder="Buscar Entrada" v-model="term">
             </div>
         </div>
         <div class="d-flex">
             <div class="col-2">
-                Filtos
+                Filtros
             </div>
             <div class=" col d-flex">
                 <li v-for="ron in ronesByTerm">
@@ -30,7 +29,6 @@ export default {
     },
     data() {
         return {
-            ronList: null,
             term: ''
         }
     },
@@ -47,7 +45,6 @@ export default {
         }
     },
     mounted() {
-        this.ronList = this.rones
     }
 }
 </script>

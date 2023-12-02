@@ -2,7 +2,7 @@
     <Navbar />
     <div class="container">Soy Layout de Catalogo</div>
     <div v-if="isLoading">
-        <div class="col-3 alert-info text-center mt-5">
+        <div class="alert-info text-center mt-5">
             Espere por favor
             <h3 class="mt-2">
                 <i class="fa fa-spin fa-sync"></i>

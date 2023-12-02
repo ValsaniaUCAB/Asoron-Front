@@ -1,5 +1,4 @@
 <template>
-    <div class="container"></div>
     <h1>Detalle</h1>
     <h1 v-if="!ronDetallado">Cargando... Por favor Espere</h1>
     <div v-else>
@@ -47,7 +46,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 img {
     height: 500px;
     width: 500px;
