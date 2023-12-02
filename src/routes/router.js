@@ -1,10 +1,12 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import catalogoRouter from '@/modules/catalogo/router'
+import eventosRouter from '@/modules/eventos/router'
+import authRouter from '@/modules/auth/router'
 
 const routes = [
     {
-        path: '/',
+        path: '',
         name: 'home',
         component: () => import(/* webpackChunkName: "home" */ '@/pages/Home'),
     },
@@ -16,11 +18,19 @@ const routes = [
     {
         path: '/profile',
         name: 'profile',
-        component: () => import(/* webpackChunkName: "profile" */ '@/modules/auth/pages/PerfilCliente'),
+        component: () => import(/* webpackChunkName: "profile" */ '@/modules/auth/layouts/ProfileLayout'),
     },
     {
         path: '/catalogo',
         ...catalogoRouter
+    },
+    {
+        path: '/eventos',
+        ...eventosRouter
+    },
+    {
+        path: '/',
+        ...authRouter
     },
     {
         // Cualquier Path que no sea ningino de los declarados iria al AboutPage

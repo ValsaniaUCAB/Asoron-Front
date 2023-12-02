@@ -1,20 +1,31 @@
 <template>
     <header>
-        <router-link :to="{ name: 'home' }"><img class="logo" src="@/modules/shared/assets/navbar/ASORON.svg"></router-link>
-        <div class="center">
-            <ul>
-                <li><router-link :to="{ name: 'home' }">Inicio</router-link></li>
-                <li><router-link :to="{ name: 'catalogo' }">Catalogo</router-link></li>
-                <li><router-link :to="{ name: 'about' }">Sobre Nosotros</router-link></li>
-            </ul>
-        </div>
-        <div class="right">
-            <ul>
-                <li><img class="lupa" src="@/modules/shared/assets/navbar/lupa.svg"></li>
-                <li><img class="shopping-bag" src="@/modules/shared/assets/navbar/shopping-bag.svg"></li>
-                <li><router-link :to="{ name: 'profile' }"><img class="user"
-                            src="@/modules/shared/assets/navbar/user.svg"></router-link></li>
-            </ul>
+        <div class="wrapper">
+            <router-link :to="{ name: 'home' }"><img class="logo"
+                    src="@/modules/shared/assets/navbar/ASORON.svg"></router-link>
+            <nav class="center">
+                <ul>
+                    <li><router-link :to="{ name: 'home' }">Inicio</router-link></li>
+                    <li><router-link :to="{ name: 'catalogo' }">Catalogo</router-link></li>
+                    <li><router-link :to="{ name: 'eventos' }">Eventos</router-link></li>
+                    <li><router-link :to="{ name: 'about' }">Sobre Nosotros</router-link></li>
+                </ul>
+            </nav>
+            <nav class="right">
+                <ul>
+                    <li>
+                        <img class="lupa" src="@/modules/shared/assets/navbar/lupa.svg">
+                    </li>
+                    <li>
+                        <img class="shopping-bag" src="@/modules/shared/assets/navbar/shopping-bag.svg">
+                    </li>
+                    <li>
+                        <router-link :to="{ name: 'login' }">
+                            <img class="user" src="@/modules/shared/assets/navbar/user.svg">
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </header>
 </template>
@@ -28,57 +39,63 @@ export default {
 
 <style>
 header {
-    height: 124px;
     width: 100%;
+    height: 92px;
     position: fixed;
     padding: 10px;
     background-color: #31212b;
     color: white;
     overflow: hidden;
+    z-index: 999;
+    top: 0;
 }
 
-.center {
-    float: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.right {
+header .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 1em 0;
+}
+
+nav {
     float: right;
-    margin-right: 43px;
-    margin-top: 27px;
 }
 
 li {
     float: left;
-    padding: 10px;
+    padding: 0 20px;
 
 }
 
 
 
 ul {
-    position: static;
-    list-style-type: none;
-    overflow: hidden;
+    display: block;
+    list-style: none;
+    gap: 1em;
+
 }
 
 .logo {
-    display: block;
-    margin-left: 43px;
-    margin-top: 43px;
+    float: left;
+    margin: 0 10px;
+    display: flex;
     width: 145px;
     height: 40px;
-    float: left;
+    position: relative;
 }
 
 
 li a {
     text-decoration: none;
     color: #fdd08d;
-    margin: 0 10px;
+    margin: 0;
 }
 
 a.router-link-exact-active {
