@@ -10,7 +10,7 @@
             <div class="col-2">
                 Filtros
             </div>
-            <div class=" col d-flex">
+            <div class="d-flex">
                 <li v-for="ron in ronesByTerm">
                     <Ron :ron="ron" />
                 </li>
