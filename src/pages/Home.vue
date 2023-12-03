@@ -29,7 +29,7 @@
             </div>
             <div v-else>
                 <div class="d-flex">
-                    <li v-for="ron in ronList">
+                    <li v-for="ron in ronList" :key="ron.id">
                         <RonMinimal :ron="ron" />
                     </li>
                 </div>
