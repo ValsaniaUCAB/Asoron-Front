@@ -47,6 +47,10 @@ img {
     margin: 10px;
     text-decoration: none;
     color: black;
+    transition: transform 0.5s;
+}
+.tarjeta:hover {
+    transform: scale(1.05);
 }
 
 .tarjeta-right h2 {
