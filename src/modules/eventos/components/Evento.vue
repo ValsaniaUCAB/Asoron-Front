@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped >
 .cuadro {
     text-align: left;
     line-height: 100%;
@@ -118,23 +118,23 @@ img {
     user-select: none;
     -webkit-user-select: none;
     vertical-align: middle;
-}
 
-.button-18:hover,
-.button-18:focus {
-    background-color: #e6bd7f;
-    color: #000;
-}
+    &:hover,
+    &:focus {
+        background-color: #e6bd7f;
+        color: #000;
+    }
 
-.button-18:active {
-    background: #c09e6a;
-    color: rgb(255, 255, 255, .7);
-}
+    &:active {
+        background: #c09e6a;
+        color: rgb(255, 255, 255, .7);
+    }
 
-.button-18:disabled {
-    cursor: not-allowed;
-    background: rgba(0, 0, 0, .08);
-    color: rgba(0, 0, 0, .3);
+    &:disabled {
+        cursor: not-allowed;
+        background: rgba(0, 0, 0, .08);
+        color: rgba(0, 0, 0, .3);
+    }
 }
 
 
