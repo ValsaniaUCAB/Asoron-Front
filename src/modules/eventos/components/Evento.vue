@@ -7,12 +7,13 @@
             <img src="../assets/placeholder evento 1.webp">
 
             <div class="d-flex flex-column mx-3 my-2 tarjeta-right">
-                <h2>{{ evento.nombre.toUpperCase() }}</h2>
-                <h4>Del {{ evento.fechaIni }} al {{ evento.fechaFin }}</h4>
-                <p>{{ evento.descripcion }}</p>
-                <span>Direccion: {{ evento.direccion }}</span>
-                <button id="tarjeta-button" class="button-18">RESERVAR</button>
-
+                <h1>{{ evento.nombre.toUpperCase() }}</h1>
+                <div class="content">
+                    <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4>
+                    <p>{{ evento.descripcion }}</p>
+                    <span>Direccion: {{ evento.direccion }}</span>
+                </div>
+                <button class="button-18">RESERVAR</button>
             </div>
         
     </router-link>
@@ -53,41 +54,52 @@ img {
     transform: scale(1.05);
 }
 
-.tarjeta-right h2 {
-    color: #31212b;
-    font-family: Inter;
-    font-weight: 800;
-    text-align: center;
-    margin: auto;
-    margin-bottom: 10px ;
+.tarjeta-right {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
-.tarjeta-right h4 {
+.tarjeta-right h1 {
+        color: #31212b;
+        font-family: Inter;
+        font-weight: 800;
+        text-align: center;
+        margin-top: auto;
+    }
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+}
+.content h4 {
     font-family: Inter;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 200;
     text-align: center;
-    margin: 0 auto;
+    margin-bottom: 8px;
     width: 70%
 }
-
-.tarjeta-right p {
+.content p {
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    width: 70%;
+}
+.content span {
+    font-size: 14px;
     font-family: Inter;
     font-weight: 400;
     text-align: center;
-    margin: auto auto 10px auto;
-    width: 70%;
-}
-.tarjeta-right span {
-    font-family: Inter;
-    font-weight: 400;
-    text-align: center;
-    margin: 10px auto;
-    width: 70%;
+    width: 50%;
 }
 
-#tarjeta-button {
+.tarjeta-right button {
     width: 120px;
-    margin: auto;
+    margin-top: 10px ;
     margin-bottom: auto;
 }
 
