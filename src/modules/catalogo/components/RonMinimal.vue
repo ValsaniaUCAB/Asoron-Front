@@ -39,9 +39,11 @@ export default {
     padding: 30px 40px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
+    transition: transform 0.5s;
 
     &:hover {
         box-shadow: 0 0 20px rgba(253, 208, 141, 0.9);
+        transform: scale(1.05);
     }
 }
 
