@@ -16,22 +16,55 @@
         <h1 class="diario-ronero-text">Disponible Ya! <br /> el <span style="color:#FDD08D">DiarioRonero</span> </h1>
         <button id="diario-ronero-button" class="button-18">Click aqui</button>
     </div>
-    <div id="catalog-wrapper"></div>
+    <div id="catalog-wrapper">
+        <h1 class="titulo-catalogo d-flex">Los Rones Mas Exquisitos</h1>
+        <div class="mini-catalog">
+            <div v-if="isLoading">
+                <div class="wait-text alert-info text-center mt-5">
+                    Espere por favor
+                    <h3 class="mt-2">
+                        <i class="fa fa-spin fa-sync"></i>
+                    </h3>
+                </div>
+            </div>
+            <div v-else>
+                <div class="d-flex">
+                    <li v-for="ron in ronList">
+                        <RonMinimal :ron="ron" />
+                    </li>
+                </div>
+            </div>
+        </div>
+        <button class="button-18 catalogo">Ver mas</button>
+    </div>
     <footer></footer>
 </template>
 
 <script>
 
 import Navbar from '@/modules/shared/components/Navbar.vue'
+import { mapActions, mapState } from 'vuex'
+import RonMinimal from '@/modules/catalogo/components/RonMinimal'
 
 export default {
     components: {
-        Navbar
+        Navbar,
+        RonMinimal
+    },
+    computed: {
+        ...mapState('catalogo', ['isLoading', 'ronList'])
+    },
+    methods: {
+        ...mapActions('catalogo', ['cargarRones'])
+    },
+    created() {
+        this.cargarRones()
     }
+
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .banner {
     margin-top: 92px;
     overflow-x: hidden;
@@ -47,7 +80,6 @@ export default {
 .banner div {
     width: 50%;
     float: right;
-
     margin-left: auto;
     position: relative;
     text-align: end;
@@ -95,6 +127,11 @@ export default {
     user-select: none;
     -webkit-user-select: none;
     vertical-align: middle;
+
+    &.catalogo {
+        font-size: 16px;
+        font-weight: normal;
+    }
 }
 
 .button-18:hover,
@@ -143,7 +180,6 @@ export default {
     align-items: center;
 }
 
-
 .diario-ronero-text {
     position: relative;
     color: #fff;
@@ -167,10 +203,30 @@ export default {
 
 
 #catalog-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
     width: 100%;
     height: 820px;
     background-color: #fff;
+    padding: 82px;
+}
+
+.wait-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+}
+
+.titulo-catalogo {
+    font-weight: bold;
+    width: 100%;
+    text-align: left
+}
+
+li {
+    list-style: none;
 }
 
 footer {
