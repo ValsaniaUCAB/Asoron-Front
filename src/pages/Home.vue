@@ -97,7 +97,6 @@ export default {
     transform: translate(-50%, -50%);
 
     text-align: center;
-
 }
 
 .button-18 {
@@ -132,42 +131,42 @@ export default {
         font-size: 16px;
         font-weight: normal;
     }
-}
 
-.button-18:hover,
-.button-18:focus {
-    background-color: #e6bd7f;
-    color: #000;
-}
+    &:hover,
+    :focus {
+        background-color: #e6bd7f;
+        color: #000;
+    }
 
-.button-18:active {
-    background: #c09e6a;
-    color: rgb(255, 255, 255, .7);
-}
+    &:active {
+        background: #c09e6a;
+        color: rgb(255, 255, 255, .7);
+    }
 
-.button-18:disabled {
-    cursor: not-allowed;
-    background: rgba(0, 0, 0, .08);
-    color: rgba(0, 0, 0, .3);
+    &:disabled {
+        cursor: not-allowed;
+        background: rgba(0, 0, 0, .08);
+        color: rgba(0, 0, 0, .3);
+    }
 }
 
 #spacer {
     position: relative;
     width: 100%;
     height: 169px;
-}
 
-#spacer h1 {
-    position: absolute;
-    color: #000;
-    font-family: 'Inter', sans-serif;
-    text-align: center;
-    font-weight: 800;
-    margin: 0;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    & h1 {
+        position: absolute;
+        color: #000;
+        font-family: 'Inter', sans-serif;
+        text-align: center;
+        font-weight: 800;
+        margin: 0;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
 }
 
 #diario-ronero {
@@ -200,8 +199,6 @@ export default {
 
 }
 
-
-
 #catalog-wrapper {
     display: flex;
     flex-direction: column;
@@ -212,17 +209,17 @@ export default {
     height: 820px;
     background-color: #fff;
     padding: 82px;
-}
 
-.wait-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 32px;
-}
+    &.wait-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 32px;
+    }
 
-.titulo-catalogo {
-    font-weight: bold;
-    width: 100%;
-    text-align: left
+    &.titulo-catalogo {
+        font-weight: bold;
+        width: 100%;
+        text-align: left
+    }
 }
 
 li {
