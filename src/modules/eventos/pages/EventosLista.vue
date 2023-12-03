@@ -1,7 +1,7 @@
 <template>
     <div>Soy una lista de Eventos</div>
     <div class="eventos mx-5 col d-flex">
-        <li v-for="evento in eventosList">
+        <li v-for="evento in eventosList" :key="evento.id" class="event-tarjeta">
             <Evento :evento="evento" />
         </li>
     </div>
@@ -30,9 +30,9 @@ export default {
 }
 
 li {
-    margin: 8px;
-    width: 100%;
     list-style-type: none;
+    align-items: center;
+    margin: 25px auto;
 }
 
 a {
