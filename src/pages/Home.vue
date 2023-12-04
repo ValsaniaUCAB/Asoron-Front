@@ -29,7 +29,7 @@
             </div>
             <div v-else>
                 <div class="d-flex">
-                    <li v-for="ron in ronList" :key="ron.id">
+                    <li v-for="ron in getRonesMinimal" :key="ron.id">
                         <RonMinimal :ron="ron" />
                     </li>
                 </div>
@@ -43,7 +43,7 @@
 <script>
 
 import Navbar from '@/modules/shared/components/Navbar.vue'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import RonMinimal from '@/modules/catalogo/components/RonMinimal'
 
 export default {
@@ -52,7 +52,8 @@ export default {
         RonMinimal
     },
     computed: {
-        ...mapState('catalogo', ['isLoading', 'ronList'])
+        ...mapState('catalogo', ['isLoading']),
+        ...mapGetters('catalogo', ['getRonesMinimal'])
     },
     methods: {
         ...mapActions('catalogo', ['cargarRones'])
@@ -157,8 +158,8 @@ export default {
 
     & h1 {
         position: absolute;
+        font-family: 'Brothers', sans-serif;
         color: #000;
-        font-family: 'Inter', sans-serif;
         text-align: center;
         font-weight: 800;
         margin: 0;
@@ -209,17 +210,19 @@ export default {
     height: 820px;
     background-color: #fff;
     padding: 82px;
+}
 
-    &.wait-text {
-        font-family: 'Inter', sans-serif;
-        font-size: 32px;
-    }
+.wait-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+}
 
-    &.titulo-catalogo {
-        font-weight: bold;
-        width: 100%;
-        text-align: left
-    }
+.titulo-catalogo {
+    font-family: 'Brothers', sans-serif;
+    color: #31212b;
+    font-weight: bold;
+    width: 1185px;
+    text-align: left
 }
 
 li {

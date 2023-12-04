@@ -3,11 +3,16 @@
 //     return state
 // }
 
-const ronesEnCatalogo = (lista, begin) => {
+const ronesEnCatalogo = (lista, begin, num) => {
     const listaAux = []
-    for (let index = begin; index < begin + 3; index++) {
-        listaAux = lista[index];
+    let cont = 0
+    for (let index = begin; index < begin + num; index++) {
+        if (lista[index]) {
+            listaAux[cont] = lista[index]
+        }
+        cont++
     }
+    return listaAux
 }
 
 export const getRonesById = (state) => (id) => {
@@ -28,10 +33,15 @@ export const getRonesById = (state) => (id) => {
     }
 }
 
-export const getRonesByTerm = (state) => (term = '') => {
+export const getRonesByTerm = (state) => (term = '', begin = 0) => {
 
     if (term.length === 0) {
-        return state.ronList
+
+        return ronesEnCatalogo(state.ronList, begin, 3)
     }
-    return state.ronList.filter(ron => ron.ron_nombre.toLowerCase().includes(term.toLocaleLowerCase()))
+    return ronesEnCatalogo(state.ronList.filter(ron => ron.ron_nombre.toLowerCase().includes(term.toLocaleLowerCase())), begin, 3)
+}
+
+export const getRonesMinimal = (state) => {
+    return ronesEnCatalogo(state.ronList, 3, 3)
 }
