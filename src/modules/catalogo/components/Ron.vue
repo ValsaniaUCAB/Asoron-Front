@@ -51,6 +51,7 @@ export default {
 }
 
 .nombre {
+    color: #31212B;
     font-size: 16px;
     font-weight: bold;
     width: 100%;
