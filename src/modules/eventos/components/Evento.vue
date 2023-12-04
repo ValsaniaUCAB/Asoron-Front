@@ -7,12 +7,18 @@
             <img src="../assets/placeholder evento 1.webp">
 
             <div class="d-flex flex-column mx-3 my-2 tarjeta-right">
-                <h2>{{ evento.nombre.toUpperCase() }}</h2>
-                <h4>Del {{ evento.fechaIni }} al {{ evento.fechaFin }}</h4>
-                <p>{{ evento.descripcion }}</p>
-                <span>Direccion: {{ evento.direccion }}</span>
-                <button id="tarjeta-button" class="button-18">RESERVAR</button>
+                <h1>{{ evento.nombre.toUpperCase() }}</h1>
+                <div class="content">
+                    <p>{{ evento.descripcion }}</p>
+                    <!-- <span>Direccion: {{ evento.direccion }}</span>
+                    <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4> -->
+                </div>
+                <button class="button-18">RESERVAR</button>
 
+                <div class="content-extra">
+                    <span>{{ evento.direccion }}</span>
+                    <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4>
+                </div>
             </div>
         
     </router-link>
@@ -53,41 +59,61 @@ img {
     transform: scale(1.05);
 }
 
-.tarjeta-right h2 {
-    color: #31212b;
-    font-family: Inter;
-    font-weight: 800;
-    text-align: center;
-    margin: auto;
-    margin-bottom: 10px ;
+.tarjeta-right {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
-.tarjeta-right h4 {
+.tarjeta-right h1 {
+        color: #31212b;
+        font-family: 'Brothers', sans-serif;
+        font-weight: 800;
+        text-align: center;
+        margin-top: auto;
+    }
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: 30px;
+}
+.content p {
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    padding: 0 1px;
+}
+
+.content-extra{
+    color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-content: left;
+    width: 100%;
+}
+.content-extra h4 {
     font-family: Inter;
     font-size: 12px;
-    font-weight: 600;
-    text-align: center;
-    margin: 0 auto;
+    font-weight: 200;
+    
+    margin-bottom: 8px;
     width: 70%
 }
-
-.tarjeta-right p {
+.content-extra span {
+    font-size: 14px;
     font-family: Inter;
     font-weight: 400;
-    text-align: center;
-    margin: auto auto 10px auto;
-    width: 70%;
-}
-.tarjeta-right span {
-    font-family: Inter;
-    font-weight: 400;
-    text-align: center;
-    margin: 10px auto;
-    width: 70%;
+    margin-bottom: 2px;    
+    width: 50%;
 }
 
-#tarjeta-button {
+.tarjeta-right button {
     width: 120px;
-    margin: auto;
+    margin-top: 10px ;
     margin-bottom: auto;
 }
 
@@ -136,6 +162,5 @@ img {
         color: rgba(0, 0, 0, .3);
     }
 }
-
 
 </style>

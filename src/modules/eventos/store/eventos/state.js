@@ -4,9 +4,9 @@ export default () => ({
     eventosList: [
         {
             id: '45',
-            nombre: 'Evento 1',
-            descripcion: 'Veniam anim esse laborum qui aliqua adipisicing sunt do ut culpa culpa.',
-            direccion: 'Catia',
+            nombre: 'RUTA SANTA TERESA',
+            descripcion: 'Ven a recorrer la Hacienda Santa Teresa y descubre nuestro maravilloso proceso de transformación ',
+            direccion: 'Hacienda Santa Teresa',
             fechaIni: 'Sat 25/12/2023',
             fechaFin: 'Sun 26/12/2023'
         },
