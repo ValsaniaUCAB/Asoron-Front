@@ -10,10 +10,15 @@
                 <h1>{{ evento.nombre.toUpperCase() }}</h1>
                 <div class="content">
                     <p>{{ evento.descripcion }}</p>
-                    <span>Direccion: {{ evento.direccion }}</span>
-                    <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4>
+                    <!-- <span>Direccion: {{ evento.direccion }}</span>
+                    <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4> -->
                 </div>
                 <button class="button-18">RESERVAR</button>
+
+                <div class="content-extra">
+                    <span>{{ evento.direccion }}</span>
+                    <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4>
+                </div>
             </div>
         
     </router-link>
@@ -71,16 +76,8 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-content: center;
     margin: 30px;
-}
-.content h4 {
-    font-family: Inter;
-    font-size: 12px;
-    font-weight: 200;
-    text-align: center;
-    margin-bottom: 8px;
-    width: 70%
 }
 .content p {
     font-family: Inter;
@@ -89,11 +86,28 @@ img {
     text-align: center;
     padding: 0 1px;
 }
-.content span {
+
+.content-extra{
+    color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-content: left;
+    width: 100%;
+}
+.content-extra h4 {
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 200;
+    
+    margin-bottom: 8px;
+    width: 70%
+}
+.content-extra span {
     font-size: 14px;
     font-family: Inter;
     font-weight: 400;
-    text-align: center;
+    margin-bottom: 2px;    
     width: 50%;
 }
 
@@ -148,6 +162,5 @@ img {
         color: rgba(0, 0, 0, .3);
     }
 }
-
 
 </style>

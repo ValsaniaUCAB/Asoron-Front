@@ -5,7 +5,7 @@ export default () => ({
         {
             id: '45',
             nombre: 'RUTA SANTA TERESA',
-            descripcion: 'Ven a recorrer la Hacienda Santa Teresa y descubre nuestro maravilloso proceso de transformación',
+            descripcion: 'Ven a recorrer la Hacienda Santa Teresa y descubre nuestro maravilloso proceso de transformación ',
             direccion: 'Hacienda Santa Teresa',
             fechaIni: 'Sat 25/12/2023',
             fechaFin: 'Sun 26/12/2023'
