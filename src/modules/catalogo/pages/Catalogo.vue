@@ -37,7 +37,8 @@ export default {
     },
     data() {
         return {
-            term: ''
+            term: '',
+            page: 1,
         }
     },
     methods: {
@@ -49,7 +50,7 @@ export default {
         }),
         ...mapGetters('catalogo', ['getRonesByTerm']),
         ronesByTerm() {
-            return this.getRonesByTerm(this.term)
+            return this.getRonesByTerm(this.term, (this.page * 3) - 3)
         }
     },
     mounted() {
