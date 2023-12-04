@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <button class="button-18 catalogo">Ver mas</button>
+        <button class="button-18 catalogo">VER MAS</button>
     </div>
     <footer></footer>
 </template>
@@ -129,8 +129,9 @@ export default {
     vertical-align: middle;
 
     &.catalogo {
-        font-size: 16px;
-        font-weight: normal;
+        font-family: 'Inter', 'sans-serif';
+        font-size: 16px ;
+        font-weight: 800;
     }
 
     &:hover,
