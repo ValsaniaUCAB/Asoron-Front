@@ -9,9 +9,9 @@
             <div class="d-flex flex-column mx-3 my-2 tarjeta-right">
                 <h1>{{ evento.nombre.toUpperCase() }}</h1>
                 <div class="content">
-                    <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4>
                     <p>{{ evento.descripcion }}</p>
                     <span>Direccion: {{ evento.direccion }}</span>
+                    <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4>
                 </div>
                 <button class="button-18">RESERVAR</button>
             </div>
@@ -61,7 +61,7 @@ img {
 }
 .tarjeta-right h1 {
         color: #31212b;
-        font-family: Inter;
+        font-family: 'Brothers', sans-serif;
         font-weight: 800;
         text-align: center;
         margin-top: auto;
@@ -87,7 +87,7 @@ img {
     font-size: 18px;
     font-weight: 400;
     text-align: center;
-    width: 70%;
+    padding: 0 1px;
 }
 .content span {
     font-size: 14px;
