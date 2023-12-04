@@ -30,6 +30,6 @@ body {
 }
 
 .container {
-  padding-top: 144px;
+  margin-top: 92px;
 }
 </style>
