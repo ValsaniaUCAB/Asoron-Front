@@ -6,11 +6,11 @@
             <div class="barras">
                 <div class="busqueda">
                     <div class="titulo-barras">Buscar</div>
-                    <input class="barra-busqueda" type="text" placeholder="Buscar Entrada" v-model="term">
+                    <input class="barra-busqueda" type="text" placeholder="Buscar ron por nombre..." v-model="term">
                 </div>
                 <div class="sort">
                     <div class="titulo-barras">Ordenar</div>
-                    <input class="barra-busqueda" type="text" placeholder="Buscar Entrada" v-model="term">
+                    <input class="barra-busqueda" type="text" placeholder="Ordenar" v-model="term">
                 </div>
             </div>
         </div>
@@ -67,6 +67,8 @@ export default {
 .catalogo {
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
 }
 
 .titulo {
@@ -76,7 +78,7 @@ export default {
     color: #31212B;
     width: 100%;
     text-align: left;
-    margin: 30px;
+    margin-left: 30px;
 }
 
 .barras {
@@ -113,7 +115,7 @@ export default {
 
 .barra-busqueda {
     height: 56px;
-    border: 2px solid #31212B;
+    border: 3px solid #31212B;
     border-radius: 16px;
 }
 

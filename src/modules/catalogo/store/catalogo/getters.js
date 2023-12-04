@@ -3,6 +3,13 @@
 //     return state
 // }
 
+const ronesEnCatalogo = (lista, begin) => {
+    const listaAux = []
+    for (let index = begin; index < begin + 3; index++) {
+        listaAux = lista[index];
+    }
+}
+
 export const getRonesById = (state) => (id) => {
 
     // const entry = state.entries.find((entry) => entry.id === id)
