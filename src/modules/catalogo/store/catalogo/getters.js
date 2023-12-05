@@ -37,9 +37,9 @@ export const getRonesByTerm = (state) => (term = '', begin = 0) => {
 
     if (term.length === 0) {
 
-        return ronesEnCatalogo(state.ronList, begin, 3)
+        return ronesEnCatalogo(state.ronList, begin, 6)
     }
-    return ronesEnCatalogo(state.ronList.filter(ron => ron.ron_nombre.toLowerCase().includes(term.toLocaleLowerCase())), begin, 3)
+    return ronesEnCatalogo(state.ronList.filter(ron => ron.ron_nombre.toLowerCase().includes(term.toLocaleLowerCase())), begin, 6)
 }
 
 export const getRonesMinimal = (state) => {

@@ -18,22 +18,28 @@
             <div class="col-2">
                 Filtros
             </div>
-            <div class="catalogo">
-                <li v-for="ron in ronesByTerm">
-                    <Ron :ron="ron" />
-                </li>
+            <div>
+                <div class="catalogo">
+                    <li v-for="ron in ronesByTerm">
+                        <Ron :ron="ron" />
+                    </li>
+                </div>
+                <Paginado :ronList="rones" :page="page" @on-click="cambiarPagina" />
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
 
-import Ron from "@/modules/catalogo/components/Ron";
+import Ron from "../components/Ron";
+import Paginado from "../components/Paginado";
 import { mapGetters, mapState } from 'vuex';
 export default {
     components: {
-        Ron
+        Ron,
+        Paginado
     },
     data() {
         return {
@@ -42,7 +48,11 @@ export default {
         }
     },
     methods: {
-
+        cambiarPagina(num) {
+            if (num === 'd') this.page--
+            else if (num === 'u') this.page++
+            else this.page = num
+        }
     },
     computed: {
         ...mapState('catalogo', {
@@ -50,7 +60,8 @@ export default {
         }),
         ...mapGetters('catalogo', ['getRonesByTerm']),
         ronesByTerm() {
-            return this.getRonesByTerm(this.term, (this.page * 3) - 3)
+            return this.getRonesByTerm(this.term, (this.page * 6) - 6)
+            //! Hay que cambiar los valores aqui 6, en la funcion getRonesByTerm en getters, y en paginado, en el template tambien a 6
         }
     },
     mounted() {
