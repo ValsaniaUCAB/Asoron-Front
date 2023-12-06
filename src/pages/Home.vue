@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <button class="button-18 catalogo">VER MAS</button>
+        <router-link :to="{ name: 'catalogo' }"><button class="button-18 catalogo">VER MAS</button></router-link>
     </div>
     <footer></footer>
 </template>
@@ -130,7 +130,7 @@ export default {
 
     &.catalogo {
         font-family: 'Inter', 'sans-serif';
-        font-size: 16px ;
+        font-size: 16px;
         font-weight: 800;
     }
 
