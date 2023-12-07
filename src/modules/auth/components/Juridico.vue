@@ -6,19 +6,31 @@
             <input type="text" placeholder="Username" class="form" />
         </div>
         <div class="form-box">
+            <p>Contraseña</p>
+            <input type="text" placeholder="Contraseña" class="form" />
+        </div>
+        <div class="form-box">
             <p>RIF Juridico</p>
             <input type="text" placeholder="2222666" class="form" />
         </div>
         <div class="form-box">
+            <p>Denominacion Comercial</p>
+            <input type="text" placeholder="Happy People 2010 C.A." class="form" />
+        </div>
+        <div class="form-box">
             <p>Razon Social</p>
-            <input type="text" placeholder="Nombre" class="form" />
+            <input type="text" placeholder="Deco muebles" class="form" />
         </div>
         <div class="form-box">
-            <p>Apellidos</p>
-            <input type="text" placeholder="Apellidos" class="form" />
+            <p>Pagina Web</p>
+            <input type="text" placeholder="tupagina.com" class="form" />
         </div>
         <div class="form-box">
-            <p>Direccion</p>
+            <p>Direccion Fiscal</p>
+            <input type="text" placeholder="Calle locura, Apt 3" class="form" />
+        </div>
+        <div class="form-box">
+            <p>Direccion Fisica</p>
             <input type="text" placeholder="Calle locura, Apt 3" class="form" />
         </div>
     </div>

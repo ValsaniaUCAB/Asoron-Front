@@ -7,6 +7,10 @@
             <input type="text" placeholder="Username" class="form" />
         </div>
         <div class="form-box">
+            <p>Contraseña</p>
+            <input type="text" placeholder="Contraseña" class="form" />
+        </div>
+        <div class="form-box">
             <p>Cedula de Identidad</p>
             <input type="text" placeholder="2222226" class="form" />
         </div>
