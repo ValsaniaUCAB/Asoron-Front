@@ -80,7 +80,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    width: 100%;
+    width: 1200px;
 }
 
 .titulo {
