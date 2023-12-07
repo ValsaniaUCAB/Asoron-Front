@@ -13,37 +13,42 @@
                     <div>- 1 +</div>
                     <button class="button-18 ">Añadir al Carrito</button>
                 </div>
-            </div>
-        </div>
+
 
         <div class="desplegables">
-        <div class="wrapper">    
-            <div class="collapsible ficha-tecnica">
-                <input type="checkbox" id="collapsible-head">
-                <label for="collapsible-head">Ficha Tecnica</label>
-                <div class="collapsible-text">
-                    <ul> 
-                        <li v-for="servir in ronDetallado.comoservir" :key="servir.id">
-                            Titulo: {{ servir.coctel }}
-                            <p>Metodo: {{ servir.como_preparar }}</p>
-                        </li>
-                    </ul>
+            <div class="wrapper">    
+                <div class="collapsible ficha-tecnica">
+                    <input type="checkbox" id="collapsible-head">
+                    <label for="collapsible-head">Ficha Tecnica</label>
+                    <div class="collapsible-text">
+                        <ul> 
+                            <li v-for="servir in ronDetallado.comoservir" :key="servir.id">
+                                Titulo: {{ servir.coctel }}
+                                <p>Metodo: {{ servir.como_preparar }}</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div class="collapsible sensaciones">
-                <input type="checkbox" id="collapsible-head2">
-                <label for="collapsible-head2">Sensaciones</label>
-                <div class="collapsible-text">
-                    <ul>
-                        <li v-for="sensacion in ronDetallado.sensancion" :key="sensacion.id">
-                            {{ sensacion.sensacion }}
-                        </li>
-                    </ul>
+                <div class="collapsible sensaciones">
+                    <input type="checkbox" id="collapsible-head2">
+                    <label for="collapsible-head2">Sensaciones</label>
+                    <div class="collapsible-text">
+                        <ul>
+                            <li v-for="sensacion in ronDetallado.sensancion" :key="sensacion.id">
+                                {{ sensacion.sensacion }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -64,16 +69,25 @@ export default {
     },
     methods: {
         async getRonDetail(id) {
-            this.ronDetallado = await getRonDetail(id)
-            console.log(this.ronDetallado)
+            this.ronDetallado = null
+            try {
+                this.ronDetallado = await getRonDetail(id)
+                console.log(this.ronDetallado)
+            } catch (error) {
+                this.$router.push({ name: 'catalogo' })
+            }
         }
     },
     mounted() {
         this.getRonDetail(this.id)
-
+    },
+    watch: {
+        id(value) {
+            this.getRonDetail(value)
+        }
     }
-
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -132,8 +146,7 @@ export default {
     flex-direction: column;
     padding-top: 50px;
     justify-content: flex-start;
-    align-items: flex-end;
-    
+    align-items: flex-start;
     height: 800px;
     
 }
@@ -144,10 +157,10 @@ export default {
 }
 
 .collapsible {
-    max-width: 450px;
+    width: 450px;
     overflow: hidden;
     font-weight: 500;
-    margin: 20px;
+    margin-bottom: 20px ;
 }
 
 .collapsible label {
