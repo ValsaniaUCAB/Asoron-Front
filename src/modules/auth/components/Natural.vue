@@ -2,9 +2,30 @@
     <div>Enter Cliente Natural</div>
 
     <div class="d-flex flex-column">
-        <input type="text" placeholder="Nombre de Usuario" class="form" />
-        <input type="password" placeholder="Contraseña" class="form" />
-        <button class="boton">Inicar Sesion</button>
+        <div class="form-box">
+            <p>Username</p>
+            <input type="text" placeholder="Username" class="form" />
+        </div>
+        <div class="form-box">
+            <p>Cedula de Identidad</p>
+            <input type="text" placeholder="2222226" class="form" />
+        </div>
+        <div class="form-box">
+            <p>RIF Personal</p>
+            <input type="text" placeholder="2222666-1" class="form" />
+        </div>
+        <div class="form-box">
+            <p>Nombres</p>
+            <input type="text" placeholder="Nombre" class="form" />
+        </div>
+        <div class="form-box">
+            <p>Apellidos</p>
+            <input type="text" placeholder="Apellidos" class="form" />
+        </div>
+        <div class="form-box">
+            <p>Direccion</p>
+            <input type="text" placeholder="Calle locura, Apt 3" class="form" />
+        </div>
     </div>
 </template>
 
@@ -15,6 +36,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+p {
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #31212B;
+
+}
+
 .box {
     width: 470px;
     display: flex;
@@ -26,7 +55,6 @@ export default {
 
 .box2 {
     align-items: center;
-    height: 300px;
     width: 470px;
     justify-content: center;
 }
@@ -43,32 +71,20 @@ img {
     color: #31212B;
 }
 
-.form {
+.form-box {
     margin-top: 12px;
     margin-bottom: 12px;
+    text-align: left;
+}
+
+.form {
+    width: 100%;
     height: 56px;
     border: 2px solid;
     border-color: lightgray;
     border-radius: 16px;
 }
 
-.boton {
-    border: 2px solid;
-    background-color: #31212B;
-    color: white;
-    height: 56px;
-    border-radius: 32px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-
-    &.select {
-        width: 200px;
-    }
-
-    &:hover {
-        background-color: #46303d;
-    }
-}
 
 .left {
     text-align: left;

@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="cuadro d-flex flex-column justify-content-center align-items-center">
         <img src="../assets/Logo.svg" class="my-4" />
         <div class="box">
             <p class="titulo">Crear cuenta</p>
@@ -15,6 +15,8 @@
                     <Juridico />
                 </template>
             </div>
+            <button class="boton">Inicar Sesion</button>
+
         </div>
     </div>
 </template>
@@ -49,6 +51,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.boton {
+    border: 2px solid;
+    background-color: #31212B;
+    color: white;
+    height: 56px;
+    width: 100%;
+    border-radius: 32px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+
+    &.select {
+        width: 200px;
+    }
+
+    &:hover {
+        background-color: #46303d;
+    }
+}
+
+.cuadro {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding: 50px 120px;
+    border-radius: 50px;
+
+}
+
 .box {
     width: 470px;
     display: flex;

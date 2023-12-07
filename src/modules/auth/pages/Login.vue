@@ -27,15 +27,14 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 600px;
-    width: 600px;
+    padding: 50px 120px;
     border-radius: 50px;
     justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .box2 {
     align-items: center;
-    height: 300px;
     width: 470px;
     justify-content: center;
 }
