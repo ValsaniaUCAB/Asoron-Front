@@ -4,7 +4,7 @@
 // }
 
 export const setRonList = (state, ronList) => {
-    state.ronList = [...state.ronList, ...ronList];
+    state.ronList = [...ronList, ...state.ronList];
     state.isLoading = false;
 }
 
