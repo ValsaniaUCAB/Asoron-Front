@@ -16,15 +16,12 @@
             </div>
         </div>
 
-        <div class="extra-content">
-
-            <div class="como-servir">
-                <div>
-                    <a href="#">
-                        <h4>Como Servir:</h4>
-                    </a>
-                </div>
-                <div class="desplegable">
+        <div class="desplegables">
+        <div class="wrapper">    
+            <div class="collapsible ficha-tecnica">
+                <input type="checkbox" id="collapsible-head">
+                <label for="collapsible-head">Ficha Tecnica</label>
+                <div class="collapsible-text">
                     <ul> 
                         <li v-for="servir in ronDetallado.comoservir" :key="servir.id">
                             Titulo: {{ servir.coctel }}
@@ -34,13 +31,10 @@
                 </div>
             </div>
 
-            <div class="sensaciones">
-                <div>
-                    <a href="">
-                        <h4>Sensaciones:</h4>
-                    </a>
-                </div>
-                <div class="desplegable">
+            <div class="collapsible sensaciones">
+                <input type="checkbox" id="collapsible-head2">
+                <label for="collapsible-head2">Sensaciones</label>
+                <div class="collapsible-text">
                     <ul>
                         <li v-for="sensacion in ronDetallado.sensancion" :key="sensacion.id">
                             {{ sensacion.sensacion }}
@@ -48,7 +42,7 @@
                     </ul>
                 </div>
             </div>
-
+        </div>
         </div>
     </div>
 </template>
@@ -131,14 +125,79 @@ export default {
     width: 75%;
 }
 
-.extra-content {
+.wrapper {
+    padding: 0;
+    margin: 0;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 100px;
+    flex-direction: column;
+    padding-top: 50px;
+    justify-content: flex-start;
+    align-items: flex-end;
+    
+    height: 800px;
+    
+}
+
+.collapsible input {
+    display: none;
+
+}
+
+.collapsible {
+    max-width: 450px;
+    overflow: hidden;
+    font-weight: 500;
+    margin: 20px;
+}
+
+.collapsible label {
+    position: relative;
+    font-weight: 600;
+    background: #FDD08D;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1), 0 4px 11px 0 rgba(0,0,0,.08);
+    color: black;
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 15px;
+    border-radius:4px ;
+    text-align: left;
+    z-index: 1;
+}
+
+.collapsible label:after {
+    content: "+";
+    position:absolute;
+    right: 15px;
+    top: 15px;
+    transition: all 0.3s ease;
+}
+
+.collapsible input:checked + label:after {
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
 }
 
 
+.collapsible-text {
+    max-height: 1px;
+    overflow: hidden;
+    border-radius: 4px;
+    line-height: 1.4;
+    position: relative;
+    top: -100%;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.collapsible input:checked ~ .collapsible-text {
+    max-height: 300px;
+    padding-bottom: 25px;
+    background: whitesmoke;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1), 0 4px 11px 0 rgba(0,0,0,.08);
+    opacity: 1;
+    top:0;
+}
 
 
 
