@@ -1,7 +1,7 @@
 
 
 export default {
-    name: 'catalogo',
+    name: 'catalogoLayout',
     component: () => import(/* webpackChunvkName: "daybook" */ '../layouts/CatalogoLayout'),
     children: [
         {

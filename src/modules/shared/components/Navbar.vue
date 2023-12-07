@@ -12,7 +12,7 @@
                 <ul>
                     <li><router-link :to="{ name: 'home' }">Inicio</router-link></li>
                     <li><router-link :to="{ name: 'catalogo' }">Catalogo</router-link></li>
-                    <li><router-link :to="{ name: 'eventos' }">Eventos</router-link></li>
+                    <li><router-link :to="{ name: 'eventos-list' }">Eventos</router-link></li>
                     <li><router-link :to="{ name: 'about' }">Sobre Nosotros</router-link></li>
                 </ul>
             </nav>

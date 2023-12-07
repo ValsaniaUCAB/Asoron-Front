@@ -88,7 +88,6 @@ export default {
 
 .box2 {
     align-items: center;
-    height: 300px;
     width: 470px;
     justify-content: center;
 }

@@ -64,8 +64,6 @@ export default {
             //! Hay que cambiar los valores aqui 6, en la funcion getRonesByTerm en getters, y en paginado, en el template tambien a 6
         }
     },
-    mounted() {
-    }
 }
 </script>
 
