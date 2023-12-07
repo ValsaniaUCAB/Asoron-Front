@@ -1,10 +1,9 @@
 <template>
-    <h1>Detalle</h1>
-    <h1 v-if="!ronDetallado">Cargando... Por favor Espere</h1>
+    <h1 class="container" v-if="!ronDetallado">Cargando... Por favor Espere</h1>
     <div v-else>
 
-        <div class="ron-container"> 
-            <img :src="ronDetallado.images[0].img_url" /> 
+        <div class="ron-container">
+            <img :src="ronDetallado.images[0].img_url" />
             <div class="info">
                 <h1>{{ ronDetallado.ron_nombre }}</h1>
                 <p>{{ ronDetallado.ron_descripcion }}</p>
@@ -15,34 +14,34 @@
                 </div>
 
 
-        <div class="desplegables">
-            <div class="wrapper">    
-                <div class="collapsible ficha-tecnica">
-                    <input type="checkbox" id="collapsible-head">
-                    <label for="collapsible-head">Ficha Tecnica</label>
-                    <div class="collapsible-text">
-                        <ul> 
-                            <li v-for="servir in ronDetallado.comoservir" :key="servir.id">
-                                Titulo: {{ servir.coctel }}
-                                <p>Metodo: {{ servir.como_preparar }}</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="desplegables">
+                    <div class="wrapper">
+                        <div class="collapsible ficha-tecnica">
+                            <input type="checkbox" id="collapsible-head">
+                            <label for="collapsible-head">Ficha Tecnica</label>
+                            <div class="collapsible-text">
+                                <ul>
+                                    <li v-for="servir in ronDetallado.comoservir" :key="servir.id">
+                                        Titulo: {{ servir.coctel }}
+                                        <p>Metodo: {{ servir.como_preparar }}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                <div class="collapsible sensaciones">
-                    <input type="checkbox" id="collapsible-head2">
-                    <label for="collapsible-head2">Sensaciones</label>
-                    <div class="collapsible-text">
-                        <ul>
-                            <li v-for="sensacion in ronDetallado.sensancion" :key="sensacion.id">
-                                {{ sensacion.sensacion }}
-                            </li>
-                        </ul>
+                        <div class="collapsible sensaciones">
+                            <input type="checkbox" id="collapsible-head2">
+                            <label for="collapsible-head2">Sensaciones</label>
+                            <div class="collapsible-text">
+                                <ul>
+                                    <li v-for="sensacion in ronDetallado.sensancion" :key="sensacion.id">
+                                        {{ sensacion.sensacion }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
 
 
@@ -91,13 +90,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .ron-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 100px;
-    }
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 100px;
+}
 
 
 .ron-container img {
@@ -116,8 +114,9 @@ export default {
     margin-right: 50px;
     color: black;
     padding-top: 40px;
-    
+
 }
+
 .info h1 {
     font-size: 36px;
     font-weight: 700;
@@ -131,7 +130,7 @@ export default {
 }
 
 .comprar {
-    margin-top:30px;
+    margin-top: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -148,7 +147,7 @@ export default {
     justify-content: flex-start;
     align-items: flex-start;
     height: 800px;
-    
+
 }
 
 .collapsible input {
@@ -160,33 +159,33 @@ export default {
     width: 450px;
     overflow: hidden;
     font-weight: 500;
-    margin-bottom: 20px ;
+    margin-bottom: 20px;
 }
 
 .collapsible label {
     position: relative;
     font-weight: 600;
     background: #FDD08D;
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1), 0 4px 11px 0 rgba(0,0,0,.08);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
     color: black;
     display: block;
     margin-bottom: 10px;
     cursor: pointer;
     padding: 15px;
-    border-radius:4px ;
+    border-radius: 4px;
     text-align: left;
     z-index: 1;
 }
 
 .collapsible label:after {
     content: "+";
-    position:absolute;
+    position: absolute;
     right: 15px;
     top: 15px;
     transition: all 0.3s ease;
 }
 
-.collapsible input:checked + label:after {
+.collapsible input:checked+label:after {
     transform: rotate(45deg);
     transition: all 0.3s ease;
 }
@@ -203,13 +202,13 @@ export default {
     transition: all 0.3s ease;
 }
 
-.collapsible input:checked ~ .collapsible-text {
+.collapsible input:checked~.collapsible-text {
     max-height: 300px;
     padding-bottom: 25px;
     background: whitesmoke;
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1), 0 4px 11px 0 rgba(0,0,0,.08);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
     opacity: 1;
-    top:0;
+    top: 0;
 }
 
 
@@ -244,7 +243,7 @@ export default {
 
     &.catalogo {
         font-family: 'Inter', 'sans-serif';
-        font-size: 16px ;
+        font-size: 16px;
         font-weight: 800;
     }
 
