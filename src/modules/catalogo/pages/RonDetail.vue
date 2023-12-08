@@ -18,12 +18,12 @@
                     <div class="wrapper">
                         <div class="collapsible ficha-tecnica">
                             <input type="checkbox" id="collapsible-head">
-                            <label for="collapsible-head">Ficha Tecnica</label>
+                            <label for="collapsible-head">FICHA TECNICA</label>
                             <div class="collapsible-text">
                                 <ul>
                                     <li v-for="servir in ronDetallado.comoservir" :key="servir.id">
-                                        Titulo: {{ servir.coctel }}
-                                        <p>Metodo: {{ servir.como_preparar }}</p>
+                                        <h4>{{ servir.coctel.toUpperCase() }}</h4>
+                                        <p>{{ servir.como_preparar }}</p>
                                     </li>
                                 </ul>
                             </div>
@@ -31,7 +31,7 @@
 
                         <div class="collapsible sensaciones">
                             <input type="checkbox" id="collapsible-head2">
-                            <label for="collapsible-head2">Sensaciones</label>
+                            <label for="collapsible-head2">SENSACIONES</label>
                             <div class="collapsible-text">
                                 <ul>
                                     <li v-for="sensacion in ronDetallado.sensancion" :key="sensacion.id">
@@ -147,6 +147,7 @@ export default {
     justify-content: flex-start;
     align-items: flex-start;
     height: 800px;
+    
 
 }
 
@@ -156,7 +157,7 @@ export default {
 }
 
 .collapsible {
-    width: 450px;
+    width: 560px;
     overflow: hidden;
     font-weight: 500;
     margin-bottom: 20px;
@@ -164,7 +165,9 @@ export default {
 
 .collapsible label {
     position: relative;
-    font-weight: 600;
+    font-size: 22px;
+    font-weight: 800;
+    font-family: 'Brothers', sans-serif;
     background: #FDD08D;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
     color: black;
@@ -202,16 +205,44 @@ export default {
     transition: all 0.3s ease;
 }
 
-.collapsible input:checked~.collapsible-text {
-    max-height: 300px;
-    padding-bottom: 25px;
+.collapsible input:checked ~ .collapsible-text {
+    max-height: 400px;
     background: whitesmoke;
+    border-radius: 4px;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
     opacity: 1;
     top: 0;
 }
 
+.collapsible-text ul{
+    padding: 0;
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    
+}
 
+.collapsible-text ul li{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    color: black;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    width: 100%;
+}
+
+.collapsible-text ul li h4{
+    font-size: 18px;
+    font-weight: 800;
+    font-family: 'Brothers', sans-serif;
+}
+
+.collapsible-text ul li p {
+    margin-left: 10px;
+}
 
 .button-18 {
     align-items: center;
