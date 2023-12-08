@@ -11,6 +11,7 @@
 
 <script>
 export default {
+    emits: ['on-click'],
     props: {
         ronList: {
             type: Array,
