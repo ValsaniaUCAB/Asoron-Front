@@ -21,6 +21,7 @@
                             <label for="collapsible-head">FICHA TECNICA</label>
                             <div class="collapsible-text">
                                 <ul>
+                                    {{console.log(ronDetallado)}}
                                     <li v-for="servir in ronDetallado.comoservir" :key="servir.id">
                                         <h4>{{ servir.coctel.toUpperCase() }}</h4>
                                         <p>{{ servir.como_preparar }}</p>
