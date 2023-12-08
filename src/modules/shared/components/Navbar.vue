@@ -54,7 +54,11 @@ export default {
     },
     methods: {
         openCarrito() {
-            this.isOpen = true
+            if (this.isOpen) {
+                this.isOpen = false
+            } else {
+                this.isOpen = true
+            }
         },
         closeCarrito() {
             this.isOpen = false
