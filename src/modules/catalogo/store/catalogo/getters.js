@@ -16,15 +16,6 @@ const ronesEnCatalogo = (lista, begin, num) => {
 }
 
 export const getRonesById = (state) => (id) => {
-
-    // const entry = state.entries.find((entry) => entry.id === id)
-
-    // if (!entry) {
-    //     return
-    // }
-
-    // return { ...entry }             // Utuilizado para que las modifcaciones no se hagan directo en el objeto
-
     for (const entry of state.entries) {     // Forma Aless
         if (entry.id === id) {
             return { ...entry }
@@ -43,5 +34,11 @@ export const getRonesByTerm = (state) => (term = '', begin = 0) => {
 }
 
 export const getRonesMinimal = (state) => {
-    return ronesEnCatalogo(state.ronList, 3, 3)
+    return ronesEnCatalogo(state.ronList, 0, 3)
 }
+
+export const getIsLoading = (state) => state.isLoading
+
+export const getRonList = (state) => {
+    return state.ronList
+} 

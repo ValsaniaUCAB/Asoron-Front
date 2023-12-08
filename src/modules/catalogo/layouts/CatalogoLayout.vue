@@ -1,7 +1,6 @@
 <template>
     <Navbar />
-    <div class="container">Soy Layout de Catalogo</div>
-    <div v-if="isLoading">
+    <div class="container" v-if="isLoading">
         <div class="alert-info text-center mt-5">
             Espere por favor
             <h3 class="mt-2">
@@ -13,7 +12,6 @@
         <router-view />
     </div>
 </template>
-
 
 <script>
 

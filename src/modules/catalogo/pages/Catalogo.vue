@@ -1,5 +1,4 @@
 <template>
-    <div>Soy Catalogo</div>
     <div>
         <div class="header">
             <div class="titulo">Productos</div>

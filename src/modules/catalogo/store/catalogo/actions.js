@@ -6,8 +6,10 @@
 import getRonList from "../../helpers/getRonList";
 
 
-export const cargarRones = async ({ commit }) => {
-    //! commit('vaciarRonList')
+export const cargarRones = async ({ commit, getters }) => {
+    commit('vaciarRonList')
     const ronList = await getRonList('/')
-    commit('setRonList', ronList)
+    if (getters.getRonList.length === 0) {
+        commit('setRonList', ronList)
+    }
 }
