@@ -21,7 +21,7 @@ function arreglarLista(ronList) {
     return ronListArreglado
 }
 
-async function getRonList(nombreTienda = 'Asoron') {
+async function getRonList(nombreTienda = 'Asoron Online') {
     const { data } = await ronCatalogo.get(`/?nombre_tienda=${nombreTienda}`)
     const { results } = data
     // console.log(arreglarLista(results))
