@@ -64,6 +64,7 @@ img {
     justify-content: center;
     align-content: center;
     align-items: center;
+    
 }
 
 .tarjeta-right h1 {
