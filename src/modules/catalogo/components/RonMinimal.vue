@@ -1,10 +1,9 @@
 <template>
     <div class="box">
-        <router-link :to="{ name: 'ron-detail', params: { id: ron.ron_id } }"><img
-                :src="ron.images[0].img_url" /></router-link>
+        <router-link :to="{ name: 'ron-detail', params: { id: ron.id } }"><img :src="ron.images[0].img_url" /></router-link>
         <div class="nombre">
-            {{ ron.ron_nombre }}
-            <div class="precio d-flex justify-content-between"><span>Desde</span><span>$289</span></div>
+            {{ ron.nombre }}
+            <div class="precio d-flex justify-content-between"><span>Desde</span><span>${{ precio }}</span></div>
         </div>
 
     </div>

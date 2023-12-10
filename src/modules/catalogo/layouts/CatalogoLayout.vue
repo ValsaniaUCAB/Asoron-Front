@@ -1,16 +1,6 @@
 <template>
     <Navbar />
-    <div class="container" v-if="isLoading">
-        <div class="alert-info text-center mt-5">
-            Espere por favor
-            <h3 class="mt-2">
-                <i class="fa fa-spin fa-sync"></i>
-            </h3>
-        </div>
-    </div>
-    <div v-else>
-        <router-view />
-    </div>
+    <router-view />
 </template>
 
 <script>

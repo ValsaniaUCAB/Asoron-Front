@@ -39,6 +39,4 @@ export const getRonesMinimal = (state) => {
 
 export const getIsLoading = (state) => state.isLoading
 
-export const getRonList = (state) => {
-    return state.ronList
-} 
+export const getRonList = (state) => state.ronList

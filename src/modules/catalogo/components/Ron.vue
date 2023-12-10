@@ -1,10 +1,10 @@
 <template>
-    <router-link :to="{ name: 'ron-detail', params: { id: ron.ron_id } }">
+    <router-link :to="{ name: 'ron-detail', params: { id: ron.id } }">
         <div class="box">
             <img :src="ron.images[0].img_url" />
             <div>
-                <div class="nombre">{{ ron.ron_nombre }}</div>
-                <div class="precio">$289</div>
+                <div class="nombre">{{ ron.nombre }}</div>
+                <div class="precio">${{ ron.precio }}</div>
                 <button class="button-18">Añadir al Carrito</button>
             </div>
 
@@ -27,7 +27,7 @@ export default {
         return {
 
         }
-    }
+    },
 }
 </script>
 

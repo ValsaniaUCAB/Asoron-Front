@@ -3,10 +3,10 @@
     <div v-else>
 
         <div class="ron-container">
-            <img :src="ronDetallado.images[0].img_url" />
+            <img :src="ronDetallado.images[0].url" />
             <div class="info">
-                <h1>{{ ronDetallado.ron_nombre }}</h1>
-                <p>{{ ronDetallado.ron_descripcion }}</p>
+                <h1>{{ ronDetallado.nombre }}</h1>
+                <p>{{ ronDetallado.descripcion }}</p>
                 <div class="comprar">
                     <span> $22 </span>
                     <div>- 1 +</div>
@@ -21,8 +21,7 @@
                             <label for="collapsible-head">FICHA TECNICA</label>
                             <div class="collapsible-text">
                                 <ul>
-                                    {{console.log(ronDetallado)}}
-                                    <li v-for="servir in ronDetallado.comoservir" :key="servir.id">
+                                    <li v-for="servir in ronDetallado.ron.comoServir" :key="servir.coctel">
                                         <h4>{{ servir.coctel.toUpperCase() }}</h4>
                                         <p>{{ servir.como_preparar }}</p>
                                     </li>
@@ -35,8 +34,8 @@
                             <label for="collapsible-head2">SENSACIONES</label>
                             <div class="collapsible-text">
                                 <ul>
-                                    <li v-for="sensacion in ronDetallado.sensancion" :key="sensacion.id">
-                                        {{ sensacion.sensacion }}
+                                    <li v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
+                                        {{ sensacion }}
                                     </li>
                                 </ul>
                             </div>
@@ -72,9 +71,9 @@ export default {
             this.ronDetallado = null
             try {
                 this.ronDetallado = await getRonDetail(id)
-                console.log(this.ronDetallado)
+                // console.log(this.ronDetallado)
             } catch (error) {
-                this.$router.push({ name: 'catalogo' })
+                // this.$router.push({ name: 'catalogo' })
             }
         }
     },
@@ -148,7 +147,7 @@ export default {
     justify-content: flex-start;
     align-items: flex-start;
     height: 800px;
-    
+
 
 }
 
@@ -206,7 +205,7 @@ export default {
     transition: all 0.3s ease;
 }
 
-.collapsible input:checked ~ .collapsible-text {
+.collapsible input:checked~.collapsible-text {
     max-height: 400px;
     background: whitesmoke;
     border-radius: 4px;
@@ -215,17 +214,17 @@ export default {
     top: 0;
 }
 
-.collapsible-text ul{
+.collapsible-text ul {
     padding: 0;
     margin: 0;
     position: relative;
     display: flex;
     flex-direction: column;
     text-align: left;
-    
+
 }
 
-.collapsible-text ul li{
+.collapsible-text ul li {
     font-size: 16px;
     font-weight: 400;
     font-family: 'Inter', sans-serif;
@@ -235,7 +234,7 @@ export default {
     width: 100%;
 }
 
-.collapsible-text ul li h4{
+.collapsible-text ul li h4 {
     font-size: 18px;
     font-weight: 800;
     font-family: 'Brothers', sans-serif;
