@@ -3,10 +3,13 @@
 
 // }
 
-// import getRonList from "../../helpers/getRonList";
+import getEventList from "../../helpers/getEventList";
 
 
-// export const cargarRones = async ({ commit }) => {
-//     const ronList = await getRonList('/')
-//     commit('setRonList', ronList)
-// }
+export const cargarEventos = async ({ commit, getters }) => {
+    commit('vaciarEventList')
+    const eventosList = await getEventList('/')
+    if (getters.getEventList.length === 0) {
+        commit('setEventList', eventosList)
+    }
+}

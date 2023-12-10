@@ -3,24 +3,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     <router-link :to="{ name: 'evento-detail', params: { id: evento.id } }" class="cuadro d-flex tarjeta">
-        
-            <img src="../assets/placeholder evento 1.webp">
 
-            <div class="d-flex flex-column mx-3 my-2 tarjeta-right">
-                <h1>{{ evento.nombre.toUpperCase() }}</h1>
-                <div class="content">
-                    <p>{{ evento.descripcion }}</p>
-                    <!-- <span>Direccion: {{ evento.direccion }}</span>
+        <img :src="evento.images[0].url">
+
+        <div class="d-flex flex-column mx-3 my-2 tarjeta-right">
+            <h1>{{ evento.nombre.toUpperCase() }}</h1>
+            <div class="content">
+                <p>{{ evento.descripcion }}</p>
+                <!-- <span>Direccion: {{ evento.direccion }}</span>
                     <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4> -->
-                </div>
-                <button class="button-18">RESERVAR</button>
-
-                <div class="content-extra">
-                    <span>{{ evento.direccion }}</span>
-                    <h4>{{ evento.fechaIni }} - {{ evento.fechaFin }}</h4>
-                </div>
             </div>
-        
+            <button class="button-18">RESERVAR</button>
+
+            <div class="content-extra">
+                <span>{{ evento.direccion }}</span>
+                <h4>{{ evento.fechaInicio }} - {{ evento.fechaFin }}</h4>
+            </div>
+        </div>
+
     </router-link>
 </template>
 
@@ -49,12 +49,13 @@ img {
 
 .tarjeta {
     background-color: #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     margin: 10px;
     text-decoration: none;
     color: black;
     transition: transform 0.5s;
 }
+
 .tarjeta:hover {
     transform: scale(1.05);
 }
@@ -64,21 +65,23 @@ img {
     align-content: center;
     align-items: center;
 }
-.tarjeta-right h1 {
-        color: #31212b;
-        font-family: 'Brothers', sans-serif;
-        font-weight: 800;
-        text-align: center;
-        margin-top: auto;
-    }
 
-.content{
+.tarjeta-right h1 {
+    color: #31212b;
+    font-family: 'Brothers', sans-serif;
+    font-weight: 800;
+    text-align: center;
+    margin-top: auto;
+}
+
+.content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
     margin: 30px;
 }
+
 .content p {
     font-family: Inter;
     font-size: 18px;
@@ -87,7 +90,7 @@ img {
     padding: 0 1px;
 }
 
-.content-extra{
+.content-extra {
     color: gray;
     display: flex;
     flex-direction: column;
@@ -95,25 +98,27 @@ img {
     align-content: left;
     width: 100%;
 }
+
 .content-extra h4 {
     font-family: Inter;
     font-size: 12px;
     font-weight: 200;
-    
+
     margin-bottom: 8px;
     width: 70%
 }
+
 .content-extra span {
     font-size: 14px;
     font-family: Inter;
     font-weight: 400;
-    margin-bottom: 2px;    
+    margin-bottom: 2px;
     width: 50%;
 }
 
 .tarjeta-right button {
     width: 120px;
-    margin-top: 10px ;
+    margin-top: 10px;
     margin-bottom: auto;
 }
 
@@ -162,5 +167,4 @@ img {
         color: rgba(0, 0, 0, .3);
     }
 }
-
 </style>

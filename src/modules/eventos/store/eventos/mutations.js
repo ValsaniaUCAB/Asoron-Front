@@ -3,7 +3,12 @@
 //
 // }
 
-// export const setRonList = (state, ronList) => {
-//     state.ronList = [...state.ronList, ...ronList];
-//     state.isLoading = false;
-// }
+export const vaciarEventList = (state) => {
+    state.isLoading = true;
+    state.eventosList = []
+}
+
+export const setEventList = (state, eventosList) => {
+    state.eventosList = [...state.eventosList, ...eventosList];
+    state.isLoading = false;
+}

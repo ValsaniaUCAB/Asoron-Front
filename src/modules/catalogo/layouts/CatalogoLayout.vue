@@ -12,9 +12,6 @@ export default {
     components: {
         Navbar
     },
-    computed: {
-        ...mapState('catalogo', ['isLoading', 'ronList'])
-    },
     methods: {
         ...mapActions('catalogo', ['cargarRones'])
     },
