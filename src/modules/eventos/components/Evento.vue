@@ -44,7 +44,7 @@ export default {
 }
 
 img {
-    width: 50%;
+    width: 480px;
 }
 
 .tarjeta {
@@ -89,6 +89,7 @@ img {
     font-weight: 400;
     text-align: center;
     padding: 0 1px;
+    width: 508px;
 }
 
 .content-extra {
