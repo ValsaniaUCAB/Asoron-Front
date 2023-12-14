@@ -56,7 +56,11 @@
 import getRonDetail from '@/modules/catalogo/helpers/getRonDetail'
 export default {
     props: {
-        id: {
+        idRon: {
+            type: String,
+            required: true
+        },
+        idTienda: {
             type: String,
             required: true
         }
@@ -67,10 +71,10 @@ export default {
         }
     },
     methods: {
-        async getRonDetail(id) {
+        async getRonDetail(id1, id2) {
             this.ronDetallado = null
             try {
-                this.ronDetallado = await getRonDetail(id)
+                this.ronDetallado = await getRonDetail(id1, id2)
                 // console.log(this.ronDetallado)
             } catch (error) {
                 // this.$router.push({ name: 'catalogo' })
@@ -78,7 +82,7 @@ export default {
         }
     },
     mounted() {
-        this.getRonDetail(this.id)
+        this.getRonDetail(this.idRon, this.idTienda)
     },
     watch: {
         id(value) {

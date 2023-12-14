@@ -55,6 +55,20 @@ function listaImages(lista) {
     return listaA
 }
 
+//! Por que es un array?
+
+// function listaInventario(lista) {
+//     let listaA = []
+//     for (const e of lista) {
+//         let obj = {
+//             id: e.img_id,
+//             url: e.img_url,
+//         }
+//         listaA.push(obj)
+//     }
+//     return listaA
+// }
+
 function listaPremio(lista) {
     let listaA = []
     for (const e of lista) {
@@ -137,13 +151,16 @@ function arreglar(item) {
             material: item.fk_bote_tapa_mate.fk_tapa_mate_mate.mate_nombre,
             tipo: item.fk_bote_tapa_mate.fk_tapa_mate_tapa.tapa_nombre,
         },
-        images: listaImages(item.imagen)
+        images: listaImages(item.imagen),
+        // inven: listaInventario(item.inventariotienda)
     }
+    console.log(obj)
     return obj
 }
 
-async function getRonDetail(id) {
-    const { data } = await ronDetail.get(`/${id}`)
+async function getRonDetail(idRon, idTienda) {
+    const { data } = await ronDetail.get(`/${idRon}/?inventario_id=${idTienda}`)
+    console.log(data)
     return arreglar(data)
 }
 

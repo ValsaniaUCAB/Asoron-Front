@@ -10,12 +10,13 @@ export default {
             component: () => import(/* webpackChunvkName: "catalogo" */ '../pages/Catalogo'),
         },
         {
-            path: ':id',
+            path: ':idRon/:idTienda',
             name: 'ron-detail',
             component: () => import(/* webpackChunvkName: "daybook-no-entry" */ '../pages/RonDetail.vue'),
             props: (route) => {
                 return {
-                    id: route.params.id
+                    idRon: route.params.idRon,
+                    idTienda: route.params.idTienda
                 }
             }
 
