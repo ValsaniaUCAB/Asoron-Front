@@ -6,7 +6,7 @@
             <img :src="ronDetallado.images[0].url" />
             <div class="info">
                 <h1>{{ ronDetallado.nombre }}</h1>
-                <p>{{ ronDetallado.descripcion }}</p>
+                <p>{{ ronDetallado.ron.descripcion }}</p>
                 <div class="comprar">
                     <span> ${{ ronDetallado.inventario.precio }} </span>
                     <div>- 1 +</div>
