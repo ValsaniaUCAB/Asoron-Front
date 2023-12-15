@@ -102,7 +102,6 @@ function listaPremio(lista) {
 }
 
 function arreglar(item) {
-    console.log('entrando a arreglar')
     const obj = {
         id: item.bote_id,
         nombre: item.bote_nombre,
@@ -154,18 +153,16 @@ function arreglar(item) {
         images: listaImages(item.imagen),
         // inven: listaInventario(item.inventariotienda)
         inventario: {
-            id: item.inventariotienda[0].inve_tiend_id,
             cantidad: item.inventariotienda[0].inve_tiend_cantidad,
             precio: item.inventariotienda[0].precio.hist_ron_precio,
         }
     }
-    console.log(obj)
     return obj
 }
 
 async function getRonDetail(idRon) {
     const { data } = await ronDetail.get(`/${idRon}`)
-    console.log(data)
+    console.log('Data arreglada', arreglar(data))
     return arreglar(data)
 }
 

@@ -1,17 +1,17 @@
 <template>
     <div>Soy un detalle de Evento</div>
-    <div v-if="!loading">
+    <!-- <div v-if="!loading">
         <h1>{{ evento.nombre }}</h1>
         <img src="../assets/placeholder evento 1.webp">
         <h4>Del {{ evento.fechaIni }} al {{ evento.fechaFin }}</h4>
         <p>Direccion: {{ evento.direccion }}</p>
         <p>{{ evento.descripcion }}</p>
 
-    </div>
+    </div> -->
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import getEventDetail from '../helpers/getEventDetail'
 export default {
     props: {
         id: {
@@ -21,25 +21,17 @@ export default {
     },
     data() {
         return {
-            loading: true,
             evento: null
         }
     },
-    computed: {
-        ...mapState('eventos', ['eventosList'])
-    },
     methods: {
-        buscar(id) {
-            for (const evento of this.eventosList) {
-                if (evento.id === id) {
-                    this.loading = false
-                    return evento
-                }
-            }
-        }
+        async getEventDetail(id) {
+            this.evento = null
+            this.evento = await getEventDetail(id)
+        },
     },
     mounted() {
-        this.evento = this.buscar(this.id)
+        this.evento = this.getEventDetail(this.id)
     }
 }
 </script>
