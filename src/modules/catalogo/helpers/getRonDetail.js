@@ -153,6 +153,11 @@ function arreglar(item) {
         },
         images: listaImages(item.imagen),
         // inven: listaInventario(item.inventariotienda)
+        inventario: {
+            id: item.inventariotienda[0].inve_tiend_id,
+            cantidad: item.inventariotienda[0].inve_tiend_cantidad,
+            precio: item.inventariotienda[0].precio.hist_ron_precio,
+        }
     }
     console.log(obj)
     return obj

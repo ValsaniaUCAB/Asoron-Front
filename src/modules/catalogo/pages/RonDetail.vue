@@ -8,7 +8,7 @@
                 <h1>{{ ronDetallado.nombre }}</h1>
                 <p>{{ ronDetallado.descripcion }}</p>
                 <div class="comprar">
-                    <span> $22 </span>
+                    <span> ${{ ronDetallado.inventario.precio }} </span>
                     <div>- 1 +</div>
                     <button class="button-18 ">Añadir al Carrito</button>
                 </div>
