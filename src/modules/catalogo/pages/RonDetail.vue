@@ -15,8 +15,21 @@
                 <div class="desplegables">
                     <div class="wrapper">
                         <div class="collapsible ficha-tecnica">
-                            <input type="checkbox" id="collapsible-head">
-                            <label for="collapsible-head">FICHA TECNICA</label>
+                            <input type="checkbox" id="collapsible-head-ficha">
+                            <label for="collapsible-head-ficha">FICHA TECNICA</label>
+                            <div class="collapsible-text">
+                                <ul>
+                                    <li v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
+                                        {{ sensacion }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <div class="collapsible como-servir">
+                            <input type="checkbox" id="collapsible-head-servir">
+                            <label for="collapsible-head-servir">COMO SERVIR</label>
                             <div class="collapsible-text">
                                 <ul>
                                     <li v-for="servir in ronDetallado.ron.comoServir" :key="servir.coctel">
@@ -28,8 +41,8 @@
                         </div>
 
                         <div class="collapsible sensaciones">
-                            <input type="checkbox" id="collapsible-head2">
-                            <label for="collapsible-head2">SENSACIONES</label>
+                            <input type="checkbox" id="collapsible-head-sensacion">
+                            <label for="collapsible-head-sensacion">SENSACIONES</label>
                             <div class="collapsible-text">
                                 <ul>
                                     <li v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
