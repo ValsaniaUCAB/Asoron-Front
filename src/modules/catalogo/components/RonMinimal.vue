@@ -3,7 +3,7 @@
         <router-link :to="{ name: 'ron-detail', params: { id: ron.id } }"><img :src="ron.images[0].img_url" /></router-link>
         <div class="nombre">
             {{ ron.nombre }}
-            <div class="precio d-flex justify-content-between"><span>Desde</span><span>${{ precio }}</span></div>
+            <div class="precio d-flex justify-content-between"><span>Desde</span><span>${{ ron.precio }}</span></div>
         </div>
 
     </div>
