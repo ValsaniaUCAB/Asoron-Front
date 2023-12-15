@@ -12,8 +12,6 @@
                     <div>- 1 +</div>
                     <button class="button-18 ">Añadir al Carrito</button>
                 </div>
-
-
                 <div class="desplegables">
                     <div class="wrapper">
                         <div class="collapsible ficha-tecnica">
@@ -42,9 +40,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
 
@@ -56,14 +51,10 @@
 import getRonDetail from '@/modules/catalogo/helpers/getRonDetail'
 export default {
     props: {
-        idRon: {
+        id: {
             type: String,
             required: true
         },
-        idTienda: {
-            type: String,
-            required: true
-        }
     },
     data() {
         return {
@@ -71,10 +62,10 @@ export default {
         }
     },
     methods: {
-        async getRonDetail(id1, id2) {
+        async getRonDetail(id) {
             this.ronDetallado = null
             try {
-                this.ronDetallado = await getRonDetail(id1, id2)
+                this.ronDetallado = await getRonDetail(id)
                 // console.log(this.ronDetallado)
             } catch (error) {
                 // this.$router.push({ name: 'catalogo' })
@@ -82,7 +73,7 @@ export default {
         }
     },
     mounted() {
-        this.getRonDetail(this.idRon, this.idTienda)
+        this.getRonDetail(this.id)
     },
     watch: {
         id(value) {

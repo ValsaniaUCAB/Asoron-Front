@@ -163,8 +163,8 @@ function arreglar(item) {
     return obj
 }
 
-async function getRonDetail(idRon, idTienda) {
-    const { data } = await ronDetail.get(`/${idRon}/?inventario_id=${idTienda}`)
+async function getRonDetail(idRon) {
+    const { data } = await ronDetail.get(`/${idRon}`)
     console.log(data)
     return arreglar(data)
 }

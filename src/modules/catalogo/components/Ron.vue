@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{ name: 'ron-detail', params: { idRon: ron.id, idTienda: ron.idTienda } }">
+    <router-link :to="{ name: 'ron-detail', params: { id: ron.id } }">
         <div class="box">
             <img :src="ron.images[0].img_url" />
             <div>
@@ -7,7 +7,6 @@
                 <div class="precio">${{ ron.precio }}</div>
                 <button class="button-18">Añadir al Carrito</button>
             </div>
-
         </div>
     </router-link>
 </template>
