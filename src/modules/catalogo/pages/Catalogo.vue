@@ -5,7 +5,8 @@
             <div class="barras">
                 <div class="busqueda">
                     <div class="titulo-barras">Buscar</div>
-                    <input class="barra-busqueda" type="text" placeholder="Buscar ron por nombre..." v-model="term">
+                    <input class="barra-busqueda" type="text" placeholder="Buscar ron por nombre..." v-model="term"
+                        @keypress.enter="cargarRonesConBusqueda">
                 </div>
                 <div class="sort">
                     <div class="titulo-barras">Ordenar</div>
@@ -27,7 +28,7 @@
             </div>
             <div v-else>
                 <div class="catalogo">
-                    <li v-for="ron in ronesByTerm">
+                    <li v-for="ron in rones">
                         <Ron :ron="ron" />
                     </li>
                 </div>
@@ -42,7 +43,7 @@
 
 import Ron from "../components/Ron";
 import Paginado from "../components/Paginado";
-import { mapGetters, mapState } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 export default {
     components: {
         Ron,
@@ -60,18 +61,18 @@ export default {
             else if (num === 'u') this.page++
             else this.page = num
         },
+        ...mapActions('catalogo', ['cargarRones']),
+        ...mapMutations('catalogo', ['setBusqueda']),
+        cargarRonesConBusqueda() {
+            this.setBusqueda(this.term)
+            this.cargarRones()
+        }
     },
     computed: {
         ...mapState('catalogo', {
             rones: 'ronList',
             isLoading: 'isLoading'
         }),
-        ...mapGetters('catalogo', ['getRonesByTerm']),
-        ronesByTerm() {
-
-            return this.getRonesByTerm(this.term, (this.page * 6) - 6)
-            //! Hay que cambiar los valores aqui 6, en la funcion getRonesByTerm en getters, y en paginado, en el template tambien a 6
-        }
     },
 }
 </script>

@@ -8,7 +8,7 @@ import getRonList from "../../helpers/getRonList";
 
 export const cargarRones = async ({ commit, getters }) => { // Funcion que carga los rones desde la bd
     commit('vaciarRonList')
-    const ronList = await getRonList()
+    const ronList = await getRonList(getters.getBusqueda)
     if (getters.getRonList.length === 0) {
         commit('setRonList', ronList)
     }

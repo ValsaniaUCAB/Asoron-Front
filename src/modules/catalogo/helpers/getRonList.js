@@ -21,9 +21,10 @@ function arreglarLista(ronList) {
     return ronListArreglado
 }
 
-async function getRonList(nombreTienda = 'Asoron Online') {
-    const { data } = await ronCatalogo.get(`/?nombre_tienda=${nombreTienda}`)
+async function getRonList(busqueda = '') {
+    const { data } = await ronCatalogo.get(`/?nombre_ron=${busqueda}`)
     const { results } = data
+    console.log(results)
     // console.log(arreglarLista(results))
     if (data) return arreglarLista(results)
     else return []

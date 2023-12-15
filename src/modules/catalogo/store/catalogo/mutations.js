@@ -12,3 +12,7 @@ export const vaciarRonList = (state) => {
     state.isLoading = true;
     state.ronList = []
 }
+
+export const setBusqueda = (state, busqueda) => {
+    state.busqueda = busqueda
+}
