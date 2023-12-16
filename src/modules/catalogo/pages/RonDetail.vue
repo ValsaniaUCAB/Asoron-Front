@@ -11,7 +11,7 @@
                     <span> ${{ ronDetallado.inventario.precio }} </span>
                     <div class="cantidad-container">
                         <button @click="decrease" class="cantidad-button minus"><span>-</span></button>
-                        <input v-model="cantidad" type="text">
+                        <input v-model="cantidad" type="number">
                         <button @click="increase" class="cantidad-button plus"><span>+</span></button>
                     </div>
                     <button class="button-18 ">Añadir al Carrito</button>
@@ -100,6 +100,13 @@ export default {
     watch: {
         id(value) {
             this.getRonDetail(value)
+        },
+        cantidad(val){
+            if (val > this.ronDetallado.inventario.cantidad){
+                this.cantidad = this.ronDetallado.inventario.cantidad
+            } else if (val < 1){
+                this.cantidad = 1
+            }
         }
     }
 }
@@ -277,6 +284,12 @@ export default {
     border: #E3E5ED 1px solid ;
     height: 40px;
     text-align: center;
+}
+
+.cantidad-container input[type=number]::-webkit-inner-spin-button, 
+.cantidad-container input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 .cantidad-button{
