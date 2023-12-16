@@ -20,7 +20,7 @@
                     <div class="wrapper">
                         <div class="collapsible ficha-tecnica">
                             <input type="checkbox" id="collapsible-head-ficha">
-                            <label for="collapsible-head-ficha">FICHA TECNICA+</label>
+                            <label for="collapsible-head-ficha">FICHA TECNICA</label>
                             <div class="collapsible-text">
                                 <ul>
                                     <li v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
