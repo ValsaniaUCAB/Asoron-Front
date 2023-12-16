@@ -32,7 +32,7 @@
                         <Ron :ron="ron" />
                     </li>
                 </div>
-                <Paginado :ronList="rones" :page="page" @on-click="cambiarPagina" />
+                <Paginado @on-click="cambiarPagina" />
             </div>
         </div>
 
@@ -52,17 +52,26 @@ export default {
     data() {
         return {
             term: '',
-            page: 1,
         }
     },
     methods: {
         cambiarPagina(num) {
-            if (num === 'd') this.page--
-            else if (num === 'u') this.page++
-            else this.page = num
+            if (num === 'd') {
+                this.setActualPage(this.pages.actual - 1)
+                this.cargarRones()
+            }
+            else if (num === 'u') {
+                this.setActualPage(this.pages.actual + 1)
+                this.cargarRones()
+            }
+
+            else {
+                this.setActualPage(num)
+                this.cargarRones()
+            }
         },
         ...mapActions('catalogo', ['cargarRones']),
-        ...mapMutations('catalogo', ['setBusqueda']),
+        ...mapMutations('catalogo', ['setBusqueda', 'setActualPage']),
         cargarRonesConBusqueda() {
             this.setBusqueda(this.term)
             this.cargarRones()
@@ -71,7 +80,8 @@ export default {
     computed: {
         ...mapState('catalogo', {
             rones: 'ronList',
-            isLoading: 'isLoading'
+            isLoading: 'isLoading',
+            pages: 'pages'
         }),
     },
 }

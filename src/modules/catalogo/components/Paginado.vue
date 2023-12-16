@@ -1,42 +1,31 @@
 <template>
-    <button class="button-18" @click="$emit('on-click', 'd')" :disabled="page === 1"> <i
+    <button class="button-18" @click="$emit('on-click', 'd')" :disabled="pages.actual === 1"> <i
             class=" fa fa-arrow-left"></i></button>
-    <span v-for=" i in valorEnteroLista()">
-        <button class=" button-18" :class="activo(i)" @click="$emit('on-click', i)" :disabled="page === i">{{ i
+    <span v-for=" i in pages.totalPaginas">
+        <button class=" button-18" :class="activo(i)" @click="$emit('on-click', i)" :disabled="pages.actual === i">{{ i
         }}</button>
     </span>
-    <button class="button-18" @click="$emit('on-click', 'u')" :disabled="page >= ronList.length / 6"><i
+    <button class="button-18" @click="$emit('on-click', 'u')" :disabled="pages.actual === pages.totalPaginas"><i
             class="fa fa-arrow-right"></i></button>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     emits: ['on-click'],
-    props: {
-        ronList: {
-            type: Array,
-            required: true
-        },
-        page: {
-            required: true,
-            type: Number,
-        }
-    },
     data() {
         return {
             activated: 'active'
         }
     },
-
     methods: {
         activo(num) {
-            if (num === this.page) return 'active'
+            if (num === this.pages.actual) return 'active'
             else return ''
         },
-        valorEnteroLista() {
-            return Math.ceil(this.ronList.length / 6)
-
-        }
+    },
+    computed: {
+        ...mapState('catalogo', ['pages'])
     }
 }
 </script>

@@ -18,10 +18,12 @@ function arreglarLista(ronList) {
     return ronListArreglado
 }
 
-async function getRonList(busqueda = '') {
-    const { data } = await ronCatalogo.get(`/?nombre_ron=${busqueda}`)
-    const { results } = data
-    if (data) return arreglarLista(results)
+async function getRonList(busqueda = '', page = '1') {
+
+    const { data } = await ronCatalogo.get(`/?page=${page}&nombre_ron=${busqueda}`)
+    console.log(data)
+    const { Paginacion, results } = data
+    if (data) return { paginacion: Paginacion, ronList: arreglarLista(results) }
     else return []
 }
 
