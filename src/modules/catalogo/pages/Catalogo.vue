@@ -21,19 +21,19 @@
                     <h2 class="filtro-titulo">Marca</h2>
                     <ul class="filtro-lista">
                         <li class="marca_item">
-                            <input type="checkbox" name="marca" value="marca1">
+                            <input type="radio" name="marca" value="marca1">
                             <label for="marca1">Cacique</label>
                         </li>
                         <li class="marca_item">
-                            <input type="checkbox" name="marca" value="marca1">
+                            <input type="radio" name="marca" value="marca1">
                             <label for="marca1">Carupano</label>
                         </li>
                         <li class="marca_item">
-                            <input type="checkbox" name="marca" value="marca1">
+                            <input type="radio" name="marca" value="marca1">
                             <label for="marca1">Pampero</label>
                         </li>
                         <li class="marca_item">
-                            <input type="checkbox" name="marca" value="marca1">
+                            <input type="radio" name="marca" value="marca1">
                             <label for="marca1">Santa Teresa</label>
                         </li>
                     </ul>
