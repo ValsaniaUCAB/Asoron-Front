@@ -14,9 +14,30 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex">
-            <div class="col-2">
-                Filtros
+        <div class="contenedor">
+            <div class="filtros">
+                <h1>Filtros</h1>
+                <div class="filtro-marca">
+                    <h2 class="filtro-titulo">Marca</h2>
+                    <ul class="filtro-lista">
+                        <li class="marca_item">
+                            <input type="checkbox" name="marca" value="marca1">
+                            <label for="marca1">Cacique</label>
+                        </li>
+                        <li class="marca_item">
+                            <input type="checkbox" name="marca" value="marca1">
+                            <label for="marca1">Carupano</label>
+                        </li>
+                        <li class="marca_item">
+                            <input type="checkbox" name="marca" value="marca1">
+                            <label for="marca1">Pampero</label>
+                        </li>
+                        <li class="marca_item">
+                            <input type="checkbox" name="marca" value="marca1">
+                            <label for="marca1">Santa Teresa</label>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div v-if="isLoading === true" class="catalogo cargando">
                 <div class="box cargando">
@@ -28,12 +49,13 @@
             </div>
             <div v-else>
                 <div class="catalogo">
-                    <li v-for="ron in rones">
+                    <li v-for="ron in rones" :key="ron.id">
                         <Ron :ron="ron" />
                     </li>
                 </div>
                 <Paginado @on-click="cambiarPagina" />
             </div>
+            <div class="spacer"></div>
         </div>
 
     </div>
@@ -94,11 +116,31 @@ export default {
     margin: 35px 0;
 }
 
+.filtros {
+    padding-left: 44px;
+    padding-top: 52px;
+    // width: 274px;
+    width: 15vw;
+    background: whitesmoke;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: #000;
+}
+
+.spacer {
+    // width: 274px;
+    width: 15vw;
+}
+
 .catalogo {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    width: 1200px;
+    justify-content: space-evenly;
+    align-items: center;
+    // width: 1200px;
+    width: 70vw;
     height: 1200px;
 
     &.cargando {
@@ -107,24 +149,27 @@ export default {
     }
 }
 
+.contenedor {
+    display: flex;
+    justify-content: space-between;
+}
+
 .titulo {
     font-family: 'Brothers', sans-serif;
     font-size: 48px;
     font-weight: bold;
     color: #31212B;
-    width: 100%;
+    
     text-align: left;
     margin-left: 30px;
 }
 
 .barras {
-
     margin: 30px;
     display: flex;
     flex-direction: row;
-    width: 100%;
-    justify-content: right;
-
+    
+    justify-content: space-around;
 }
 
 .busqueda {
@@ -169,7 +214,54 @@ export default {
     }
 }
 
+.filtros h1 {
+    font-size: 36px;
+    padding-bottom: 30px;
+    font-weight: 600;
+}
+
+.filtro-marca {
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+}
+
+
+.filtro-titulo {
+    padding-bottom: 25px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.filtro-lista {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    list-style-type: none;
+    width: 100%;
+}
+
+.filtro-lista li {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+}
+
+.filtro-lista li input {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
 li {
+    padding: 0;
     list-style-type: none;
 }
 
