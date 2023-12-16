@@ -9,14 +9,18 @@
                 <p>{{ ronDetallado.ron.descripcion }}</p>
                 <div class="comprar">
                     <span> ${{ ronDetallado.inventario.precio }} </span>
-                    <div>- 1 +</div>
+                    <div class="cantidad-container">
+                        <button @click="decrease" class="cantidad-button minus"><span>-</span></button>
+                        <input v-model="cantidad" type="text">
+                        <button @click="increase" class="cantidad-button plus"><span>+</span></button>
+                    </div>
                     <button class="button-18 ">Añadir al Carrito</button>
                 </div>
                 <div class="desplegables">
                     <div class="wrapper">
                         <div class="collapsible ficha-tecnica">
                             <input type="checkbox" id="collapsible-head-ficha">
-                            <label for="collapsible-head-ficha">FICHA TECNICA</label>
+                            <label for="collapsible-head-ficha">FICHA TECNICA+</label>
                             <div class="collapsible-text">
                                 <ul>
                                     <li v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
@@ -25,8 +29,6 @@
                                 </ul>
                             </div>
                         </div>
-
-
                         <div class="collapsible como-servir">
                             <input type="checkbox" id="collapsible-head-servir">
                             <label for="collapsible-head-servir">COMO SERVIR</label>
@@ -39,7 +41,6 @@
                                 </ul>
                             </div>
                         </div>
-
                         <div class="collapsible sensaciones">
                             <input type="checkbox" id="collapsible-head-sensacion">
                             <label for="collapsible-head-sensacion">SENSACIONES</label>
@@ -55,7 +56,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -71,7 +71,8 @@ export default {
     },
     data() {
         return {
-            ronDetallado: null
+            ronDetallado: null,
+            cantidad: 1
         }
     },
     methods: {
@@ -83,6 +84,14 @@ export default {
             } catch (error) {
                 // this.$router.push({ name: 'catalogo' })
             }
+        },
+        increase(){
+            if(this.cantidad < this.ronDetallado.inventario.cantidad)
+            this.cantidad++
+        },
+        decrease(){
+            if(this.cantidad > 1){
+                this.cantidad--}
         }
     },
     mounted() {
@@ -251,6 +260,54 @@ export default {
 .collapsible-text ul li p {
     margin-left: 10px;
 }
+
+.cantidad-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #E3E5ED 1px solid ;
+    width: 150px;
+    height: 40px;
+    border-radius:24px;
+}
+
+.cantidad-container input {
+    border: 0px;
+    width: 50px;
+    border: #E3E5ED 1px solid ;
+    height: 40px;
+    text-align: center;
+}
+
+.cantidad-button{
+    border: 0px;
+    width: 50px;
+    padding: 0;
+    padding-bottom: 3px;
+    font-size: 24px;
+    color:#7c7c7c ;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+    transition: background-color 0.167s, color 0.167s;
+}
+
+.cantidad-button:hover {
+    background-color: #E3E5ED;
+    color: #000;
+}
+
+.plus {
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+.minus {
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+}
+
 
 .button-18 {
     align-items: center;
