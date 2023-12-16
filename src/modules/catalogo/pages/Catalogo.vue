@@ -119,9 +119,7 @@ export default {
 .filtros {
     padding-left: 44px;
     padding-top: 52px;
-    // width: 274px;
     width: 15vw;
-    
     display:flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -140,9 +138,8 @@ export default {
     justify-content: space-evenly;
     align-items: center;
     max-width: 1200px;
-    
     width: 70vw;
-    height: 1200px;
+    margin-bottom: 10vh;
 
     &.cargando {
         justify-content: center;
