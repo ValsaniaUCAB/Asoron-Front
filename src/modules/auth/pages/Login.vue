@@ -5,9 +5,9 @@
             <div class="box2">
                 <div class="d-flex flex-column">
                     <p class="titulo">Iniciar Sesion</p>
-                    <input type="text" placeholder="Nombre de Usuario" class="form" />
-                    <input type="password" placeholder="Contraseña" class="form" />
-                    <button class="boton">Inicar Sesion</button>
+                    <input type="text" placeholder="Nombre de Usuario" class="form" v-model="username" />
+                    <input type="password" placeholder="Contraseña" class="form" v-model="password" />
+                    <button class="boton" @click="sendLogin">Inicar Sesion</button>
                     <p class="left">Nuevo en Asoron? <router-link :to="{ name: 'register' }">Crear una cuenta</router-link>
                     </p>
                 </div>
@@ -17,8 +17,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-
+    data() {
+        return {
+            username: '',
+            password: ''
+        }
+    },
+    methods: {
+        ...mapActions('auth', ['login']),
+        sendLogin() {
+            console.log(this.username, this.password)
+            this.login({ username: this.username, password: this.password })
+        }
+    },
 }
 </script>
 

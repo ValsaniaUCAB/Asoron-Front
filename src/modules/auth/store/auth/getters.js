@@ -28,3 +28,5 @@
 //     }
 //     return state.ronList.filter(ron => ron.ron_nombre.toLowerCase().includes(term.toLocaleLowerCase()))
 // }
+
+export const getTokenAccess = (state) => state.token.access
