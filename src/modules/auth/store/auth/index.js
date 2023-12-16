@@ -4,7 +4,7 @@ import * as getters from "./getters"
 import * as mutations from "./mutations"
 import state from "./state"
 
-const eventosModule = {
+const authModule = {
     namespaced: true,
     actions,
     getters,
@@ -12,4 +12,4 @@ const eventosModule = {
     state
 }
 
-export default eventosModule
+export default authModule

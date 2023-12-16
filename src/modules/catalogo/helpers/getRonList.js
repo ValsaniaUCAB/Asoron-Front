@@ -11,9 +11,6 @@ function arreglarLista(ronList) {
             images: item.fk_inve_tiend_bote.imagen,
             precio: item.precio.hist_ron_precio,
             // Elementos de la tienda
-            idTienda: item.inve_tiend_id,
-            tipoTienda: item.fk_inve_tiend_tiend.fk_tiend_tipo_tiend.tipo_tiend_nombre,
-            nombreTienda: item.fk_inve_tiend_tiend.tiend_nombre,
             cantidad: item.inve_tiend_cantidad,
         }
         ronListArreglado.push(obj)
@@ -24,8 +21,6 @@ function arreglarLista(ronList) {
 async function getRonList(busqueda = '') {
     const { data } = await ronCatalogo.get(`/?nombre_ron=${busqueda}`)
     const { results } = data
-    console.log(results)
-    // console.log(arreglarLista(results))
     if (data) return arreglarLista(results)
     else return []
 }
