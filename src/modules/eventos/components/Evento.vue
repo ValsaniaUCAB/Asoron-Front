@@ -4,7 +4,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     <router-link :to="{ name: 'evento-detail', params: { id: evento.id } }" class="cuadro d-flex tarjeta">
 
-        <img :src="evento.images[0].url">
+        <!-- <img :src="evento.images[0].url"> -->
+
+        <!-- aqui -->
+
+        <div class="test-image" :style="{ backgroundImage: `url(${evento.images[0].url})`}"></div>
+        
+        <!-- ESTE ES EL AUTOGENERADO DE IMAGEN DE EVENTO -->
+        
+        <!-- <div class="test-random-image">
+            <h1> {{ "EVENTO " + evento.nombre.toUpperCase() }} </h1>
+        </div> -->
+
+        <!-- termina aqui -->
 
         <div class="d-flex flex-column mx-3 my-2 tarjeta-right">
             <h1>{{ evento.nombre.toUpperCase() }}</h1>
@@ -46,6 +58,35 @@ export default {
 img {
     width: 480px;
 }
+
+// aqui
+
+.test-image {
+    width: 480px;
+    height: 480px;
+    background-size: cover;
+    background-position: center;
+}
+
+.test-random-image {
+    width: 480px;
+    height: 480px;
+    background: rgb(2,0,36);
+    background: linear-gradient(137deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test-random-image h1 {
+    color: #fff;
+    font-family: 'Brothers', sans-serif;
+    font-weight: 800;
+    text-align: center;
+    
+}
+
+// termina aqui
 
 .tarjeta {
     background-color: #fff;
