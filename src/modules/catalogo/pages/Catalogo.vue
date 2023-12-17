@@ -17,27 +17,48 @@
         <div class="contenedor">
             <div class="filtros">
                 <h1>Filtros</h1>
-                <div class="filtro-marca">
+                <form class="filtro-container filtro-marca">
                     <h2 class="filtro-titulo">Marca</h2>
                     <ul class="filtro-lista">
-                        <li class="marca_item">
+                        <li class="filtro_item">
                             <input type="radio" name="marca" value="marca1">
                             <label for="marca1">Cacique</label>
                         </li>
-                        <li class="marca_item">
+                        <li class="filtro_item">
                             <input type="radio" name="marca" value="marca1">
                             <label for="marca1">Carupano</label>
                         </li>
-                        <li class="marca_item">
+                        <li class="filtro_item">
                             <input type="radio" name="marca" value="marca1">
                             <label for="marca1">Pampero</label>
                         </li>
-                        <li class="marca_item">
+                        <li class="filtro_item">
                             <input type="radio" name="marca" value="marca1">
                             <label for="marca1">Santa Teresa</label>
                         </li>
                     </ul>
-                </div>
+                </form>
+                <form class="filtro-container filtro-tipo-ron">
+                    <h2 class="filtro-titulo">Tipo de Ron</h2>
+                    <ul class="filtro-lista">
+                        <li class="filtro_item">
+                            <input type="radio" name="marca" value="marca1">
+                            <label for="marca1">Ambar</label>
+                        </li>
+                        <li class="filtro_item">
+                            <input type="radio" name="marca" value="marca1">
+                            <label for="marca1">Ambar Deluxe</label>
+                        </li>
+                        <li class="filtro_item">
+                            <input type="radio" name="marca" value="marca1">
+                            <label for="marca1">Obscuro</label>
+                        </li>
+                        <li class="filtro_item">
+                            <input type="radio" name="marca" value="marca1">
+                            <label for="marca1">Christian Pato</label>
+                        </li>
+                    </ul>
+                </form>
             </div>
             <div v-if="isLoading === true" class="catalogo cargando">
                 <div class="box cargando">
@@ -218,12 +239,12 @@ export default {
     font-weight: 600;
 }
 
-.filtro-marca {
+.filtro-container {
     display:flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    
+    margin-bottom: 5vh ;
 }
 
 
