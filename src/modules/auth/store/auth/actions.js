@@ -9,6 +9,7 @@ import { setHeader, getHeader } from "@/lib/api"
 import { getCookie, setCookie } from "@/lib/cookies"
 import { emptyHeader } from "@/lib/api";
 
+
 export const login = async ({ commit }, { username, password }) => {
     console.log('header antes del post Login', getHeader())
     const data = await postLogin(username, password)
