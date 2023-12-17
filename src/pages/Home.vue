@@ -56,12 +56,11 @@ export default {
         ...mapGetters('catalogo', ['getRonesMinimal'])
     },
     methods: {
-        ...mapActions('catalogo', ['cargarRones'])
+        ...mapActions('catalogo', ['cargarRones']),
     },
-    created() {
+    async created() {
         this.cargarRones()
     }
-
 }
 </script>
 

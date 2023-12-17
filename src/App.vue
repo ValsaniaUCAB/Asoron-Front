@@ -5,11 +5,22 @@
 
 <script>
 import Navbar from '@/modules/shared/components/Navbar.vue'
-
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'App',
   components: {
     Navbar
+  },
+  methods: {
+    ...mapActions('auth', ['findUser'])
+  },
+  computed: {
+    ...mapState('auth', ['user'])
+  },
+  async created() {
+    if (!this.user) {
+      await this.findUser()
+    }
   }
 }
 </script>

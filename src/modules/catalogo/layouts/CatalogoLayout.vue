@@ -13,9 +13,10 @@ export default {
         Navbar
     },
     methods: {
-        ...mapActions('catalogo', ['cargarRones'])
+        ...mapActions('catalogo', ['cargarRones']),
+        ...mapActions('auth', ['findUser'])
     },
-    created() {
+    async created() {
         this.cargarRones()
     }
 }
