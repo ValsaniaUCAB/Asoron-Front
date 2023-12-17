@@ -39,7 +39,6 @@
 
 <script>
 import Carrito from '@/modules/carrito/components/Carrito'
-import { re } from 'mathjs'
 import { mapState } from 'vuex'
 export default {
     components: {
