@@ -1,5 +1,4 @@
-import eventoCatalogo from "../api/eventoCatalogo"
-
+import api from "@/api";
 function listaImages(lista) {
     let listaA = []
     for (const e of lista) {
@@ -37,7 +36,7 @@ function arreglarLista(eventList) {
 }
 
 async function getRonList() {
-    const { data } = await eventoCatalogo.get(`/`)
+    const { data } = await api.get(`/store/evento/`)
     const { results } = data
     if (data) return arreglarLista(results)
     else return []

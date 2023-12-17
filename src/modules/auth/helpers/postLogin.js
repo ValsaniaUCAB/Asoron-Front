@@ -11,7 +11,6 @@ import { setHeader } from "@/api"
 async function postLogin(username, password) {
     const dataToSave = { username, password }
     const { data } = await api.post('/auth/jwt/create/', dataToSave)
-    console.log('data en postLogin', data)
     setHeader(data.access)
     return data
 }

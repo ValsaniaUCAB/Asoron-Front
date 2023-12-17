@@ -1,4 +1,4 @@
-import ronDetail from "@/modules/catalogo/api/ronDetail";
+import api from "@/api";
 
 function listaBarriles(lista) {
     let listaA = []
@@ -161,7 +161,7 @@ function arreglar(item) {
 }
 
 async function getRonDetail(idRon) {
-    const { data } = await ronDetail.get(`/${idRon}`)
+    const { data } = await api.get(`/store/botella-detail/${idRon}`)
     console.log('Data arreglada', arreglar(data))
     return arreglar(data)
 }

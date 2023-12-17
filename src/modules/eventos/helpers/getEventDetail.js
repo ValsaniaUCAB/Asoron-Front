@@ -1,4 +1,4 @@
-import eventoDetail from "../api/eventoDetail";
+import api from '@/api';
 
 function listaImages(lista) {
     let listaA = []
@@ -51,7 +51,7 @@ function arreglar(data) {
 }
 
 async function getEventDetail(id) {
-    const { data } = await eventoDetail.get(id);
+    const { data } = await api.get(`/store/evento-detail/${id}`);
     console.log('data sin modificar', data)
     console.log('data arreglada', arreglar(data))
 }

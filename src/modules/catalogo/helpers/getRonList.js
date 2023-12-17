@@ -1,4 +1,4 @@
-import ronCatalogo from "@/modules/catalogo/api/ronCatalogo";
+import api from '@/api'
 
 function arreglarLista(ronList) {
     let ronListArreglado = []
@@ -18,9 +18,18 @@ function arreglarLista(ronList) {
     return ronListArreglado
 }
 
+// async function getRonList(busqueda = '', page = '1') {
+
+//     const { data } = await ronCatalogo.get(`/?page=${page}&nombre_ron=${busqueda}`)
+//     console.log(data)
+//     const { Paginacion, results } = data
+//     if (data) return { paginacion: Paginacion, ronList: arreglarLista(results) }
+//     else return []
+// }
+
 async function getRonList(busqueda = '', page = '1') {
 
-    const { data } = await ronCatalogo.get(`/?page=${page}&nombre_ron=${busqueda}`)
+    const { data } = await api.get(`/store/inventario-tienda/?page=${page}&nombre_ron=${busqueda}`)
     console.log(data)
     const { Paginacion, results } = data
     if (data) return { paginacion: Paginacion, ronList: arreglarLista(results) }
