@@ -18,47 +18,48 @@
             <div class="filtros">
                 <h1>Filtros</h1>
                 <form class="filtro-container filtro-marca">
-                    <h2 class="filtro-titulo">Marca</h2>
+                    <h2 class="filtro-titulo">Marca : {{this.marca}}</h2>
                     <ul class="filtro-lista">
                         <li class="filtro_item">
-                            <input type="radio" name="marca" value="marca1">
-                            <label for="marca1">Cacique</label>
+                            <input v-model="marca" type="radio" value="Cacique">
+                            <label>Cacique</label>
                         </li>
                         <li class="filtro_item">
-                            <input type="radio" name="marca" value="marca1">
-                            <label for="marca1">Carupano</label>
+                            <input v-model="marca" type="radio" value="Carupano">
+                            <label>Carupano</label>
                         </li>
                         <li class="filtro_item">
-                            <input type="radio" name="marca" value="marca1">
-                            <label for="marca1">Pampero</label>
+                            <input v-model="marca" type="radio" value="Pampero">
+                            <label>Pampero</label>
                         </li>
                         <li class="filtro_item">
-                            <input type="radio" name="marca" value="marca1">
-                            <label for="marca1">Santa Teresa</label>
+                            <input v-model="marca" type="radio" value="Santa Teresa">
+                            <label>Santa Teresa</label>
                         </li>
                     </ul>
                 </form>
                 <form class="filtro-container filtro-tipo-ron">
-                    <h2 class="filtro-titulo">Tipo de Ron</h2>
+                    <h2 class="filtro-titulo">Tipo de Ron : {{this.tipo_ron}}</h2>
                     <ul class="filtro-lista">
                         <li class="filtro_item">
-                            <input type="radio" name="marca" value="marca1">
-                            <label for="marca1">Ambar</label>
+                            <input v-model="tipo_ron" type="radio" value="Ambar">
+                            <label>Ambar</label>
                         </li>
                         <li class="filtro_item">
-                            <input type="radio" name="marca" value="marca1">
-                            <label for="marca1">Ambar Deluxe</label>
+                            <input v-model="tipo_ron" type="radio" value="Ambar Deluxe">
+                            <label>Ambar Deluxe</label>
                         </li>
                         <li class="filtro_item">
-                            <input type="radio" name="marca" value="marca1">
-                            <label for="marca1">Obscuro</label>
+                            <input v-model="tipo_ron" type="radio" value="Valsania Gay">
+                            <label>Obscuro</label>
                         </li>
                         <li class="filtro_item">
-                            <input type="radio" name="marca" value="marca1">
-                            <label for="marca1">Christian Pato</label>
+                            <input v-model="tipo_ron" type="radio" value="Christian Pato">
+                            <label>Christian Pato</label>
                         </li>
                     </ul>
                 </form>
+                <input v-model="sliderValue" type="range" min="0" max="100" class="slider" />
             </div>
             <div v-if="isLoading === true" class="catalogo cargando">
                 <div class="box cargando">
@@ -87,6 +88,8 @@
 import Ron from "../components/Ron";
 import Paginado from "../components/Paginado";
 import { mapActions, mapMutations, mapState } from 'vuex';
+import { ref } from "vue";
+
 export default {
     components: {
         Ron,
@@ -95,6 +98,9 @@ export default {
     data() {
         return {
             term: '',
+            sliderValue : ref(50),
+            tipo_ron : '',
+            marca : '',
         }
     },
     methods: {
