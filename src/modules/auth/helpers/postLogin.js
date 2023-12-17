@@ -1,6 +1,7 @@
 // import authLogin from "../api/loginApi";
 import api from "@/lib/api"
 import { setHeader } from "@/lib/api"
+import { setCookie } from "@/lib/cookies"
 
 
 // function postLogin(username, password) {
@@ -10,8 +11,14 @@ import { setHeader } from "@/lib/api"
 
 async function postLogin(username, password) {
     const dataToSave = { username, password }
-    const { data } = await api.post('/auth/jwt/create/', dataToSave)
-    setHeader(data.access)
-    return data
+    try {
+        const { data } = await api.post('/auth/jwt/create/', dataToSave)
+        setHeader(data.access)
+        setCookie('access', data.access)
+        return data
+    } catch (error) {
+        setCookie('access', '')
+        console.log(error)
+    }
 }
 export default postLogin

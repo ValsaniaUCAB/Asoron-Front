@@ -29,17 +29,20 @@ export default {
     },
     methods: {
         ...mapActions('auth', ['login']),
-        sendLogin() {
+        async sendLogin() {
             console.log(this.username, this.password)
             new Swal({
                 title: 'Espere por favor',
                 allowOutsideClick: false,
             })
             Swal.showLoading()
+            try {
+                await this.login({ username: this.username, password: this.password })
+                Swal.fire('Success', 'Inicio Sesion con exito', 'success', this.$router.push({ name: 'home' }))
+            } catch (error) {
+                Swal.fire('Error', 'Sesion no encontrada', 'error', this.username = '', this.password = '')
+            }
 
-            this.login({ username: this.username, password: this.password })
-
-            Swal.fire('Success', 'Inicio Sesion con exito', 'success', this.$router.push({ name: 'home' }))
 
         }
     },
