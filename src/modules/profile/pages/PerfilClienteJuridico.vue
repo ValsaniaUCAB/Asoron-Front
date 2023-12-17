@@ -1,5 +1,5 @@
 <template>
-    <div>Soy LayoutCliente</div>
+    <h1>Soy Perfil del Cliente Juridico</h1>
 </template>
 
 <script>

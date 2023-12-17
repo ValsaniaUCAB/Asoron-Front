@@ -3,9 +3,10 @@
 //
 // }
 
-export const setToken = (state, payload) => {
-    state.token.access = payload.access
-    state.token.refresh = payload.refresh
+export const setToken = (state, { access, refresh }) => {
+
+    if (access) state.token.access = access
+    if (refresh) state.token.refresh = refresh
 }
 
 export const setUser = (state, payload) => {

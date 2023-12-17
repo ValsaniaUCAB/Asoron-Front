@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import catalogoRouter from '@/modules/catalogo/router'
 import eventosRouter from '@/modules/eventos/router'
 import authRouter from '@/modules/auth/router'
+import profileRouter from '@/modules/profile/router'
 
 const routes = [
     {
@@ -17,8 +18,7 @@ const routes = [
     },
     {
         path: '/profile',
-        name: 'profile',
-        component: () => import(/* webpackChunkName: "profile" */ '@/modules/auth/layouts/ProfileLayout'),
+        ...profileRouter
     },
     {
         path: '/catalogo',
