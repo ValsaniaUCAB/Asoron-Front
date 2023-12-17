@@ -16,11 +16,20 @@ export default {
             })
             Swal.showLoading()
             await this.logout()
-            Swal.fire('Success', 'Cerró sesión con exito', 'success', this.$router.push({ name: 'home' }))
+            Swal.fire({
+                title: 'Success',
+                text: 'Cerró sesión con éxito',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#31212b',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$router.push({ name: 'home' });
+                }
+            });
         }
     },
-
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

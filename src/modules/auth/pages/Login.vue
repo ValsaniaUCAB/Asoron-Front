@@ -38,7 +38,11 @@ export default {
             Swal.showLoading()
             try {
                 await this.login({ username: this.username, password: this.password })
-                Swal.fire('Success', 'Inicio Sesion con exito', 'success', this.$router.push({ name: 'home' }))
+                Swal.fire('Success', 'Inicio Sesion con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$router.push({ name: 'home' });
+                    }
+                });
             } catch (error) {
                 Swal.fire('Error', 'Sesion no encontrada', 'error', this.username = '', this.password = '')
             }

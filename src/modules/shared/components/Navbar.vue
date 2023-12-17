@@ -68,6 +68,10 @@ export default {
                 this.$router.push({ name: 'login' })
                 return
             }
+            if (this.user.is_staff === true) {
+                this.$router.push({ name: 'empleado' })
+                return
+            }
             if (this.user.fk_usua_clie_natu) {
                 this.$router.push({ name: 'natural' })
                 return
