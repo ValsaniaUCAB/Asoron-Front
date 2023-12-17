@@ -1,5 +1,5 @@
 <template>
-    <h1>Soy Perfil del Cliente</h1>
+    <h1>Soy Perfil del Cliente Natural</h1>
 </template>
 
 <script>
