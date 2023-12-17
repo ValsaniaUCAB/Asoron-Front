@@ -26,9 +26,7 @@
                             @click="openCarrito">
                     </li>
                     <li>
-                        <router-link :to="{ name: 'login' }">
-                            <img class="user" src="@/modules/shared/assets/navbar/user.svg">
-                        </router-link>
+                        <img class="user pointer" src="@/modules/shared/assets/navbar/user.svg" @click="profile()">
                     </li>
                 </ul>
             </nav>
@@ -41,8 +39,8 @@
 
 <script>
 import Carrito from '@/modules/carrito/components/Carrito'
-
-
+import { re } from 'mathjs'
+import { mapState } from 'vuex'
 export default {
     components: {
         Carrito
@@ -51,6 +49,9 @@ export default {
         return {
             isOpen: false,
         }
+    },
+    computed: {
+        ...mapState('auth', ['user'])
     },
     methods: {
         openCarrito() {
@@ -62,6 +63,20 @@ export default {
         },
         closeCarrito() {
             this.isOpen = false
+        },
+        profile() {
+            if (!this.user) {
+                this.$router.push({ name: 'login' })
+                return
+            }
+            if (this.user.fk_usua_clie_natu) {
+                this.$router.push({ name: 'natural' })
+                return
+            }
+            if (this.user.fk_usua_clie_juri) {
+                this.$router.push({ name: 'juridico' })
+                return
+            }
         }
     }
 }
