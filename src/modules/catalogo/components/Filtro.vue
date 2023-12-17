@@ -44,7 +44,7 @@
             </ul>
         </form>
         <h2 class="filtro-titulo">Precio : {{this.sliderValue}}</h2>
-        <input v-model="sliderValue" type="range" min="0" max="100" class="slider"/>
+        <input v-model="sliderValue" type="range" min="0" max="1300" class="slider"/>
     </div>
   
 </template>
@@ -56,7 +56,7 @@ import { ref } from "vue";
 export default {
     data() {
         return {
-            sliderValue : ref(50),
+            sliderValue : ref(0),
             tipo_ron : '',
             marca : '',
         }
