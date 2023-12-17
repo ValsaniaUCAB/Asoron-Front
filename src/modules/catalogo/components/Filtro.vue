@@ -43,8 +43,14 @@
                 </li>
             </ul>
         </form>
-        <h2 class="filtro-titulo">Precio : {{this.sliderValue}}</h2>
-        <input v-model="sliderValue" type="range" min="0" max="1300" class="slider"/>
+        <div class="filtro-container filtro-precio"  >
+            <h2 class="filtro-titulo">Precio : {{this.valorPrecio}}</h2>
+            <input v-model="valorPrecio" type="range" min="0" max="1300" class="slider"/>
+        </div>
+        <div class="filtro-container filtro-anejamiento"  >
+            <h2 class="filtro-titulo">Añejamiento : {{this.valorAnejamiento}}</h2>
+            <input v-model="valorAnejamiento" type="range" min="1" max="35" class="slider"/>
+        </div>
     </div>
   
 </template>
@@ -56,7 +62,8 @@ import { ref } from "vue";
 export default {
     data() {
         return {
-            sliderValue : ref(0),
+            valorPrecio : ref(0),
+            valorAnejamiento : ref(1),
             tipo_ron : '',
             marca : '',
         }
