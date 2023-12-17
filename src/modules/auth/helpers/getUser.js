@@ -1,5 +1,5 @@
-import api from "@/api"
-import { getHeader } from "@/api"
+import api from "@/lib/api"
+import { getHeader } from "@/lib/api"
 
 const getUser = async () => {
     if (!getHeader()) {

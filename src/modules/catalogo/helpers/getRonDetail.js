@@ -1,4 +1,4 @@
-import api from "@/api";
+import api from "@/lib/api";
 
 function listaBarriles(lista) {
     let listaA = []

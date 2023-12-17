@@ -1,6 +1,6 @@
 // import authLogin from "../api/loginApi";
-import api from "@/api"
-import { setHeader } from "@/api"
+import api from "@/lib/api"
+import { setHeader } from "@/lib/api"
 
 
 // function postLogin(username, password) {

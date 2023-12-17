@@ -1,4 +1,4 @@
-import api from "@/api";
+import api from "@/lib/api";
 function listaImages(lista) {
     let listaA = []
     for (const e of lista) {
