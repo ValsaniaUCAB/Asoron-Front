@@ -4,4 +4,5 @@ export default () => ({
         access: null,
         refresh: null
     },
+    user: null
 })

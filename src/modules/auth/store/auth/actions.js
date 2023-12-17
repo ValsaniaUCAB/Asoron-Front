@@ -5,17 +5,11 @@
 
 import postLogin from "../../helpers/postLogin";
 import getUser from "../../helpers/getUser";
+import { getHeader } from "@/api"
 
-export const login = async ({ commit, getters }, { username, password }) => {
-    const { data } = await postLogin(username, password)
-    console.log(data)
+export const login = async ({ commit }, { username, password }) => {
+    console.log('header antes del post Login', getHeader())
+    const data = await postLogin(username, password)
     commit('setToken', data)
-    console.log(await getUser(getters.getTokenAccess))
+    commit('setUser', getUser())
 }
-
-// export const getUserData = async ({ commit, getters }) => {
-//     console.log('Tengo un peo')
-//     console.log(getters.getTokenAccess)
-//     // const { data } = await getUser(getters.getTokenAccess)
-//     // commit('setUserData', data)
-// }

@@ -18,6 +18,8 @@
 
 <script>
 import { mapActions } from 'vuex'
+import Swal from 'sweetalert2'
+
 export default {
     data() {
         return {
@@ -29,7 +31,16 @@ export default {
         ...mapActions('auth', ['login']),
         sendLogin() {
             console.log(this.username, this.password)
+            new Swal({
+                title: 'Espere por favor',
+                allowOutsideClick: false,
+            })
+            Swal.showLoading()
+
             this.login({ username: this.username, password: this.password })
+
+            Swal.fire('Success', 'Inicio Sesion con exito', 'success', this.$router.push({ name: 'home' }))
+
         }
     },
 }
