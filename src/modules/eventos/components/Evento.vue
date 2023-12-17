@@ -8,7 +8,7 @@
 
         <!-- aqui -->
 
-        <div v-if="evento.images[0].url" class="test-image" :style="{ backgroundImage: `url(${evento.images[0].url})`}"></div>
+        <div v-if="evento.images[0]" class="test-image" :style="{ backgroundImage: `url(${evento.images[0].url})`}"></div>
         
         <!-- ESTE ES EL AUTOGENERADO DE IMAGEN DE EVENTO -->
         
