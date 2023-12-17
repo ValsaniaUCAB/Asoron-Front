@@ -8,13 +8,13 @@
 
         <!-- aqui -->
 
-        <div class="test-image" :style="{ backgroundImage: `url(${evento.images[0].url})`}"></div>
+        <div v-if="evento.images[0].url" class="test-image" :style="{ backgroundImage: `url(${evento.images[0].url})`}"></div>
         
         <!-- ESTE ES EL AUTOGENERADO DE IMAGEN DE EVENTO -->
         
-        <!-- <div class="test-random-image">
+        <div v-else class="test-random-image">
             <h1> {{ "EVENTO " + evento.nombre.toUpperCase() }} </h1>
-        </div> -->
+        </div>
 
         <!-- termina aqui -->
 
