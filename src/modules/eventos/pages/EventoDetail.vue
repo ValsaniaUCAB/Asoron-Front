@@ -1,18 +1,19 @@
 <template>
     <div>Soy un detalle de Evento</div>
-    <!-- <div v-if="!loading">
-        <h1>{{ evento.nombre }}</h1>
-        <img src="../assets/placeholder evento 1.webp">
-        <h4>Del {{ evento.fechaIni }} al {{ evento.fechaFin }}</h4>
-        <p>Direccion: {{ evento.direccion }}</p>
-        <p>{{ evento.descripcion }}</p>
-
-    </div> -->
+    <div v-if="!isLoading">
+        <li v-for="ron in evento.rones">
+            <ron-minimal :ron="ron"></ron-minimal>
+        </li>
+    </div>
 </template>
 
 <script>
 import getEventDetail from '../helpers/getEventDetail'
+import RonMinimal from '@/modules/catalogo/components/RonMinimal'
 export default {
+    components: {
+        RonMinimal
+    },
     props: {
         id: {
             type: String,
@@ -21,6 +22,7 @@ export default {
     },
     data() {
         return {
+            isLoading: true,
             evento: null
         }
     },
@@ -32,14 +34,13 @@ export default {
     },
     mounted() {
         this.evento = this.getEventDetail(this.id)
+        this.isLoading = false
     }
 }
 </script>
 
 <style scoped>
-img {
-    border-radius: 20px;
-    padding: 15px;
-    height: 400px
+li {
+    list-style: none;
 }
 </style>
