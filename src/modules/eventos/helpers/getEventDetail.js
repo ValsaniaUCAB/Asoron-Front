@@ -15,7 +15,6 @@ function listaImages(lista) {
 function listaRones(lista) {
     let listaA = []
     for (let e of lista) {
-        e = e.fk_inve_event_inve_tiend
         let obj = {
             id: e.fk_inve_tiend_bote.bote_id,
             nombre: e.fk_inve_tiend_bote.bote_nombre,
@@ -23,7 +22,6 @@ function listaRones(lista) {
             images: listaImages(e.fk_inve_tiend_bote.imagen),
             cantidad: e.inve_tiend_cantidad,
             precio: e.precio.hist_ron_precio,
-
         }
         listaA.push(obj)
     }
@@ -45,7 +43,8 @@ function arreglar(data) {
             municipio: data.fk_event_lugar.municipio,
             parroquia: data.fk_event_lugar.parroquia,
         },
-        rones: listaRones(data.iventario),
+        rones: listaRones(data.fk_event_tien.inventario),
+        tienda: data.fk_event_tien.tiend_nombre
     }
     return obj
 }
