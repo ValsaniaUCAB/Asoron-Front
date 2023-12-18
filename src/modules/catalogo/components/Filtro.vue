@@ -1,65 +1,65 @@
 <template>
     <div class="filtros">
         <h1>Filtros</h1>
-        <form class="filtro-container filtro-marca">
+        <div class="filtro-container filtro-marca">
             <h2 class="filtro-titulo">Marca : {{this.marca}}</h2>
             <ul class="filtro-lista">
                 <li class="filtro_item">
-                    <input v-model="marca" type="radio" value="Cacique">
+                    <input v-model="marca" name="marca" type="radio" value="Cacique">
                     <label>Cacique</label>
                 </li>
                 <li class="filtro_item">
-                    <input v-model="marca" type="radio" value="Carupano">
+                    <input v-model="marca" name="marca" type="radio" value="Carupano">
                     <label>Carupano</label>
                 </li>
                 <li class="filtro_item">
-                    <input v-model="marca" type="radio" value="Pampero">
+                    <input v-model="marca" name="marca" type="radio" value="Pampero">
                     <label>Pampero</label>
                 </li>
                 <li class="filtro_item">
-                    <input v-model="marca" type="radio" value="Santa Teresa">
+                    <input v-model="marca" name="marca" type="radio" value="Santa Teresa">
                     <label>Santa Teresa</label>
                 </li>
             </ul>
-        </form>
-        <form class="filtro-container filtro-tipo-ron">
+        </div>
+        <div class="filtro-container filtro-tipo-ron">
             <h2 class="filtro-titulo">Tipo de Ron : {{this.tipo_ron}}</h2>
             <ul class="filtro-lista">
                 <li class="filtro_item">
-                    <input v-model="tipo_ron" type="radio" value="Ambar">
+                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Ambar">
                     <label>Ambar</label>
                 </li>
                 <li class="filtro_item">
-                    <input v-model="tipo_ron" type="radio" value="Ambar Deluxe">
+                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Ambar Deluxe">
                     <label>Ambar Deluxe</label>
                 </li>
                 <li class="filtro_item">
-                    <input v-model="tipo_ron" type="radio" value="Valsania Gay">
+                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Valsania Gay">
                     <label>Obscuro</label>
                 </li>
                 <li class="filtro_item">
-                    <input v-model="tipo_ron" type="radio" value="Christian Pato">
+                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Christian Pato">
                     <label>Christian Pato</label>
                 </li>
             </ul>
-        </form>
-        <form class="filtro-container filtro-clasificacion">
+        </div>
+        <div class="filtro-container filtro-clasificacion">
             <h2 class="filtro-titulo">Clasificacion : {{this.clasificacion}}</h2>
             <ul class="filtro-lista">
                 <li class="filtro_item">
-                    <input v-model="tipo_ron" type="radio" value="Industrial">
+                    <input v-model="clasificacion" name="clasificacion" type="radio" value="Industrial">
                     <label>Industrial</label>
                 </li>
                 <li class="filtro_item">
-                    <input v-model="tipo_ron" type="radio" value="Agricola">
+                    <input v-model="clasificacion" name="clasificacion" type="radio" value="Agricola">
                     <label>Agricola</label>
                 </li>
             </ul>
-        </form>
+        </div>
         <div class="filtro-container filtro-precio">
             <h2 class="filtro-titulo">Precio : {{this.valorPrecio}}</h2>
             <div class="slider-container">
-                <input v-model="valorPrecio" type="range" min="0" max="1300" class="slider"/>
+                <input v-model="valorPrecio" type="range" min="0" max="1300" class="slider" step="10"/>
             </div>
         </div>
         <div class="filtro-container filtro-anejamiento"  >
@@ -87,7 +87,7 @@ export default {
         return {
             valorPrecio : ref(0),
             valorAnejamiento : ref(1),
-            valorGrado : ref(1),
+            valorGrado : ref(30),
             tipo_ron : '',
             marca : '',
             clasificacion : '',
