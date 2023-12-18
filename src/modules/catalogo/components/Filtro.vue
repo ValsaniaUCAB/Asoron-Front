@@ -4,21 +4,9 @@
         <div class="filtro-container filtro-marca">
             <h2 class="filtro-titulo">Marca : {{ this.marca }}</h2>
             <ul class="filtro-lista">
-                <li class="filtro_item">
-                    <input v-model="marca" class="boton-radio" name="marca" type="radio" value="Cacique">
-                    <label>Cacique</label>
-                </li>
-                <li class="filtro_item">
-                    <input v-model="marca" class="boton-radio" name="marca" type="radio" value="Carupano">
-                    <label>Carupano</label>
-                </li>
-                <li class="filtro_item">
-                    <input v-model="marca" name="marca" type="radio" value="Pampero">
-                    <label>Pampero</label>
-                </li>
-                <li class="filtro_item">
-                    <input v-model="marca" name="marca" type="radio" value="Santa Teresa">
-                    <label>Santa Teresa</label>
+                <li v-for="proveedor in marca_list" :key="proveedor.id" class="filtro_item">
+                    <input v-model="marca" class="boton-radio" name="marca" type="radio" :value=proveedor>
+                    <label>{{proveedor}}</label>
                 </li>
             </ul>
         </div>
@@ -68,7 +56,7 @@
 <script>
 
 import { ref } from "vue";
-import getRonTipoList from '../helpers/getRonTipo';
+import { getRonTipoList , getRonMarcaList } from '../helpers/getRonFiltros';
 
 export default {
     data() {
@@ -80,10 +68,12 @@ export default {
             marca: '',
             clasificacion: '',
             tipo_ron_list: [],
+            marca_list: [],
         }
     },
     async mounted() {
         this.tipo_ron_list = await getRonTipoList();
+        this.marca_list = await getRonMarcaList();
     },
 }
 </script>
