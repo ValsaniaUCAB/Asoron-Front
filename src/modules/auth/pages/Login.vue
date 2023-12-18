@@ -14,13 +14,18 @@
             </div>
         </div>
     </div>
+    <back-to-home />
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import Swal from 'sweetalert2'
+import BackToHome from '../components/BackToHome.vue'
 
 export default {
+    components: {
+        BackToHome
+    },
     data() {
         return {
             username: '',
