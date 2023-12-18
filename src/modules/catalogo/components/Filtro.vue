@@ -5,11 +5,11 @@
             <h2 class="filtro-titulo">Marca : {{this.marca}}</h2>
             <ul class="filtro-lista">
                 <li class="filtro_item">
-                    <input v-model="marca" name="marca" type="radio" value="Cacique">
+                    <input v-model="marca" class="boton-radio" name="marca" type="radio" value="Cacique">
                     <label>Cacique</label>
                 </li>
                 <li class="filtro_item">
-                    <input v-model="marca" name="marca" type="radio" value="Carupano">
+                    <input v-model="marca" class="boton-radio" name="marca" type="radio" value="Carupano">
                     <label>Carupano</label>
                 </li>
                 <li class="filtro_item">
@@ -166,6 +166,12 @@ export default {
     align-self: center;
     padding-top: 10px;
 }
+
+
+
+input[type="radio"]{  
+    accent-color: #232323;
+} 
 
 input[type="range"] {
   /* removing default appearance */
