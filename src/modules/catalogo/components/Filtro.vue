@@ -26,21 +26,9 @@
             <h2 class="filtro-titulo">Tipo de Ron : {{ this.tipo_ron }}</h2>
             <ul class="filtro-lista">
                 <li v-for="tipoRon in tipo_ron_list" class="filtro_item" :key="tipoRon.id">
-                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value=tipoRon>
+                    <input v-model="tipo_ron" name="tipo_ron" type="radio" :value=tipoRon>
                     <label>{{ tipoRon }}</label>
                 </li>
-                <li class="filtro_item">
-                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Ambar Deluxe">
-                    <label>Ambar Deluxe</label>
-                </li>
-                <!-- <li class="filtro_item">
-                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Valsania Gay">
-                    <label>Obscuro</label>
-                </li>
-                <li class="filtro_item">
-                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Christian Pato">
-                    <label>Christian Pato</label>
-                </li> -->
             </ul>
         </div>
         <div class="filtro-container filtro-clasificacion">
