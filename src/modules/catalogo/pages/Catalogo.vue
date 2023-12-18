@@ -44,7 +44,6 @@ import Ron from "../components/Ron";
 import Paginado from "../components/Paginado";
 import Filtro from "../components/Filtro";
 import { mapActions, mapMutations, mapState } from 'vuex';
-import { ref } from "vue";
 
 export default {
     components: {
@@ -55,9 +54,6 @@ export default {
     data() {
         return {
             term: '',
-            sliderValue : ref(50),
-            tipo_ron : '',
-            marca : '',
         }
     },
     methods: {
