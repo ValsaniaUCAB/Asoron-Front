@@ -2,7 +2,7 @@
     <div>Soy un detalle de Evento</div>
     <div v-if="!isLoading">
         <li v-for="ron in evento.rones">
-            <ron-minimal :ron="ron"></ron-minimal>
+            <ron-minimal :ron="ron" :clickeable="false"></ron-minimal>
         </li>
     </div>
 </template>

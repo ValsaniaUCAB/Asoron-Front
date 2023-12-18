@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-        <router-link :to="{ name: 'ron-detail', params: { id: ron.id } }"><img :src="ron.images[0].img_url" /></router-link>
+        <img class="pointer" :src="ron.images[0].img_url" @click="sendToDetail()" />
         <div class="nombre">
             {{ ron.nombre }}
             <div class="precio d-flex justify-content-between"><span>${{ ron.precio }}</span></div>
@@ -15,10 +15,23 @@ export default {
         ron: {
             type: Object,
             Required: true,
+        },
+        clickeable: {
+            type: Boolean,
+            default: true
         }
     },
     methods: {
-
+        sendToDetail() {
+            if (this.clickeable) {
+                this.$router.push({
+                    name: 'ron-detail',
+                    params: {
+                        id: this.ron.id
+                    }
+                })
+            }
+        }
     },
     data() {
         return {
