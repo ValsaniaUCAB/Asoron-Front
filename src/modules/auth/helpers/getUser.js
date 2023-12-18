@@ -13,15 +13,12 @@ const getUser = async () => {
         const { data } = await api.get('/auth/users/me/')
         console.log('Usuario', data)
         if (data.is_staff) {
-            console.log('Entra a empleado')
             data.data = await getEmpleado()
         }
         if (data.fk_usua_clie_natu) {
-            console.log('Entra a natural')
             data.data = await getClienteNatural()
         }
         if (data.fk_usua_clie_juri) {
-            console.log('Entra a juridico')
             await getClienteJuridico()
         }
         return data

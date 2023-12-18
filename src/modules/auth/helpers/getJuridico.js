@@ -38,7 +38,6 @@ function arreglar(item) {
         telefono: listaTelefonos(i.telefono),
     }
 
-    console.log(obj)
     return obj
 }
 
@@ -46,7 +45,6 @@ const getClienteJuridico = async () => {
     try {
         const { data } = await api.get('/store/clienteJuridico/')
         const { results } = data
-        console.log(results)
         return arreglar(results)
     } catch (error) {
         console.log('error', error)

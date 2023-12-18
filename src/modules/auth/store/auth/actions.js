@@ -18,8 +18,6 @@ export const login = async ({ commit }, { username, password }) => {
 }
 
 export const findUser = async ({ commit }) => {
-    console.log(getCookie('access'))
-
     const data = getCookie('access')
     if (data) {
         setHeader(data)
