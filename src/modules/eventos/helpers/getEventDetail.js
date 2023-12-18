@@ -4,8 +4,8 @@ function listaImages(lista) {
     let listaA = []
     for (const e of lista) {
         let obj = {
-            id: e.img_id,
-            url: e.img_url,
+            img_id: e.img_id,
+            img_url: e.img_url,
         }
         listaA.push(obj)
     }
