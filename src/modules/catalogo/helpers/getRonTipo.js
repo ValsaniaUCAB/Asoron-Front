@@ -1,10 +1,10 @@
 import api from '@/lib/api';
 
-const getRonTipoList = async() => {
+const getRonTipoList = async () => {
     const { data } = await api.get(`/store/tipo-ron/`)
     const lista = []
     for (const tipo of data) {
-        lista.push(tipo.tipo_ron_nombre) 
+        lista.push(tipo.tipo_ron_nombre)
     }
     return lista
 }
