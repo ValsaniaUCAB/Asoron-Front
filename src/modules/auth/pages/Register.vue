@@ -16,20 +16,22 @@
                 </template>
             </div>
             <button class="boton">Inicar Sesion</button>
-
         </div>
     </div>
+    <back-to-home />
 </template>
 
 <script>
 
 import Natural from '../components/Natural'
 import Juridico from '../components/Juridico'
+import BackToHome from '../components/BackToHome'
 
 export default {
     components: {
         Natural,
-        Juridico
+        Juridico,
+        BackToHome
     },
     data() {
         return {
