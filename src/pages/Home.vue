@@ -29,7 +29,7 @@
             </div>
             <div v-else>
                 <div class="d-flex">
-                    <li v-for="ron in getRonesMinimal" :key="ron.id">
+                    <li v-for="ron in rones" :key="ron.id">
                         <RonMinimal :ron="ron" />
                     </li>
                 </div>
@@ -43,23 +43,23 @@
 <script>
 
 import Navbar from '@/modules/shared/components/Navbar.vue'
-import { mapActions, mapGetters, mapState } from 'vuex'
 import RonMinimal from '@/modules/catalogo/components/RonMinimal'
+import getRones from '@/modules/catalogo/helpers/getRonesHome'
 
 export default {
     components: {
         Navbar,
         RonMinimal
     },
-    computed: {
-        ...mapState('catalogo', ['isLoading']),
-        ...mapGetters('catalogo', ['getRonesMinimal'])
-    },
-    methods: {
-        ...mapActions('catalogo', ['cargarRones']),
+    data() {
+        return {
+            isLoading: true,
+            rones: []
+        }
     },
     async created() {
-        this.cargarRones()
+        this.rones = await getRones()
+        this.isLoading = false
     }
 }
 </script>
