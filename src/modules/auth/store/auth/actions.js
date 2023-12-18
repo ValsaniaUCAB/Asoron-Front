@@ -7,6 +7,7 @@ import postLogin from "../../helpers/postLogin";
 import getUser from "../../helpers/getUser";
 import { setHeader, getHeader } from "@/lib/api"
 import { getCookie, setCookie } from "@/lib/cookies"
+import { emptyHeader } from "@/lib/api";
 
 
 export const login = async ({ commit }, { username, password }) => {
@@ -17,8 +18,6 @@ export const login = async ({ commit }, { username, password }) => {
 }
 
 export const findUser = async ({ commit }) => {
-    console.log(getCookie('access'))
-
     const data = getCookie('access')
     if (data) {
         setHeader(data)
@@ -31,4 +30,5 @@ export const logout = async ({ commit }) => {
     commit('setTokenNull')
     commit('setUser', null)
     setCookie('access', '')
+    emptyHeader()
 }

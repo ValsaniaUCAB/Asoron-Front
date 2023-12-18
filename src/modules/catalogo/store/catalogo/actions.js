@@ -10,7 +10,6 @@ export const cargarRones = async ({ commit, getters }) => { // Funcion que carga
     commit('vaciarRonList')
     const { paginacion, ronList } = await getRonList(getters.getBusqueda, getters.getActualPage)
     if (getters.getRonList.length === 0) {
-        console.log(paginacion)
         commit('setPages', paginacion)
         commit('setRonList', ronList)
     }

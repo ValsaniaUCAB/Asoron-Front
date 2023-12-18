@@ -18,3 +18,7 @@ export const setTokenNull = (state) => {
 export const setUser = (state, payload) => {
     state.user = payload
 }
+
+export const setUserData = (state, payload) => {
+    state.user.data = payload
+}
