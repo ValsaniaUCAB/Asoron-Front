@@ -29,7 +29,6 @@ function arreglar(item) {
         }
     }
 
-    console.log(obj)
     return obj
 }
 
@@ -37,6 +36,7 @@ const getEmpleado = async () => {
     try {
         const { data } = await api.get('/store/empleado/')
         const { results } = data
+        return arreglar(results)
     } catch (error) {
         console.log('error', error)
     }
