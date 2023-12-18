@@ -25,22 +25,22 @@
         <div class="filtro-container filtro-tipo-ron">
             <h2 class="filtro-titulo">Tipo de Ron : {{this.tipo_ron}}</h2>
             <ul class="filtro-lista">
-                <li class="filtro_item">
-                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Ambar">
-                    <label>Ambar</label>
+                <li v-for="tipoRon in getTipoRonList" class="filtro_item" :key="tipoRon.id">
+                    <input v-model="tipo_ron" name="tipo_ron" type="radio" value=tipoRon>
+                    <label>{{tipoRon}}</label>
                 </li>
                 <li class="filtro_item">
                     <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Ambar Deluxe">
                     <label>Ambar Deluxe</label>
                 </li>
-                <li class="filtro_item">
+                <!-- <li class="filtro_item">
                     <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Valsania Gay">
                     <label>Obscuro</label>
                 </li>
                 <li class="filtro_item">
                     <input v-model="tipo_ron" name="tipo_ron" type="radio" value="Christian Pato">
                     <label>Christian Pato</label>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="filtro-container filtro-clasificacion">
@@ -81,6 +81,7 @@
 <script>
 
 import { ref } from "vue";
+import getRonTipoList from '../helpers/getRonTipo';
 
 export default {
     data() {
@@ -91,8 +92,15 @@ export default {
             tipo_ron : '',
             marca : '',
             clasificacion : '',
+            tipo_ron_list : [],
         }
     },
+    computed : {
+        async getTipoRonList() {
+            this.tipo_ron_list = await getRonTipoList();
+            return this.tipo_ron_list;
+        }
+    }
 }
 </script>
 
