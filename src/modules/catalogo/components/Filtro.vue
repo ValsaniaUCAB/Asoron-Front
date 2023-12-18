@@ -43,13 +43,36 @@
                 </li>
             </ul>
         </form>
-        <div class="filtro-container filtro-precio"  >
+        <form class="filtro-container filtro-clasificacion">
+            <h2 class="filtro-titulo">Clasificacion : {{this.clasificacion}}</h2>
+            <ul class="filtro-lista">
+                <li class="filtro_item">
+                    <input v-model="tipo_ron" type="radio" value="Industrial">
+                    <label>Industrial</label>
+                </li>
+                <li class="filtro_item">
+                    <input v-model="tipo_ron" type="radio" value="Agricola">
+                    <label>Agricola</label>
+                </li>
+            </ul>
+        </form>
+        <div class="filtro-container filtro-precio">
             <h2 class="filtro-titulo">Precio : {{this.valorPrecio}}</h2>
-            <input v-model="valorPrecio" type="range" min="0" max="1300" class="slider"/>
+            <div class="slider-container">
+                <input v-model="valorPrecio" type="range" min="0" max="1300" class="slider"/>
+            </div>
         </div>
         <div class="filtro-container filtro-anejamiento"  >
             <h2 class="filtro-titulo">Añejamiento : {{this.valorAnejamiento}}</h2>
-            <input v-model="valorAnejamiento" type="range" min="1" max="35" class="slider"/>
+            <div class="slider-container">
+                <input v-model="valorAnejamiento" type="range" min="1" max="35" class="slider" step="1"/>
+            </div>
+        </div>
+        <div class="filtro-container filtro-grado"  >
+            <h2 class="filtro-titulo">Grado Alholico : {{this.valorGrado}}</h2>
+            <div class="slider-container">
+                <input v-model="valorGrado" type="range" min="30" max="50" class="slider" step="10"/>
+            </div>
         </div>
     </div>
   
@@ -64,8 +87,10 @@ export default {
         return {
             valorPrecio : ref(0),
             valorAnejamiento : ref(1),
+            valorGrado : ref(1),
             tipo_ron : '',
             marca : '',
+            clasificacion : '',
         }
     },
 }
@@ -100,14 +125,20 @@ export default {
 
 
 .filtro-titulo {
-    padding-bottom: 25px;
+    padding-bottom: 10px;
+    width: 13vw;
+    text-align: left;
+    margin-bottom: 15px ;
     font-size: 24px;
     font-weight: 600;
+    border-bottom: 3px solid #31212B ;
+    border-right: 3px solid #31212B ;
 }
 
 .filtro-lista {
     margin: 0;
     padding: 0;
+    padding-left: 5px ;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -128,6 +159,66 @@ export default {
     margin-right: 10px;
     width: 20px;
     height: 20px;
+}
+
+.slider-container {
+    display: flex;
+    align-self: center;
+    padding-top: 10px;
+}
+
+input[type="range"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  width: 13vw;
+  cursor: pointer;
+  outline: none;
+  /*  slider progress trick  */
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+/* Track: webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 15px;
+  background: whitesmoke;
+  border-radius: 16px;
+}
+
+/* Track: Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+  height: 15px;
+  background: whitesmoke;
+  border-radius: 16px;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  height: 15px;
+  width: 15px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 2px solid #31212B;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #31212B;
+}
+
+
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #31212B;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #31212B;
 }
 
 
