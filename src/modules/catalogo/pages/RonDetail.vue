@@ -142,10 +142,12 @@ export default {
 }
 
 .info h1 {
+    width: 564px;;
     font-size: 36px;
     font-weight: 700;
     font-family: 'Brothers';
     margin-bottom: 20px;
+    text-align: left;
 }
 
 .info p {
