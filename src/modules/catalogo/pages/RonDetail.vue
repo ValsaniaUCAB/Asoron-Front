@@ -142,7 +142,7 @@ export default {
 }
 
 .info h1 {
-    width: 564px;;
+    width: 564px;
     font-size: 36px;
     font-weight: 700;
     font-family: 'Brothers';
