@@ -1,5 +1,24 @@
 import api from '@/lib/api';
 
+//! Revisar que funcione
+
+function listaEvento(lista) {
+    let listaA = []
+    for (const e of lista) {
+        let obj = {
+            id: e.entr_envt_id,
+            nombre: e.entr_envt_nombre,
+            cantidad: e.entr_envt_cantidad,
+            precio: e.entr_envt_precio,
+            fechaInicio: e.entr_envt_fecha_inicio,
+            fechaFin: e.entr_envt_fecha_fin,
+        }
+        listaA.push(obj)
+    }
+    return listaA
+}
+
+
 function listaImages(lista) {
     let listaA = []
     for (const e of lista) {
@@ -29,7 +48,7 @@ function listaRones(lista) {
 }
 
 function arreglar(data) {
-    console.log('Entra a arreglar')
+    console.log({ data })
     let obj = {
         id: data.event_id,
         nombre: data.event_nombre,
@@ -44,7 +63,8 @@ function arreglar(data) {
             parroquia: data.fk_event_lugar.parroquia,
         },
         rones: listaRones(data.fk_event_tien.inventario),
-        tienda: data.fk_event_tien.tiend_nombre
+        tienda: data.fk_event_tien.tiend_nombre,
+        entradas: listaEvento(data.entradas),
     }
     return obj
 }
