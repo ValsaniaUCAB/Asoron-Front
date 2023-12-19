@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="contenedor">
-            <Filtro/>
+            <Filtro />
             <div v-if="isLoading === true" class="catalogo cargando">
                 <div class="box cargando">
                     Espere por favor
@@ -76,6 +76,7 @@ export default {
         ...mapMutations('catalogo', ['setBusqueda', 'setActualPage']),
         cargarRonesConBusqueda() {
             this.setBusqueda(this.term)
+            this.setActualPage(1)
             this.cargarRones()
         }
     },
@@ -86,6 +87,15 @@ export default {
             pages: 'pages'
         }),
     },
+    watch: {
+        term(value) {
+            if (value === '' & this.isLoading === false) {
+                this.setBusqueda('')
+                this.setActualPage(1)
+                this.cargarRones()
+            }
+        }
+    }
 }
 </script>
 
@@ -126,7 +136,7 @@ export default {
     font-size: 48px;
     font-weight: bold;
     color: #31212B;
-    
+
     text-align: left;
     margin-left: 30px;
 }
@@ -135,7 +145,7 @@ export default {
     margin: 30px;
     display: flex;
     flex-direction: row;
-    
+
     justify-content: space-around;
 }
 
