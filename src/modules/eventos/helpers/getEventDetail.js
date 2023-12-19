@@ -8,7 +8,7 @@ function listaEvento(lista) {
         let obj = {
             id: e.entr_envt_id,
             nombre: e.entr_envt_nombre,
-            cantidad: e.entr_envt_cantidad,
+            cantidad: e.entr_evnt_cantidad,
             precio: e.entr_envt_precio,
             fechaInicio: e.entr_envt_fecha_inicio,
             fechaFin: e.entr_envt_fecha_fin,
