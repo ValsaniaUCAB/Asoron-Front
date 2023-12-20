@@ -7,5 +7,13 @@ export default () => ({
         actual: 1,
         totalPaginas: null,
         totalRones: null,
+    },
+    filtros: {
+        proveedor: '',
+        grado: '',
+        anejamiento: '',
+        clasificacion: '',
+        tipo: '',
+        precioMax: ''
     }
 })

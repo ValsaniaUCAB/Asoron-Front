@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="contenedor">
-            <Filtro @on-filter="filtrar"/>
+            <Filtro @on-filter="filtrar" @on-unfilter="unfilter" />
             <div v-if="isLoading === true" class="catalogo cargando">
                 <div class="box cargando">
                     Espere por favor
@@ -75,10 +75,16 @@ export default {
         filtrar(filtros) {
             this.setActualPage(1)
             this.setBusqueda('')
-            this.cargarRones(filtros)
+            this.setFiltros(filtros)
+            this.cargarRones()
+        },
+        unfilter() {
+            this.vaciarFiltros()
+            this.setActualPage(1)
+            this.cargarRones()
         },
         ...mapActions('catalogo', ['cargarRones']),
-        ...mapMutations('catalogo', ['setBusqueda', 'setActualPage']),
+        ...mapMutations('catalogo', ['setBusqueda', 'setActualPage', 'setFiltros', 'vaciarFiltros']),
         cargarRonesConBusqueda() {
             this.setBusqueda(this.term)
             this.setActualPage(1)

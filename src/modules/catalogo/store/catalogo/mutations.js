@@ -26,3 +26,18 @@ export const setPages = (state, pages) => {
 export const setActualPage = (state, actualPage) => {
     state.pages.actual = actualPage
 }
+
+export const setFiltros = (state, filtros) => {
+    state.filtros = filtros
+}
+
+export const vaciarFiltros = (state) => {
+    state.filtros = {
+        proveedor: '',
+        grado: '',
+        anejamiento: '',
+        clasificacion: '',
+        tipo: '',
+        precioMax: ''
+    }
+}

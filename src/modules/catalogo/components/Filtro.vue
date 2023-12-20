@@ -4,10 +4,20 @@
             <h1>Filtros</h1>
             <div class="buttons-container">
                 <button class="title-btn apply-btn" @click="filtrar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FDD08D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                        stroke="#FDD08D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-check">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
                 </button>
-                <button class="title-btn cancel-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <!-- TODO: Hacer que se quiten las selecciones de los radios -->
+                <button class="title-btn cancel-btn" @click="$emit('on-unfilter')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                        stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
                 </button>
             </div>
         </div>
@@ -16,7 +26,7 @@
             <ul class="filtro-lista">
                 <li v-for="proveedor in marca_list" :key="proveedor.id" class="filtro_item">
                     <input v-model="marca" class="boton-radio" name="marca" type="radio" :value=proveedor>
-                    <label>{{proveedor}}</label>
+                    <label>{{ proveedor }}</label>
                 </li>
             </ul>
         </div>
@@ -66,10 +76,10 @@
 <script>
 
 import { ref } from "vue";
-import { getRonTipoList , getRonMarcaList } from '../helpers/getRonFiltros';
+import { getRonTipoList, getRonMarcaList } from '../helpers/getRonFiltros';
 
 export default {
-    emits: ['on-filter'],
+    emits: ['on-filter', 'on-unfilter'],
     data() {
         return {
             valorPrecio: ref(0),
@@ -86,26 +96,25 @@ export default {
         this.tipo_ron_list = await getRonTipoList();
         this.marca_list = await getRonMarcaList();
     },
-    methods:{
-        async filtrar(){
+    methods: {
+        async filtrar() {
             let filtros = {
-                precioMax: this.valorPrecio !== 0? this.valorPrecio : "",
-                anejamiento: this.valorAnejamiento !== 0? this.valorAnejamiento : "",
-                grado: this.valorGrado !== 0? this.valorGrado : "",
-                tipo: this.tipo_ron? this.tipo_ron : "",
-                proveedor: this.marca? this.marca : "",
-                clasificacion: this.clasificacion? this.clasificacion : "",
+                precioMax: this.valorPrecio !== 0 ? this.valorPrecio : '',
+                anejamiento: this.valorAnejamiento !== 0 ? this.valorAnejamiento : '',
+                grado: this.valorGrado !== 0 ? this.valorGrado : '',
+                tipo: this.tipo_ron ? this.tipo_ron : '',
+                proveedor: this.marca ? this.marca : '',
+                clasificacion: this.clasificacion ? this.clasificacion : '',
             }
             console.log(filtros)
             this.$emit('on-filter', filtros)
         }
-    
+
     }
 }
 </script>
 
 <style>
-
 .title-container {
     display: flex;
     justify-content: space-between;
