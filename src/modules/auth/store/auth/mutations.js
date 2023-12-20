@@ -22,3 +22,7 @@ export const setUser = (state, payload) => {
 export const setUserData = (state, payload) => {
     state.user.data = payload
 }
+
+export const setCodigoTelefono = (state, payload) => {
+    state.listaCodigoTelefono = payload
+}
