@@ -10,8 +10,7 @@
                         <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
                 </button>
-                <!-- TODO: Hacer que se quiten las selecciones de los radios -->
-                <button class="title-btn cancel-btn" @click="$emit('on-unfilter')">
+                <button class="title-btn cancel-btn" @click="unfilter()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
                         stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-x">
@@ -104,7 +103,7 @@ export default {
         this.marca_list = await getRonMarcaList();
     },
     methods: {
-        async filtrar() {
+        filtrar() {
             let filtros = {
                 precioMax: this.valorPrecioMax !== '1300' ? this.valorPrecioMax : '',
                 precioMin: this.valorPrecioMin !== '0' ? this.valorPrecioMin : '',
@@ -116,9 +115,19 @@ export default {
             }
             console.log(filtros)
             this.$emit('on-filter', filtros)
+        },
+        unfilter() {
+            this.valorPrecioMax = 1300;
+            this.valorPrecioMin = 0;
+            this.valorAnejamiento = 0;
+            this.valorGrado = 0;
+            this.tipo_ron = '';
+            this.marca = '';
+            this.clasificacion = '';
+            this.$emit('on-unfilter')
         }
+    },
 
-    }
 }
 </script>
 
