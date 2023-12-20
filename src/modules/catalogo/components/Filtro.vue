@@ -3,7 +3,7 @@
         <div class="title-container">
             <h1>Filtros</h1>
             <div class="buttons-container">
-                <button class="title-btn apply-btn">
+                <button class="title-btn apply-btn" @click="filtrar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FDD08D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </button>
                 <button class="title-btn cancel-btn">
@@ -69,11 +69,12 @@ import { ref } from "vue";
 import { getRonTipoList , getRonMarcaList } from '../helpers/getRonFiltros';
 
 export default {
+    emits: ['on-filter'],
     data() {
         return {
             valorPrecio: ref(0),
-            valorAnejamiento: ref(1),
-            valorGrado: ref(30),
+            valorAnejamiento: ref(0),
+            valorGrado: ref(0),
             tipo_ron: '',
             marca: '',
             clasificacion: '',
@@ -85,6 +86,21 @@ export default {
         this.tipo_ron_list = await getRonTipoList();
         this.marca_list = await getRonMarcaList();
     },
+    methods:{
+        async filtrar(){
+            let filtros = {
+                precioMax: this.valorPrecio !== 0? this.valorPrecio : "",
+                anejamiento: this.valorAnejamiento !== 0? this.valorAnejamiento : "",
+                grado: this.valorGrado !== 0? this.valorGrado : "",
+                tipo: this.tipo_ron? this.tipo_ron : "",
+                proveedor: this.marca? this.marca : "",
+                clasificacion: this.clasificacion? this.clasificacion : "",
+            }
+            console.log(filtros)
+            this.$emit('on-filter', filtros)
+        }
+    
+    }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <button class="button-18" @click="$emit('on-click', 'd')" :disabled="pages.actual === 1"> <i
             class=" fa fa-arrow-left"></i></button>
-    <span v-for=" i in pages.totalPaginas">
+    <span v-for=" i in pages.totalPaginas" :key="i.id">
         <button class=" button-18" :class="activo(i)" @click="$emit('on-click', i)" :disabled="pages.actual === i">{{ i
         }}</button>
     </span>
