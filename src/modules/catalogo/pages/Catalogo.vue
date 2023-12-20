@@ -26,11 +26,12 @@
             </div>
             <div v-else>
                 <div class="catalogo">
-                    <li v-for="ron in rones" :key="ron.id">
+                    <li v-if="rones.length > 0" v-for="ron in rones" :key="ron.id">
                         <Ron :ron="ron" />
                     </li>
+                    <div v-else class="aviso">No hay rones que cumplan con su criterio :(</div>
                 </div>
-                <Paginado @on-click="cambiarPagina" />
+                <Paginado v-if="rones.length > 0" @on-click="cambiarPagina" />
             </div>
             <div class="spacer"></div>
         </div>
@@ -200,6 +201,13 @@ export default {
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         border-radius: 16px;
     }
+}
+
+.aviso {
+    font-family: 'Brothers', sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #31212B;
 }
 
 li {
