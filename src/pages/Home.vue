@@ -45,7 +45,6 @@
 import Navbar from '@/modules/shared/components/Navbar.vue'
 import RonMinimal from '@/modules/catalogo/components/RonMinimal'
 import getRones from '@/modules/catalogo/helpers/getRonesHome'
-import getDiarioRonero from '@/modules/catalogo/helpers/getDiarioRonero'
 
 export default {
     components: {
@@ -59,9 +58,10 @@ export default {
         }
     },
     methods: {
-        async getDiario() {
-            const diario = await getDiarioRonero()
-            console.log(diario)
+        getDiario() {
+            this.$router.push({
+                name: 'diario-ronero'
+            })
         }
     },
     async created() {
