@@ -6,7 +6,8 @@
                 <div class="d-flex flex-column">
                     <p class="titulo">Iniciar Sesion</p>
                     <input type="text" placeholder="Nombre de Usuario" class="form" v-model="username" />
-                    <input type="password" placeholder="Contraseña" class="form" v-model="password" />
+                    <input type="password" placeholder="Contraseña" class="form" @keypress.enter="sendLogin"
+                        v-model="password" />
                     <button class="boton" @click="sendLogin">Inicar Sesion</button>
                     <p class="left">Nuevo en Asoron? <router-link :to="{ name: 'register' }">Crear una cuenta</router-link>
                     </p>
