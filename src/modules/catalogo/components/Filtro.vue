@@ -53,21 +53,27 @@
             </ul>
         </div>
         <div class="filtro-container filtro-precio">
-            <h2 class="filtro-titulo">Precio : {{ this.valorPrecio }}</h2>
+            <h2 class="filtro-titulo">Precio Minimo: {{ this.valorPrecioMin }}</h2>
             <div class="slider-container">
-                <input v-model="valorPrecio" type="range" min="0" max="1300" class="slider" step="10" />
+                <input v-model="valorPrecioMin" type="range" min="0" max="1300" class="slider" step="10" />
+            </div>
+        </div>
+        <div class="filtro-container filtro-precio">
+            <h2 class="filtro-titulo">Precio Max: {{ this.valorPrecioMax }}</h2>
+            <div class="slider-container">
+                <input v-model="valorPrecioMax" type="range" min="10" max="1300" class="slider" step="10" />
             </div>
         </div>
         <div class="filtro-container filtro-anejamiento">
             <h2 class="filtro-titulo">Añejamiento : {{ this.valorAnejamiento }}</h2>
             <div class="slider-container">
-                <input v-model="valorAnejamiento" type="range" min="1" max="35" class="slider" step="1" />
+                <input v-model="valorAnejamiento" type="range" min="0" max="35" class="slider" step="1" />
             </div>
         </div>
         <div class="filtro-container filtro-grado">
             <h2 class="filtro-titulo">Grado Alholico : {{ this.valorGrado }}</h2>
             <div class="slider-container">
-                <input v-model="valorGrado" type="range" min="30" max="50" class="slider" step="10" />
+                <input v-model="valorGrado" type="range" min="0" max="70" class="slider" step="10" />
             </div>
         </div>
     </div>
@@ -82,7 +88,8 @@ export default {
     emits: ['on-filter', 'on-unfilter'],
     data() {
         return {
-            valorPrecio: ref(0),
+            valorPrecioMax: ref(1300),
+            valorPrecioMin: ref(0),
             valorAnejamiento: ref(0),
             valorGrado: ref(0),
             tipo_ron: '',
@@ -99,7 +106,8 @@ export default {
     methods: {
         async filtrar() {
             let filtros = {
-                precioMax: this.valorPrecio !== 0 ? this.valorPrecio : '',
+                precioMax: this.valorPrecioMax !== '1300' ? this.valorPrecioMax : '',
+                precioMin: this.valorPrecioMin !== '0' ? this.valorPrecioMin : '',
                 anejamiento: this.valorAnejamiento !== 0 ? this.valorAnejamiento : '',
                 grado: this.valorGrado !== 0 ? this.valorGrado : '',
                 tipo: this.tipo_ron ? this.tipo_ron : '',

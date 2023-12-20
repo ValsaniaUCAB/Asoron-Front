@@ -14,6 +14,7 @@ export default () => ({
         anejamiento: '',
         clasificacion: '',
         tipo: '',
+        precioMin: '',
         precioMax: ''
     }
 })

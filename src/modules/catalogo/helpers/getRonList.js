@@ -29,10 +29,10 @@ function arreglarLista(ronList) {
 
 async function getRonList(busqueda = '', page = '1', filtros) {
 
-    const { proveedor, grado, anejamiento, clasificacion, tipo, precioMax } = filtros
+    const { proveedor, grado, anejamiento, clasificacion, tipo, precioMax, precioMin } = filtros
 
     const { data } = await api.get(`/store/inventario-tienda/?page=${page}&nombre_ron=${busqueda}&proveedor=${proveedor}&grado_alcohol=${grado}&anejamiento${anejamiento}`
-        + `&clasificacion_ron=${clasificacion}&tipo_ron=${tipo}&max_price=${precioMax}`)
+        + `&clasificacion_ron=${clasificacion}&tipo_ron=${tipo}&max_price=${precioMax}&min_price=${precioMin}`)
     const { Paginacion, results } = data
     if (data) return { paginacion: Paginacion, ronList: arreglarLista(results) }
     else return []

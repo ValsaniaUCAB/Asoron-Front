@@ -38,6 +38,7 @@ export const vaciarFiltros = (state) => {
         anejamiento: '',
         clasificacion: '',
         tipo: '',
+        precioMin: '',
         precioMax: ''
     }
 }
