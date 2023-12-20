@@ -14,7 +14,7 @@
     </div>
     <div id="diario-ronero">
         <h1 class="diario-ronero-text">Disponible Ya! <br /> el <span style="color:#FDD08D">DiarioRonero</span> </h1>
-        <button id="diario-ronero-button" class="button-18">Click aqui</button>
+        <button id="diario-ronero-button" class="button-18" @click="getDiario()">Click aqui</button>
     </div>
     <div id="catalog-wrapper">
         <h1 class="titulo-catalogo d-flex">Los Rones Mas Exquisitos</h1>
@@ -45,6 +45,7 @@
 import Navbar from '@/modules/shared/components/Navbar.vue'
 import RonMinimal from '@/modules/catalogo/components/RonMinimal'
 import getRones from '@/modules/catalogo/helpers/getRonesHome'
+import getDiarioRonero from '@/modules/catalogo/helpers/getDiarioRonero'
 
 export default {
     components: {
@@ -55,6 +56,12 @@ export default {
         return {
             isLoading: true,
             rones: []
+        }
+    },
+    methods: {
+        async getDiario() {
+            const diario = await getDiarioRonero()
+            console.log(diario)
         }
     },
     async created() {

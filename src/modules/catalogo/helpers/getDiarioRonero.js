@@ -1,16 +1,36 @@
 import api from '@/lib/api'
 
-function arreglar(item) {
-    const obj = {
-
+function arreglarLista(lista) {
+    let diarioRonero = []
+    for (const e of lista) {
+        let obj = {
+            botella: {
+                id: e.fk_ofer_bote_bote.bote_id,
+                nombre: e.fk_ofer_bote_bote.bote_nombre,
+                descripcion: e.fk_ofer_bote_bote.bote_descripcion,
+                images: e.fk_ofer_bote_bote.imagen,
+            },
+            oferta: {
+                id: e.fk_ofer_bote_ofer.ofer_id,
+                nombre: e.fk_ofer_bote_ofer.ofer_nombre,
+                descripcion: e.fk_ofer_bote_ofer.ofer_descripcion,
+                fechaInicio: e.fk_ofer_bote_ofer.ofer_fecha_inicio,
+                fechaFin: e.fk_ofer_bote_ofer.ofer_fecha_fin,
+                descuento: e.ofer_bote_porcentaje
+            }
+        }
+        diarioRonero.push(obj)
     }
-    return obj
+    return diarioRonero
 }
 
 async function getDiarioRonero() {
     const { data } = await api.get(`/store/diario-ronero/`)
-    console.log('Data arreglada', arreglar(data))
-    return arreglar(data)
+    console.log(data)
+    const { Paginacion, results } = data
+    console.log('Data arreglada', arreglarLista(results))
+    if (data) return { paginacion: Paginacion, diarioRonero: arreglarLista(results) }
+    else return []
 }
 
 export default getDiarioRonero
