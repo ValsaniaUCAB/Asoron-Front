@@ -1,5 +1,5 @@
 <template>
-    <div class="box">
+    <div class="caja">
         <router-view />
     </div>
 </template>
@@ -11,10 +11,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.box {
+.caja {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 </style>

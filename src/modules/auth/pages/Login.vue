@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-content-center">
+    <div class="cotenedor">
         <div class="box">
             <img src="../assets/Logo.svg" class="my-4" />
             <div class="box2">
@@ -60,6 +60,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cotenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .box {
     display: flex;
     flex-direction: column;

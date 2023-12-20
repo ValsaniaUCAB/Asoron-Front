@@ -30,6 +30,7 @@
             <p>Direccion</p>
             <input type="text" placeholder="Calle locura, Apt 3" class="form" />
         </div>
+        <button class="boton">Registrarse</button>
     </div>
 </template>
 
@@ -40,6 +41,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.boton {
+    border: 2px solid;
+    background-color: #31212B;
+    color: white;
+    height: 56px;
+    width: 100%;
+    border-radius: 32px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+
+    &.select {
+        width: 200px;
+    }
+
+    &:hover {
+        background-color: #46303d;
+    }
+}
+
 p {
     margin-bottom: 0;
     font-size: 18px;
