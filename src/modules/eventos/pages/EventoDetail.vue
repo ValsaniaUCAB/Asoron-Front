@@ -14,11 +14,18 @@
                 <p>Desde el {{ evento.fechaInicio }} hasta el {{ evento.fechaFin }}</p>
                 <p>Celebrado en: {{ evento.direccion }}, {{ evento.lugar.parroquia }}, {{ evento.lugar.municipio }}, {{
                     evento.lugar.estado }}</p>
+                <div v-if="evento.entradas.length > 0">
+                    <p>Entradas disponibles:</p>
+                    <div class="entrada" v-for="entrada in evento.entradas">
+                        <span>{{ entrada.nombre }}</span><span>${{ entrada.precio }}</span>
+                    </div>
+                    <button class="button-18">Comprar Entrada</button>
+                </div>
             </div>
         </div>
         <div class="box">
+            <h1> Lista de rones a presentar</h1>
             <div class="rones-container">
-                <h1> Lista de rones a presentar</h1>
                 <li v-for="ron in evento.rones">
                     <ron-minimal :ron="ron" :clickeable="false"></ron-minimal>
                 </li>
@@ -127,14 +134,6 @@ export default {
     align-items: center;
     justify-content: center;
     margin: 60px;
-}
-
-.rones-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 1144px;
 
     & h1 {
         width: 564px;
@@ -143,6 +142,70 @@ export default {
         font-family: 'Brothers';
         margin-bottom: 20px;
         text-align: left;
+    }
+}
+
+.rones-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 1144px;
+}
+
+.entrada {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 564px;
+    margin-bottom: 10px;
+
+}
+
+.button-18 {
+    margin: 10px;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #31212B;
+    border-radius: 100px;
+    box-sizing: border-box;
+    color: #000;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 480px;
+    min-height: 40px;
+    min-width: 0px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+
+    &:hover,
+    :focus {
+        background-color: #31212B;
+        color: #e6bd7f;
+    }
+
+    &:active {
+        background: #48323f;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background: rgba(0, 0, 0, .08);
+        color: rgba(0, 0, 0, .3);
     }
 }
 
