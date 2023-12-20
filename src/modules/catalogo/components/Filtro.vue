@@ -2,14 +2,14 @@
     <div class="filtros">
         <div class="title-container">
             <h1>Filtros</h1>
-            <button class="title-btn apply-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 50 50">
-                    <path d="M 41.9375 8.625 C 41.273438 8.648438 40.664063 9 40.3125 9.5625 L 21.5 38.34375 L 9.3125 27.8125 C 8.789063 27.269531 8.003906 27.066406 7.28125 27.292969 C 6.5625 27.515625 6.027344 28.125 5.902344 28.867188 C 5.777344 29.613281 6.078125 30.363281 6.6875 30.8125 L 20.625 42.875 C 21.0625 43.246094 21.640625 43.410156 22.207031 43.328125 C 22.777344 43.242188 23.28125 42.917969 23.59375 42.4375 L 43.6875 11.75 C 44.117188 11.121094 44.152344 10.308594 43.78125 9.644531 C 43.410156 8.984375 42.695313 8.589844 41.9375 8.625 Z"></path>
-                </svg>
-            </button>
-            <button class="title-btn cancel-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="none" viewBox="0 0 50 50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"><path d="M20 4 4 20M4 4l16 16"/></svg>
-            </button>
+            <div class="buttons-container">
+                <button class="title-btn apply-btn" @click="filtrar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FDD08D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </button>
+                <button class="title-btn cancel-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
         </div>
         <div class="filtro-container filtro-marca">
             <h2 class="filtro-titulo">Marca : {{ this.marca }}</h2>
@@ -69,11 +69,12 @@ import { ref } from "vue";
 import { getRonTipoList , getRonMarcaList } from '../helpers/getRonFiltros';
 
 export default {
+    emits: ['on-filter'],
     data() {
         return {
             valorPrecio: ref(0),
-            valorAnejamiento: ref(1),
-            valorGrado: ref(30),
+            valorAnejamiento: ref(0),
+            valorGrado: ref(0),
             tipo_ron: '',
             marca: '',
             clasificacion: '',
@@ -85,6 +86,21 @@ export default {
         this.tipo_ron_list = await getRonTipoList();
         this.marca_list = await getRonMarcaList();
     },
+    methods:{
+        async filtrar(){
+            let filtros = {
+                precioMax: this.valorPrecio !== 0? this.valorPrecio : "",
+                anejamiento: this.valorAnejamiento !== 0? this.valorAnejamiento : "",
+                grado: this.valorGrado !== 0? this.valorGrado : "",
+                tipo: this.tipo_ron? this.tipo_ron : "",
+                proveedor: this.marca? this.marca : "",
+                clasificacion: this.clasificacion? this.clasificacion : "",
+            }
+            console.log(filtros)
+            this.$emit('on-filter', filtros)
+        }
+    
+    }
 }
 </script>
 
@@ -104,13 +120,6 @@ export default {
     border: none;
 }
 
-.apply-btn svg {
-    fill: #FDD08D;
-}
-.cancel-btn svg {
-    fill: #31212b;
-}
-
 .filtros {
     padding-left: 44px;
     padding-top: 52px;
@@ -122,7 +131,7 @@ export default {
     color: #000;
 }
 
-.filtros h1 {
+.title-container h1 {
     font-size: 36px;
     font-weight: 600;
 }

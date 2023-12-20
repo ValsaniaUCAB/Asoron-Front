@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="contenedor">
-            <Filtro />
+            <Filtro @on-filter="filtrar"/>
             <div v-if="isLoading === true" class="catalogo cargando">
                 <div class="box cargando">
                     Espere por favor
@@ -71,6 +71,11 @@ export default {
                 this.setActualPage(num)
                 this.cargarRones()
             }
+        },
+        filtrar(filtros) {
+            this.setActualPage(1)
+            this.setBusqueda('')
+            this.cargarRones(filtros)
         },
         ...mapActions('catalogo', ['cargarRones']),
         ...mapMutations('catalogo', ['setBusqueda', 'setActualPage']),
