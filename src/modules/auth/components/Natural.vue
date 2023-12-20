@@ -4,43 +4,99 @@
     <div class="d-flex flex-column">
         <div class="form-box">
             <p>Username</p>
-            <input type="text" placeholder="Username" class="form" />
+            <input type="text" placeholder="Username" class="form" v-model="username" />
         </div>
         <div class="form-box">
             <p>Contraseña</p>
-            <input type="text" placeholder="Contraseña" class="form" />
+            <input type="text" placeholder="Contraseña" class="form" v-model="password" />
+        </div>
+        <div class="form-box">
+            <p>Correo Electronico</p>
+            <input type="text" placeholder="micorreo@gmail.com" class="form" v-model="email" />
         </div>
         <div class="form-box">
             <p>Cedula de Identidad</p>
-            <input type="text" placeholder="2222226" class="form" />
+            <input type="text" placeholder="2222226" class="form" v-model="cedula" />
         </div>
         <div class="form-box">
             <p>RIF Personal</p>
-            <input type="text" placeholder="2222666-1" class="form" />
+            <input type="text" placeholder="2222666-1" class="form" v-model="rif" />
         </div>
         <div class="form-box">
-            <p>Nombres</p>
-            <input type="text" placeholder="Nombre" class="form" />
+            <p>Nombre</p>
+            <input type="text" placeholder="Nombre" class="form" v-model="nombre" />
         </div>
         <div class="form-box">
-            <p>Apellidos</p>
-            <input type="text" placeholder="Apellidos" class="form" />
+            <p>Segundo Nombre</p>
+            <input type="text" placeholder="Nombre" class="form" v-model="segundoNombre" />
+        </div>
+        <div class="form-box">
+            <p>Apellido</p>
+            <input type="text" placeholder="Apellidos" class="form" v-model="apellido" />
+        </div>
+        <div class="form-box">
+            <p>Segundo Apellido</p>
+            <input type="text" placeholder="Apellidos" class="form" v-model="segundoApellido" />
         </div>
         <div class="form-box">
             <p>Direccion</p>
-            <input type="text" placeholder="Calle locura, Apt 3" class="form" />
+            <input type="text" placeholder="Calle locura, Apt 3" class="form" v-model="direccion" />
+            <Lugar @on-click="setParroquia"></Lugar>
+        </div>
+        <div class="form-box">
+            <p>Telefono</p>
+            <div class="form-telefono">
+                <CodigoTelefono @on-click="setCodigoTelefono"></CodigoTelefono>
+                <input type="text" placeholder="1234567" class="form" v-model="telefono" />
+            </div>
         </div>
         <button class="boton">Registrarse</button>
     </div>
 </template>
 
 <script>
-export default {
 
+import CodigoTelefono from './CodigoTelefono';
+import Lugar from './Lugar.vue'
+
+export default {
+    components: {
+        Lugar,
+        CodigoTelefono
+    },
+    data() {
+        return {
+            username: '',
+            password: '',
+            email: '',
+            cedula: '',
+            rif: '',
+            nombre: '',
+            segundoNombre: '',
+            apellido: '',
+            segundoApellido: '',
+            direccion: '',
+            parroquia: '',
+            codigoTelefono: '',
+            telefono: ''
+        }
+    },
+    methods: {
+        setParroquia(item) {
+            this.parroquia = item
+        }
+    }
 }
+
 </script>
 
 <style lang="scss" scoped>
+.form-telefono {
+    display: flex;
+    justify-content: space-between;
+
+}
+
 .boton {
     border: 2px solid;
     background-color: #31212B;
