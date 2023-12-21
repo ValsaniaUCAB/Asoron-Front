@@ -11,7 +11,13 @@
                 </div>
                 <div class="sort">
                     <div class="titulo-barras">Ordenar</div>
-                    <input class="barra-busqueda" type="text" placeholder="Ordenar" v-model="term">
+                    <CDropdown class="barra-busqueda">
+                        <CDropdownToggle>Orden</CDropdownToggle>
+                        <CDropdownMenu style="width:100%;">
+                            <CDropdownItem @click="ordenar('precio')">Precio Ascendente</CDropdownItem>
+                            <CDropdownItem @click="ordenar('-precio')">Precio Descendente</CDropdownItem>
+                        </CDropdownMenu>
+                    </CDropdown>
                 </div>
             </div>
         </div>
@@ -59,6 +65,8 @@ export default {
         }
     },
     methods: {
+        ...mapActions('catalogo', ['cargarRones']),
+        ...mapMutations('catalogo', ['setBusqueda', 'setActualPage', 'setFiltros', 'vaciarFiltros', 'setOrden']),
         cambiarPagina(num) {
             if (num === 'd') {
                 this.setActualPage(this.pages.actual - 1)
@@ -85,10 +93,13 @@ export default {
             this.setActualPage(1)
             this.cargarRones()
         },
-        ...mapActions('catalogo', ['cargarRones']),
-        ...mapMutations('catalogo', ['setBusqueda', 'setActualPage', 'setFiltros', 'vaciarFiltros']),
         cargarRonesConBusqueda() {
             this.setBusqueda(this.term)
+            this.setActualPage(1)
+            this.cargarRones()
+        },
+        ordenar(orden) {
+            this.setOrden(orden)
             this.setActualPage(1)
             this.cargarRones()
         }

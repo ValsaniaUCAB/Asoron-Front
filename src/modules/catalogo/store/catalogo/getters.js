@@ -13,6 +13,8 @@ export const getActualPage = (state) => state.pages.actual
 
 export const getFiltros = (state) => state.filtros
 
+export const getOrden = (state) => state.orden
+
 const ronesEnCatalogo = (lista, begin, num) => {
     const listaAux = []
     let cont = 0

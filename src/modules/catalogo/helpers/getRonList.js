@@ -18,21 +18,12 @@ function arreglarLista(ronList) {
     return ronListArreglado
 }
 
-// async function getRonList(busqueda = '', page = '1') {
-
-//     const { data } = await ronCatalogo.get(`/?page=${page}&nombre_ron=${busqueda}`)
-//     console.log(data)
-//     const { Paginacion, results } = data
-//     if (data) return { paginacion: Paginacion, ronList: arreglarLista(results) }
-//     else return []
-// }
-
-async function getRonList(busqueda = '', page = '1', filtros) {
+async function getRonList(busqueda = '', page = '1', filtros, orden) {
 
     const { proveedor, grado, anejamiento, clasificacion, tipo, precioMax, precioMin } = filtros
 
     const { data } = await api.get(`/store/inventario-tienda/?page=${page}&nombre_ron=${busqueda}&proveedor=${proveedor}&grado_alcohol=${grado}&anejamiento${anejamiento}`
-        + `&clasificacion_ron=${clasificacion}&tipo_ron=${tipo}&max_price=${precioMax}&min_price=${precioMin}`)
+        + `&clasificacion_ron=${clasificacion}&tipo_ron=${tipo}&max_price=${precioMax}&min_price=${precioMin}&order_by=${orden}`)
     const { Paginacion, results } = data
     if (data) return { paginacion: Paginacion, ronList: arreglarLista(results) }
     else return []

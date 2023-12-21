@@ -31,6 +31,10 @@ export const setFiltros = (state, filtros) => {
     state.filtros = filtros
 }
 
+export const setOrden = (state, orden) => {
+    state.orden = orden
+}
+
 export const vaciarFiltros = (state) => {
     state.filtros = {
         proveedor: '',
