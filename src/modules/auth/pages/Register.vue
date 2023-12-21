@@ -26,7 +26,6 @@
 import Natural from '../components/Natural'
 import Juridico from '../components/Juridico'
 import BackToHome from '../components/BackToHome'
-import { mapActions } from 'vuex'
 
 export default {
     components: {
@@ -49,10 +48,8 @@ export default {
                 this.selection = 'natural'
             }
         },
-        ...mapActions('auth', ['cargarCodigoTelefono'])
     },
     mounted() {
-        this.cargarCodigoTelefono()
 
     }
 

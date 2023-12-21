@@ -50,14 +50,16 @@
                 <input type="text" placeholder="1234567" class="form" v-model="telefono" />
             </div>
         </div>
-        <button class="boton">Registrarse</button>
+        <button class="boton" @click="registrarse">Registrarse</button>
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 import CodigoTelefono from './CodigoTelefono';
 import Lugar from './Lugar.vue'
+import Swal from 'sweetalert2'
 
 export default {
     components: {
@@ -66,28 +68,184 @@ export default {
     },
     data() {
         return {
-            username: '',
-            password: '',
-            email: '',
-            cedula: '',
-            rif: '',
-            nombre: '',
-            segundoNombre: '',
-            apellido: '',
-            segundoApellido: '',
-            direccion: '',
+            username: 'prueba1',
+            password: 'qazwsx222',
+            email: 'alessvalsania@gmail.com',
+            cedula: '27451057',
+            rif: '274510575',
+            nombre: 'Alessandro',
+            segundoNombre: 'Rafael',
+            apellido: 'Valsania',
+            segundoApellido: 'Jimenez',
+            direccion: 'Av. Sur 14',
             parroquia: '',
             codigoTelefono: '',
-            telefono: ''
+            telefono: '2733220'
         }
     },
     methods: {
+        ...mapActions('auth', ['registerClienteNatural']),
         setParroquia(item) {
             this.parroquia = item
-        }
+        },
+        setCodigoTelefono(item) {
+            this.codigoTelefono = item.id
+        },
+        validateNumericCharacters(password) {
+            const numericRegex = /\d/;
+            return numericRegex.test(password);
+        },
+        validarCorreoElectronico(correo) {
+            const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            return regexCorreo.test(correo);
+        },
+        validarSoloNumeros(cadena) {
+            const regexNumeros = /^\d+$/;
+            return regexNumeros.test(cadena);
+        },
+        validar() {
+            // USERNAME
+            if (this.username === '') {
+                alert('Debe ingresar un username')
+                return false
+            }
+            if (this.username.length < 6) {
+                alert('El username debe tener al menos 6 caracteres')
+                return false
+            }
+            if (this.password === '') {
+                alert('Debe ingresar una contraseña')
+                return false
+            }
+            if (this.password.length < 9) {
+                alert('La contraseña debe tener al menos 9 caracteres')
+                return false
+            }
+            if (!this.validateNumericCharacters(this.password)) {
+                alert('La contraseña debe tener al menos un caracter numerico')
+                return false
+            }
+            if (this.email === '') {
+                alert('Debe ingresar un correo electronico')
+                return false
+            }
+            if (!this.validarCorreoElectronico(this.email)) {
+                alert('Debe ingresar un correo electronico valido')
+                return false
+            }
+            if (this.cedula === '') {
+                alert('Debe ingresar una cedula de identidad')
+                return false
+            }
+            if (!this.validarSoloNumeros(this.cedula)) {
+                alert('La cedula de identidad debe contener solo numeros')
+                return false
+            }
+            if (this.cedula.length < 7) {
+                alert('La cedula de identidad debe tener al menos 7 caracteres')
+                return false
+            }
+            if (this.cedula.length > 9) {
+                alert('La cedula de identidad debe tener como maximo 8 caracteres')
+                return false
+            }
+            if (this.rif === '') {
+                alert('Debe ingresar un RIF')
+                return false
+            }
+            if (!this.validarSoloNumeros(this.rif)) {
+                alert('El rif debe contener solo numeros')
+                return false
+            }
+            if (this.rif.length < 7) {
+                alert('El rif debe tener al menos 7 caracteres')
+                return false
+            }
+            if (this.rif.length > 10) {
+                alert('El rif debe tener como maximo 10 caracteres')
+                return false
+            }
+            if (this.nombre === '') {
+                alert('Debe ingresar un nombre')
+                return false
+            }
+            if (this.apellido === '') {
+                alert('Debe ingresar un apellido')
+                return false
+            }
+            if (this.direccion === '') {
+                alert('Debe ingresar una direccion')
+                return false
+            }
+            if (this.parroquia === '') {
+                alert('Debe ingresar una parroquia')
+                return false
+            }
+            if (this.codigoTelefono === '') {
+                alert('Debe ingresar un codigo de telefono')
+                return false
+            }
+            if (this.telefono === '') {
+                alert('Debe ingresar un telefono')
+                return false
+            }
+            if (!this.validarSoloNumeros(this.telefono)) {
+                alert('El telefono debe contener solo numeros')
+                return false
+            }
+            return true
+        },
+        async registrarse() {
+            if (!this.validar()) return
+            const data = {
+                username: this.username,
+                password: this.password,
+                email: this.email,
+                clie_natu_cedula_identidad: this.cedula,
+                clie_natu_rif: this.rif,
+                clie_natu_nombre: this.nombre,
+                clie_natu_segundo_nombre: this.segundoNombre,
+                clie_natu_apellido: this.apellido,
+                clie_natu_segundo_apellido: this.segundoApellido,
+                clie_natu_direccion_habitacion: this.direccion,
+                fk_clie_natu_lugar: this.parroquia,
+                codigo_telefono: this.codigoTelefono,
+                telefono: this.telefono
+            }
+            console.log(data)
+            new Swal({
+                title: 'Espere por favor',
+                allowOutsideClick: false,
+            })
+            Swal.showLoading()
+            try {
+                await this.registerClienteNatural(data)
+                Swal.fire('Success', 'Registrado con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$router.push({ name: 'home' });
+                    }
+                });
+            } catch (error) {
+                Swal.fire('Error', 'Problemas al registrar' + error, 'error',
+                    // this.username = '',
+                    // this.password = '',
+                    // this.email = '',
+                    // this.cedula = '',
+                    // this.rif = '',
+                    // this.nombre = '',
+                    // this.segundoNombre = '',
+                    // this.apellido = '',
+                    // this.segundoApellido = '',
+                    // this.direccion = '',
+                    // this.parroquia = '',
+                    // this.codigoTelefono = '',
+                    // this.telefono = ''
+                )
+            }
+        },
     }
 }
-
 </script>
 
 <style lang="scss" scoped>

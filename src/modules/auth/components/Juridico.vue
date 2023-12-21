@@ -105,7 +105,172 @@ export default {
         },
         setParroquiaFiscal(item) {
             this.parroquiaFiscal = item
-        }
+        },
+
+        // Validacion
+        validateNumericCharacters(password) {
+            const numericRegex = /\d/;
+            return numericRegex.test(password);
+        },
+        validarCorreoElectronico(correo) {
+            const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            return regexCorreo.test(correo);
+        },
+        validarSoloNumeros(cadena) {
+            const regexNumeros = /^\d+$/;
+            return regexNumeros.test(cadena);
+        },
+        validar() {
+            // USERNAME
+            if (this.username === '') {
+                alert('Debe ingresar un username')
+                return false
+            }
+            if (this.username.length < 6) {
+                alert('El username debe tener al menos 6 caracteres')
+                return false
+            }
+            if (this.password === '') {
+                alert('Debe ingresar una contraseña')
+                return false
+            }
+            if (this.password.length < 9) {
+                alert('La contraseña debe tener al menos 9 caracteres')
+                return false
+            }
+            if (!this.validateNumericCharacters(this.password)) {
+                alert('La contraseña debe tener al menos un caracter numerico')
+                return false
+            }
+            if (this.email === '') {
+                alert('Debe ingresar un correo electronico')
+                return false
+            }
+            if (!this.validarCorreoElectronico(this.email)) {
+                alert('Debe ingresar un correo electronico valido')
+                return false
+            }
+            if (this.rif === '') {
+                alert('Debe ingresar un RIF')
+                return false
+            }
+            if (!this.validarSoloNumeros(this.rif)) {
+                alert('El rif debe contener solo numeros')
+                return false
+            }
+            if (this.rif.length < 8) {
+                alert('El rif debe tener al menos 8 caracteres')
+                return false
+            }
+            if (this.rif.length > 9) {
+                alert('El rif debe tener como maximo 9 caracteres')
+                return false
+            }
+            if (this.denominacionComercial === '') {
+                alert('Debe ingresar una denominacion comercial')
+                return false
+            }
+            if (this.razonSocial === '') {
+                alert('Debe ingresar una razon social')
+                return false
+            }
+            if (this.paginaWeb === '') {
+                alert('Debe ingresar una pagina web')
+                return false
+            }
+            if (this.capitalDisponible === '') {
+                alert('Debe ingresar un capital disponible')
+                return false
+            }
+            if (!this.validarSoloNumeros(this.capitalDisponible)) {
+                alert('El capital disponible debe contener solo numeros')
+                return false
+            }
+            if (this.direccionFisica === '') {
+                alert('Debe ingresar una direccion fisica')
+                return false
+            }
+            if (this.parroquiaFisica === '') {
+                alert('Debe ingresar una parroquia fisica')
+                return false
+            }
+            if (this.direccionFiscal === '') {
+                alert('Debe ingresar una direccion fiscal')
+                return false
+            }
+            if (this.parroquiaFiscal === '') {
+                alert('Debe ingresar una parroquia fiscal')
+                return false
+            }
+            if (this.tipoComercio === '') {
+                alert('Debe ingresar un tipo de comercio')
+                return false
+            }
+            if (this.codigoTelefono === '') {
+                alert('Debe ingresar un codigo de telefono')
+                return false
+            }
+            if (this.telefono === '') {
+                alert('Debe ingresar un telefono')
+                return false
+            }
+            if (!this.validarSoloNumeros(this.telefono)) {
+                alert('El telefono debe contener solo numeros')
+                return false
+            }
+            return true
+        },
+        async registrarse() {
+            if (!this.validar()) return
+            const data = {
+                username: this.username,
+                password: this.password,
+                email: this.email,
+                rif: this.rif,
+                denominacionComercial: this.denominacionComercial,
+                razonSocial: this.razonSocial,
+                paginaWeb: this.paginaWeb,
+                capitalDisponible: this.capitalDisponible,
+                direccionFisica: this.direccionFisica,
+                direccionFiscal: this.direccionFiscal,
+                tipoComercio: this.tipoComercio,
+                parroquiaFisica: this.parroquiaFisica,
+                parroquiaFiscal: this.parroquiaFiscal,
+                codigo_Telefono: this.codigoTelefono,
+                telefono: this.telefono
+            }
+            console.log(data)
+            new Swal({
+                title: 'Espere por favor',
+                allowOutsideClick: false,
+            })
+            Swal.showLoading()
+            try {
+                await this.registerClienteNatural(data)
+                Swal.fire('Success', 'Registrado con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$router.push({ name: 'home' });
+                    }
+                });
+            } catch (error) {
+                Swal.fire('Error', 'Problemas al registrar' + error, 'error',
+                    // this.username = '',
+                    // this.password = '',
+                    // this.email = '',
+                    // this.cedula = '',
+                    // this.rif = '',
+                    // this.nombre = '',
+                    // this.segundoNombre = '',
+                    // this.apellido = '',
+                    // this.segundoApellido = '',
+                    // this.direccion = '',
+                    // this.parroquia = '',
+                    // this.codigoTelefono = '',
+                    // this.telefono = ''
+                )
+            }
+        },
     }
 }
 </script>

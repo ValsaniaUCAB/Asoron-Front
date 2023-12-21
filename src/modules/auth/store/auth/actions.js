@@ -8,8 +8,7 @@ import getUser from "../../helpers/getUser";
 import { setHeader, getHeader } from "@/lib/api"
 import { getCookie, setCookie } from "@/lib/cookies"
 import { emptyHeader } from "@/lib/api";
-import getCodigoTelefono from '../../helpers/getCodigoTelefono'
-
+import postClienteNatural from '../../helpers/postClienteNatural'
 
 export const login = async ({ commit }, { username, password }) => {
     console.log('header antes del post Login', getHeader())
@@ -34,6 +33,8 @@ export const logout = async ({ commit }) => {
     emptyHeader()
 }
 
-export const cargarCodigoTelefono = async ({ commit }) => {
-    commit('setCodigoTelefono', await getCodigoTelefono())
+export const registerClienteNatural = async ({ commit }, dataToSave) => {
+    const data = await postClienteNatural(dataToSave)
+    commit('setToken', data)
+    commit('setUser', await getUser())
 }
