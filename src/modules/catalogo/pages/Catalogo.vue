@@ -1,4 +1,5 @@
 <template>
+    <div class="container"></div>
     <div>
         <div class="header">
             <div class="titulo">Productos</div>
@@ -148,7 +149,7 @@ export default {
     font-size: 48px;
     font-weight: bold;
     color: #31212B;
-
+    align-self: flex-start;
     text-align: left;
     margin-left: 30px;
 }
