@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-        <img class="pointer" :src="prod.botella.images[0].img_url" @click="sendToDetail()" />
+        <img class="pointer" :src="prod.botella.images[0].img_url" />
         <div class="nombre">
             {{ prod.botella.nombre }}
             <div class="precio ">Descuento: {{ prod.oferta.descuento }}%</div>

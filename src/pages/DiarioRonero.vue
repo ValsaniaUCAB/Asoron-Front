@@ -14,6 +14,7 @@
                 <RonDiario :prod="prod" />
             </div>
         </div>
+        <div class="button-container"><button class="button-18" @click="getDiarioPdf">Descargar</button></div>
     </div>
 </template>
 
@@ -21,6 +22,7 @@
 
 import Navbar from '@/modules/shared/components/Navbar'
 import getDiarioRonero from '@/modules/catalogo/helpers/getDiarioRonero'
+import getDiarioRoneroPdf from '@/modules/catalogo/helpers/getDiarioRoneroPdf'
 import RonDiario from '@/modules/catalogo/components/RonDiario'
 
 export default {
@@ -31,12 +33,24 @@ export default {
     },
     data() {
         return {
-            diario: null
+            diario: null,
+            pdf: null
         }
     },
     methods: {
         async getDiario() {
             this.diario = await getDiarioRonero()
+        },
+        async getDiarioPdf() {
+            this.pdf = await getDiarioRoneroPdf()
+            const url = window.URL.createObjectURL(new Blob([this.pdf]));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'diario_ronero.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
         }
     },
     mounted() {
@@ -46,6 +60,65 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.button-18 {
+    -webkit-user-select: none;
+    align-items: center;
+    background-color: #FDD08D;
+    border-radius: 100px;
+    border: 0;
+    box-sizing: border-box;
+    color: #000;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: 'Brothers', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    justify-content: center;
+    line-height: 20px;
+    height: 100px;
+    width: 400px;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding: 0px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    vertical-align: middle;
+
+    &.catalogo {
+        font-family: 'Inter', 'sans-serif';
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    &:hover,
+    :focus {
+        background-color: #e6bd7f;
+        color: #000;
+    }
+
+    &:active {
+        background: #c09e6a;
+        color: rgb(255, 255, 255, .7);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background: rgba(0, 0, 0, .08);
+        color: rgba(0, 0, 0, .3);
+    }
+}
+
+.button-container {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-end;
+}
+
 .rones {
     display: flex;
     flex-direction: row;
@@ -53,5 +126,9 @@ export default {
     flex-wrap: wrap;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+.container {
+    margin-bottom: 100px;
 }
 </style>
