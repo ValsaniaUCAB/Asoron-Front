@@ -9,6 +9,7 @@ import { setHeader, getHeader } from "@/lib/api"
 import { getCookie, setCookie } from "@/lib/cookies"
 import { emptyHeader } from "@/lib/api";
 import postClienteNatural from '../../helpers/postClienteNatural'
+import postClienteJuridico from "../../helpers/postClienteJuridico";
 
 export const login = async ({ commit }, { username, password }) => {
     console.log('header antes del post Login', getHeader())
@@ -35,6 +36,12 @@ export const logout = async ({ commit }) => {
 
 export const registerClienteNatural = async ({ commit }, dataToSave) => {
     const data = await postClienteNatural(dataToSave)
+    commit('setToken', data)
+    commit('setUser', await getUser())
+}
+
+export const registerClienteJuridico = async ({ commit }, dataToSave) => {
+    const data = await postClienteJuridico(dataToSave)
     commit('setToken', data)
     commit('setUser', await getUser())
 }

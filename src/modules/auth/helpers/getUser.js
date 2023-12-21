@@ -19,7 +19,7 @@ const getUser = async () => {
             data.data = await getClienteNatural()
         }
         if (data.fk_usua_clie_juri) {
-            await getClienteJuridico()
+            data.data = await getClienteJuridico()
         }
         return data
     } catch (error) {

@@ -54,7 +54,7 @@
                 <input type="text" placeholder="1234567" class="form" v-model="telefono" />
             </div>
         </div>
-        <button class="boton">Registrarse</button>
+        <button class="boton" @click="registrarse()">Registrarse</button>
 
     </div>
 </template>
@@ -63,6 +63,8 @@
 import Lugar from './Lugar'
 import CodigoTelefono from './CodigoTelefono';
 import TipoComercio from './TipoComercio';
+import { mapActions } from 'vuex';
+import Swal from 'sweetalert2';
 
 export default {
     components: {
@@ -94,6 +96,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions('auth', ['registerClienteJuridico']),
         setCodigoTelefono(item) {
             this.codigoTelefono = item.id
         },
@@ -227,17 +230,17 @@ export default {
                 username: this.username,
                 password: this.password,
                 email: this.email,
-                rif: this.rif,
-                denominacionComercial: this.denominacionComercial,
-                razonSocial: this.razonSocial,
-                paginaWeb: this.paginaWeb,
-                capitalDisponible: this.capitalDisponible,
-                direccionFisica: this.direccionFisica,
-                direccionFiscal: this.direccionFiscal,
-                tipoComercio: this.tipoComercio,
-                parroquiaFisica: this.parroquiaFisica,
-                parroquiaFiscal: this.parroquiaFiscal,
-                codigo_Telefono: this.codigoTelefono,
+                clie_juri_rif: this.rif,
+                clie_juri_denominacion_comercial: this.denominacionComercial,
+                clie_juri_razon_social: this.razonSocial,
+                clie_juri_pagina_web: this.paginaWeb,
+                clie_juri_capital_disponible: this.capitalDisponible,
+                clie_juri_direccion_fisica: this.direccionFisica,
+                clie_juri_direccion_fiscal: this.direccionFiscal,
+                fk_clie_juri_tipo_come: this.tipoComercio,
+                fk_clie_juri_lugar_fisica: this.parroquiaFisica,
+                fk_clie_juri_lugar_fiscal: this.parroquiaFiscal,
+                codigo_telefono: this.codigoTelefono,
                 telefono: this.telefono
             }
             console.log(data)
@@ -247,7 +250,7 @@ export default {
             })
             Swal.showLoading()
             try {
-                await this.registerClienteNatural(data)
+                await this.registerClienteJuridico(data)
                 Swal.fire('Success', 'Registrado con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
                     if (result.isConfirmed) {
                         this.$router.push({ name: 'home' });
