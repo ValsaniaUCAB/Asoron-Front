@@ -5,6 +5,4 @@ export default () => ({
         refresh: null
     },
     user: null,
-    listaCodigoTelefono: [],
-    listaLugar: [],
 })
