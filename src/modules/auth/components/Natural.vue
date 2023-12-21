@@ -68,19 +68,19 @@ export default {
     },
     data() {
         return {
-            username: 'prueba1',
-            password: 'qazwsx222',
-            email: 'alessvalsania@gmail.com',
-            cedula: '27451057',
-            rif: '274510575',
-            nombre: 'Alessandro',
-            segundoNombre: 'Rafael',
-            apellido: 'Valsania',
-            segundoApellido: 'Jimenez',
-            direccion: 'Av. Sur 14',
+            username: '',
+            password: '',
+            email: '',
+            cedula: '',
+            rif: '',
+            nombre: '',
+            segundoNombre: '',
+            apellido: '',
+            segundoApellido: '',
+            direccion: '',
             parroquia: '',
             codigoTelefono: '',
-            telefono: '2733220'
+            telefono: ''
         }
     },
     methods: {

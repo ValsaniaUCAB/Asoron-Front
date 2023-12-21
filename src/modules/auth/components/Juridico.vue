@@ -19,11 +19,11 @@
         </div>
         <div class="form-box">
             <p>Denominacion Comercial</p>
-            <input type="text" placeholder="Happy People 2010 C.A." class="form" v-model="denominacionComercial" />
+            <input type="text" placeholder="Deco muebles" class="form" v-model="denominacionComercial" />
         </div>
         <div class="form-box">
             <p>Razon Social</p>
-            <input type="text" placeholder="Deco muebles" class="form" v-model="razonSocial" />
+            <input type="text" placeholder="Deco muebles C.A" class="form" v-model="razonSocial" />
         </div>
         <div class="form-box">
             <p>Pagina Web</p>
