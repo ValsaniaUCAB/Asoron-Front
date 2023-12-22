@@ -54,7 +54,7 @@
         <div class="filtro-container filtro-precio">
             <h2 class="filtro-titulo">Precio Minimo: {{ this.valorPrecioMin }}</h2>
             <div class="slider-container">
-                <input v-model="valorPrecioMin" type="range" min="0" max="1300" class="slider" step="10" />
+                <input v-model="valorPrecioMin" type="range" min="0" :max=valorPrecioMax class="slider" step="10" />
             </div>
         </div>
         <div class="filtro-container filtro-precio">
@@ -147,9 +147,9 @@ export default {
 }
 
 .filtros {
-    padding-left: 44px;
-    padding-top: 52px;
-    width: 15vw;
+    padding-left: 2vw;
+    padding-top: 3vh;
+    width: 18vw;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -178,8 +178,6 @@ export default {
     margin-bottom: 15px;
     font-size: 24px;
     font-weight: 600;
-    border-bottom: 3px solid #31212B;
-    border-right: 3px solid #31212B;
 }
 
 .filtro-lista {
@@ -273,4 +271,6 @@ input[type="range"]::-moz-range-thumb {
     /*  slider progress trick  */
     box-shadow: -407px 0 0 400px #31212B;
 }
+
+
 </style>

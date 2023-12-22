@@ -31,12 +31,12 @@
                     </h3>
                 </div>
             </div>
-            <div v-else>
-                <div class="catalogo">
+            <div v-else class="catalogo-container">
+                <div class="catalogo"> 
                     <li v-if="rones.length > 0" v-for="ron in rones" :key="ron.id">
                         <Ron :ron="ron" />
                     </li>
-                    <div v-else class="aviso">No hay rones que cumplan con su criterio :(</div>
+                    <div v-else class="aviso"> No hay rones que cumplan con su criterio :( </div>
                 </div>
                 <Paginado v-if="rones.length > 0" @on-click="cambiarPagina" />
             </div>
@@ -132,7 +132,7 @@ export default {
 
 .spacer {
     // width: 274px;
-    width: 15vw;
+    width: 10vw;
 }
 
 .catalogo {
@@ -220,6 +220,8 @@ export default {
     font-size: 48px;
     font-weight: bold;
     color: #31212B;
+    width: 40vw;
+    
 }
 
 li {
