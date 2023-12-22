@@ -74,9 +74,6 @@ export default {
     },
     data() {
         return {
-
-
-
             // Datos de la cuenta
             username: '',
             password: '',
@@ -257,21 +254,8 @@ export default {
                     }
                 });
             } catch (error) {
-                Swal.fire('Error', 'Problemas al registrar' + error, 'error',
-                    // this.username = '',
-                    // this.password = '',
-                    // this.email = '',
-                    // this.cedula = '',
-                    // this.rif = '',
-                    // this.nombre = '',
-                    // this.segundoNombre = '',
-                    // this.apellido = '',
-                    // this.segundoApellido = '',
-                    // this.direccion = '',
-                    // this.parroquia = '',
-                    // this.codigoTelefono = '',
-                    // this.telefono = ''
-                )
+                console.log({ error })
+                Swal.fire('Error', `Problemas al registrar: ${error.response.data.error}`, 'error')
             }
         },
     }

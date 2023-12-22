@@ -12,7 +12,8 @@ async function postClienteJuridico(dataToSave) {
         return data
     } catch (error) {
         setCookie('access', '')
-        console.log(error)
+        console.log('error:', error)
+        throw error
     }
 }
 export default postClienteJuridico
