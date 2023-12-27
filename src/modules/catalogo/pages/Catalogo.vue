@@ -2,7 +2,6 @@
     <div class="container"></div>
     <div>
         <div class="header">
-            <div class="titulo">Productos</div>
             <div class="barras">
                 <div class="busqueda">
                     <div class="titulo-barras">Buscar</div>
@@ -153,16 +152,6 @@ export default {
 .contenedor {
     display: flex;
     justify-content: space-between;
-}
-
-.titulo {
-    font-family: 'Brothers', sans-serif;
-    font-size: 48px;
-    font-weight: bold;
-    color: #31212B;
-    align-self: flex-start;
-    text-align: left;
-    margin-left: 30px;
 }
 
 .barras {
