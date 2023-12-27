@@ -1,7 +1,6 @@
 <template>
     <h1 class="container" v-if="!ronDetallado">Cargando... Por favor Espere</h1>
     <div v-else>
-
         <div class="ron-container">
             <img :src="ronDetallado.images[0].url" />
             <div class="info">
@@ -16,46 +15,131 @@
                     </div>
                     <button class="button-18 ">Añadir al Carrito</button>
                 </div>
-                <div class="desplegables">
-                    <div class="wrapper">
-                        <div class="collapsible ficha-tecnica">
-                            <input type="checkbox" id="collapsible-head-ficha">
-                            <label for="collapsible-head-ficha">FICHA TECNICA</label>
-                            <div class="collapsible-text">
-                                <ul>
-                                    <li v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
-                                        {{ sensacion }}
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="collapsible como-servir">
-                            <input type="checkbox" id="collapsible-head-servir">
-                            <label for="collapsible-head-servir">COMO SERVIR</label>
-                            <div class="collapsible-text">
-                                <ul>
-                                    <li v-for="servir in ronDetallado.ron.comoServir" :key="servir.coctel">
-                                        <h4>{{ servir.coctel.toUpperCase() }}</h4>
-                                        <p>{{ servir.como_preparar }}</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="collapsible sensaciones">
-                            <input type="checkbox" id="collapsible-head-sensacion">
-                            <label for="collapsible-head-sensacion">SENSACIONES</label>
-                            <div class="collapsible-text">
-                                <ul>
-                                    <li v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
-                                        {{ sensacion }}
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+        <div class="desplegables-contenedor">
+            <div class="desplegables-container">
+                <div class="collapsible ficha-tecnica">
+                    <input class="collapsible-input"  type="checkbox" id="collapsible-head-ficha">
+                    <label class="collapsible-label external-label"  for="collapsible-head-ficha">FICHA TECNICA</label>
+                    <div class="collapsible-text">
+                        <ul class="collapsible-text-list external-list">
+                            <li>
+                                <b>Clasificación : </b>{{ ronDetallado.ron.clasificacion}}
+                            </li>
+                            <!-- Colapsable interno de Añejamiento -->
+                            <div class="collapsible mini-collapsible">
+                                <input class="collapsible-input" type="checkbox" id="collapsible-head-anejamiento">
+                                <label class="collapsible-label internal-label" for="collapsible-head-anejamiento">Añejamiento</label>
+                                <div class="collapsible-text">
+                                    <ul class="collapsible-text-list internal-list">
+                                        <li>
+                                            <b>Cantidad de Años : </b>{{ ronDetallado.ron.anejamiento.cantidadAnos}} años
+                                        </li>
+                                        <li>
+                                            <b>Calidad del Agua : </b>{{ ronDetallado.ron.anejamiento.calidadAgua}}
+                                        </li>
+                                        <li>
+                                            <b>Metodo de Destilación : </b>{{ ronDetallado.ron.anejamiento.metodoDestilacion}}
+                                        </li>
+                                        <li>
+                                            <b>Metodo de Fermentación : </b>{{ ronDetallado.ron.anejamiento.metodoFermentacion}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <li>
+                                <b>Grado Alcoholico : </b>{{ ronDetallado.ron.grad_alcohol}}°
+                            </li>
+                            <li>
+                                <b>Sensaciones : </b>
+                                <span v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
+                                    {{ sensacion }}, 
+                                </span>
+                            </li>
+                            <!-- Colapsable de Barril-->
+                            <div class="collapsible mini-collapsible">
+                                <input class="collapsible-input" type="checkbox" id="collapsible-head-barriles">
+                                <label class="collapsible-label internal-label" for="collapsible-head-barriles">Barril</label>
+                                <div class="collapsible-text internal-list">
+                                    <ul class="collapsible-text-list internal-list">
+                                        <div v-for="barril in ronDetallado.ron.anejamiento.barril" :key="barril.id" class="collapsible mini-collapsible">
+                                            <input class="collapsible-input" type="radio" name="barriles" :id=ronDetallado.ron.anejamiento.barril.indexOf(barril)>
+                                            <label class="collapsible-label internal-label add-label-padding" :for=ronDetallado.ron.anejamiento.barril.indexOf(barril)>
+                                                Barril {{ronDetallado.ron.anejamiento.barril.indexOf(barril)}}
+                                            </label>
+                                            <div class="collapsible-text internal-list">
+                                                <ul class="collapsible-text-list internal-list add-list-padding">
+                                                    <li>
+                                                        <b>Cantidad de Años : </b>{{ barril.anos}} años
+                                                    </li>
+                                                    <li>
+                                                        <b>Calidad del Barril : </b>{{ barril.calidad}}
+                                                    </li>
+                                                    <li>
+                                                        <b>Madera : </b>{{ barril.madera}}
+                                                    </li>
+                                                    <li>
+                                                        <b>Capacidad : </b>{{ barril.tamano}} Lts.
+                                                    </li>
+                                                    <li>
+                                                        <b>Tipo : </b>{{ barril.tipo}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="collapsible como-servir">
+                    <input class="collapsible-input" type="checkbox" id="collapsible-head-servir">
+                    <label class="collapsible-label external-label" for="collapsible-head-servir">COMO SERVIR</label>
+                    <div class="collapsible-text">
+                        <ul class="collapsible-text-list external-list" >
+                            <li class="collapsible-text-list-como-servir" v-for="servir in ronDetallado.ron.comoServir" :key="servir.coctel">
+                                <h4>{{ servir.coctel.toUpperCase() }}</h4>
+                                <p>{{ servir.como_preparar }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+        </div>
+        
+        <!-- testing de desplegable mini -->
+        <!--
+        <div class="collapsible sensaciones">
+            <input class="collapsible-input" type="checkbox" id="collapsible-head-sensacion">
+            <label class="collapsible-label external-label" for="collapsible-head-sensacion">SENSACIONES</label>
+            <div class="collapsible-text">
+                <ul class="collapsible-text-list external-list">
+                    <li>
+                        <b>Añejamiento : </b>{{ ronDetallado.ron.anejamiento.cantidadAnos}} años
+                    </li>
+                        <div class="collapsible mini-collapsible">
+                            <input class="collapsible-input" type="checkbox" id="collapsible-head-mini">
+                            <label class="collapsible-label internal-label" for="collapsible-head-mini">Colapsable</label>
+                            <div class="collapsible-text internal-text">
+                                <ul class="collapsible-text-list internal-list">
+                                    <li>
+                                        <b>Añejamiento : </b>{{ ronDetallado.ron.anejamiento.cantidadAnos}} años
+                                    </li>
+                                    <li>
+                                        <b>Sensaciones : </b>
+                                        <span v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
+                                            {{ sensacion }}, 
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                </ul>
+            </div>
+        </div> -->
+        <footer></footer>
     </div>
 </template>
 
@@ -72,7 +156,7 @@ export default {
     data() {
         return {
             ronDetallado: null,
-            cantidad: 1
+            cantidad: 1,
         }
     },
     methods: {
@@ -92,7 +176,7 @@ export default {
         decrease(){
             if(this.cantidad > 1){
                 this.cantidad--}
-        }
+        },
     },
     mounted() {
         this.getRonDetail(this.id)
@@ -114,11 +198,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+footer {
+    height: 800px;
+}
+
 .ron-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-top: 100px;
+}
+
+.desplegables-contenedor {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 
@@ -164,49 +258,56 @@ export default {
     width: 75%;
 }
 
-.wrapper {
+
+// colapsables 
+
+.desplegables-container {
+    width: 1060px;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    padding-top: 50px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 800px;
-
-
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    
 }
 
-.collapsible input {
+.collapsible-input {
     display: none;
 
 }
 
 .collapsible {
-    width: 560px;
+    max-width: 70vw;
     overflow: hidden;
     font-weight: 500;
     margin-bottom: 20px;
 }
 
-.collapsible label {
+.mini-collapsible {
+    margin-bottom: 0;
+}
+
+.collapsible .collapsible-label {
     position: relative;
+    display: block;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.external-label {
+    border-radius: 4px;
+    padding: 15px;
+    color: black;
     font-size: 22px;
     font-weight: 800;
     font-family: 'Brothers', sans-serif;
     background: #FDD08D;
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
-    color: black;
-    display: block;
-    margin-bottom: 10px;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 4px;
     text-align: left;
-    z-index: 1;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
+    margin-bottom: 10px;
 }
 
-.collapsible label:after {
+.collapsible .external-label:after {
     content: "+";
     position: absolute;
     right: 15px;
@@ -214,7 +315,7 @@ export default {
     transition: all 0.3s ease;
 }
 
-.collapsible input:checked+label:after {
+.collapsible .collapsible-input:checked+.collapsible-label:after {
     transform: rotate(45deg);
     transition: all 0.3s ease;
 }
@@ -231,26 +332,27 @@ export default {
     transition: all 0.3s ease;
 }
 
-.collapsible input:checked~.collapsible-text {
-    max-height: 400px;
+.collapsible .collapsible-input:checked~.collapsible-text {
+    max-height: 1000px;
     background: whitesmoke;
     border-radius: 4px;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
     opacity: 1;
     top: 0;
+    
 }
 
-.collapsible-text ul {
+.collapsible-text .collapsible-text-list {
     padding: 0;
     margin: 0;
     position: relative;
     display: flex;
     flex-direction: column;
     text-align: left;
-
+    gap: 0;
 }
 
-.collapsible-text ul li {
+.external-list li {
     font-size: 16px;
     font-weight: 400;
     font-family: 'Inter', sans-serif;
@@ -258,18 +360,66 @@ export default {
     padding: 10px 20px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
     width: 100%;
+    margin: 0;
 }
 
-.collapsible-text ul li h4 {
+.internal-list li {
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: black;
+    padding: 10px 20px 10px 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    width: 100%;
+    margin: 0;
+}
+
+.add-list-padding li {
+    padding-left: 60px;
+}
+
+.collapsible-text .collapsible-text-list .collapsible-text-list-como-servir h4 {
     font-size: 18px;
     font-weight: 800;
     font-family: 'Brothers', sans-serif;
 }
 
-.collapsible-text ul li p {
+.collapsible-text .collapsible-text-list .collapsible-text-list-como-servir p {
     margin-left: 10px;
 }
 
+// colapsables internos
+
+.internal-label {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    color: black;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.add-label-padding {
+    padding-left: 40px;
+}
+
+.internal-label:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.collapsible .internal-label:after {
+    content: "+";
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    transition: all 0.3s ease;
+}
+
+
+
+// cantidad
 .cantidad-container {
     display: flex;
     justify-content: center;
