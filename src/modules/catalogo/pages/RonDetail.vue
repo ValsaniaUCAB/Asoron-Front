@@ -39,7 +39,6 @@
                             <li>
                                 <b>Origen : </b>{{ronDetallado.ron.lugar.estado}}, {{ronDetallado.ron.lugar.municipio}}, Pqa.{{ronDetallado.ron.lugar.parroquia}}
                             </li>
-                            
                             <!-- Colapsable interno de Añejamiento -->
                             <div class="collapsible mini-collapsible">
                                 <input class="collapsible-input" type="checkbox" id="collapsible-head-anejamiento">
@@ -63,6 +62,32 @@
                             </div>
                             <li>
                                 <b>Grado Alcoholico : </b>{{ ronDetallado.ron.grad_alcohol}}°
+                            </li>
+                            <div class="collapsible mini-collapsible">
+                                <input class="collapsible-input" type="checkbox" id="collapsible-head-botella">
+                                <label class="collapsible-label internal-label" for="collapsible-head-botella">Botella</label>
+                                <div class="collapsible-text">
+                                    <ul class="collapsible-text-list internal-list">
+                                        <li>
+                                            <b>Material : </b>{{ ronDetallado.material.nombre}}
+                                        </li>
+                                        <li>
+                                            <b>Capacidad : </b>{{ ronDetallado.material.capacidad}} mlts.
+                                        </li>
+                                        <li>
+                                            <b>Altura : </b>{{ ronDetallado.material.altura}} cm.
+                                        </li>
+                                        <li>
+                                            <b>Ancho : </b>{{ ronDetallado.material.ancho}} cm.
+                                        </li>
+                                        <li>
+                                            <b>Tapa : </b>{{ ronDetallado.tapa.tipo}} de {{ ronDetallado.tapa.material}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <li>
+                                <b>Color : </b>{{ronDetallado.ron.color.nombre}}, {{ronDetallado.ron.color.descripcion}}
                             </li>
                             <li>
                                 <b>Sensaciones : </b>
@@ -101,6 +126,23 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="collapsible mini-collapsible">
+                                <input class="collapsible-input" type="checkbox" id="collapsible-head-caja">
+                                <label class="collapsible-label internal-label" for="collapsible-head-caja">Caja</label>
+                                <div class="collapsible-text">
+                                    <ul class="collapsible-text-list internal-list">
+                                        <li>
+                                            <b>Paleta : </b>{{ ronDetallado.caja.paleta}}, {{ ronDetallado.caja.cantidad_paleta}} UND.
+                                        </li>
+                                        <li>
+                                            <b>Bulto: </b>{{ ronDetallado.caja.bulto}}, {{ ronDetallado.caja.cantidad_bulto}} UND.
+                                        </li>
+                                        <li>
+                                            <b>Caja : </b>{{ ronDetallado.caja.caja}}, {{ ronDetallado.caja.cantidad_caja}} UND.
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
