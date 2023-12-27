@@ -27,6 +27,19 @@
                             <li>
                                 <b>Clasificación : </b>{{ ronDetallado.ron.clasificacion}}
                             </li>
+                            <li>
+                                <b>Tipo : </b>{{ ronDetallado.ron.tipo}}
+                            </li>
+                            <li>
+                                <b>Materia Prima : </b>
+                                <span v-for="materia in ronDetallado.ron.matePrima" :key="materia.id">
+                                    {{ materia }}, 
+                                </span>
+                            </li>
+                            <li>
+                                <b>Origen : </b>{{ronDetallado.ron.lugar.estado}}, {{ronDetallado.ron.lugar.municipio}}, Pqa.{{ronDetallado.ron.lugar.parroquia}}
+                            </li>
+                            
                             <!-- Colapsable interno de Añejamiento -->
                             <div class="collapsible mini-collapsible">
                                 <input class="collapsible-input" type="checkbox" id="collapsible-head-anejamiento">
