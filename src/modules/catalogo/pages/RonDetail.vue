@@ -363,12 +363,25 @@ footer {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
     opacity: 1;
     top: 0;
-    
 }
 
 .collapsible .collapsible-input:checked~.scrollable {
     overflow-y: scroll;
 
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: #FDD08D;
+  border-radius: 100px;
 }
 
 .collapsible-text .collapsible-text-list {
