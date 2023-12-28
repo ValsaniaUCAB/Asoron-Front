@@ -163,37 +163,6 @@
                 </div>
             </div>    
         </div>
-        
-        <!-- testing de desplegable mini -->
-        <!--
-        <div class="collapsible sensaciones">
-            <input class="collapsible-input" type="checkbox" id="collapsible-head-sensacion">
-            <label class="collapsible-label external-label" for="collapsible-head-sensacion">SENSACIONES</label>
-            <div class="collapsible-text">
-                <ul class="collapsible-text-list external-list">
-                    <li>
-                        <b>Añejamiento : </b>{{ ronDetallado.ron.anejamiento.cantidadAnos}} años
-                    </li>
-                        <div class="collapsible mini-collapsible">
-                            <input class="collapsible-input" type="checkbox" id="collapsible-head-mini">
-                            <label class="collapsible-label internal-label" for="collapsible-head-mini">Colapsable</label>
-                            <div class="collapsible-text internal-text">
-                                <ul class="collapsible-text-list internal-list">
-                                    <li>
-                                        <b>Añejamiento : </b>{{ ronDetallado.ron.anejamiento.cantidadAnos}} años
-                                    </li>
-                                    <li>
-                                        <b>Sensaciones : </b>
-                                        <span v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
-                                            {{ sensacion }}, 
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                </ul>
-            </div>
-        </div> -->
         <footer></footer>
     </div>
 </template>
