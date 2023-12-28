@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-background fade-in" @click.self="$emit('on-close')">
+    <div class="modal-background fade-in" @click.self="$emit('on:close')">
         <!-- El click.self permite que la emision sea solo en el componente padre y no en los hijos -->
         <div class="modal-container">
             <div class="container">
@@ -28,7 +28,7 @@
 import item from './ItemCarrito'
 
 export default {
-    emits: ['on-close'],             // defino las emisiones que puede hacer el componente
+    emits: ['on:close'],             // defino las emisiones que puede hacer el componente
     props: {
         property: {
             type: String,
@@ -57,13 +57,11 @@ export default {
 }
 
 .modal-container {
-    display: absolute;
     width: 610px;
     height: 100%;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    z-index: auto;
 }
 
 .box {

@@ -31,7 +31,12 @@
                 </ul>
             </nav>
         </div>
+<<<<<<< HEAD
         <Carrito v-if="isOpen" @on-close="closeCarrito">
+=======
+    </header>
+    <Carrito v-if="isOpen" @on:close="closeCarrito">
+>>>>>>> fbe0a8502f7bb140df830fe0fdd16753e82e24d4
 
         </Carrito>
     </header>
@@ -54,7 +59,11 @@ export default {
     },
     methods: {
         openCarrito() {
-            this.isOpen = !this.isOpen
+            if (this.isOpen) {
+                this.isOpen = false
+            } else {
+                this.isOpen = true
+            }
         },
         closeCarrito() {
             this.isOpen = false
