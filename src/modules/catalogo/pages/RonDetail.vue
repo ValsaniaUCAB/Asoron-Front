@@ -22,7 +22,7 @@
                 <div class="collapsible ficha-tecnica">
                     <input class="collapsible-input"  type="checkbox" id="collapsible-head-ficha">
                     <label class="collapsible-label external-label"  for="collapsible-head-ficha">FICHA TECNICA</label>
-                    <div class="collapsible-text">
+                    <div class="collapsible-text scrollable">
                         <ul class="collapsible-text-list external-list">
                             <li>
                                 <b>Clasificación : </b>{{ ronDetallado.ron.clasificacion}}
@@ -357,13 +357,18 @@ footer {
 }
 
 .collapsible .collapsible-input:checked~.collapsible-text {
-    max-height: 1000px;
+    max-height: 500px;
     background: whitesmoke;
     border-radius: 4px;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
     opacity: 1;
     top: 0;
     
+}
+
+.collapsible .collapsible-input:checked~.scrollable {
+    overflow-y: scroll;
+
 }
 
 .collapsible-text .collapsible-text-list {
