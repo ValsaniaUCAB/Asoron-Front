@@ -26,7 +26,6 @@ function arreglarLista(lista) {
 
 async function getDiarioRonero() {
     const { data } = await api.get(`/store/diario-ronero/`)
-    console.log(data)
     console.log('Data arreglada', arreglarLista(data))
     if (data) return arreglarLista(data)
     else return []
