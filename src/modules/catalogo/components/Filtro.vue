@@ -21,56 +21,65 @@
             </div>
         </div>
         <div class="filtro-container filtro-marca">
-            <h2 class="filtro-titulo">Marca : {{ this.marca }}</h2>
-            <ul class="filtro-lista">
-                <li v-for="proveedor in marca_list" :key="proveedor.id" class="filtro_item">
-                    <input v-model="marca" class="boton-radio" name="marca" type="radio" :value=proveedor>
-                    <label>{{ proveedor }}</label>
-                </li>
-            </ul>
-        </div>
-        <div class="filtro-container filtro-tipo-ron">
-            <h2 class="filtro-titulo">Tipo de Ron : {{ this.tipo_ron }}</h2>
-            <ul class="filtro-lista">
-                <li v-for="tipoRon in tipo_ron_list" class="filtro_item" :key="tipoRon.id">
-                    <input v-model="tipo_ron" name="tipo_ron" type="radio" :value=tipoRon>
-                    <label>{{ tipoRon }}</label>
-                </li>
-            </ul>
-        </div>
-        <div class="filtro-container filtro-clasificacion">
-            <h2 class="filtro-titulo">Clasificacion : {{ this.clasificacion }}</h2>
-            <ul class="filtro-lista">
-                <li class="filtro_item">
-                    <input v-model="clasificacion" name="clasificacion" type="radio" value="Industrial">
-                    <label>Industrial</label>
-                </li>
-                <li class="filtro_item">
-                    <input v-model="clasificacion" name="clasificacion" type="radio" value="Agricola">
-                    <label>Agricola</label>
-                </li>
-            </ul>
-        </div>
-        <div class="filtro-container filtro-precio">
-            <h2 class="filtro-titulo">Precio Minimo: {{ this.valorPrecioMin }}</h2>
-            <div class="slider-container">
-                <input v-model="valorPrecioMin" type="range" min="0" :max=valorPrecioMax class="slider" step="10" />
+            <input class="collapsible-input" type="checkbox" id="marca-desplegable">
+            <label for="marca-desplegable" class="filtro-label">Marca</label>
+            <div class="collapsible-container">
+                <ul class="filtro-lista">
+                    <li v-for="proveedor in marca_list" :key="proveedor.id" class="filtro_item">
+                        <input v-model="marca" class="boton-radio" name="marca" type="radio" :value=proveedor>
+                        <label>{{ proveedor }}</label>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="filtro-container filtro-precio">
+        <div class="filtro-container filtro-tipo-ron">
+            <input class="collapsible-input" type="checkbox" id="tipo-desplegable">
+            <label for="tipo-desplegable" class="filtro-label">Tipo de Ron</label>
+            <div class="collapsible-container">
+                <ul class="filtro-lista">
+                    <li v-for="tipoRon in tipo_ron_list" class="filtro_item" :key="tipoRon.id">
+                        <input v-model="tipo_ron" name="tipo_ron" type="radio" :value=tipoRon>
+                        <label>{{ tipoRon }}</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="filtro-container filtro-clasificacion">
+            <input class="collapsible-input" type="checkbox" id="clasificacion-desplegable">
+            <label for="clasificacion-desplegable" class="filtro-label">Clasificacion{{ this.clasificacion }}</label>
+            <div class="collapsible-container">
+                <ul class="filtro-lista">
+                    <li class="filtro_item">
+                        <input v-model="clasificacion" name="clasificacion" type="radio" value="Industrial">
+                        <label>Industrial</label>
+                    </li>
+                    <li class="filtro_item">
+                        <input v-model="clasificacion" name="clasificacion" type="radio" value="Agricola">
+                        <label>Agricola</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="filtro-container filtro-desplazables filtro-precio">
             <h2 class="filtro-titulo">Precio Max: {{ this.valorPrecioMax }}</h2>
             <div class="slider-container">
                 <input v-model="valorPrecioMax" type="range" min="10" max="1300" class="slider" step="10" />
             </div>
         </div>
-        <div class="filtro-container filtro-anejamiento">
+        <div class="filtro-container filtro-desplazables filtro-precio">
+            <h2 class="filtro-titulo">Precio Min: {{ this.valorPrecioMin }}</h2>
+            <div class="slider-container">
+                <input v-model="valorPrecioMin" type="range" min="0" :max=valorPrecioMax class="slider" step="10" />
+            </div>
+        </div>
+        <div class="filtro-container filtro-desplazables filtro-anejamiento">
             <h2 class="filtro-titulo">Añejamiento : {{ this.valorAnejamiento }}</h2>
             <div class="slider-container">
                 <input v-model="valorAnejamiento" type="range" min="0" max="35" class="slider" step="1" />
             </div>
         </div>
-        <div class="filtro-container filtro-grado">
-            <h2 class="filtro-titulo">Grado Alholico : {{ this.valorGrado }}</h2>
+        <div class="filtro-container filtro-desplazables filtro-grado">
+            <h2 class="filtro-titulo">Grado : {{ this.valorGrado }}</h2>
             <div class="slider-container">
                 <input v-model="valorGrado" type="range" min="0" max="70" class="slider" step="10" />
             </div>
@@ -167,17 +176,45 @@ export default {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-bottom: 5vh;
+    
 }
 
+.filtro-desplazables {
+    margin-bottom: 20px;
+}
 
-.filtro-titulo {
-    padding-bottom: 10px;
+.filtro-titulo , .filtro-label {
+    
     width: 13vw;
     text-align: left;
-    margin-bottom: 15px;
+    
     font-size: 24px;
     font-weight: 600;
+}
+
+.filtro-label {
+    margin-bottom: 15px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.collapsible-input {
+    display: none;
+}
+
+.filtro-container .filtro-label:after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.3s ease;
+}
+
+.filtro-container .collapsible-input:checked+.filtro-label:after {
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
 }
 
 .filtro-lista {
@@ -211,6 +248,23 @@ export default {
     align-self: center;
     padding-top: 10px;
 }
+
+.collapsible-container {
+    width: 100%;
+    max-height: 0;
+    top: -10;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    
+}
+
+.filtro-container .collapsible-input:checked~.collapsible-container {
+    max-height: 500px;
+    opacity: 1;
+    top: 0;
+    margin-bottom: 20px ;
+}
+
 
 
 
