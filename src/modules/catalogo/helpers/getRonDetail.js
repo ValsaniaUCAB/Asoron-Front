@@ -70,7 +70,6 @@ function listaImages(lista) {
 // }
 
 function arreglarPremio(e) {
-    console.log('Entra a premio')
     if (e.fk_cata_even_premio_ron_premio === null) return {}
     else {
         return {
@@ -172,7 +171,6 @@ function arreglar(item) {
 
 async function getRonDetail(idRon) {
     const { data } = await api.get(`/store/botella-detail/${idRon}`)
-    console.log('Data sin arreglar', data)
     console.log('Data arreglada', arreglar(data))
     return arreglar(data)
 }
