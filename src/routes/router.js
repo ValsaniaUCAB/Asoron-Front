@@ -4,6 +4,7 @@ import catalogoRouter from '@/modules/catalogo/router'
 import eventosRouter from '@/modules/eventos/router'
 import authRouter from '@/modules/auth/router'
 import profileRouter from '@/modules/profile/router'
+import pagosRouter from '@/modules/pagos/router'
 
 const routes = [
     {
@@ -36,6 +37,10 @@ const routes = [
     {
         path: '/',
         ...authRouter
+    },
+    {
+        path: '/checkout',
+        ...pagosRouter
     },
     {
         // Cualquier Path que no sea ningino de los declarados iria al AboutPage
