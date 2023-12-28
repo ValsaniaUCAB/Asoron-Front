@@ -31,10 +31,10 @@
                 </ul>
             </nav>
         </div>
-    </header>
-    <Carrito v-if="isOpen" @on-close="closeCarrito">
+        <Carrito v-if="isOpen" @on-close="closeCarrito">
 
-    </Carrito>
+        </Carrito>
+    </header>
 </template>
 
 <script>
