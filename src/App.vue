@@ -43,4 +43,19 @@ body {
 .container {
   margin-top: 92px;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+  
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #31212b;
+  
+}
+
 </style>
