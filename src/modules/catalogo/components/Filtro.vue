@@ -61,25 +61,25 @@
             </div>
         </div>
         <div class="filtro-container filtro-desplazables filtro-precio">
-            <h2 class="filtro-titulo">Precio Max: {{ this.valorPrecioMax }}</h2>
+            <h2 class="filtro-titulo">Precio Max: {{ this.valorPrecioMax }}$</h2>
             <div class="slider-container">
                 <input v-model="valorPrecioMax" type="range" min="10" max="1300" class="slider" step="10" />
             </div>
         </div>
         <div class="filtro-container filtro-desplazables filtro-precio">
-            <h2 class="filtro-titulo">Precio Min: {{ this.valorPrecioMin }}</h2>
+            <h2 class="filtro-titulo">Precio Min: {{ this.valorPrecioMin }}$</h2>
             <div class="slider-container">
                 <input v-model="valorPrecioMin" type="range" min="0" :max=valorPrecioMax class="slider" step="10" />
             </div>
         </div>
         <div class="filtro-container filtro-desplazables filtro-anejamiento">
-            <h2 class="filtro-titulo">Añejamiento : {{ this.valorAnejamiento }}</h2>
+            <h2 class="filtro-titulo">Añejamiento : {{ this.valorAnejamiento }} años</h2>
             <div class="slider-container">
                 <input v-model="valorAnejamiento" type="range" min="0" max="35" class="slider" step="1" />
             </div>
         </div>
         <div class="filtro-container filtro-desplazables filtro-grado">
-            <h2 class="filtro-titulo">Grado : {{ this.valorGrado }}</h2>
+            <h2 class="filtro-titulo">Grado : {{ this.valorGrado }}°</h2>
             <div class="slider-container">
                 <input v-model="valorGrado" type="range" min="0" max="70" class="slider" step="10" />
             </div>
@@ -185,7 +185,7 @@ export default {
 
 .filtro-titulo , .filtro-label {
     
-    width: 13vw;
+    width: 15vw;
     text-align: left;
     
     font-size: 24px;
