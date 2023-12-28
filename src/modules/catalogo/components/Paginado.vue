@@ -13,11 +13,6 @@
 import { mapState } from 'vuex'
 export default {
     emits: ['on-click'],
-    data() {
-        return {
-            activated: 'active'
-        }
-    },
     methods: {
         activo(num) {
             if (num === this.pages.actual) return 'active'

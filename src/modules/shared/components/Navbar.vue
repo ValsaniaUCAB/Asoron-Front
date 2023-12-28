@@ -32,7 +32,7 @@
             </nav>
         </div>
     </header>
-    <Carrito v-if="isOpen" @on:close="closeCarrito">
+    <Carrito v-if="isOpen" @on-close="closeCarrito">
 
     </Carrito>
 </template>
@@ -54,11 +54,7 @@ export default {
     },
     methods: {
         openCarrito() {
-            if (this.isOpen) {
-                this.isOpen = false
-            } else {
-                this.isOpen = true
-            }
+            this.isOpen = !this.isOpen
         },
         closeCarrito() {
             this.isOpen = false
