@@ -69,10 +69,11 @@ function listaImages(lista) {
 //     return listaA
 // }
 
-function listaPremio(lista) {
-    let listaA = []
-    for (const e of lista) {
-        let obj = {
+function arreglarPremio(e) {
+    console.log('Entra a premio')
+    if (e.fk_cata_even_premio_ron_premio === null) return {}
+    else {
+        return {
             nombre: e.fk_cata_even_premio_ron_premio.prem_nombre,
             descripcion: e.fk_cata_even_premio_ron_premio.prem_descripcion,
             direccion: e.fk_cata_even_premio_ron_premio.prem_direccion,
@@ -80,7 +81,16 @@ function listaPremio(lista) {
                 estado: e.fk_cata_even_premio_ron_premio.fk_prem_lugar.estado,
                 municipio: e.fk_cata_even_premio_ron_premio.fk_prem_lugar.municipio,
                 parroquia: e.fk_cata_even_premio_ron_premio.fk_prem_lugar.parroquia,
-            },
+            }
+        }
+    }
+}
+
+function listaPremio(lista) {
+    let listaA = []
+    for (const e of lista) {
+        let obj = {
+            premio: arreglarPremio(e),
             fechaPremiacion: e.cata_even_premio_ron_fecha_premiacion,
             evento: {
                 nombre: e.fk_cata_even_premio_ron_evento.event_nombre,
@@ -162,6 +172,7 @@ function arreglar(item) {
 
 async function getRonDetail(idRon) {
     const { data } = await api.get(`/store/botella-detail/${idRon}`)
+    console.log('Data sin arreglar', data)
     console.log('Data arreglada', arreglar(data))
     return arreglar(data)
 }
