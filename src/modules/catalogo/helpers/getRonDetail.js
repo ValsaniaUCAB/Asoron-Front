@@ -69,10 +69,10 @@ function listaImages(lista) {
 //     return listaA
 // }
 
-function listaPremio(lista) {
-    let listaA = []
-    for (const e of lista) {
-        let obj = {
+function arreglarPremio(e) {
+    if (e.fk_cata_even_premio_ron_premio === null) return {}
+    else {
+        return {
             nombre: e.fk_cata_even_premio_ron_premio.prem_nombre,
             descripcion: e.fk_cata_even_premio_ron_premio.prem_descripcion,
             direccion: e.fk_cata_even_premio_ron_premio.prem_direccion,
@@ -80,7 +80,16 @@ function listaPremio(lista) {
                 estado: e.fk_cata_even_premio_ron_premio.fk_prem_lugar.estado,
                 municipio: e.fk_cata_even_premio_ron_premio.fk_prem_lugar.municipio,
                 parroquia: e.fk_cata_even_premio_ron_premio.fk_prem_lugar.parroquia,
-            },
+            }
+        }
+    }
+}
+
+function listaPremio(lista) {
+    let listaA = []
+    for (const e of lista) {
+        let obj = {
+            premio: arreglarPremio(e),
             fechaPremiacion: e.cata_even_premio_ron_fecha_premiacion,
             evento: {
                 nombre: e.fk_cata_even_premio_ron_evento.event_nombre,
