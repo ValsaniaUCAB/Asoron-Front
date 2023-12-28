@@ -49,7 +49,7 @@ export default {
     left: 0;
     width: 100vw;
     height: 100vh;
-
+    z-index: 900;
     display: flex;
     background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
@@ -62,6 +62,7 @@ export default {
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 900;
 }
 
 .box {

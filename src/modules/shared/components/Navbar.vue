@@ -31,9 +31,9 @@
                 </ul>
             </nav>
         </div>
+    </header>
         <Carrito v-if="isOpen" @on:close="closeCarrito">
         </Carrito>
-    </header>
 </template>
 
 <script>
