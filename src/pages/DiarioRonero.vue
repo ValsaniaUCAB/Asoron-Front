@@ -10,7 +10,7 @@
                 fill="#FDD08D" />
         </svg>
         <div class="rones">
-            <div v-if="diario" v-for="prod in diario.diarioRonero" :key="prod.botella.id">
+            <div v-if="diario" v-for="prod in diario" :key="prod.botella.id">
                 <RonDiario :prod="prod" />
             </div>
         </div>

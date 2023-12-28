@@ -27,9 +27,8 @@ function arreglarLista(lista) {
 async function getDiarioRonero() {
     const { data } = await api.get(`/store/diario-ronero/`)
     console.log(data)
-    const { Paginacion, results } = data
-    console.log('Data arreglada', arreglarLista(results))
-    if (data) return { paginacion: Paginacion, diarioRonero: arreglarLista(results) }
+    console.log('Data arreglada', arreglarLista(data))
+    if (data) return arreglarLista(data)
     else return []
 }
 
