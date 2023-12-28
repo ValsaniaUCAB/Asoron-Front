@@ -3,7 +3,10 @@
         <img class="pointer" :src="prod.botella.images[0].img_url" />
         <div class="nombre">
             {{ prod.botella.nombre }}
-            <div class="precio ">Descuento: {{ prod.oferta.descuento }}%</div>
+            <div>
+                <div class="precio">Descuento: {{ prod.oferta.descuento }}%</div>
+                <div class="oferta-nombre">{{ prod.oferta.nombre }}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -36,6 +39,7 @@ export default {
 
 <style lang="scss" scoped>
 .box {
+    margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -66,6 +70,10 @@ export default {
     font-weight: normal;
     width: 100%;
     text-align: center;
+}
+
+.oferta-descripcion {
+    font-weight: normal;
 }
 
 img {
