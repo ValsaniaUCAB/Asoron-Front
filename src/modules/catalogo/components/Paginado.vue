@@ -28,7 +28,7 @@
     </div>
 
     <!--* Si son muchas Paginas y esta fuera del 1 -->
-    <div v-else>
+    <div v-if="pages.totalPaginas > 3 && (pages.actual !== 1)">
         <button class="button-18" @click="$emit('on-click', 'd')" :disabled="pages.actual === 1"> <i
                 class=" fa fa-arrow-left"></i></button>
 
