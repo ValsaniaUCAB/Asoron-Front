@@ -69,7 +69,7 @@
         <div class="filtro-container filtro-desplazables filtro-precio">
             <h2 class="filtro-titulo">Precio Min: {{ this.valorPrecioMin }}$</h2>
             <div class="slider-container">
-                <input v-model="valorPrecioMin" type="range" min="0" :max=valorPrecioMax class="slider" step="10" />
+                <input v-model="valorPrecioMin" type="range" min="0" max="1300" class="slider" step="10" />
             </div>
         </div>
         <div class="filtro-container filtro-desplazables filtro-anejamiento">
@@ -96,10 +96,10 @@ export default {
     emits: ['on-filter', 'on-unfilter'],
     data() {
         return {
-            valorPrecioMax: ref(1300),
-            valorPrecioMin: ref(0),
-            valorAnejamiento: ref(0),
-            valorGrado: ref(0),
+            valorPrecioMax: 1300,
+            valorPrecioMin: 0,
+            valorAnejamiento: 0,
+            valorGrado: 0,
             tipo_ron: '',
             marca: '',
             clasificacion: '',
@@ -138,7 +138,7 @@ export default {
     },
     watch:{
         valorPrecioMax(valor){
-            if (this.valorPrecioMin > valor ){
+            if ( valor < this.valorPrecioMin  ){
                 this.valorPrecioMin = this.valorPrecioMax - 1;
             }
         }
