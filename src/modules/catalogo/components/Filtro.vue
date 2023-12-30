@@ -136,10 +136,10 @@ export default {
             this.$emit('on-unfilter')
         }
     },
-    watch:{
-        valorPrecioMax(valor){
-            if ( valor < this.valorPrecioMin  ){
-                this.valorPrecioMin = this.valorPrecioMax - 1;
+    watch: {
+        valorPrecioMax(valor) {
+            if (Number.parseInt(valor) < this.valorPrecioMin) {
+                this.valorPrecioMin = this.valorPrecioMax - 10;
             }
         }
     },
@@ -183,18 +183,19 @@ export default {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    
+
 }
 
 .filtro-desplazables {
     margin-bottom: 20px;
 }
 
-.filtro-titulo , .filtro-label {
-    
+.filtro-titulo,
+.filtro-label {
+
     width: 15vw;
     text-align: left;
-    
+
     font-size: 24px;
     font-weight: 600;
 }
@@ -262,14 +263,14 @@ export default {
     top: -10;
     overflow: hidden;
     transition: all 0.3s ease;
-    
+
 }
 
 .filtro-container .collapsible-input:checked~.collapsible-container {
     max-height: 500px;
     opacity: 1;
     top: 0;
-    margin-bottom: 20px ;
+    margin-bottom: 20px;
 }
 
 
@@ -332,6 +333,4 @@ input[type="range"]::-moz-range-thumb {
     /*  slider progress trick  */
     box-shadow: -407px 0 0 400px #31212B;
 }
-
-
 </style>
