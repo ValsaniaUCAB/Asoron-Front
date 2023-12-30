@@ -69,7 +69,7 @@
         <div class="filtro-container filtro-desplazables filtro-precio">
             <h2 class="filtro-titulo">Precio Min: {{ this.valorPrecioMin }}$</h2>
             <div class="slider-container">
-                <input v-model="valorPrecioMin" type="range" min="0" max="1300" class="slider" step="10" />
+                <input v-model="valorPrecioMin" type="range" min="0" :max="valorPrecioMax" class="slider" step="10" />
             </div>
         </div>
         <div class="filtro-container filtro-desplazables filtro-anejamiento">
