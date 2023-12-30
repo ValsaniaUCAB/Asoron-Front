@@ -136,6 +136,13 @@ export default {
             this.$emit('on-unfilter')
         }
     },
+    watch:{
+        valorPrecioMax(valor){
+            if (this.valorPrecioMin > valor ){
+                this.valorPrecioMin = this.valorPrecioMax - 1;
+            }
+        }
+    },
 
 }
 </script>

@@ -164,10 +164,9 @@ export default {
 }
 
 .button-18 {
-    margin: 10px;
     align-items: center;
-    background-color: #fff;
-    border: 1px solid #31212B;
+    background-color: #FDD08D;
+    border: 0;
     border-radius: 100px;
     box-sizing: border-box;
     color: #000;
@@ -175,7 +174,7 @@ export default {
     display: inline-flex;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 800;
     justify-content: center;
     line-height: 20px;
     max-width: 480px;
@@ -194,12 +193,13 @@ export default {
 
     &:hover,
     :focus {
-        background-color: #31212B;
-        color: #e6bd7f;
+        background-color: #e6bd7f;
+        color: #000;
     }
 
     &:active {
-        background: #48323f;
+        background: #c09e6a;
+        color: rgb(255, 255, 255, .7);
     }
 
     &:disabled {
