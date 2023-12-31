@@ -157,7 +157,31 @@
                         </ul>
                     </div>
                 </div>
-            </div>    
+            </div> 
+            <div class="collapsible premios">
+                <input class="collapsible-input" type="checkbox" id="collapsible-head-premios">
+                <label class="collapsible-label external-label" for="collapsible-head-premios">PREMIOS</label>
+                <div class="collapsible-text scrollable">
+                    <ul class="collapsible-text-list external-list" >
+                        <li class="collapsible-text-list-premios" v-for="premio in ronDetallado.ron.premio" :key="premio.id">
+                            <div class="premio-left">
+                                <h3 v-if="premio.premio.nombre">{{ premio.premio.nombre }}</h3>
+                                <h3 v-else>Premio del Evento</h3>
+                                <h4>{{ premio.evento.nombre }}</h4>
+                                <span>{{ premio.evento.direccion }}</span>
+                            </div>
+                            <div class="premio-center">
+                                <span>{{ premio.premio.descripcion }}</span>
+                                <blockquote v-if="premio.notaCata[0]">{{ premio.notaCata[0].descripcion}}</blockquote>
+                                <blockquote v-else>Muy buen Ron, que se repita, 100% real No autogenerado</blockquote>
+                            </div>
+                            <div class="premio-right">
+                                <span>{{ premio.evento.fechaFin }}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>   
         </div>
         <footer></footer>
     </div>
@@ -235,8 +259,9 @@ footer {
 
 .desplegables-contenedor {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center ;
 }
 
 
@@ -286,7 +311,7 @@ footer {
 // colapsables 
 
 .desplegables-container {
-    width: 1060px;
+    width: 70vw;
     padding: 0;
     margin: 0;
     display: grid;
@@ -457,6 +482,40 @@ footer {
     right: 20px;
     top: 10px;
     transition: all 0.3s ease;
+}
+
+// Premios
+
+.premios {
+    max-width: 70vw;
+    width: 100%;
+}
+
+.collapsible-text-list-premios {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.collapsible-text-list-premios .premio-left {
+    
+}
+
+.collapsible-text-list-premios .premio-center {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.collapsible-text-list-premios .premio-right {
+    align-self: flex-end;
+}
+
+.collapsible-text-list-premios .premio-center blockquote {
+    justify-self: center;
+}
+.collapsible-text-list-premios .premio-center span {
+    justify-self: flex-start;
 }
 
 .button-18 {
