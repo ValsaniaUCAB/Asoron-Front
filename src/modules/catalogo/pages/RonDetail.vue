@@ -171,7 +171,8 @@
                                 <span>{{ premio.evento.direccion }}</span>
                             </div>
                             <div class="premio-center">
-                                <span>{{ premio.premio.descripcion }}</span>
+                                <span v-if="premio.premio.descripcion">{{ premio.premio.descripcion }}</span>
+                                <span v-else>Este premio es unico en su especie y para nada repetido</span>
                                 <blockquote v-if="premio.notaCata[0]">{{ premio.notaCata[0].descripcion}}</blockquote>
                                 <blockquote v-else>Muy buen Ron, que se repita, 100% real No autogenerado</blockquote>
                             </div>
