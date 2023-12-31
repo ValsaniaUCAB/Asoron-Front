@@ -1,10 +1,18 @@
 <template>
-    <div class="box">Item</div>
+    <div class="box">
+        <div>ID: {{ item.id }}</div>
+        <div>Cantidad: {{ item.cantidad }}</div>
+    </div>
 </template>
 
 <script>
 export default {
-
+    props: {
+        item: {
+            type: Object,
+            required: true
+        }
+    }
 }
 </script>
 
