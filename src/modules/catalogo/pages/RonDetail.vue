@@ -8,11 +8,7 @@
                 <p>{{ ronDetallado.ron.descripcion }}</p>
                 <div class="comprar">
                     <span> ${{ ronDetallado.inventario.precio }} </span>
-                    <div class="cantidad-container">
-                        <button @click="decrease" class="cantidad-button minus"><span>-</span></button>
-                        <input v-model="cantidad" type="number">
-                        <button @click="increase" class="cantidad-button plus"><span>+</span></button>
-                    </div>
+                    <PlusMinusInput :Max="ronDetallado.inventario.cantidad"/>
                     <button class="button-18 ">Añadir al Carrito</button>
                 </div>
             </div>
@@ -170,7 +166,11 @@
 <script>
 
 import getRonDetail from '@/modules/catalogo/helpers/getRonDetail'
+import PlusMinusInput from '@/modules/shared/components/PlusMinusInput.vue'
 export default {
+    components: {
+        PlusMinusInput
+    },
     props: {
         id: {
             type: String,
@@ -458,63 +458,6 @@ footer {
     top: 10px;
     transition: all 0.3s ease;
 }
-
-
-
-// cantidad
-.cantidad-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: #E3E5ED 1px solid ;
-    width: 150px;
-    height: 40px;
-    border-radius:24px;
-}
-
-.cantidad-container input {
-    border: 0px;
-    width: 50px;
-    border: #E3E5ED 1px solid ;
-    height: 40px;
-    text-align: center;
-}
-
-.cantidad-container input[type=number]::-webkit-inner-spin-button, 
-.cantidad-container input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
-
-.cantidad-button{
-    border: 0px;
-    width: 50px;
-    padding: 0;
-    padding-bottom: 3px;
-    font-size: 24px;
-    color:#7c7c7c ;
-    justify-content: center;
-    text-align: center;
-    vertical-align: middle;
-    background-color: transparent;
-    transition: background-color 0.167s, color 0.167s;
-}
-
-.cantidad-button:hover {
-    background-color: #E3E5ED;
-    color: #000;
-}
-
-.plus {
-    border-top-right-radius: 24px;
-    border-bottom-right-radius: 24px;
-}
-
-.minus {
-    border-top-left-radius: 24px;
-    border-bottom-left-radius: 24px;
-}
-
 
 .button-18 {
     align-items: center;
