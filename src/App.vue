@@ -12,7 +12,9 @@ export default {
     Navbar
   },
   methods: {
-    ...mapActions('auth', ['findUser'])
+    ...mapActions('auth', ['findUser']),
+    ...mapActions('carrito', ['getCarritoCliente'])
+
   },
   computed: {
     ...mapState('auth', ['user'])
@@ -20,6 +22,7 @@ export default {
   async created() {
     if (!this.user) {
       await this.findUser()
+      await this.getCarritoCliente()
     }
   }
 }
@@ -50,12 +53,11 @@ body {
 
 ::-webkit-scrollbar-track {
   background: none;
-  
+
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #31212b;
   border-radius: 100px;
 }
-
 </style>

@@ -8,9 +8,9 @@
                         <p class="asoron">ASORON</p>
                         <p class="enc-tit">Bienvenido! Guest</p>
                     </div>
-                    <div v-for="i in 2">
+                    <div v-for="item in items">
                         <li>
-                            <item></item>
+                            <item :item="item"></item>
                         </li>
                     </div>
                     <div class="footer">
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
 
 import item from './ItemCarrito'
 
@@ -38,6 +39,9 @@ export default {
     components:
     {
         item
+    },
+    computed: {
+        ...mapState('carrito', ['items'])
     }
 }
 </script>
