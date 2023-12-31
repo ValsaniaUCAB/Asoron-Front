@@ -10,7 +10,7 @@
 export default {
     name: 'PlusMinusInput',
     props: {
-        Max :{
+        Max :{ // Valor máximo que puede tener el input
             type: Number,
             required: true
         },
@@ -31,7 +31,7 @@ export default {
         },
     },
     watch: {
-        cantidad(val){
+        cantidad(val){ // Si el valor es mayor al máximo, se establece el máximo, si es menor a 1, se establece 1
             if (val > this.Max){
                 this.cantidad = this.Max
             } else if (val < 1){
