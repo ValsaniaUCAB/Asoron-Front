@@ -1,14 +1,14 @@
 <template>
-    <router-link :to="{ name: 'ron-detail', params: { id: ron.id } }">
+    <div @click="goToDetail">
         <div class="box">
             <img :src="ron.images[0].img_url" />
             <div>
                 <div class="nombre">{{ ron.nombre }}</div>
                 <div class="precio">${{ ron.precio }}</div>
-                <button class="button-18">Añadir al Carrito</button>
+                <button class="button-18" @click.stop="click()">Añadir al Carrito</button>
             </div>
         </div>
-    </router-link>
+    </div>
 </template>
 
 <script>
@@ -20,7 +20,12 @@ export default {
         }
     },
     methods: {
-
+        click() {
+            console.log('boton')
+        },
+        goToDetail() {
+            this.$router.push({ name: 'ron-detail', params: { id: this.ron.id } })
+        }
     },
     data() {
         return {
