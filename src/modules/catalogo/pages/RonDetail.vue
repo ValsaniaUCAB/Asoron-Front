@@ -168,7 +168,10 @@
                                 <h3 v-if="premio.premio.nombre">{{ premio.premio.nombre }}</h3>
                                 <h3 v-else>Premio del Evento</h3>
                                 <h4>{{ premio.evento.nombre }}</h4>
-                                <span>{{ premio.evento.direccion }}</span>
+                                <div class="location">
+                                    <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px" y="0px" viewBox="0 0 100 125"><g transform="translate(0,-952.36218)"><path style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;" d="m 50.00015,957.56521 c -16.7931,0 -30.4375,13.8052 -30.4375,30.7187 0,5.4508 1.4321,10.5606 3.9063,14.99999 0.016,0.028 0.015,0.066 0.031,0.094 a 2.80028,2.80028 0 0 0 0.1562,0.3438 c 0.01,0.012 0.024,0.019 0.031,0.031 l 24.0313,42 a 2.80028,2.80028 0 0 0 4.875,-0.031 l 23.6874,-42 0.063,-0.125 c 0.01,-0.012 0.024,-0.019 0.031,-0.031 a 2.80028,2.80028 0 0 0 0.2188,-0.5 c 2.4045,-4.39189 3.8437,-9.41329 3.8437,-14.78129 0,-16.7276 -13.3648,-30.3609 -29.9063,-30.6563 -0.033,-6e-4 -0.061,-0.031 -0.094,-0.031 a 2.80028,2.80028 0 0 0 -0.2813,-0.031 c -0.053,-3e-4 -0.1032,0 -0.1562,0 z m 0,12.0937 c 9.6622,0 17.5625,7.9899 17.5625,17.75 0,9.7603 -7.9003,17.71869 -17.5625,17.71869 -9.6622,0 -17.5625,-7.95849 -17.5625,-17.71869 0,-9.7602 7.9003,-17.75 17.5625,-17.75 z" fill="#5E5E5E" fill-opacity="1" stroke="none" marker="none" visibility="visible" display="inline" overflow="visible"/></g></svg>
+                                    <span>{{ premio.evento.direccion }}</span>
+                                </div>
                             </div>
                             <div class="premio-center">
                                 <span v-if="premio.premio.descripcion">{{ premio.premio.descripcion }}</span>
@@ -494,31 +497,58 @@ footer {
 
 .collapsible-text-list-premios {
     display: flex;
-    justify-content: space-between;
-    
+    width: 100%;
 }
 
+
 .collapsible-text-list-premios .premio-left {
-    
+    font-family: 'Inter', sans-serif;
+    width: 30%;
+}
+
+.collapsible-text-list-premios .premio-left h3{
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.collapsible-text-list-premios .premio-left h4{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.collapsible-text-list-premios .premio-left .location svg{
+    width: 16px;
+    height: 16px;
+}
+.collapsible-text-list-premios .premio-left .location span{
+    font-size: 14px;
+    color: #5E5E5E
 }
 
 .collapsible-text-list-premios .premio-center {
     display: flex;
     flex-direction: column;
     text-align: center;
+    align-items: center;
+    width: 45%;
+    margin-right: auto;
+}
+
+.collapsible-text-list-premios .premio-center span {
+    margin-bottom: 1vh;
+    font-size : 14px;
+    color: #949494;
+}
+.collapsible-text-list-premios .premio-center blockquote {
+    
 }
 
 .collapsible-text-list-premios .premio-right {
+    width: 10%;
+    font-size: 14px;
     align-self: flex-end;
+    text-align: right;
 }
-
-.collapsible-text-list-premios .premio-center blockquote {
-    justify-self: center;
-}
-.collapsible-text-list-premios .premio-center span {
-    justify-self: flex-start;
-}
-
 .button-18 {
     align-items: center;
     background-color: #FDD08D;
