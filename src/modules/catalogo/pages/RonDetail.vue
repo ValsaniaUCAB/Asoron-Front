@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div> 
-            <div class="collapsible premios">
+            <div v-if="ronDetallado.ron.premio.length != 0" class="collapsible premios">
                 <input class="collapsible-input" type="checkbox" id="collapsible-head-premios">
                 <label class="collapsible-label external-label" for="collapsible-head-premios">PREMIOS</label>
                 <div class="collapsible-text scrollable">
@@ -259,6 +259,7 @@ footer {
     flex-direction: row;
     justify-content: center;
     margin-top: 100px;
+    margin-bottom: 3vh;
 }
 
 .desplegables-contenedor {
@@ -509,6 +510,7 @@ footer {
 .collapsible-text-list-premios .premio-left h3{
     font-size: 20px;
     font-weight: 800;
+    font-family: 'Brothers', sans-serif;
 }
 
 .collapsible-text-list-premios .premio-left h4{
@@ -540,7 +542,7 @@ footer {
     color: #949494;
 }
 .collapsible-text-list-premios .premio-center blockquote {
-    
+    font-style: italic;
 }
 
 .collapsible-text-list-premios .premio-right {
