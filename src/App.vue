@@ -22,7 +22,9 @@ export default {
   async created() {
     if (!this.user) {
       await this.findUser()
-      await this.getCarritoCliente()
+      if (this.user) {
+        await this.getCarritoCliente()
+      }
     }
   }
 }

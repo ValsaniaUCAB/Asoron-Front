@@ -35,6 +35,7 @@ export default {
     },
     methods: {
         ...mapActions('auth', ['login']),
+        ...mapActions('carrito', ['getCarritoCliente']),
         async sendLogin() {
             console.log(this.username, this.password)
             new Swal({
@@ -44,6 +45,7 @@ export default {
             Swal.showLoading()
             try {
                 await this.login({ username: this.username, password: this.password })
+                await this.getCarritoCliente()
                 Swal.fire('Success', 'Inicio Sesion con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
                     if (result.isConfirmed) {
                         this.$router.push({ name: 'home' });
