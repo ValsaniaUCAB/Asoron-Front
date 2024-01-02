@@ -3,11 +3,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import Swal from 'sweetalert2'
 
 export default {
     methods: {
+        ...mapMutations('carrito', ['vaciarCarrito']),
         ...mapActions('auth', ['logout']),
         async sendLogout() {
             new Swal({
@@ -16,6 +17,7 @@ export default {
             })
             Swal.showLoading()
             await this.logout()
+            await this.vaciarCarrito()
             Swal.fire({
                 title: 'Success',
                 text: 'Cerró sesión con éxito',

@@ -5,7 +5,7 @@
 
 export default () => ({
 
-    uuid: '',
+    uuid: null,
     items: []
 
 })
