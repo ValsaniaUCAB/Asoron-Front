@@ -219,7 +219,7 @@
                 </div>
             </div>
         </div>
-        <div class="relacionados-contenedor">
+        <div v-if="rones.length!== 0" class="relacionados-contenedor">
             <div class="relacionados-container">
                 <h1 class="titulo-catalogo">Rones Relacionados</h1>
                 <div v-if="isLoading">
