@@ -1,6 +1,6 @@
 <template>
     <h1 class="container" v-if="!ronDetallado">Cargando... Por favor Espere</h1>
-    <div v-else>
+    <div class="whole-container" v-else>
         <div class="ron-container">
             <img :src="ronDetallado.images[0].url" />
             <div class="info">
@@ -172,7 +172,7 @@
                     </div>
                 </div>
             </div>
-            <div v-if="ronDetallado.ron.premio.length !== 0" class="collapsible premios">
+            <div v-show="ronDetallado.ron.premio.length !== 0" class="collapsible premios">
                 <input class="collapsible-input" type="checkbox" id="collapsible-head-premios">
                 <label class="collapsible-label external-label" for="collapsible-head-premios">PREMIOS</label>
                 <div class="collapsible-text scrollable">
@@ -216,10 +216,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="catalog-wrapper">
-        <h1 class="titulo-catalogo d-flex">Rones Relacionados</h1>
-        <div class="mini-catalog">
+        <div class="relacionados-container">
+            <h1 class="titulo-catalogo">Rones Relacionados</h1>
             <div v-if="isLoading">
                 <div class="wait-text alert-info text-center mt-5">
                     Espere por favor
@@ -229,16 +227,13 @@
                 </div>
             </div>
             <div v-else>
-                <div class="d-flex">
+                <ul class="relacionados-catologo">
                     <li v-for="ron in rones" :key="ron.id">
                         <RonMinimal :clickeable="true" :ron="ron" />
                     </li>
-                </div>
+                </ul>
             </div>
         </div>
-    </div>
-
-    <div class="separator">
     </div>
 </template>
 
@@ -246,12 +241,12 @@
 
 import getRonDetail from '@/modules/catalogo/helpers/getRonDetail'
 import PlusMinusInput from '@/modules/shared/components/PlusMinusInput.vue'
-import RonMinimal from '@/modules/catalogo/components/RonMinimal'
+import RonMinimal from '@/modules/catalogo/components/RonMinimal.vue'
 import getRonesRelacionado from '@/modules/catalogo/helpers/getRonDetailRelacionados'
 export default {
     components: {
         PlusMinusInput,
-        RonMinimal
+        RonMinimal,
     },
     props: {
         id: {
@@ -269,7 +264,7 @@ export default {
     },
     methods: {
         async getRonRelacionados() {
-            this.rones = await getRonesRelacionado(this.ronDetallado.ron.proveedor.denominacionComercial, this.ronDetallado.inventario.precio )
+            this.rones = await getRonesRelacionado(this.ronDetallado.ron.proveedor.denominacionComercial, this.ronDetallado.inventario.precio, this.ronDetallado.id )
             this.isLoading = false
         },
         async getRonDetail(id) {
@@ -302,6 +297,10 @@ export default {
 
 .separator {
     height: 30vh;
+}
+
+.whole-container {
+    height: 2000px;
 }
 
 .ron-container {
@@ -653,17 +652,25 @@ export default {
         background: rgba(0, 0, 0, .08);
         color: rgba(0, 0, 0, .3);
     }
-
-#catalog-wrapper {
+}
+.relacionados-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    position: relative;
-    width: 100%;
-    height: 820px;
     background-color: #fff;
     padding: 82px;
+}
+
+.relacionados-catalogo {
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.relacionados-catalogo li {
+    list-style-type: none
 }
 
 .wait-text {
@@ -675,13 +682,10 @@ export default {
     font-family: 'Brothers', sans-serif;
     color: #31212b;
     font-weight: bold;
-    width: 1185px;
-    text-align: left
+    align-self: flex-start;
+    text-align: left;
+    padding-bottom: 3vh;
 }
 
-li {
-    list-style: none;
-}
 
-}
 </style>

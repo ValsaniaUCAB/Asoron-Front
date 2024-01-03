@@ -3,9 +3,9 @@ import api from '@/lib/api'
 
 function nuevaLista(ronList, id) {
     let ronListNueva = []
-    for (const item of ronList) {
-        if (item.id !== id) {
-            ronListNueva.push(item)
+    for (const ron of ronList) {
+        if (ron.id !== id) {
+            ronListNueva.push(ron)
         }
     }
     return ronListNueva
@@ -30,7 +30,7 @@ function arreglarLista(ronList) {
 }
 
 
-async function getRonList(marca = '', precio = 1 ,busqueda = '', page = '1') {
+async function getRonList(marca = '', precio = 1 , id ,busqueda = '', page = '1') {
     let peticion = ""
     if (precio > 200) {
         peticion = `/store/inventario-tienda/?search=${busqueda}&page=${page}&order_by=-precio&proveedor=${marca}`
@@ -39,10 +39,11 @@ async function getRonList(marca = '', precio = 1 ,busqueda = '', page = '1') {
     }
     const { data } = await api.get(peticion)
     let { results } = data
-    if (results.length > 3) {
-        results = results.splice(0, 3)
+    let listaArreglada = nuevaLista(arreglarLista(results), id)
+    if (listaArreglada.length > 3) {
+        listaArreglada = listaArreglada.splice(0, 3)
     }
-    if (data) return arreglarLista(results)
+    if (data) return listaArreglada
     else return []
 }
 

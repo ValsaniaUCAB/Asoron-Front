@@ -12,8 +12,6 @@ export default {
 
 <style>
 footer {
-
-    position: relative;
     width: 100%;
     height: 241px;
     background-color: #31212b;
