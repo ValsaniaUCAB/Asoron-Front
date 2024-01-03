@@ -250,7 +250,7 @@ export default {
             try {
                 await this.registerClienteJuridico(data)
                 await this.getCarritoCliente()
-                Swal.fire('Success', 'Registrado con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
+                Swal.fire('Success', 'Registrado con exito', 'success').then((result) => {
                     if (result.isConfirmed) {
                         this.$router.push({ name: 'home' });
                     }

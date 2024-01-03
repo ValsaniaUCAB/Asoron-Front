@@ -51,7 +51,7 @@ export default {
                 if (this.user.fk_usua_clie_natu != null || this.user.fk_usua_clie_juri != null) {
                     await this.getCarritoCliente()
                 }
-                Swal.fire('Success', 'Inicio Sesion con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
+                Swal.fire('Success', 'Inicio Sesion con exito', 'success').then((result) => {
                     if (result.isConfirmed) {
                         this.$router.push({ name: 'home' });
                     }
