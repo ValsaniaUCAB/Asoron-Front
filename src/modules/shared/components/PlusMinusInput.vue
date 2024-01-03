@@ -13,12 +13,18 @@ export default {
     props: {
         Max: { // Valor máximo que puede tener el input
             type: Number,
-            required: true
+            required: true,
+            default: 100
         },
+        inicial: { // Valor inicial del input
+            type: Number,
+            required: false,
+            default: 1
+        }
     },
     data() {
         return {
-            cantidad: 1,
+            cantidad: this.inicial,
         }
     },
     methods: {

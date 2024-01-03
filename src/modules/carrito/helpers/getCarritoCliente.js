@@ -12,7 +12,8 @@ function isAfiliado(e) {
 function isEvento(e) {
     if (e) {
         return {
-            nombre: e.entr_envt_nombre,
+            nombre: e.fk_entr_envt_evento,
+            entradaNombre: e.entr_envt_nombre,
             precio: e.entr_envt_precio
         }
     } else return null

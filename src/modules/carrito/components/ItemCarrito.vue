@@ -23,14 +23,7 @@
                 <div class="nombre">{{ item.botella.nombre }}</div>
                 <Oferta :oferta="oferta" :ofertaList="ofertaList" @on-cambiarOferta="cambiarOferta"
                     @on-quitarOferta="quitarOferta" />
-                <!-- <CDropdown style="width: 100%">
-                    <CDropdownToggle @click="">Oferta</CDropdownToggle>
-                    <CDropdownMenu>
-                        <CDropdownItem v-if="ofertaList.length === 0">No hay descuentos para esta botella</CDropdownItem>
-                        <CDropdownItem v-else v-for="item in ofertaList" :key="item.id" @click="cambiarOferta(item)">
-                            {{ item.descuento }}% de descuento</CDropdownItem>
-                    </CDropdownMenu>
-                </CDropdown> -->
+                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad" />
             </div>
         </div>
         <div class="monto-afiliado">
@@ -39,7 +32,7 @@
                 <div class="cantidad">x{{ item.cantidad }}</div>
             </div>
             <hr>
-            <div class="total">Total: ${{ item.botella.precio * item.cantidad }}</div>
+            <div class="total">Total: ${{ (item.botella.precio * item.cantidad).toFixed(2) }}</div>
         </div>
     </div>
 
@@ -48,17 +41,9 @@
             <img :src="item.botella.images[0].img_url" alt="Imagen que no carga">
             <div class="info-afiliado">
                 <div class="nombre">{{ item.botella.nombre }}</div>
-                <!-- <CDropdown style="width: 100%">
-                    <CDropdownToggle @click="">Oferta</CDropdownToggle>
-                    <CDropdownMenu>
-                        <CDropdownItem v-if="ofertaList.length === 0">No hay descuentos para esta botella</CDropdownItem>
-                        <CDropdownItem v-else v-for="item in ofertaList" :key="item.id" @click="cambiarOferta(item)">
-                            {{ item.descuento }}% de descuento</CDropdownItem>
-                        <CDropdownItem @click="quitarOferta">Quitar oferta</CDropdownItem>
-                    </CDropdownMenu>
-                </CDropdown> -->
                 <Oferta :oferta="oferta" :ofertaList="ofertaList" @on-cambiarOferta="cambiarOferta"
                     @on-quitarOferta="quitarOferta" />
+                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad" />
             </div>
         </div>
         <div class="monto-afiliado">
@@ -69,8 +54,28 @@
                 <div class="cantidad">x{{ item.cantidad }}</div>
             </div>
             <hr>
-            <div class="total">Total: ${{ (item.botella.precio - (item.botella.precio *
-                oferta.descuento / 100)).toFixed(2) * item.cantidad }}</div>
+            <div class="total">Total: ${{ ((item.botella.precio - (item.botella.precio *
+                oferta.descuento / 100)).toFixed(2) * item.cantidad).toFixed(2) }}</div>
+        </div>
+    </div>
+
+    <div v-if="item.evento" class="caja">
+        <div class="info">
+            <img src="@/modules/shared/assets/Evento PNG.png" alt="Imagen que no carga">
+            <div class="info-afiliado">
+                <div class="nombre">{{ item.evento.nombre }}</div>
+                <div class="entrada"> {{ item.evento.entradaNombre }}</div>
+                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad" />
+
+            </div>
+        </div>
+        <div class="monto-afiliado">
+            <div>
+                <div class="precio"> ${{ item.evento.precio }}</div>
+                <div class="cantidad">x{{ item.cantidad }}</div>
+            </div>
+            <hr>
+            <div class="total">Total: ${{ item.evento.precio * item.cantidad }}</div>
         </div>
     </div>
 </template>
@@ -79,7 +84,7 @@
 import { CDropdown } from '@coreui/vue'
 import getOfertasList from '../helpers/getOfertasList'
 import Oferta from './Oferta'
-
+import PlusMinusInput from '@/modules/shared/components/PlusMinusInput'
 
 export default {
     props: {
@@ -90,7 +95,8 @@ export default {
     },
     components: {
         CDropdown,
-        Oferta
+        Oferta,
+        PlusMinusInput
     },
     data() {
         return {
@@ -124,6 +130,9 @@ export default {
                     console.log(error)
                 }
             }
+        },
+        changeCantidad(value) {
+            this.item.cantidad = value
         }
     },
     mounted() {
@@ -162,7 +171,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-left: 10px;
     width: 250px;
 }

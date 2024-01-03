@@ -32,8 +32,8 @@
             </nav>
         </div>
     </header>
-        <Carrito v-if="isOpen" @on:close="closeCarrito">
-        </Carrito>
+    <Carrito v-if="isOpen" @on-close="closeCarrito">
+    </Carrito>
 </template>
 
 <script>

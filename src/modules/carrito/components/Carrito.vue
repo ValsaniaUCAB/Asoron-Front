@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-background fade-in" @click.self="$emit('on:close')">
+    <div class="modal-background fade-in" @click.self="$emit('on-close')">
         <!-- El click.self permite que la emision sea solo en el componente padre y no en los hijos -->
         <div class="modal-container">
             <div class="box">
@@ -35,12 +35,9 @@ import { mapGetters, mapState } from 'vuex'
 import item from './ItemCarrito'
 
 export default {
-    emits: ['on:close'],             // defino las emisiones que puede hacer el componente
+    emits: ['on-close'],             // defino las emisiones que puede hacer el componente
     props: {
-        property: {
-            type: String,
-            required: true,
-        }
+
     },
     components:
     {
@@ -56,7 +53,7 @@ export default {
 <style scoped>
 .modal-background {
     position: fixed;
-    padding-top : 92px;
+    padding-top: 92px;
     top: 0;
     left: 0;
     width: 100vw;
