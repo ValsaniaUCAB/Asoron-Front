@@ -668,7 +668,7 @@ export default {
     width: 70vw;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center
 }
 
 .relacionados-catalogo {
