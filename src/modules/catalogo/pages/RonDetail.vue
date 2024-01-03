@@ -8,7 +8,7 @@
                 <p>{{ ronDetallado.ron.descripcion }}</p>
                 <div class="comprar">
                     <span> ${{ ronDetallado.inventario.precio }} </span>
-                    <PlusMinusInput :Max="ronDetallado.inventario.cantidad"/>
+                    <PlusMinusInput :Max="ronDetallado.inventario.cantidad" @update:modelValue="changeCantidad" />
                     <button class="button-18 ">Añadir al Carrito</button>
                 </div>
             </div>
@@ -16,108 +16,117 @@
         <div class="desplegables-contenedor">
             <div class="desplegables-container">
                 <div class="collapsible ficha-tecnica">
-                    <input class="collapsible-input"  type="checkbox" id="collapsible-head-ficha">
-                    <label class="collapsible-label external-label"  for="collapsible-head-ficha">FICHA TECNICA</label>
+                    <input class="collapsible-input" type="checkbox" id="collapsible-head-ficha">
+                    <label class="collapsible-label external-label" for="collapsible-head-ficha">FICHA TECNICA</label>
                     <div class="collapsible-text scrollable">
                         <ul class="collapsible-text-list external-list">
                             <li>
-                                <b>Clasificación : </b>{{ ronDetallado.ron.clasificacion}}
+                                <b>Clasificación : </b>{{ ronDetallado.ron.clasificacion }}
                             </li>
                             <li>
-                                <b>Tipo : </b>{{ ronDetallado.ron.tipo}}
+                                <b>Tipo : </b>{{ ronDetallado.ron.tipo }}
                             </li>
                             <li>
                                 <b>Materia Prima : </b>
                                 <span v-for="materia in ronDetallado.ron.matePrima" :key="materia.id">
-                                    {{ materia }}, 
+                                    {{ materia }},
                                 </span>
                             </li>
                             <li>
-                                <b>Origen : </b>{{ronDetallado.ron.lugar.estado}}, {{ronDetallado.ron.lugar.municipio}}, Pqa.{{ronDetallado.ron.lugar.parroquia}}
+                                <b>Origen : </b>{{ ronDetallado.ron.lugar.estado }}, {{ ronDetallado.ron.lugar.municipio }},
+                                Pqa.{{ ronDetallado.ron.lugar.parroquia }}
                             </li>
                             <!-- Colapsable interno de Añejamiento -->
                             <div class="collapsible mini-collapsible">
                                 <input class="collapsible-input" type="checkbox" id="collapsible-head-anejamiento">
-                                <label class="collapsible-label internal-label" for="collapsible-head-anejamiento">Añejamiento</label>
+                                <label class="collapsible-label internal-label"
+                                    for="collapsible-head-anejamiento">Añejamiento</label>
                                 <div class="collapsible-text">
                                     <ul class="collapsible-text-list internal-list">
                                         <li>
-                                            <b>Cantidad de Años : </b>{{ ronDetallado.ron.anejamiento.cantidadAnos}} años
+                                            <b>Cantidad de Años : </b>{{ ronDetallado.ron.anejamiento.cantidadAnos }} años
                                         </li>
                                         <li>
-                                            <b>Calidad del Agua : </b>{{ ronDetallado.ron.anejamiento.calidadAgua}}
+                                            <b>Calidad del Agua : </b>{{ ronDetallado.ron.anejamiento.calidadAgua }}
                                         </li>
                                         <li>
-                                            <b>Metodo de Destilación : </b>{{ ronDetallado.ron.anejamiento.metodoDestilacion}}
+                                            <b>Metodo de Destilación : </b>{{
+                                                ronDetallado.ron.anejamiento.metodoDestilacion }}
                                         </li>
                                         <li>
-                                            <b>Metodo de Fermentación : </b>{{ ronDetallado.ron.anejamiento.metodoFermentacion}}
+                                            <b>Metodo de Fermentación : </b>{{
+                                                ronDetallado.ron.anejamiento.metodoFermentacion }}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <li>
-                                <b>Grado Alcoholico : </b>{{ ronDetallado.ron.grad_alcohol}}°
+                                <b>Grado Alcoholico : </b>{{ ronDetallado.ron.grad_alcohol }}°
                             </li>
                             <div class="collapsible mini-collapsible">
                                 <input class="collapsible-input" type="checkbox" id="collapsible-head-botella">
-                                <label class="collapsible-label internal-label" for="collapsible-head-botella">Botella</label>
+                                <label class="collapsible-label internal-label"
+                                    for="collapsible-head-botella">Botella</label>
                                 <div class="collapsible-text">
                                     <ul class="collapsible-text-list internal-list">
                                         <li>
-                                            <b>Material : </b>{{ ronDetallado.material.nombre}}
+                                            <b>Material : </b>{{ ronDetallado.material.nombre }}
                                         </li>
                                         <li>
-                                            <b>Capacidad : </b>{{ ronDetallado.material.capacidad}} mlts.
+                                            <b>Capacidad : </b>{{ ronDetallado.material.capacidad }} mlts.
                                         </li>
                                         <li>
-                                            <b>Altura : </b>{{ ronDetallado.material.altura}} cm.
+                                            <b>Altura : </b>{{ ronDetallado.material.altura }} cm.
                                         </li>
                                         <li>
-                                            <b>Ancho : </b>{{ ronDetallado.material.ancho}} cm.
+                                            <b>Ancho : </b>{{ ronDetallado.material.ancho }} cm.
                                         </li>
                                         <li>
-                                            <b>Tapa : </b>{{ ronDetallado.tapa.tipo}} de {{ ronDetallado.tapa.material}}
+                                            <b>Tapa : </b>{{ ronDetallado.tapa.tipo }} de {{ ronDetallado.tapa.material }}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <li>
-                                <b>Color : </b>{{ronDetallado.ron.color.nombre}}, {{ronDetallado.ron.color.descripcion}}
+                                <b>Color : </b>{{ ronDetallado.ron.color.nombre }}, {{ ronDetallado.ron.color.descripcion }}
                             </li>
                             <li>
                                 <b>Sensaciones : </b>
                                 <span v-for="sensacion in ronDetallado.ron.sensacion" :key="sensacion.id">
-                                    {{ sensacion }}, 
+                                    {{ sensacion }},
                                 </span>
                             </li>
                             <!-- Colapsable de Barril-->
                             <div class="collapsible mini-collapsible">
                                 <input class="collapsible-input" type="checkbox" id="collapsible-head-barriles">
-                                <label class="collapsible-label internal-label" for="collapsible-head-barriles">Barril</label>
+                                <label class="collapsible-label internal-label"
+                                    for="collapsible-head-barriles">Barril</label>
                                 <div class="collapsible-text internal-list">
                                     <ul class="collapsible-text-list internal-list">
-                                        <div v-for="barril in ronDetallado.ron.anejamiento.barril" :key="barril.id" class="collapsible mini-collapsible">
-                                            <input class="collapsible-input" type="radio" name="barriles" :id=ronDetallado.ron.anejamiento.barril.indexOf(barril)>
-                                            <label class="collapsible-label internal-label add-label-padding" :for=ronDetallado.ron.anejamiento.barril.indexOf(barril)>
-                                                Barril {{ronDetallado.ron.anejamiento.barril.indexOf(barril)}}
+                                        <div v-for="barril in ronDetallado.ron.anejamiento.barril" :key="barril.id"
+                                            class="collapsible mini-collapsible">
+                                            <input class="collapsible-input" type="radio" name="barriles"
+                                                :id=ronDetallado.ron.anejamiento.barril.indexOf(barril)>
+                                            <label class="collapsible-label internal-label add-label-padding"
+                                                :for=ronDetallado.ron.anejamiento.barril.indexOf(barril)>
+                                                Barril {{ ronDetallado.ron.anejamiento.barril.indexOf(barril) }}
                                             </label>
                                             <div class="collapsible-text internal-list">
                                                 <ul class="collapsible-text-list internal-list add-list-padding">
                                                     <li>
-                                                        <b>Cantidad de Años : </b>{{ barril.anos}} años
+                                                        <b>Cantidad de Años : </b>{{ barril.anos }} años
                                                     </li>
                                                     <li>
-                                                        <b>Calidad del Barril : </b>{{ barril.calidad}}
+                                                        <b>Calidad del Barril : </b>{{ barril.calidad }}
                                                     </li>
                                                     <li>
-                                                        <b>Madera : </b>{{ barril.madera}}
+                                                        <b>Madera : </b>{{ barril.madera }}
                                                     </li>
                                                     <li>
-                                                        <b>Capacidad : </b>{{ barril.tamano}} Lts.
+                                                        <b>Capacidad : </b>{{ barril.tamano }} Lts.
                                                     </li>
                                                     <li>
-                                                        <b>Tipo : </b>{{ barril.tipo}}
+                                                        <b>Tipo : </b>{{ barril.tipo }}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -131,13 +140,17 @@
                                 <div class="collapsible-text">
                                     <ul class="collapsible-text-list internal-list">
                                         <li>
-                                            <b>Paleta : </b>{{ ronDetallado.caja.paleta}}, {{ ronDetallado.caja.cantidad_paleta}} UND.
+                                            <b>Paleta : </b>{{ ronDetallado.caja.paleta }}, {{
+                                                ronDetallado.caja.cantidad_paleta }} UND.
                                         </li>
                                         <li>
-                                            <b>Bulto: </b>{{ ronDetallado.caja.bulto}}, {{ ronDetallado.caja.cantidad_bulto}} UND.
+                                            <b>Bulto: </b>{{ ronDetallado.caja.bulto }}, {{
+                                                ronDetallado.caja.cantidad_bulto }} UND.
                                         </li>
                                         <li>
-                                            <b>Caja : </b>{{ ronDetallado.caja.caja}}, {{ ronDetallado.caja.cantidad_caja}} UND.
+                                            <b>Caja : </b>{{ ronDetallado.caja.caja }}, {{ ronDetallado.caja.cantidad_caja
+                                            }}
+                                            UND.
                                         </li>
                                     </ul>
                                 </div>
@@ -149,34 +162,50 @@
                     <input class="collapsible-input" type="checkbox" id="collapsible-head-servir">
                     <label class="collapsible-label external-label" for="collapsible-head-servir">COMO SERVIR</label>
                     <div class="collapsible-text">
-                        <ul class="collapsible-text-list external-list" >
-                            <li class="collapsible-text-list-como-servir" v-for="servir in ronDetallado.ron.comoServir" :key="servir.coctel">
+                        <ul class="collapsible-text-list external-list">
+                            <li class="collapsible-text-list-como-servir" v-for="servir in ronDetallado.ron.comoServir"
+                                :key="servir.coctel">
                                 <h4>{{ servir.coctel.toUpperCase() }}</h4>
                                 <p>{{ servir.como_preparar }}</p>
                             </li>
                         </ul>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="collapsible premios">
                 <input class="collapsible-input" type="checkbox" id="collapsible-head-premios">
                 <label class="collapsible-label external-label" for="collapsible-head-premios">PREMIOS</label>
                 <div class="collapsible-text scrollable">
-                    <ul class="collapsible-text-list external-list" >
-                        <li class="collapsible-text-list-premios" v-for="premio in ronDetallado.ron.premio" :key="premio.id">
+                    <ul class="collapsible-text-list external-list">
+                        <li class="collapsible-text-list-premios" v-for="premio in ronDetallado.ron.premio"
+                            :key="premio.id">
                             <div class="premio-left">
                                 <h3 v-if="premio.premio.nombre">{{ premio.premio.nombre }}</h3>
                                 <h3 v-else>Premio del Evento</h3>
                                 <h4>{{ premio.evento.nombre }}</h4>
                                 <div class="location">
-                                    <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px" y="0px" viewBox="0 0 100 125"><g transform="translate(0,-952.36218)"><path style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;" d="m 50.00015,957.56521 c -16.7931,0 -30.4375,13.8052 -30.4375,30.7187 0,5.4508 1.4321,10.5606 3.9063,14.99999 0.016,0.028 0.015,0.066 0.031,0.094 a 2.80028,2.80028 0 0 0 0.1562,0.3438 c 0.01,0.012 0.024,0.019 0.031,0.031 l 24.0313,42 a 2.80028,2.80028 0 0 0 4.875,-0.031 l 23.6874,-42 0.063,-0.125 c 0.01,-0.012 0.024,-0.019 0.031,-0.031 a 2.80028,2.80028 0 0 0 0.2188,-0.5 c 2.4045,-4.39189 3.8437,-9.41329 3.8437,-14.78129 0,-16.7276 -13.3648,-30.3609 -29.9063,-30.6563 -0.033,-6e-4 -0.061,-0.031 -0.094,-0.031 a 2.80028,2.80028 0 0 0 -0.2813,-0.031 c -0.053,-3e-4 -0.1032,0 -0.1562,0 z m 0,12.0937 c 9.6622,0 17.5625,7.9899 17.5625,17.75 0,9.7603 -7.9003,17.71869 -17.5625,17.71869 -9.6622,0 -17.5625,-7.95849 -17.5625,-17.71869 0,-9.7602 7.9003,-17.75 17.5625,-17.75 z" fill="#5E5E5E" fill-opacity="1" stroke="none" marker="none" visibility="visible" display="inline" overflow="visible"/></g></svg>
+                                    <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+                                        xmlns:cc="http://creativecommons.org/ns#"
+                                        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                                        xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                                        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px"
+                                        y="0px" viewBox="0 0 100 125">
+                                        <g transform="translate(0,-952.36218)">
+                                            <path
+                                                style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;"
+                                                d="m 50.00015,957.56521 c -16.7931,0 -30.4375,13.8052 -30.4375,30.7187 0,5.4508 1.4321,10.5606 3.9063,14.99999 0.016,0.028 0.015,0.066 0.031,0.094 a 2.80028,2.80028 0 0 0 0.1562,0.3438 c 0.01,0.012 0.024,0.019 0.031,0.031 l 24.0313,42 a 2.80028,2.80028 0 0 0 4.875,-0.031 l 23.6874,-42 0.063,-0.125 c 0.01,-0.012 0.024,-0.019 0.031,-0.031 a 2.80028,2.80028 0 0 0 0.2188,-0.5 c 2.4045,-4.39189 3.8437,-9.41329 3.8437,-14.78129 0,-16.7276 -13.3648,-30.3609 -29.9063,-30.6563 -0.033,-6e-4 -0.061,-0.031 -0.094,-0.031 a 2.80028,2.80028 0 0 0 -0.2813,-0.031 c -0.053,-3e-4 -0.1032,0 -0.1562,0 z m 0,12.0937 c 9.6622,0 17.5625,7.9899 17.5625,17.75 0,9.7603 -7.9003,17.71869 -17.5625,17.71869 -9.6622,0 -17.5625,-7.95849 -17.5625,-17.71869 0,-9.7602 7.9003,-17.75 17.5625,-17.75 z"
+                                                fill="#5E5E5E" fill-opacity="1" stroke="none" marker="none"
+                                                visibility="visible" display="inline" overflow="visible" />
+                                        </g>
+                                    </svg>
                                     <span>{{ premio.evento.direccion }}</span>
                                 </div>
                             </div>
                             <div class="premio-center">
                                 <span v-if="premio.premio.descripcion">{{ premio.premio.descripcion }}</span>
                                 <span v-else>Este premio es unico en su especie y para nada repetido</span>
-                                <blockquote v-if="premio.notaCata[0]">" {{ premio.notaCata[0].descripcion}} "</blockquote>
+                                <blockquote v-if="premio.notaCata[0]">" {{ premio.notaCata[0].descripcion }} "</blockquote>
                                 <blockquote v-else>" Muy buen Ron, que se repita, 100% real No autogenerado "</blockquote>
                             </div>
                             <div class="premio-right">
@@ -185,7 +214,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>   
+            </div>
         </div>
         <footer></footer>
     </div>
@@ -221,14 +250,9 @@ export default {
                 // this.$router.push({ name: 'catalogo' })
             }
         },
-        increase(){
-            if(this.cantidad < this.ronDetallado.inventario.cantidad)
-            this.cantidad++
-        },
-        decrease(){
-            if(this.cantidad > 1){
-                this.cantidad--}
-        },
+        changeCantidad(value) {
+            this.cantidad = value
+        }
     },
     mounted() {
         this.getRonDetail(this.id)
@@ -237,13 +261,6 @@ export default {
         id(value) {
             this.getRonDetail(value)
         },
-        cantidad(val){
-            if (val > this.ronDetallado.inventario.cantidad){
-                this.cantidad = this.ronDetallado.inventario.cantidad
-            } else if (val < 1){
-                this.cantidad = 1
-            }
-        }
     }
 }
 
@@ -265,7 +282,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center ;
+    align-items: center;
 }
 
 
@@ -321,7 +338,7 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    
+
 }
 
 .collapsible-input {
@@ -400,17 +417,17 @@ footer {
 }
 
 .scrollable::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
 
 .scrollable::-webkit-scrollbar-track {
-  background-color: #e4e4e4;
-  border-radius: 100px;
+    background-color: #e4e4e4;
+    border-radius: 100px;
 }
 
 .scrollable::-webkit-scrollbar-thumb {
-  background-color: #FDD08D;
-  border-radius: 100px;
+    background-color: #FDD08D;
+    border-radius: 100px;
 }
 
 .collapsible-text .collapsible-text-list {
@@ -506,21 +523,22 @@ footer {
     width: 30%;
 }
 
-.collapsible-text-list-premios .premio-left h3{
+.collapsible-text-list-premios .premio-left h3 {
     font-size: 20px;
     font-weight: 800;
 }
 
-.collapsible-text-list-premios .premio-left h4{
+.collapsible-text-list-premios .premio-left h4 {
     font-size: 16px;
     font-weight: 600;
 }
 
-.collapsible-text-list-premios .premio-left .location svg{
+.collapsible-text-list-premios .premio-left .location svg {
     width: 16px;
     height: 16px;
 }
-.collapsible-text-list-premios .premio-left .location span{
+
+.collapsible-text-list-premios .premio-left .location span {
     font-size: 14px;
     color: #5E5E5E
 }
@@ -536,12 +554,11 @@ footer {
 
 .collapsible-text-list-premios .premio-center span {
     margin-bottom: 1vh;
-    font-size : 14px;
+    font-size: 14px;
     color: #949494;
 }
-.collapsible-text-list-premios .premio-center blockquote {
-    
-}
+
+.collapsible-text-list-premios .premio-center blockquote {}
 
 .collapsible-text-list-premios .premio-right {
     width: 10%;
@@ -549,6 +566,7 @@ footer {
     align-self: flex-end;
     text-align: right;
 }
+
 .button-18 {
     align-items: center;
     background-color: #FDD08D;
