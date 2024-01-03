@@ -276,6 +276,7 @@ footer {
     flex-direction: row;
     justify-content: center;
     margin-top: 100px;
+    margin-bottom: 4vh;
 }
 
 .desplegables-contenedor {
