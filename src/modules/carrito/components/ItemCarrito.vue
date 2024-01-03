@@ -42,8 +42,8 @@
             <img :src="item.botella.images[0].img_url" alt="Imagen que no carga">
             <div class="info-afiliado">
                 <div class="nombre">{{ item.botella.nombre }}</div>
-                <Oferta :oferta="item.oferta" :selected="oferta.selected" :ofertaList="ofertaList" @on-cambiarOferta="cambiarOferta"
-                    @on-quitarOferta="quitarOferta" />
+                <Oferta :oferta="item.oferta" :selected="oferta.selected" :ofertaList="ofertaList" :index="index"
+                    @on-cambiarOferta="cambiarOferta" @on-quitarOferta="quitarOferta" />
                 <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad"
                     :Max="item.botella.cantidadMaxima" />
             </div>
@@ -60,8 +60,8 @@
                 <div class="cantidad">x{{ item.cantidad }}</div>
             </div>
             <hr>
-            <div v-if="oferta.selected === true" class="total">Total: ${{ calcularTotal(this.item.oferta.descuento)}}</div>
-            <div v-else class="total">Total: ${{ calcularTotal()}}</div>
+            <div v-if="oferta.selected === true" class="total">Total: ${{ calcularTotal(this.item.oferta.descuento) }}</div>
+            <div v-else class="total">Total: ${{ calcularTotal() }}</div>
         </div>
     </div>
 
@@ -119,19 +119,15 @@ export default {
                 selected: false
             },
             ofertaList: [],
-            total : 0,
+            total: 0,
         };
     },
     methods: {
         ...mapMutations('carrito', ['changeCantidadItemCarrito']),
         cambiarOferta(item) {
-            // this.oferta.descuento = item.descuento;
-            // this.oferta.nombre = item.nombre;
             this.oferta.selected = true;
         },
         quitarOferta() {
-            // this.oferta.descuento = 0;
-            // this.oferta.nombre = '';
             this.oferta.selected = false;
         },
         async getOfertas() {
@@ -150,12 +146,12 @@ export default {
 
         calcularTotal(oferta = 0) {
             this.total = ((this.item.botella.precio - (this.item.botella.precio *
-                oferta / 100)).toFixed(2) * this.item.cantidad).toFixed(2) 
+                oferta / 100)).toFixed(2) * this.item.cantidad).toFixed(2)
             return this.total
         },
 
         calcularEventAfil(precio, cantidad = 1) {
-            this.total = (precio* cantidad).toFixed(2)
+            this.total = (precio * cantidad).toFixed(2)
             return this.total
         }
     },
@@ -167,9 +163,9 @@ export default {
             this.oferta.selected = true;
         }
     },
-    watch:{
-        total : {
-            handler(value, oldValue){
+    watch: {
+        total: {
+            handler(value, oldValue) {
                 this.$emit('on-calcularTotal', [parseFloat(value), parseFloat(oldValue)])
             },
             immediate: true

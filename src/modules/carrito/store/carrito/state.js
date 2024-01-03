@@ -6,6 +6,6 @@
 export default () => ({
 
     uuid: null,
-    items: []
-
+    items: [],
+    montoTotal: 0,
 })

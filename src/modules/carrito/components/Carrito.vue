@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
 
 import item from './ItemCarrito'
 
@@ -45,11 +45,11 @@ export default {
     },
     data() {
         return {
-            TotalFinal : 0 ,
+            TotalFinal: 0,
         };
     },
     computed: {
-        ...mapState('carrito', ['items']),
+        ...mapState('carrito', ['items', 'montoTotal']),
         ...mapState('auth', ['user']),
         // montoTotal() {
         //     let montoFinal = 0
@@ -62,6 +62,7 @@ export default {
         // }
     },
     methods: {
+        ...mapMutations('carrito', ['changeMontoTotal']),
         addTotal(total) {
             if (total[1]) {
                 this.TotalFinal = this.TotalFinal - parseFloat(total[1])
@@ -70,6 +71,7 @@ export default {
                 this.TotalFinal = this.TotalFinal + parseFloat(total[0])
             }
             this.TotalFinal = Math.round(this.TotalFinal * 100) / 100;
+            this.changeMontoTotal(this.TotalFinal)
         }
     }
 }
