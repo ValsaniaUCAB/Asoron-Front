@@ -1,5 +1,4 @@
 import api from '@/lib/api'
-
 function isAfiliado(e) {
     if (e) {
         return {
@@ -20,7 +19,6 @@ function isEvento(e) {
     } else return null
 }
 
-
 function isBotella(e) {
     if (e) {
         return {
@@ -31,7 +29,6 @@ function isBotella(e) {
             cantidadMaxima: e.inve_tiend_cantidad
         }
     } else return null
-
 }
 
 function isOferta(e) {
@@ -44,40 +41,31 @@ function isOferta(e) {
 
 }
 
-function listaItems(lista) {
-    let listaA = []
-    for (const e of lista) {
-        let obj = {
-            id: e.carri_item_id,
-            cantidad: e.carri_item_cantidad,
-            afiliado: isAfiliado(e.fk_carri_item_afil),
-            evento: isEvento(e.fk_carri_item_entr_evento),
-            botella: isBotella(e.fk_carri_item_inve_tiend),
-            oferta: isOferta(e.fk_carri_item_ofer_ron)
-        }
-        listaA.push(obj)
+function arreglarItem(e) {
+
+    let obj = {
+        id: e.carri_item_id,
+        cantidad: e.carri_item_cantidad,
+        afiliado: isAfiliado(e.fk_carri_item_afil),
+        evento: isEvento(e.fk_carri_item_entr_evento),
+        botella: isBotella(e.fk_carri_item_inve_tiend),
+        oferta: isOferta(e.fk_carri_item_ofer_ron)
     }
-    return listaA
+
+    return obj
 }
 
 
-
-function arreglarLista(lista) {
-    let carritoArreglado = []
-    for (const item of lista) {
-        let obj = {
-            uuid: item.carr_uuid,
-            items: listaItems(item.items)
-        }
-        carritoArreglado.push(obj)
+async function postItemCarrito(dataToSave) {
+    try {
+        const { data } = await api.post(`/store/carrito-detail/`, dataToSave)
+        console.log('data dentro de postItemCarrito', data)
+        return arreglarItem(data)
+    } catch (error) {
+        console.log(error)
+        throw error
     }
-    return carritoArreglado[0]
+
 }
 
-async function getCarritoCliente() {
-    const { data } = await api.get(`/store/carrito/`)
-    if (data) return arreglarLista(data)
-    else throw new Error('No se pudo obtener el carrito')
-}
-
-export default getCarritoCliente
+export default postItemCarrito

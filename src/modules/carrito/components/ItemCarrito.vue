@@ -23,7 +23,8 @@
                 <div class="nombre">{{ item.botella.nombre }}</div>
                 <Oferta :oferta="oferta" :ofertaList="ofertaList" @on-cambiarOferta="cambiarOferta"
                     @on-quitarOferta="quitarOferta" />
-                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad" />
+                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad"
+                    :Max="item.botella.cantidadMaxima" />
             </div>
         </div>
         <div class="monto-afiliado">
@@ -43,7 +44,8 @@
                 <div class="nombre">{{ item.botella.nombre }}</div>
                 <Oferta :oferta="oferta" :ofertaList="ofertaList" @on-cambiarOferta="cambiarOferta"
                     @on-quitarOferta="quitarOferta" />
-                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad" />
+                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad"
+                    :Max="item.botella.cantidadMaxima" />
             </div>
         </div>
         <div class="monto-afiliado">
@@ -65,7 +67,8 @@
             <div class="info-afiliado">
                 <div class="nombre">{{ item.evento.nombre }}</div>
                 <div class="entrada"> {{ item.evento.entradaNombre }}</div>
-                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad" />
+                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad"
+                    :Max="item.evento.cantidadMaxima" />
 
             </div>
         </div>
@@ -85,11 +88,16 @@ import { CDropdown } from '@coreui/vue'
 import getOfertasList from '../helpers/getOfertasList'
 import Oferta from './Oferta'
 import PlusMinusInput from '@/modules/shared/components/PlusMinusInput'
+import { mapMutations } from 'vuex'
 
 export default {
     props: {
         item: {
             type: Object,
+            required: true
+        },
+        index: {
+            type: Number,
             required: true
         }
     },
@@ -109,6 +117,7 @@ export default {
         };
     },
     methods: {
+        ...mapMutations('carrito', ['changeCantidadItemCarrito']),
         cambiarOferta(item) {
             this.oferta.descuento = item.descuento;
             this.oferta.nombre = item.nombre;
@@ -125,7 +134,6 @@ export default {
             if (this.item.botella) {
                 try {
                     this.ofertaList = await getOfertasList(this.item.botella.id)
-                    console.log(this.ofertaList)
                 } catch (error) {
                     console.log(error)
                 }
@@ -133,6 +141,7 @@ export default {
         },
         changeCantidad(value) {
             this.item.cantidad = value
+            this.changeCantidadItemCarrito({ index: this.index, cantidad: value })
         }
     },
     mounted() {

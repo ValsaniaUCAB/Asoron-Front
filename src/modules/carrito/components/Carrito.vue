@@ -16,8 +16,8 @@
                     </div>
                 </div>
                 <div class="items-container">
-                    <li v-for="item in items" :key="item.id">
-                        <item :item="item"></item>
+                    <li v-for="(item, index) in items" :key="item.id">
+                        <item :item="item" :index="index"></item>
                     </li>
                 </div>
                 <div class="footer">

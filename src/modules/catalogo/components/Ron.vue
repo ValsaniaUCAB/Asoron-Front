@@ -5,13 +5,16 @@
             <div>
                 <div class="nombre">{{ ron.nombre }}</div>
                 <div class="precio">${{ ron.precio }}</div>
-                <button class="button-18" @click.stop="click()">Añadir al Carrito</button>
+                <button class="button-18" @click.stop="anadirAlCarrito()">Añadir al Carrito</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+import Swal from 'sweetalert2'
+
 export default {
     props: {
         ron: {
@@ -19,9 +22,41 @@ export default {
             Required: true,
         }
     },
+    computed: {
+        ...mapState('carrito', ['uuid']),
+    },
     methods: {
-        click() {
-            console.log('boton')
+        ...mapActions('carrito', ['addProductoCarrito']),
+        async anadirAlCarrito() {
+            const data = {
+                fk_carri_item_inve_tiend: this.ron.idTiendaBotella,
+                carri_item_cantidad: 1,
+                carr_uuid: this.uuid
+            }
+            console.log(data)
+            try {
+                await this.addProductoCarrito(data)
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "Añadido al carrito",
+                    background: "#42FF00",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+            } catch (error) {
+                console.log(error)
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "Error al añadir al carrito",
+                    background: "#F94646",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+            }
         },
         goToDetail() {
             this.$router.push({ name: 'ron-detail', params: { id: this.ron.id } })
