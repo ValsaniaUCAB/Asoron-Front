@@ -21,7 +21,7 @@
                     </li>
                 </div>
                 <div class="footer">
-                    <div class="monto"><span>Monto total:</span><span>$286</span></div>
+                    <div class="monto"><span>Monto total:</span><span>${{ montoTotal }}</span></div>
                 </div>
             </div>
         </div>
@@ -45,7 +45,16 @@ export default {
     },
     computed: {
         ...mapState('carrito', ['items']),
-        ...mapState('auth', ['user'])
+        ...mapState('auth', ['user']),
+        montoTotal() {
+            let montoFinal = 0
+            for (const item of this.items) {
+                if (item.botella) montoFinal += item.botella.precio * item.cantidad
+                if (item.evento) montoFinal += item.evento.precio * item.cantidad
+                if (item.afiliado) montoFinal += item.afiliado.precio * item.cantidad
+            }
+            return montoFinal
+        }
     }
 }
 </script>
