@@ -21,7 +21,7 @@
                     <div class="collapsible-text scrollable">
                         <ul class="collapsible-text-list external-list">
                             <li>
-                                <b>Proveedor : </b>{{ ronDetallado.ron.proveedor.razonSocial }} , <a :href="ronDetallado.ron.proveedor.web">Pagina Web</a>
+                                <b>Proveedor : </b>{{ ronDetallado.ron.proveedor.razonSocial }} , <a id="link-proveedor" :href="ronDetallado.ron.proveedor.web">Pagina Web</a>
                             </li>
                             <li>
                                 <b>Clasificación : </b>{{ ronDetallado.ron.clasificacion }}
@@ -517,6 +517,11 @@ export default {
 
 .collapsible-text .collapsible-text-list .collapsible-text-list-como-servir p {
     margin-left: 10px;
+}
+
+#link-proveedor {
+    font-weight: 600;
+    color:#31212b
 }
 
 // colapsables internos
