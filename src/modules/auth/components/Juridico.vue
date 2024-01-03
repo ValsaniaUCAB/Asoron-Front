@@ -94,6 +94,7 @@ export default {
     },
     methods: {
         ...mapActions('auth', ['registerClienteJuridico']),
+        ...mapActions('carrito', ['getCarritoCliente']),
         setCodigoTelefono(item) {
             this.codigoTelefono = item.id
         },
@@ -248,6 +249,7 @@ export default {
             Swal.showLoading()
             try {
                 await this.registerClienteJuridico(data)
+                await this.getCarritoCliente()
                 Swal.fire('Success', 'Registrado con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
                     if (result.isConfirmed) {
                         this.$router.push({ name: 'home' });

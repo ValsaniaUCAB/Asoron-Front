@@ -85,6 +85,7 @@ export default {
     },
     methods: {
         ...mapActions('auth', ['registerClienteNatural']),
+        ...mapActions('carrito', ['getCarritoCliente']),
         setParroquia(item) {
             this.parroquia = item
         },
@@ -221,6 +222,7 @@ export default {
             Swal.showLoading()
             try {
                 await this.registerClienteNatural(data)
+                await this.getCarritoCliente()
                 Swal.fire('Success', 'Registrado con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
                     if (result.isConfirmed) {
                         this.$router.push({ name: 'home' });

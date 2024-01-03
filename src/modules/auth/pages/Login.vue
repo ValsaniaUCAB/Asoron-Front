@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Swal from 'sweetalert2'
 import BackToHome from '../components/BackToHome.vue'
 
@@ -33,6 +33,9 @@ export default {
             password: ''
         }
     },
+    computed: {
+        ...mapState('auth', ['user'])
+    },
     methods: {
         ...mapActions('auth', ['login']),
         ...mapActions('carrito', ['getCarritoCliente']),
@@ -45,7 +48,9 @@ export default {
             Swal.showLoading()
             try {
                 await this.login({ username: this.username, password: this.password })
-                await this.getCarritoCliente()
+                if (this.user.fk_usua_clie_natu != null || this.user.fk_usua_clie_juri != null) {
+                    await this.getCarritoCliente()
+                }
                 Swal.fire('Success', 'Inicio Sesion con exito', 'success', this.$router.push({ name: 'home' })).then((result) => {
                     if (result.isConfirmed) {
                         this.$router.push({ name: 'home' });

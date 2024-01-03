@@ -6,7 +6,15 @@
                 <div class="box">
                     <div class="encabezado">
                         <p class="asoron">ASORON</p>
-                        <p class="enc-tit">Bienvenido! Guest</p>
+                        <div v-if="user === null">
+                            <p class="enc-tit">Bienvenido! Guest</p>
+                        </div>
+                        <div v-else>
+                            <p v-if="user.fk_usua_clie_natu" class="enc-tit">Bienvenido! {{ user.data.nombre }} </p>
+                            <p v-if="user.fk_usua_clie_juri" class="enc-tit">Bienvenido! {{ user.data.razonSocial }} </p>
+                            <p v-if="user.fk_usua_clie_juri === null && user.fk_usua_clie_natu === null" class="enc-tit">
+                                Bienvenido! {{ user.data.nombre }} </p>
+                        </div>
                     </div>
                     <div v-for="item in items">
                         <li>
@@ -41,7 +49,8 @@ export default {
         item
     },
     computed: {
-        ...mapState('carrito', ['items'])
+        ...mapState('carrito', ['items']),
+        ...mapState('auth', ['user'])
     }
 }
 </script>

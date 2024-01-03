@@ -1,9 +1,13 @@
 <template>
-    <div class="caja">
+    <div v-if="item.afiliado" class="caja">
         <div class="info">
-            <img :src="info.imagen" alt="Imagen que no carga">
+            <img src="@/modules/shared/assets/Logo PNG.png" alt="Imagen que no carga">
+            <div class="info-afiliado">
+                <div class="nombre">{{ item.afiliado.nombre }}</div>
+                <div class="cantidad">Cantidad: x{{ item.cantidad }}</div>
+            </div>
         </div>
-        <div class="monto">precio</div>
+        <div class="monto">${{ item.afiliado.precio }}</div>
     </div>
 </template>
 
@@ -35,6 +39,8 @@ export default {
                 this.info.imagen = '@/modules/shared/assets/Logo PNG.png'
                 this.info.precio = this.item.afiliado.precio
             }
+
+
         }
     },
     mounted() {
@@ -58,5 +64,28 @@ export default {
     height: 150px;
     border: 1px solid lightgray;
     padding: 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+}
+
+.info-afiliado {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
+.nombre {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+img {
+    width: 50px;
+    height: 50px;
 }
 </style>
