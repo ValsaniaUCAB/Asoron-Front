@@ -9,8 +9,9 @@
 <script>
 export default {
     name: 'PlusMinusInput',
+    emits: ['update:modelValue'],
     props: {
-        Max :{ // Valor máximo que puede tener el input
+        Max: { // Valor máximo que puede tener el input
             type: Number,
             required: true
         },
@@ -21,22 +22,24 @@ export default {
         }
     },
     methods: {
-        increase(){
-            if(this.cantidad < this.Max)
-            this.cantidad++
+        increase() {
+            if (this.cantidad < this.Max)
+                this.cantidad++
         },
-        decrease(){
-            if(this.cantidad > 1){
-                this.cantidad--}
+        decrease() {
+            if (this.cantidad > 1) {
+                this.cantidad--
+            }
         },
     },
     watch: {
-        cantidad(val){ // Si el valor es mayor al máximo, se establece el máximo, si es menor a 1, se establece 1
-            if (val > this.Max){
+        cantidad(val) { // Si el valor es mayor al máximo, se establece el máximo, si es menor a 1, se establece 1
+            if (val > this.Max) {
                 this.cantidad = this.Max
-            } else if (val < 1){
+            } else if (val < 1) {
                 this.cantidad = 1
             }
+            this.$emit('update:modelValue', this.cantidad) // Emite el valor actualizado
         }
     }
 
@@ -44,38 +47,37 @@ export default {
 </script>
 
 <style scoped>
-
 .cantidad-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: #E3E5ED 1px solid ;
+    border: #E3E5ED 1px solid;
     width: 150px;
     height: 40px;
-    border-radius:24px;
+    border-radius: 24px;
 }
 
 .cantidad-container input {
     border: 0px;
     width: 50px;
-    border: #E3E5ED 1px solid ;
+    border: #E3E5ED 1px solid;
     height: 40px;
     text-align: center;
 }
 
-.cantidad-container input[type=number]::-webkit-inner-spin-button, 
-.cantidad-container input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+.cantidad-container input[type=number]::-webkit-inner-spin-button,
+.cantidad-container input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-.cantidad-button{
+.cantidad-button {
     border: 0px;
     width: 50px;
     padding: 0;
     padding-bottom: 3px;
     font-size: 24px;
-    color:#7c7c7c ;
+    color: #7c7c7c;
     justify-content: center;
     text-align: center;
     vertical-align: middle;
