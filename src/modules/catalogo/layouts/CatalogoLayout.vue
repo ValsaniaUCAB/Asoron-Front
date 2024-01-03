@@ -1,16 +1,19 @@
 <template>
     <Navbar />
     <router-view />
+    <Footer/>
 </template>
 
 <script>
 
 import { mapActions, mapState } from 'vuex'
 import Navbar from '@/modules/shared/components/Navbar.vue'
+import Footer from '@/modules/shared/components/Footer.vue'
 
 export default {
     components: {
-        Navbar
+        Navbar,
+        Footer
     },
     methods: {
         ...mapActions('catalogo', ['cargarRones']),

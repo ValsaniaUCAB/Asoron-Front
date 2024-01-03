@@ -216,7 +216,9 @@
                 </div>
             </div>
         </div>
-        <footer></footer>
+    </div>
+    <div class="separator">
+
     </div>
 </template>
 
@@ -267,8 +269,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-footer {
-    height: 800px;
+
+.separator {
+    height: 30vh;
 }
 
 .ron-container {
