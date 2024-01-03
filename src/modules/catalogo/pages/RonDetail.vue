@@ -1,6 +1,6 @@
 <template>
     <h1 class="container" v-if="!ronDetallado">Cargando... Por favor Espere</h1>
-    <div class="whole-container" v-else>
+    <div v-else>
         <div class="ron-container">
             <img :src="ronDetallado.images[0].url" />
             <div class="info">
@@ -20,6 +20,9 @@
                     <label class="collapsible-label external-label" for="collapsible-head-ficha">FICHA TECNICA</label>
                     <div class="collapsible-text scrollable">
                         <ul class="collapsible-text-list external-list">
+                            <li>
+                                <b>Proveedor : </b>{{ ronDetallado.ron.proveedor.razonSocial }} , <a :href="ronDetallado.ron.proveedor.web">Pagina Web</a>
+                            </li>
                             <li>
                                 <b>Clasificación : </b>{{ ronDetallado.ron.clasificacion }}
                             </li>
@@ -216,24 +219,27 @@
                 </div>
             </div>
         </div>
-        <div class="relacionados-container">
-            <h1 class="titulo-catalogo">Rones Relacionados</h1>
-            <div v-if="isLoading">
-                <div class="wait-text alert-info text-center mt-5">
-                    Espere por favor
-                    <h3 class="mt-2">
-                        <i class="fa fa-spin fa-sync"></i>
-                    </h3>
+        <div class="relacionados-contenedor">
+            <div class="relacionados-container">
+                <h1 class="titulo-catalogo">Rones Relacionados</h1>
+                <div v-if="isLoading">
+                    <div class="wait-text alert-info text-center mt-5">
+                        Espere por favor
+                        <h3 class="mt-2">
+                            <i class="fa fa-spin fa-sync"></i>
+                        </h3>
+                    </div>
+                </div>
+                <div v-else>
+                    <ul class="relacionados-catologo">
+                        <li v-for="ron in rones" :key="ron.id">
+                            <RonMinimal :clickeable="true" :ron="ron" />
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div v-else>
-                <ul class="relacionados-catologo">
-                    <li v-for="ron in rones" :key="ron.id">
-                        <RonMinimal :clickeable="true" :ron="ron" />
-                    </li>
-                </ul>
-            </div>
         </div>
+        <div class="separator"></div>
     </div>
 </template>
 
@@ -296,12 +302,9 @@ export default {
 <style lang="scss" scoped>
 
 .separator {
-    height: 30vh;
+    height: 10vh;
 }
 
-.whole-container {
-    height: 2000px;
-}
 
 .ron-container {
     display: flex;
@@ -316,8 +319,16 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 3vh ;
 }
 
+.relacionados-contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3vh ;
+}
 
 .ron-container img {
     width: 500px;
@@ -371,7 +382,6 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-
 }
 
 .collapsible-input {
@@ -436,7 +446,7 @@ export default {
 }
 
 .collapsible .collapsible-input:checked~.collapsible-text {
-    max-height: 500px;
+    max-height: 550px;
     background: whitesmoke;
     border-radius: 4px;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
@@ -653,18 +663,16 @@ export default {
         color: rgba(0, 0, 0, .3);
     }
 }
+
 .relacionados-container {
+    width: 70vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    padding: 82px;
+    align-items: flex-start;
 }
 
 .relacionados-catalogo {
     display: flex;
-    height: 100px;
     justify-content: center;
     align-items: center;
 }
@@ -683,7 +691,6 @@ export default {
     color: #31212b;
     font-weight: bold;
     align-self: flex-start;
-    text-align: left;
     padding-bottom: 3vh;
 }
 

@@ -46,8 +46,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     height: 500px;
-    width: 370px;
+    width: 20vw;
     padding: 30px 40px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
@@ -75,7 +76,7 @@ export default {
 }
 
 img {
-    height: 300px;
-    width: 300px;
+    height: 20vw;
+    width: 20vw;
 }
 </style>
