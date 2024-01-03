@@ -1,6 +1,6 @@
 <template>
     <CDropdown style="width: 100%">
-        <CDropdownToggle @click="">{{ titulo }}</CDropdownToggle>
+        <CDropdownToggle>{{ titulo }}</CDropdownToggle>
         <CDropdownMenu>
             <CDropdownItem v-if="ofertaList.length === 0">No hay descuentos para esta botella</CDropdownItem>
             <CDropdownItem v-else v-for="item in ofertaList" :key="item.id" @click="$emit('on-cambiarOferta', item)">
@@ -21,6 +21,10 @@ export default {
         oferta: {
             type: Object,
             required: true
+        },
+        selected: {
+            type: Boolean,
+            required: true
         }
     },
     data() {
@@ -30,7 +34,7 @@ export default {
     },
     computed: {
         titulo() {
-            if (this.oferta.selected) {
+            if (this.selected) {
                 return this.oferta.nombre
             } else {
                 return 'Oferta'

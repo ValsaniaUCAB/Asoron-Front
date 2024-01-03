@@ -17,11 +17,11 @@
                 </div>
                 <div class="items-container">
                     <li v-for="(item, index) in items" :key="item.id">
-                        <item :item="item" :index="index"></item>
+                        <item @on-calcularTotal="addTotal" :item="item" :index="index"></item>
                     </li>
                 </div>
                 <div class="footer">
-                    <div class="monto"><span>Monto total:</span><span>${{ montoTotal }}</span></div>
+                    <div class="monto"><span>Monto total:</span><span>${{ TotalFinal }}</span></div>
                 </div>
             </div>
         </div>
@@ -43,17 +43,33 @@ export default {
     {
         item
     },
+    data() {
+        return {
+            TotalFinal : 0 ,
+        };
+    },
     computed: {
         ...mapState('carrito', ['items']),
         ...mapState('auth', ['user']),
-        montoTotal() {
-            let montoFinal = 0
-            for (const item of this.items) {
-                if (item.botella) montoFinal += item.botella.precio * item.cantidad
-                if (item.evento) montoFinal += item.evento.precio * item.cantidad
-                if (item.afiliado) montoFinal += item.afiliado.precio * item.cantidad
+        // montoTotal() {
+        //     let montoFinal = 0
+        //     for (const item of this.items) {
+        //         if (item.botella) montoFinal += item.botella.precio * item.cantidad
+        //         if (item.evento) montoFinal += item.evento.precio * item.cantidad
+        //         if (item.afiliado) montoFinal += item.afiliado.precio * item.cantidad
+        //     }
+        //     return montoFinal
+        // }
+    },
+    methods: {
+        addTotal(total) {
+            if (total[1]) {
+                this.TotalFinal = this.TotalFinal - parseFloat(total[1])
             }
-            return montoFinal
+            if (total[0]) {
+                this.TotalFinal = this.TotalFinal + parseFloat(total[0])
+            }
+            this.TotalFinal = Math.round(this.TotalFinal * 100) / 100;
         }
     }
 }

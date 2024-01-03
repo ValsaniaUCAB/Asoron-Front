@@ -12,11 +12,11 @@
                 <div class="cantidad">x{{ item.cantidad }}</div>
             </div>
             <hr>
-            <div class="total">Total: ${{ item.afiliado.precio * item.cantidad }}</div>
+            <div class="total">Total: ${{ calcularEventAfil(item.afiliado.precio) }}</div>
         </div>
     </div>
 
-    <div v-if="(item.botella && oferta.selected === false)" class="caja">
+    <!-- <div v-if="(item.botella && oferta.selected === false)" class="caja">
         <div class="info">
             <img :src="item.botella.images[0].img_url" alt="Imagen que no carga">
             <div class="info-afiliado">
@@ -33,31 +33,35 @@
                 <div class="cantidad">x{{ item.cantidad }}</div>
             </div>
             <hr>
-            <div class="total">Total: ${{ (item.botella.precio * item.cantidad).toFixed(2) }}</div>
+            <div class="total">Total: ${{ calcularTotal() }}</div>
         </div>
-    </div>
+    </div> -->
 
-    <div v-if="item.botella && oferta.selected === true" class="caja">
+    <div v-if="item.botella" class="caja">
         <div class="info">
             <img :src="item.botella.images[0].img_url" alt="Imagen que no carga">
             <div class="info-afiliado">
                 <div class="nombre">{{ item.botella.nombre }}</div>
-                <Oferta :oferta="oferta" :ofertaList="ofertaList" @on-cambiarOferta="cambiarOferta"
+                <Oferta :oferta="item.oferta" :selected="oferta.selected" :ofertaList="ofertaList" @on-cambiarOferta="cambiarOferta"
                     @on-quitarOferta="quitarOferta" />
                 <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad"
                     :Max="item.botella.cantidadMaxima" />
             </div>
         </div>
         <div class="monto-afiliado">
-            <div>
+            <div v-if="oferta.selected === true">
                 <span class="precio-sin-desc">${{ item.botella.precio }}</span>
                 <span class="precio-con-desc"> ${{ (item.botella.precio - (item.botella.precio *
-                    oferta.descuento / 100)).toFixed(2) }}</span>
+                    item.oferta.descuento / 100)).toFixed(2) }}</span>
+                <div class="cantidad">x{{ item.cantidad }}</div>
+            </div>
+            <div v-else>
+                <div class="precio"> ${{ item.botella.precio }}</div>
                 <div class="cantidad">x{{ item.cantidad }}</div>
             </div>
             <hr>
-            <div class="total">Total: ${{ ((item.botella.precio - (item.botella.precio *
-                oferta.descuento / 100)).toFixed(2) * item.cantidad).toFixed(2) }}</div>
+            <div v-if="oferta.selected === true" class="total">Total: ${{ calcularTotal(this.item.oferta.descuento)}}</div>
+            <div v-else class="total">Total: ${{ calcularTotal()}}</div>
         </div>
     </div>
 
@@ -78,7 +82,7 @@
                 <div class="cantidad">x{{ item.cantidad }}</div>
             </div>
             <hr>
-            <div class="total">Total: ${{ item.evento.precio * item.cantidad }}</div>
+            <div class="total">Total: ${{ calcularEventAfil(item.evento.precio, item.cantidad) }}</div>
         </div>
     </div>
 </template>
@@ -91,6 +95,7 @@ import PlusMinusInput from '@/modules/shared/components/PlusMinusInput'
 import { mapMutations } from 'vuex'
 
 export default {
+    emits: ['on-calcularTotal'],
     props: {
         item: {
             type: Object,
@@ -109,25 +114,24 @@ export default {
     data() {
         return {
             oferta: {
-                descuento: 0,
-                nombre: '',
+                // descuento: 0,
+                // nombre: '',
                 selected: false
             },
-            ofertaList: []
+            ofertaList: [],
+            total : 0,
         };
     },
     methods: {
         ...mapMutations('carrito', ['changeCantidadItemCarrito']),
         cambiarOferta(item) {
-            this.oferta.descuento = item.descuento;
-            this.oferta.nombre = item.nombre;
+            // this.oferta.descuento = item.descuento;
+            // this.oferta.nombre = item.nombre;
             this.oferta.selected = true;
-
-            console.log()
         },
         quitarOferta() {
-            this.oferta.descuento = 0;
-            this.oferta.nombre = '';
+            // this.oferta.descuento = 0;
+            // this.oferta.nombre = '';
             this.oferta.selected = false;
         },
         async getOfertas() {
@@ -142,14 +146,33 @@ export default {
         changeCantidad(value) {
             this.item.cantidad = value
             this.changeCantidadItemCarrito({ index: this.index, cantidad: value })
+        },
+
+        calcularTotal(oferta = 0) {
+            this.total = ((this.item.botella.precio - (this.item.botella.precio *
+                oferta / 100)).toFixed(2) * this.item.cantidad).toFixed(2) 
+            return this.total
+        },
+
+        calcularEventAfil(precio, cantidad = 1) {
+            this.total = (precio* cantidad).toFixed(2)
+            return this.total
         }
     },
     mounted() {
         this.getOfertas();
         if (this.item.oferta) {
-            this.oferta.descuento = this.item.oferta.descuento;
-            this.oferta.nombre = this.item.oferta.nombre;
+            // this.oferta.descuento = this.item.oferta.descuento;
+            // this.oferta.nombre = this.item.oferta.nombre;
             this.oferta.selected = true;
+        }
+    },
+    watch:{
+        total : {
+            handler(value, oldValue){
+                this.$emit('on-calcularTotal', [parseFloat(value), parseFloat(oldValue)])
+            },
+            immediate: true
         }
     },
 }
