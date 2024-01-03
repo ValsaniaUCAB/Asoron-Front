@@ -217,8 +217,28 @@
             </div>
         </div>
     </div>
-    <div class="separator">
+    <div id="catalog-wrapper">
+        <h1 class="titulo-catalogo d-flex">Rones Relacionados</h1>
+        <div class="mini-catalog">
+            <div v-if="isLoading">
+                <div class="wait-text alert-info text-center mt-5">
+                    Espere por favor
+                    <h3 class="mt-2">
+                        <i class="fa fa-spin fa-sync"></i>
+                    </h3>
+                </div>
+            </div>
+            <div v-else>
+                <div class="d-flex">
+                    <li v-for="ron in rones" :key="ron.id">
+                        <RonMinimal :clickeable="true" :ron="ron" />
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="separator">
     </div>
 </template>
 
@@ -226,9 +246,12 @@
 
 import getRonDetail from '@/modules/catalogo/helpers/getRonDetail'
 import PlusMinusInput from '@/modules/shared/components/PlusMinusInput.vue'
+import RonMinimal from '@/modules/catalogo/components/RonMinimal'
+import getRonesRelacionado from '@/modules/catalogo/helpers/getRonDetailRelacionados'
 export default {
     components: {
-        PlusMinusInput
+        PlusMinusInput,
+        RonMinimal
     },
     props: {
         id: {
@@ -240,13 +263,20 @@ export default {
         return {
             ronDetallado: null,
             cantidad: 1,
+            isLoading: true,
+            rones: []
         }
     },
     methods: {
+        async getRonRelacionados() {
+            this.rones = await getRonesRelacionado(this.ronDetallado.ron.proveedor.denominacionComercial, this.ronDetallado.inventario.precio )
+            this.isLoading = false
+        },
         async getRonDetail(id) {
             this.ronDetallado = null
             try {
                 this.ronDetallado = await getRonDetail(id)
+                this.getRonRelacionados()
                 // console.log(this.ronDetallado)
             } catch (error) {
                 // this.$router.push({ name: 'catalogo' })
@@ -263,7 +293,7 @@ export default {
         id(value) {
             this.getRonDetail(value)
         },
-    }
+    },
 }
 
 </script>
@@ -623,5 +653,35 @@ export default {
         background: rgba(0, 0, 0, .08);
         color: rgba(0, 0, 0, .3);
     }
+
+#catalog-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 820px;
+    background-color: #fff;
+    padding: 82px;
+}
+
+.wait-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+}
+
+.titulo-catalogo {
+    font-family: 'Brothers', sans-serif;
+    color: #31212b;
+    font-weight: bold;
+    width: 1185px;
+    text-align: left
+}
+
+li {
+    list-style: none;
+}
+
 }
 </style>
