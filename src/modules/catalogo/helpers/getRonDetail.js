@@ -150,6 +150,7 @@ function arreglar(item) {
                 rif: item.fk_bote_ron.fk_ron_prove.prov_rif,
                 razonSocial: item.fk_bote_ron.fk_ron_prove.prov_razon_social,
                 web: item.fk_bote_ron.fk_ron_prove.prov_pagina_web,
+                denominacionComercial: item.fk_bote_ron.fk_ron_prove.prov_denominacion_comercial
             },
             matePrima: listaMateria(item.fk_bote_ron.mateprima),
             sensacion: listaSensacion(item.fk_bote_ron.sensancion),
