@@ -526,6 +526,7 @@ footer {
 .collapsible-text-list-premios .premio-left h3 {
     font-size: 20px;
     font-weight: 800;
+    font-family: 'Brothers', sans-serif;
 }
 
 .collapsible-text-list-premios .premio-left h4 {
@@ -558,8 +559,9 @@ footer {
     color: #949494;
 }
 
-.collapsible-text-list-premios .premio-center blockquote {}
-
+.collapsible-text-list-premios .premio-center blockquote {
+    font-style: italic;
+}
 .collapsible-text-list-premios .premio-right {
     width: 10%;
     font-size: 14px;
