@@ -172,7 +172,7 @@
                     </div>
                 </div>
             </div>
-            <div class="collapsible premios">
+            <div v-if="ronDetallado.ron.premio.length !== 0" class="collapsible premios">
                 <input class="collapsible-input" type="checkbox" id="collapsible-head-premios">
                 <label class="collapsible-label external-label" for="collapsible-head-premios">PREMIOS</label>
                 <div class="collapsible-text scrollable">
