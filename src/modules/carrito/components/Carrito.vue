@@ -2,28 +2,26 @@
     <div class="modal-background fade-in" @click.self="$emit('on:close')">
         <!-- El click.self permite que la emision sea solo en el componente padre y no en los hijos -->
         <div class="modal-container">
-            <div class="container">
-                <div class="box">
-                    <div class="encabezado">
-                        <p class="asoron">ASORON</p>
-                        <div v-if="user === null">
-                            <p class="enc-tit">Bienvenido! Guest</p>
-                        </div>
-                        <div v-else>
-                            <p v-if="user.fk_usua_clie_natu" class="enc-tit">Bienvenido! {{ user.data.nombre }} </p>
-                            <p v-if="user.fk_usua_clie_juri" class="enc-tit">Bienvenido! {{ user.data.razonSocial }} </p>
-                            <p v-if="user.fk_usua_clie_juri === null && user.fk_usua_clie_natu === null" class="enc-tit">
-                                Bienvenido! {{ user.data.nombre }} </p>
-                        </div>
+            <div class="box">
+                <div class="encabezado">
+                    <p class="asoron">ASORON</p>
+                    <div v-if="user === null">
+                        <p class="enc-tit">Bienvenido! Guest</p>
                     </div>
-                    <div v-for="item in items">
-                        <li>
-                            <item :item="item"></item>
-                        </li>
+                    <div v-else>
+                        <p v-if="user.fk_usua_clie_natu" class="enc-tit">Bienvenido! {{ user.data.nombre }} </p>
+                        <p v-if="user.fk_usua_clie_juri" class="enc-tit">Bienvenido! {{ user.data.razonSocial }} </p>
+                        <p v-if="user.fk_usua_clie_juri === null && user.fk_usua_clie_natu === null" class="enc-tit">
+                            Bienvenido! {{ user.data.nombre }} </p>
                     </div>
-                    <div class="footer">
-                        <div class="monto"><span>Monto total:</span><span>$286</span></div>
-                    </div>
+                </div>
+                <div class="items-container">
+                    <li v-for="item in items" :key="item.id">
+                        <item :item="item"></item>
+                    </li>
+                </div>
+                <div class="footer">
+                    <div class="monto"><span>Monto total:</span><span>$286</span></div>
                 </div>
             </div>
         </div>
@@ -58,10 +56,10 @@ export default {
 <style scoped>
 .modal-background {
     position: fixed;
+    padding-top : 92px;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
     z-index: 900;
     display: flex;
     background-color: rgba(0, 0, 0, 0.5);
@@ -71,7 +69,7 @@ export default {
 
 .modal-container {
     width: 610px;
-    height: 100%;
+    height: 100vh;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -81,9 +79,17 @@ export default {
 .box {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    padding: 30px;
+    padding: 20px;
     justify-content: space-between;
+}
+
+.encabezado {
+    height: 10vh;
+}
+
+.items-container {
+    max-height: 70vh;
+    overflow-y: scroll;
 }
 
 .asoron {
@@ -109,6 +115,7 @@ p {
 .footer {
     display: flex;
     flex-direction: column;
+    height: 5vh;
 }
 
 .monto {
@@ -138,7 +145,7 @@ p {
 li {
     width: 100%;
     list-style: none;
-    margin: 10px;
+    margin: 10px 0;
 }
 
 @keyframes fadeIn {
