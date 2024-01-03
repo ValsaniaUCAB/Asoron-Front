@@ -26,7 +26,8 @@ function isBotella(e) {
             nombre: e.fk_inve_tiend_bote.bote_nombre,
             images: e.fk_inve_tiend_bote.imagen,
             precio: e.precio.hist_ron_precio,
-            cantidadMaxima: e.inve_tiend_cantidad
+            cantidadMaxima: e.inve_tiend_cantidad,
+            precioConDescuento: null
         }
     } else return null
 }

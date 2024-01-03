@@ -51,13 +51,11 @@
         <div class="monto-afiliado">
             <div>
                 <span class="precio-sin-desc">${{ item.botella.precio }}</span>
-                <span class="precio-con-desc"> ${{ (item.botella.precio - (item.botella.precio *
-                    oferta.descuento / 100)).toFixed(2) }}</span>
+                <span class="precio-con-desc"> ${{ item.botella.precioConDescuento }}</span>
                 <div class="cantidad">x{{ item.cantidad }}</div>
             </div>
             <hr>
-            <div class="total">Total: ${{ ((item.botella.precio - (item.botella.precio *
-                oferta.descuento / 100)).toFixed(2) * item.cantidad).toFixed(2) }}</div>
+            <div class="total">Total: ${{ item.botella.precioConDescuento * item.cantidad }}</div>
         </div>
     </div>
 
@@ -74,7 +72,7 @@
         </div>
         <div class="monto-afiliado">
             <div>
-                <div class="precio"> ${{ item.evento.precio }}</div>
+                <div class="precio">${{ item.evento.precio }}</div>
                 <div class="cantidad">x{{ item.cantidad }}</div>
             </div>
             <hr>
@@ -117,13 +115,15 @@ export default {
         };
     },
     methods: {
-        ...mapMutations('carrito', ['changeCantidadItemCarrito']),
+        ...mapMutations('carrito', ['changeCantidadItemCarrito', 'changeDescuento']),
         cambiarOferta(item) {
             this.oferta.descuento = item.descuento;
             this.oferta.nombre = item.nombre;
             this.oferta.selected = true;
-
-            console.log()
+            //     this.changeDescuento({
+            //         index: this.index,
+            //         value: (this.item.botella.precio - (this.item.botella.precio * this.oferta.descuento / 100)).toFixed(2)
+            //     })
         },
         quitarOferta() {
             this.oferta.descuento = 0;
@@ -150,6 +150,10 @@ export default {
             this.oferta.descuento = this.item.oferta.descuento;
             this.oferta.nombre = this.item.oferta.nombre;
             this.oferta.selected = true;
+            // this.changeDescuento({
+            //     index: this.index,
+            //     value: (this.item.botella.precio - (this.item.botella.precio * this.oferta.descuento / 100)).toFixed(2)
+            // })
         }
     },
 }

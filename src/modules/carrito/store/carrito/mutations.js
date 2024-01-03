@@ -20,3 +20,11 @@ export const changeCantidadItemCarrito = (state, { index, cantidad }) => {
 export const addItemCarrito = (state, item) => {
     state.items.push(item)
 }
+
+export const changeDescuento = (state, { index, value }) => {
+    state.items[index].botella.precioConDescuento = value
+}
+
+export const deleteDescuento = (state, index) => {
+    state.items[index].botella.precioConDescuento = null
+}

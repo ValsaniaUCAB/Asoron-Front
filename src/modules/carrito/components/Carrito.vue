@@ -21,7 +21,7 @@
                     </li>
                 </div>
                 <div class="footer">
-                    <div class="monto"><span>Monto total:</span><span>${{ montoTotal }}</span></div>
+                    <div class="monto"><span>Monto total:</span><span>${{ (montoTotal).toFixed(2) }}</span></div>
                 </div>
             </div>
         </div>
@@ -49,6 +49,10 @@ export default {
         montoTotal() {
             let montoFinal = 0
             for (const item of this.items) {
+                // if (item.botella) {
+                //     if (item.botella.precioConDescuento) montoFinal += item.botella.precioConDescuento * item.cantidad
+                //     else montoFinal += item.botella.precio * item.cantidad
+                // }
                 if (item.botella) montoFinal += item.botella.precio * item.cantidad
                 if (item.evento) montoFinal += item.evento.precio * item.cantidad
                 if (item.afiliado) montoFinal += item.afiliado.precio * item.cantidad
