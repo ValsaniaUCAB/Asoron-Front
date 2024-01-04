@@ -12,36 +12,36 @@
                 <h1>{{ evento.nombre }}</h1>
                 <p>{{ evento.descripcion }}</p>
                 <div class="location">
-                    <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
-                        xmlns:cc="http://creativecommons.org/ns#"
-                        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                        xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+                    <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+                        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+                        xmlns="http://www.w3.org/2000/svg"
                         xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-                        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px"
-                        y="0px" viewBox="0 0 100 125">
+                        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px" y="0px"
+                        viewBox="0 0 100 125">
                         <g transform="translate(0,-952.36218)">
                             <path
                                 style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;"
                                 d="m 50.00015,957.56521 c -16.7931,0 -30.4375,13.8052 -30.4375,30.7187 0,5.4508 1.4321,10.5606 3.9063,14.99999 0.016,0.028 0.015,0.066 0.031,0.094 a 2.80028,2.80028 0 0 0 0.1562,0.3438 c 0.01,0.012 0.024,0.019 0.031,0.031 l 24.0313,42 a 2.80028,2.80028 0 0 0 4.875,-0.031 l 23.6874,-42 0.063,-0.125 c 0.01,-0.012 0.024,-0.019 0.031,-0.031 a 2.80028,2.80028 0 0 0 0.2188,-0.5 c 2.4045,-4.39189 3.8437,-9.41329 3.8437,-14.78129 0,-16.7276 -13.3648,-30.3609 -29.9063,-30.6563 -0.033,-6e-4 -0.061,-0.031 -0.094,-0.031 a 2.80028,2.80028 0 0 0 -0.2813,-0.031 c -0.053,-3e-4 -0.1032,0 -0.1562,0 z m 0,12.0937 c 9.6622,0 17.5625,7.9899 17.5625,17.75 0,9.7603 -7.9003,17.71869 -17.5625,17.71869 -9.6622,0 -17.5625,-7.95849 -17.5625,-17.71869 0,-9.7602 7.9003,-17.75 17.5625,-17.75 z"
-                                fill="#5E5E5E" fill-opacity="1" stroke="none" marker="none"
-                                visibility="visible" display="inline" overflow="visible" />
+                                fill="#5E5E5E" fill-opacity="1" stroke="none" marker="none" visibility="visible"
+                                display="inline" overflow="visible" />
                         </g>
                     </svg>
-                    <span>{{evento.lugar.estado }}, {{ evento.lugar.municipio }}, {{ evento.lugar.parroquia }}, {{ evento.direccion }}</span>
+                    <span>{{ evento.lugar.estado }}, {{ evento.lugar.municipio }}, {{ evento.lugar.parroquia }}, {{
+                        evento.direccion }}</span>
                 </div>
                 <span class="fecha">{{ evento.fechaInicio }} ~ {{ evento.fechaFin }}</span>
                 <div class="entradas-container" v-if="evento.entradas.length > 0">
                     <span class="entradas-title">ENTRADAS DISPONIBLES</span>
                     <ul class="entradas-lista">
                         <li class="entrada" v-for="entrada in evento.entradas" :key="entrada.id">
-                            <input v-model="entrada_id" type="radio" name="entrada" :id="entrada.id" :value="entrada.id">
+                            <input v-model="entradaId" type="radio" name="entrada" :id="entrada.id" :value="entrada.id">
                             <div class="entradas-tipo">
                                 <label :for="entrada.id">{{ entrada.nombre }}</label>
                                 <span>${{ entrada.precio }}</span>
                             </div>
                         </li>
                     </ul>
-                    <button class="button-18">Comprar Entrada</button>
+                    <button class="button-18" @click="anadirAlCarrito">Comprar Entrada</button>
                 </div>
             </div>
         </div>
@@ -59,6 +59,9 @@
 <script>
 import getEventDetail from '../helpers/getEventDetail'
 import RonMinimal from '@/modules/catalogo/components/RonMinimal.vue'
+import { mapState, mapActions } from 'vuex'
+import Swal from 'sweetalert2'
+
 export default {
     components: {
         RonMinimal,
@@ -72,7 +75,7 @@ export default {
     data() {
         return {
             evento: null,
-            entrada_id : "",
+            entradaId: null,
         }
     },
     methods: {
@@ -80,12 +83,88 @@ export default {
             this.evento = null
             this.evento = await getEventDetail(id)
         },
+        ...mapActions('carrito', ['addProductoCarrito']),
+        async anadirAlCarrito() {
+            if (!this.user) {
+                this.$router.push({ name: 'login' })
+            } else {
+                if (!this.entradaId) {
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Seleccione una Entrada primero",
+                        background: "#0085FF",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                    return
+                }
+                if (this.revisarEnCarrito()) {
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Ya se encuentra en el carrito",
+                        background: "#0085FF",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                    return
+                }
+                const data = {
+                    fk_carri_item_entr_evento: this.entradaId,
+                    carri_item_cantidad: 1,
+                    carr_uuid: this.uuid
+                }
+                console.log(data)
+                try {
+                    await this.addProductoCarrito(data)
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Añadido al carrito",
+                        background: "#42FF00",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                } catch (error) {
+                    console.log(error)
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Error al añadir al carrito",
+                        background: "#F94646",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                }
+            }
+        },
+        revisarEnCarrito() {
+            const item = this.items.find((item) => {
+                console.log(item)
+                if (!item.evento) return
+                if (item.evento.idEntrada === this.entradaId) {
+                    return item
+                }
+            })
+            if (item) {
+                return true
+            } else {
+                return false
+            }
+        },
     },
     computed: {
         hasImage() {
             if (this.evento.images[0]) return true
             else return false
-        }
+        },
+        ...mapState('carrito', ['uuid', 'items']),
+        ...mapState('auth', ['user'])
     },
     mounted() {
         this.getEventDetail(this.id)
@@ -225,9 +304,11 @@ export default {
 .rones-container li {
     list-style: none;
 }
+
 .location {
     align-self: flex-end;
 }
+
 .location svg {
     width: 16px;
     height: 16px;
@@ -289,7 +370,7 @@ export default {
 }
 
 .entradas-tipo span {
-    margin-right: 5px ;
+    margin-right: 5px;
 }
 
 .entradas-container button {
@@ -297,5 +378,4 @@ export default {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-
 </style>

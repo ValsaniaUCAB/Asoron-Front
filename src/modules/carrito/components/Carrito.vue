@@ -112,10 +112,9 @@ export default {
                     carri_item_id: item.id
                 }
             }
-            console.log(item.id, data)
             this.modifyItemCarrito({ id: item.id, dataToSave: data })
         }
-
+        console.log('carritoActualizado')
     }
 
 }
