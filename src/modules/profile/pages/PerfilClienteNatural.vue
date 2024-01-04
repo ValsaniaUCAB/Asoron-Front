@@ -1,14 +1,17 @@
 <template>
     <h1>Soy Perfil del Cliente Natural</h1>
+    <Afiliado></Afiliado>
     <Logout></Logout>
 </template>
 
 <script>
 import Logout from '../components/Logout'
+import Afiliado from '../components/Afiliado'
 
 export default {
     components: {
-        Logout
+        Logout,
+        Afiliado
     },
 }
 </script>

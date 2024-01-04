@@ -3,6 +3,10 @@
 //
 // }
 
+export const addItemCarrito = (state, item) => {
+    state.items.push(item)
+}
+
 export const setCarrito = (state, carrito) => {
     state.uuid = carrito.uuid
     state.items = carrito.items
@@ -17,9 +21,6 @@ export const changeCantidadItemCarrito = (state, { index, cantidad }) => {
     state.items[index].cantidad = cantidad
 }
 
-export const addItemCarrito = (state, item) => {
-    state.items.push(item)
-}
 
 export const changeMontoTotal = (state, monto) => {
     state.montoTotal = monto

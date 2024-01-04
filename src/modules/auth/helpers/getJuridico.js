@@ -36,6 +36,7 @@ function arreglar(item) {
             parroquia: i.fk_clie_juri_lugar_fisica.parroquia,
         },
         telefono: listaTelefonos(i.telefono),
+        afiliado: false
     }
 
     return obj

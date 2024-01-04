@@ -5,7 +5,8 @@
 
 import getCarrito from '../../helpers/getCarritoCliente'
 import postItemCarrito from '../../helpers/postItemCarrito'
-
+import { postAfiliadoCarrito } from '../../helpers/postItemCarrito'
+import getAfiliadoItem from '../../helpers/getAfiliadoItem'
 
 export const getCarritoCliente = async ({ commit }) => {
     const carrito = await getCarrito()
@@ -17,4 +18,13 @@ export const addProductoCarrito = async ({ commit }, data) => {
     const producto = await postItemCarrito(data)
     console.log(producto)
     commit('addItemCarrito', producto)
+}
+
+export const addAfiliadoCarrito = async ({ commit }, data) => {
+    console.log('antes', data)
+    const afiliado = await getAfiliadoItem()
+    data.fk_carri_item_afil = afiliado.id
+    console.log(data)
+    const item = await postAfiliadoCarrito(data)
+    commit('addItemCarrito', item)
 }

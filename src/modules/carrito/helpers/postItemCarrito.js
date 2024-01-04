@@ -1,4 +1,5 @@
 import api from '@/lib/api'
+
 function isAfiliado(e) {
     if (e) {
         return {
@@ -65,7 +66,20 @@ async function postItemCarrito(dataToSave) {
         console.log(error)
         throw error
     }
-
 }
 
+async function postAfiliadoCarrito(dataToSave) {
+    try {
+        const { data } = await api.post(`/store/carrito-detail/`, dataToSave)
+        console.log('data dentro de postAfiliadoCarrito', data)
+        return arreglarItem(data)
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+
 export default postItemCarrito
+
+export { postAfiliadoCarrito } 
