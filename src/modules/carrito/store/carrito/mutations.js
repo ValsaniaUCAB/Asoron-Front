@@ -20,3 +20,16 @@ export const changeCantidadItemCarrito = (state, { index, cantidad }) => {
 export const addItemCarrito = (state, item) => {
     state.items.push(item)
 }
+
+export const changeMontoTotal = (state, monto) => {
+    state.montoTotal = monto
+}
+
+export const agregarOfertaCarrito = (state, { index, oferta }) => {
+
+    state.items[index].oferta = oferta
+}
+
+export const quitarOfertaCarrito = (state, index) => {
+    state.items[index].oferta = null
+}
