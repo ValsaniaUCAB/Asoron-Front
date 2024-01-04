@@ -21,7 +21,7 @@
                     </li>
                 </div>
                 <div class="footer">
-                    <div class="monto"><span>Monto total:</span><span>${{ TotalFinal }}</span></div>
+                    <div class="monto" v-if="user"><span>Monto total:</span><span>${{ TotalFinal }}</span></div>
                 </div>
             </div>
         </div>

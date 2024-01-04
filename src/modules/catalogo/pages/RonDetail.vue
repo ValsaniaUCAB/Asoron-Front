@@ -9,7 +9,7 @@
                 <div class="comprar">
                     <span> ${{ ronDetallado.inventario.precio }} </span>
                     <PlusMinusInput :Max="ronDetallado.inventario.cantidad" @update:modelValue="changeCantidad" />
-                    <button class="button-18 ">Añadir al Carrito</button>
+                    <button class="button-18" @click="anadirAlCarrito">Añadir al Carrito</button>
                 </div>
             </div>
         </div>
@@ -21,7 +21,8 @@
                     <div class="collapsible-text scrollable">
                         <ul class="collapsible-text-list external-list">
                             <li>
-                                <b>Proveedor : </b>{{ ronDetallado.ron.proveedor.razonSocial }} , <a id="link-proveedor" :href="ronDetallado.ron.proveedor.web">Pagina Web</a>
+                                <b>Proveedor : </b>{{ ronDetallado.ron.proveedor.razonSocial }} , <a id="link-proveedor"
+                                    :href="ronDetallado.ron.proveedor.web">Pagina Web</a>
                             </li>
                             <li>
                                 <b>Clasificación : </b>{{ ronDetallado.ron.clasificacion }}
@@ -219,7 +220,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="rones.length!== 0" class="relacionados-contenedor">
+        <div v-if="rones.length !== 0" class="relacionados-contenedor">
             <div class="relacionados-container">
                 <h1 class="titulo-catalogo">Rones Relacionados</h1>
                 <div v-if="isLoading">
@@ -249,6 +250,9 @@ import getRonDetail from '@/modules/catalogo/helpers/getRonDetail'
 import PlusMinusInput from '@/modules/shared/components/PlusMinusInput.vue'
 import RonMinimal from '@/modules/catalogo/components/RonMinimal.vue'
 import getRonesRelacionado from '@/modules/catalogo/helpers/getRonDetailRelacionados'
+import { mapActions, mapState } from 'vuex'
+import Swal from 'sweetalert2'
+
 export default {
     components: {
         PlusMinusInput,
@@ -268,9 +272,13 @@ export default {
             rones: []
         }
     },
+    computed: {
+        ...mapState('auth', ['user']),
+        ...mapState('carrito', ['uuid']),
+    },
     methods: {
         async getRonRelacionados() {
-            this.rones = await getRonesRelacionado(this.ronDetallado.ron.proveedor.denominacionComercial, this.ronDetallado.inventario.precio, this.ronDetallado.id )
+            this.rones = await getRonesRelacionado(this.ronDetallado.ron.proveedor.denominacionComercial, this.ronDetallado.inventario.precio, this.ronDetallado.id)
             this.isLoading = false
         },
         async getRonDetail(id) {
@@ -285,7 +293,43 @@ export default {
         },
         changeCantidad(value) {
             this.cantidad = value
-        }
+        },
+        ...mapActions('carrito', ['addProductoCarrito']),
+        async anadirAlCarrito() {
+            if (!this.user) {
+                this.$router.push({ name: 'login' })
+            } else {
+                const data = {
+                    fk_carri_item_inve_tiend: this.ronDetallado.inventario.idTienda,
+                    carri_item_cantidad: this.cantidad,
+                    carr_uuid: this.uuid
+                }
+                console.log(data)
+                try {
+                    await this.addProductoCarrito(data)
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Añadido al carrito",
+                        background: "#42FF00",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                } catch (error) {
+                    console.log(error)
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Error al añadir al carrito",
+                        background: "#F94646",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                }
+            }
+        },
     },
     mounted() {
         this.getRonDetail(this.id)
@@ -300,7 +344,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .separator {
     height: 10vh;
 }
@@ -319,7 +362,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: 3vh ;
+    padding-bottom: 3vh;
 }
 
 .relacionados-contenedor {
@@ -327,7 +370,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: 3vh ;
+    padding-bottom: 3vh;
 }
 
 .ron-container img {
@@ -521,7 +564,7 @@ export default {
 
 #link-proveedor {
     font-weight: 600;
-    color:#31212b
+    color: #31212b
 }
 
 // colapsables internos
@@ -610,6 +653,7 @@ export default {
 .collapsible-text-list-premios .premio-center blockquote {
     font-style: italic;
 }
+
 .collapsible-text-list-premios .premio-right {
     width: 10%;
     font-size: 14px;
@@ -698,6 +742,4 @@ export default {
     align-self: flex-start;
     padding-bottom: 3vh;
 }
-
-
 </style>

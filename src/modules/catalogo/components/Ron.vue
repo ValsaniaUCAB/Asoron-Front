@@ -24,38 +24,43 @@ export default {
     },
     computed: {
         ...mapState('carrito', ['uuid']),
+        ...mapState('auth', ['user'])
     },
     methods: {
         ...mapActions('carrito', ['addProductoCarrito']),
         async anadirAlCarrito() {
-            const data = {
-                fk_carri_item_inve_tiend: this.ron.idTiendaBotella,
-                carri_item_cantidad: 1,
-                carr_uuid: this.uuid
-            }
-            console.log(data)
-            try {
-                await this.addProductoCarrito(data)
-                Swal.fire({
-                    position: "bottom-end",
-                    title: "Añadido al carrito",
-                    background: "#42FF00",
-                    color: "#fff",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    backdrop: false
-                });
-            } catch (error) {
-                console.log(error)
-                Swal.fire({
-                    position: "bottom-end",
-                    title: "Error al añadir al carrito",
-                    background: "#F94646",
-                    color: "#fff",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    backdrop: false
-                });
+            if (!this.user) {
+                this.$router.push({ name: 'login' })
+            } else {
+                const data = {
+                    fk_carri_item_inve_tiend: this.ron.idTiendaBotella,
+                    carri_item_cantidad: 1,
+                    carr_uuid: this.uuid
+                }
+                console.log(data)
+                try {
+                    await this.addProductoCarrito(data)
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Añadido al carrito",
+                        background: "#42FF00",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                } catch (error) {
+                    console.log(error)
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Error al añadir al carrito",
+                        background: "#F94646",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                }
             }
         },
         goToDetail() {
