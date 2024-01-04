@@ -34,3 +34,7 @@ export const agregarOfertaCarrito = (state, { index, oferta }) => {
 export const quitarOfertaCarrito = (state, index) => {
     state.items[index].oferta = null
 }
+
+export const deleteItemCarrito = (state, id) => {
+    state.items = state.items.filter(item => item.id !== id)
+}
