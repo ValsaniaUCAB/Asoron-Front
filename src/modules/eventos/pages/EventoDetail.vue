@@ -34,7 +34,7 @@
                     <span class="entradas-title">ENTRADAS DISPONIBLES</span>
                     <ul class="entradas-lista">
                         <li class="entrada" v-for="entrada in evento.entradas" :key="entrada.id">
-                            <input type="checkbox" name="entrada" :id="entrada.id" :value="entrada.id">
+                            <input v-model="entrada_id" type="radio" name="entrada" :id="entrada.id" :value="entrada.id">
                             <div class="entradas-tipo">
                                 <label :for="entrada.id">{{ entrada.nombre }}</label>
                                 <span>${{ entrada.precio }}</span>
@@ -71,7 +71,8 @@ export default {
     },
     data() {
         return {
-            evento: null
+            evento: null,
+            entrada_id : "",
         }
     },
     methods: {
