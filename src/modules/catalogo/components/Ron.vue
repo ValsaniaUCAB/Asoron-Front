@@ -23,7 +23,7 @@ export default {
         }
     },
     computed: {
-        ...mapState('carrito', ['uuid']),
+        ...mapState('carrito', ['uuid', 'items']),
         ...mapState('auth', ['user'])
     },
     methods: {
@@ -32,6 +32,18 @@ export default {
             if (!this.user) {
                 this.$router.push({ name: 'login' })
             } else {
+                if (this.revisarEnCarrito()) {
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "Ya se encuentra en el carrito",
+                        background: "#0085FF",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                    return
+                }
                 const data = {
                     fk_carri_item_inve_tiend: this.ron.idTiendaBotella,
                     carri_item_cantidad: 1,
@@ -61,6 +73,20 @@ export default {
                         backdrop: false
                     });
                 }
+            }
+        },
+        revisarEnCarrito() {
+            const item = this.items.find((item) => {
+                console.log(item)
+                if (!item.botella) return
+                if (item.botella.idBotella === this.ron.id) {
+                    return item
+                }
+            })
+            if (item) {
+                return true
+            } else {
+                return false
             }
         },
         goToDetail() {
