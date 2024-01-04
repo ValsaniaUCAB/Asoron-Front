@@ -16,6 +16,12 @@ export const vaciarCarrito = (state) => {
     state.items = []
 }
 
+export const endCarrito = (state) => {
+    state.uuid = null
+    state.items = []
+    state.montoTotal = 0
+}
+
 export const changeCantidadItemCarrito = (state, { index, cantidad }) => {
     state.items[index].cantidad = cantidad
 }

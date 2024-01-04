@@ -3,6 +3,7 @@ import { getHeader } from "@/lib/api"
 import getClienteNatural from "./getNatural";
 import getClienteJuridico from "./getJuridico";
 import getEmpleado from "./getEmpleado";
+import getAfiliado from "./getAfiliado";
 
 const getUser = async () => {
     if (!getHeader()) {
@@ -21,6 +22,7 @@ const getUser = async () => {
         if (data.fk_usua_clie_juri) {
             data.data = await getClienteJuridico()
         }
+        data.data.afiliado = await getAfiliado(data)
         return data
     } catch (error) {
         console.log('error', error)
