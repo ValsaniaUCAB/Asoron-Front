@@ -154,11 +154,9 @@ export default {
             return this.total
         },
         deleteItem() {
-            try {
-                const resp = this.deleteItemCarrito(this.item.id)
-            } catch (error) {
-
-            }
+            this.total = "eliminado"
+            const resp = this.deleteItemCarrito(this.item.id)
+            
         }
     },
     mounted() {
@@ -170,6 +168,10 @@ export default {
     watch: {
         total: {
             handler(value, oldValue) {
+                if (value === "eliminado") {
+                    this.$emit('on-calcularTotal', [0, parseFloat(oldValue)])
+                }
+                console.log(parseFloat(value), parseFloat(oldValue))
                 this.$emit('on-calcularTotal', [parseFloat(value), parseFloat(oldValue)])
             },
             immediate: true
