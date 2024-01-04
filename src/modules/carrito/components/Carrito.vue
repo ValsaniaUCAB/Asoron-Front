@@ -20,8 +20,9 @@
                         <item @on-calcularTotal="addTotal" :item="item" :index="index"></item>
                     </li>
                 </div>
-                <div class="footer" v-if="user">
+                <div class="total-container" v-if="user">
                     <div class="monto"><span>Monto total:</span><span>${{ TotalFinal }}</span></div>
+                    <button>CHECKOUT</button>
                 </div>
             </div>
         </div>
@@ -179,7 +180,7 @@ p {
     text-align: left;
 }
 
-.footer {
+.total-container {
     display: flex;
     flex-direction: column;
     height: 5vh;
