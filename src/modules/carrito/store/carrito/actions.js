@@ -22,10 +22,8 @@ export const addProductoCarrito = async ({ commit }, data) => {
 }
 
 export const addAfiliadoCarrito = async ({ commit }, data) => {
-    console.log('antes', data)
     const afiliado = await getAfiliadoItem()
     data.fk_carri_item_afil = afiliado.id
-    console.log(data)
     const item = await postAfiliadoCarrito(data)
     commit('addItemCarrito', item)
 }
