@@ -31,6 +31,15 @@ export default {
                         }
                         try {
                             await this.addAfiliadoCarrito(data)
+                            Swal.fire({
+                                position: "bottom-end",
+                                title: "Añadido al carrito",
+                                background: "#42FF00",
+                                color: "#fff",
+                                showConfirmButton: false,
+                                timer: 1500,
+                                backdrop: false
+                            });
                         } catch (error) {
                             console.log(error)
                         }
@@ -40,27 +49,6 @@ export default {
                 });
             }
         }
-
-        // async sendLogout() {
-        //     new Swal({
-        //         title: 'Espere por favor',
-        //         allowOutsideClick: false,
-        //     })
-        //     Swal.showLoading()
-        //     await this.logout()
-        //     await this.vaciarCarrito()
-        //     Swal.fire({
-        //         title: 'Success',
-        //         text: 'Cerró sesión con éxito',
-        //         icon: 'success',
-        //         confirmButtonText: 'OK',
-        //         confirmButtonColor: '#31212b',
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             this.$router.push({ name: 'home' });
-        //         }
-        //     });
-        // }
     },
 }
 </script>
