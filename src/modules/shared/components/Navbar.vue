@@ -19,9 +19,6 @@
             <nav class="right">
                 <ul>
                     <li>
-                        <img class="lupa" src="@/modules/shared/assets/navbar/lupa.svg">
-                    </li>
-                    <li>
                         <img class="shopping-bag pointer" src="@/modules/shared/assets/navbar/shopping-bag.svg"
                             @click="openCarrito">
                     </li>
