@@ -11,14 +11,36 @@
             <div class="info">
                 <h1>{{ evento.nombre }}</h1>
                 <p>{{ evento.descripcion }}</p>
-                <p>Desde el {{ evento.fechaInicio }} hasta el {{ evento.fechaFin }}</p>
-                <p>Celebrado en: {{ evento.direccion }}, {{ evento.lugar.parroquia }}, {{ evento.lugar.municipio }}, {{
-                    evento.lugar.estado }}</p>
-                <div v-if="evento.entradas.length > 0">
-                    <p>Entradas disponibles:</p>
-                    <div class="entrada" v-for="entrada in evento.entradas">
-                        <span>{{ entrada.nombre }}</span><span>${{ entrada.precio }}</span>
-                    </div>
+                <div class="location">
+                    <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+                        xmlns:cc="http://creativecommons.org/ns#"
+                        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px"
+                        y="0px" viewBox="0 0 100 125">
+                        <g transform="translate(0,-952.36218)">
+                            <path
+                                style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;"
+                                d="m 50.00015,957.56521 c -16.7931,0 -30.4375,13.8052 -30.4375,30.7187 0,5.4508 1.4321,10.5606 3.9063,14.99999 0.016,0.028 0.015,0.066 0.031,0.094 a 2.80028,2.80028 0 0 0 0.1562,0.3438 c 0.01,0.012 0.024,0.019 0.031,0.031 l 24.0313,42 a 2.80028,2.80028 0 0 0 4.875,-0.031 l 23.6874,-42 0.063,-0.125 c 0.01,-0.012 0.024,-0.019 0.031,-0.031 a 2.80028,2.80028 0 0 0 0.2188,-0.5 c 2.4045,-4.39189 3.8437,-9.41329 3.8437,-14.78129 0,-16.7276 -13.3648,-30.3609 -29.9063,-30.6563 -0.033,-6e-4 -0.061,-0.031 -0.094,-0.031 a 2.80028,2.80028 0 0 0 -0.2813,-0.031 c -0.053,-3e-4 -0.1032,0 -0.1562,0 z m 0,12.0937 c 9.6622,0 17.5625,7.9899 17.5625,17.75 0,9.7603 -7.9003,17.71869 -17.5625,17.71869 -9.6622,0 -17.5625,-7.95849 -17.5625,-17.71869 0,-9.7602 7.9003,-17.75 17.5625,-17.75 z"
+                                fill="#5E5E5E" fill-opacity="1" stroke="none" marker="none"
+                                visibility="visible" display="inline" overflow="visible" />
+                        </g>
+                    </svg>
+                    <span>{{evento.lugar.estado }}, {{ evento.lugar.municipio }}, {{ evento.lugar.parroquia }}, {{ evento.direccion }}</span>
+                </div>
+                <span class="fecha">{{ evento.fechaInicio }} ~ {{ evento.fechaFin }}</span>
+                <div class="entradas-container" v-if="evento.entradas.length > 0">
+                    <span class="entradas-title">ENTRADAS DISPONIBLES</span>
+                    <ul class="entradas-lista">
+                        <li class="entrada" v-for="entrada in evento.entradas" :key="entrada.id">
+                            <input type="checkbox" name="entrada" :id="entrada.id" :value="entrada.id">
+                            <div class="entradas-tipo">
+                                <label :for="entrada.id">{{ entrada.nombre }}</label>
+                                <span>${{ entrada.precio }}</span>
+                            </div>
+                        </li>
+                    </ul>
                     <button class="button-18">Comprar Entrada</button>
                 </div>
             </div>
@@ -26,7 +48,7 @@
         <div class="box">
             <h1> Lista de rones a presentar</h1>
             <div class="rones-container">
-                <li v-for="ron in evento.rones">
+                <li v-for="ron in evento.rones" :key="ron.id">
                     <ron-minimal :ron="ron" :clickeable="false"></ron-minimal>
                 </li>
             </div>
@@ -36,10 +58,10 @@
 
 <script>
 import getEventDetail from '../helpers/getEventDetail'
-import RonMinimal from '@/modules/catalogo/components/RonMinimal'
+import RonMinimal from '@/modules/catalogo/components/RonMinimal.vue'
 export default {
     components: {
-        RonMinimal
+        RonMinimal,
     },
     props: {
         id: {
@@ -112,9 +134,9 @@ export default {
     margin-right: 50px;
     color: black;
     padding-top: 40px;
+    width: 564px;
 
     & h1 {
-        width: 564px;
         font-size: 36px;
         font-weight: 700;
         font-family: 'Brothers';
@@ -151,16 +173,6 @@ export default {
     align-items: center;
     justify-content: center;
     width: 1144px;
-}
-
-.entrada {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 564px;
-    margin-bottom: 10px;
-
 }
 
 .button-18 {
@@ -209,7 +221,79 @@ export default {
     }
 }
 
-li {
+.rones-container li {
     list-style: none;
 }
+.location {
+    align-self: flex-end;
+}
+.location svg {
+    width: 16px;
+    height: 16px;
+}
+
+.location span {
+    font-size: 14px;
+    color: #5E5E5E
+}
+
+.fecha {
+    font-size: 14px;
+    color: #5E5E5E;
+    align-self: flex-end;
+}
+
+.entradas-container {
+    width: 100%;
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.entradas-title {
+    margin-bottom: 2vh;
+    align-self: center;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.entradas-lista {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0;
+}
+
+.entrada {
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.entrada input {
+    margin-right: 10px;
+}
+
+.entradas-tipo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    font-size: 18px;
+}
+
+.entradas-tipo label {
+    margin-right: auto;
+}
+
+.entradas-tipo span {
+    margin-right: 5px ;
+}
+
+.entradas-container button {
+    align-self: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 </style>

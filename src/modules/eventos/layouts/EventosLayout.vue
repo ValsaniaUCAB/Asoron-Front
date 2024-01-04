@@ -1,6 +1,5 @@
 <template>
     <Navbar />
-    <div class="container">Soy Layout eventos</div>
     <router-view />
 </template>
 
