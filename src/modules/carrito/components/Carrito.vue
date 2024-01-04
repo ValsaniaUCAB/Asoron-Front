@@ -51,15 +51,6 @@ export default {
     computed: {
         ...mapState('carrito', ['items', 'montoTotal']),
         ...mapState('auth', ['user']),
-        // montoTotal() {
-        //     let montoFinal = 0
-        //     for (const item of this.items) {
-        //         if (item.botella) montoFinal += item.botella.precio * item.cantidad
-        //         if (item.evento) montoFinal += item.evento.precio * item.cantidad
-        //         if (item.afiliado) montoFinal += item.afiliado.precio * item.cantidad
-        //     }
-        //     return montoFinal
-        // }
     },
     methods: {
         ...mapMutations('carrito', ['changeMontoTotal']),

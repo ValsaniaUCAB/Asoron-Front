@@ -1,8 +1,3 @@
-
-// export const myAction = async ({ commit }) => {
-
-// }
-
 import getCarrito from '../../helpers/getCarritoCliente'
 import postItemCarrito from '../../helpers/postItemCarrito'
 import { postAfiliadoCarrito } from '../../helpers/postItemCarrito'
