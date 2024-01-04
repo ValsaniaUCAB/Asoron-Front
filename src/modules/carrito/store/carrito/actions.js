@@ -3,6 +3,7 @@ import postItemCarrito from '../../helpers/postItemCarrito'
 import { postAfiliadoCarrito } from '../../helpers/postItemCarrito'
 import getAfiliadoItem from '../../helpers/getAfiliadoItem'
 import deleteItemCarritoApi from '../../helpers/deleteItemCarrito'
+import putItemCarrito from '../../helpers/putItemCarrito'
 
 export const getCarritoCliente = async ({ commit }) => {
     const carrito = await getCarrito()
@@ -27,4 +28,10 @@ export const deleteItemCarrito = async ({ commit }, id) => {
     const { data } = await deleteItemCarritoApi(id)
     commit('deleteItemCarrito', id)
     return data
+}
+
+export const modifyItemCarrito = async ({ commit }, { id, dataToSave }) => {
+    const item = await putItemCarrito(id, dataToSave)
+    commit('addItemCarrito', item)
+    return item
 }

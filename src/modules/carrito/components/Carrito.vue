@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from 'vuex'
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 
 import item from './ItemCarrito'
 
@@ -49,11 +49,12 @@ export default {
         };
     },
     computed: {
-        ...mapState('carrito', ['items', 'montoTotal']),
+        ...mapState('carrito', ['items', 'montoTotal', 'uuid']),
         ...mapState('auth', ['user']),
     },
     methods: {
-        ...mapMutations('carrito', ['changeMontoTotal']),
+        ...mapActions('carrito', ['modifyItemCarrito']),
+        ...mapMutations('carrito', ['changeMontoTotal', 'vaciarCarrito']),
         addTotal(total) {
             if (total[1]) {
                 this.TotalFinal = this.TotalFinal - parseFloat(total[1])
@@ -63,8 +64,60 @@ export default {
             }
             this.TotalFinal = Math.round(this.TotalFinal * 100) / 100;
             this.changeMontoTotal(this.TotalFinal)
+        },
+
+    },
+    unmounted() {
+        this.vaciarCarrito()
+        for (const item of this.items) {
+            let data = {}
+            if (item.botella) {
+                if (item.oferta) {
+                    data = {
+                        carri_item_cantidad: item.cantidad,
+                        fk_carri_item_inve_tiend: item.botella.idTienda,
+                        fk_carri_item_ofer_ron: item.oferta.id,
+                        fk_carri_item_entr_evento: item.evento,
+                        fk_carri_item_afil: item.afiliado,
+                        carri_item_id: item.id
+                    }
+                } else {
+                    data = {
+                        carri_item_cantidad: item.cantidad,
+                        fk_carri_item_inve_tiend: item.botella.idTienda,
+                        fk_carri_item_ofer_ron: item.oferta,
+                        fk_carri_item_entr_evento: item.evento,
+                        fk_carri_item_afil: item.afiliado,
+                        carri_item_id: item.id
+                    }
+                }
+            }
+            if (item.evento) {
+                data = {
+                    carri_item_cantidad: item.cantidad,
+                    fk_carri_item_inve_tiend: item.botella,
+                    fk_carri_item_ofer_ron: item.oferta,
+                    fk_carri_item_entr_evento: item.evento.idEntrada,
+                    fk_carri_item_afil: item.afiliado,
+                    carri_item_id: item.id
+                }
+            }
+            if (item.afiliado) {
+                data = {
+                    carri_item_cantidad: item.cantidad,
+                    fk_carri_item_inve_tiend: item.botella,
+                    fk_carri_item_ofer_ron: item.oferta,
+                    fk_carri_item_entr_evento: item.evento,
+                    fk_carri_item_afil: item.afiliado.id,
+                    carri_item_id: item.id
+                }
+            }
+            console.log(item.id, data)
+            this.modifyItemCarrito({ id: item.id, dataToSave: data })
         }
+
     }
+
 }
 </script>
 

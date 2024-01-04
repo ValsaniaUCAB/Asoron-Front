@@ -22,6 +22,7 @@
             </svg>
         </button>
     </div>
+
     <div v-if="item.botella" class="caja">
         <div class="info">
             <img :src="item.botella.images[0].img_url" alt="Imagen que no carga">
@@ -131,7 +132,7 @@ export default {
         async getOfertas() {
             if (this.item.botella) {
                 try {
-                    this.ofertaList = await getOfertasList(this.item.botella.id)
+                    this.ofertaList = await getOfertasList(this.item.botella.idBotella)
                 } catch (error) {
                     console.log(error)
                 }

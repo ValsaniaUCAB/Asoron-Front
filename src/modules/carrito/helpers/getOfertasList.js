@@ -4,6 +4,7 @@ function arreglarLista(lista) {
     let ofertasArreglado = []
     for (const item of lista) {
         let obj = {
+            id: item.ofer_bote_id,
             descuento: item.ofer_bote_porcentaje,
             nombre: item.fk_ofer_bote_ofer.ofer_nombre,
         }

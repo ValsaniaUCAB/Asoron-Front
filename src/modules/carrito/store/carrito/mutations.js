@@ -13,7 +13,6 @@ export const setCarrito = (state, carrito) => {
 }
 
 export const vaciarCarrito = (state) => {
-    state.uuid = null
     state.items = []
 }
 
@@ -27,7 +26,6 @@ export const changeMontoTotal = (state, monto) => {
 }
 
 export const agregarOfertaCarrito = (state, { index, oferta }) => {
-
     state.items[index].oferta = oferta
 }
 
