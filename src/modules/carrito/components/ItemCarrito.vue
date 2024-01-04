@@ -14,10 +14,9 @@
             <hr>
             <div class="total">Total: ${{ calcularEventAfil(item.afiliado.precio) }}</div>
         </div>
-        <button class="title-btn cancel-btn" @click="delete_item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
-                stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="feather feather-x">
+        <button class="title-btn cancel-btn" @click="deleteItem">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -49,10 +48,9 @@
             <div v-if="oferta.selected === true" class="total">Total: ${{ calcularTotal(this.item.oferta.descuento) }}</div>
             <div v-else class="total">Total: ${{ calcularTotal() }}</div>
         </div>
-        <button class="title-btn cancel-btn" @click="delete_item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
-                stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="feather feather-x">
+        <button class="title-btn cancel-btn" @click="deleteItem">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -78,10 +76,9 @@
             <hr>
             <div class="total">Total: ${{ calcularEventAfil(item.evento.precio, item.cantidad) }}</div>
         </div>
-        <button class="title-btn cancel-btn" @click="delete_item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
-                stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="feather feather-x">
+        <button class="title-btn cancel-btn" @click="deleteItem">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -94,7 +91,7 @@ import { CDropdown } from '@coreui/vue'
 import getOfertasList from '../helpers/getOfertasList'
 import Oferta from './Oferta'
 import PlusMinusInput from '@/modules/shared/components/PlusMinusInput'
-import { mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
     emits: ['on-calcularTotal'],
@@ -124,6 +121,7 @@ export default {
     },
     methods: {
         ...mapMutations('carrito', ['changeCantidadItemCarrito']),
+        ...mapActions('carrito', ['deleteItemCarrito']),
         cambiarOferta(item) {
             this.oferta.selected = true;
         },
@@ -153,6 +151,13 @@ export default {
         calcularEventAfil(precio, cantidad = 1) {
             this.total = (precio * cantidad).toFixed(2)
             return this.total
+        },
+        deleteItem() {
+            try {
+                const resp = this.deleteItemCarrito(this.item.id)
+            } catch (error) {
+
+            }
         }
     },
     mounted() {
