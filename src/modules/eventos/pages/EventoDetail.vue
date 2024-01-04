@@ -255,6 +255,7 @@ export default {
     align-self: center;
     font-size: 24px;
     font-weight: 600;
+    font-family: 'Brothers';
 }
 
 .entradas-lista {
