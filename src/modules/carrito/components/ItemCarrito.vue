@@ -14,29 +14,15 @@
             <hr>
             <div class="total">Total: ${{ calcularEventAfil(item.afiliado.precio) }}</div>
         </div>
+        <button class="title-btn cancel-btn" @click="delete_item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-x">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
     </div>
-
-    <!-- <div v-if="(item.botella && oferta.selected === false)" class="caja">
-        <div class="info">
-            <img :src="item.botella.images[0].img_url" alt="Imagen que no carga">
-            <div class="info-afiliado">
-                <div class="nombre">{{ item.botella.nombre }}</div>
-                <Oferta :oferta="oferta" :ofertaList="ofertaList" @on-cambiarOferta="cambiarOferta"
-                    @on-quitarOferta="quitarOferta" />
-                <PlusMinusInput @update:modelValue="changeCantidad" :inicial="this.item.cantidad"
-                    :Max="item.botella.cantidadMaxima" />
-            </div>
-        </div>
-        <div class="monto-afiliado">
-            <div>
-                <div class="precio"> ${{ item.botella.precio }}</div>
-                <div class="cantidad">x{{ item.cantidad }}</div>
-            </div>
-            <hr>
-            <div class="total">Total: ${{ calcularTotal() }}</div>
-        </div>
-    </div> -->
-
     <div v-if="item.botella" class="caja">
         <div class="info">
             <img :src="item.botella.images[0].img_url" alt="Imagen que no carga">
@@ -63,6 +49,14 @@
             <div v-if="oferta.selected === true" class="total">Total: ${{ calcularTotal(this.item.oferta.descuento)}}</div>
             <div v-else class="total">Total: ${{ calcularTotal()}}</div>
         </div>
+        <button class="title-btn cancel-btn" @click="delete_item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-x">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
     </div>
 
     <div v-if="item.evento" class="caja">
@@ -84,6 +78,14 @@
             <hr>
             <div class="total">Total: ${{ calcularEventAfil(item.evento.precio, item.cantidad) }}</div>
         </div>
+        <button class="title-btn cancel-btn" @click="delete_item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-x">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
     </div>
 </template>
 
@@ -114,8 +116,6 @@ export default {
     data() {
         return {
             oferta: {
-                // descuento: 0,
-                // nombre: '',
                 selected: false
             },
             ofertaList: [],
@@ -125,13 +125,9 @@ export default {
     methods: {
         ...mapMutations('carrito', ['changeCantidadItemCarrito']),
         cambiarOferta(item) {
-            // this.oferta.descuento = item.descuento;
-            // this.oferta.nombre = item.nombre;
             this.oferta.selected = true;
         },
         quitarOferta() {
-            // this.oferta.descuento = 0;
-            // this.oferta.nombre = '';
             this.oferta.selected = false;
         },
         async getOfertas() {
@@ -162,8 +158,6 @@ export default {
     mounted() {
         this.getOfertas();
         if (this.item.oferta) {
-            // this.oferta.descuento = this.item.oferta.descuento;
-            // this.oferta.nombre = this.item.oferta.nombre;
             this.oferta.selected = true;
         }
     },
@@ -234,5 +228,11 @@ export default {
 img {
     width: 50px;
     height: 50px;
+}
+
+.title-btn {
+    padding: 0;
+    background: none;
+    border: none;
 }
 </style>
