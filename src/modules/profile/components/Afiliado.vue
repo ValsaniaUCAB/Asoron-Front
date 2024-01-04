@@ -42,13 +42,36 @@ export default {
                             });
                         } catch (error) {
                             console.log(error)
+                            Swal.fire({
+                                position: "bottom-end",
+                                title: "Error al añadir al carrito",
+                                background: "#F94646",
+                                color: "#fff",
+                                showConfirmButton: false,
+                                timer: 1500,
+                                backdrop: false
+                            });
                         }
                     } else if (result.isDenied) {
                         Swal.fire('No afiliado', '', 'info')
                     }
                 });
             }
-        }
+        },
+        // revisarEnCarrito() {
+        //     const item = this.items.find((item) => {
+        //         console.log(item)
+        //         if (!item.afiliado) return
+        //         if (item.afiliado.id === this.user.id) {
+        //             return item
+        //         }
+        //     })
+        //     if (item) {
+        //         return true
+        //     } else {
+        //         return false
+        //     }
+        // },
     },
 }
 </script>
