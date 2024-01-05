@@ -213,10 +213,12 @@ p {
     -ms-animation: fadeIn ease-out 0.2s;
 }
 
-li {
+.items-container li {
     width: 100%;
     list-style: none;
-    margin: 10px 0;
+    margin: 0;
+    padding: 0 20px 0 10px;
+
 }
 
 @keyframes fadeIn {
