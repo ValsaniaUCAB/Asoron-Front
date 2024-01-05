@@ -14,6 +14,7 @@ export const setCarrito = (state, carrito) => {
 
 export const vaciarCarrito = (state) => {
     state.items = []
+    state.montoTotal = 0
 }
 
 export const endCarrito = (state) => {

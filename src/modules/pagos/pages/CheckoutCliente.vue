@@ -52,7 +52,7 @@
                 <div class="productos-box">
                     <div class="producto" v-for="(item, index) in items" :key="item.id">
                         <div>
-                            <span>{{ index + 1 }}.-</span>
+                            <span>{{ index + 1 }}.- </span>
                             <span v-if="item.afiliado">{{ item.afiliado.nombre }}</span>
                             <span v-if="item.botella">{{ item.botella.nombre }}</span>
                             <span v-if="item.evento">{{ item.evento.nombre }}</span>
@@ -62,7 +62,8 @@
                             <span v-if="item.botella && !item.oferta">${{ item.botella.precio }}</span>
                             <span v-if="item.botella && item.oferta">
                                 <span class="precio-sin-desc">${{ item.botella.precio }}</span>
-                                ${{ item.botella.precio - (item.botella.precio * item.oferta.descuento / 100).toFixed(2) }}
+                                ${{ (item.botella.precio - (item.botella.precio * item.oferta.descuento / 100)).toFixed(2)
+                                }}
                             </span>
                             <span v-if="item.evento">${{ item.evento.precio }}</span>
                             <span> x{{ item.cantidad }}</span>
@@ -72,7 +73,7 @@
             </div>
             <div>
                 <hr>
-                <div class="monto-total">${{ montoTotal }}</div>
+                <div class="monto-total">${{ montoTotal.toFixed(2) }}</div>
                 <button @click="vender()">Pagar</button>
             </div>
         </div>
@@ -86,6 +87,10 @@ import Swal from 'sweetalert2'
 import AddCard from '../components/AddCard.vue'
 import getTarjetas from '../helpers/getTarjetas'
 import Lugar from '@/modules/auth/components/Lugar'
+import getPrecioPuntos from '../helpers/getPrecioPuntos'
+import getPuntosInfo from '../helpers/getPuntosInfo'
+import postVenta from '../helpers/postVenta'
+
 export default {
     components: {
         AddCard,
@@ -101,12 +106,15 @@ export default {
             tarjetaId: null,
             puntosId: null,
             puntosPrecio: 15,
+            maxPuntos: 0,
         };
     },
     computed: {
         ...mapState('carrito', ['items', 'uuid']),
         ...mapState('auth', ['user']),
-        isLoading() {
+        isLoading(venta) {
+            if (venta)
+                return true
             if (!this.user || !this.items || this.items.length === 0 || this.listaTarjetas === null) {
                 new Swal({
                     title: 'Espere por favor',
@@ -143,6 +151,8 @@ export default {
         }
     },
     methods: {
+        ...mapMutations('carrito', ['endCarrito']),
+        ...mapActions('carrito', ['getCarritoCliente']),
         openAddCard() {
             this.active = true
         },
@@ -154,7 +164,7 @@ export default {
             this.fkDireccion = value
             console.log(value)
         },
-        vender() {
+        async vender() {
             if (this.validar()) {
                 new Swal({
                     title: 'Espere por favor',
@@ -166,24 +176,29 @@ export default {
                     fk_vent_direccion: this.fkDireccion,
                     uuid_carrito: this.uuid,
                     tarjeta_id: this.tarjetaId,
-                    cantidad_tarjeta: this.montoTarjeta,
+                    cantidad_tarjeta: Number.parseFloat(this.montoTarjeta.toFixed(2)),
                     puntos_id: this.puntosId,
                     cantidad_puntos: this.montoPuntos
                 }
                 try {
                     console.log(data)
-                    Swal.fire('Success', 'Inicio Sesion con exito', 'success').then((result) => {
+                    await postVenta(data)
+                    Swal.fire('Success', 'Pago realizado con exito', 'success').then((result) => {
                         if (result.isConfirmed) {
-                            // this.$router.push({ name: 'home' });
+                            this.endCarrito()
+                            this.getCarritoCliente()
+                            this.$router.push({ name: 'home' });
+                            Swal.close()
                         }
                     });
                 } catch (error) {
-
+                    console.log(error)
+                    Swal.fire('Error', `Problema al registrar el pago\n${error.response.data.error}`, 'error')
                 }
             }
         },
         validar() {
-            if (this.direccion === '' || this.tarjetaId === null || this.fkDireccion === '') {
+            if (this.direccion === '' || this.tarjetaId === null || this.fkDireccion === '' || this.puntosId === null) {
                 Swal.fire({
                     position: "bottom-end",
                     title: "Debe llenar todos los campos",
@@ -200,6 +215,10 @@ export default {
     },
     async mounted() {
         this.listaTarjetas = await getTarjetas()
+        this.puntosPrecio = await getPrecioPuntos()
+        const data = await getPuntosInfo()
+        this.puntosId = data.punt_id
+        this.maxPuntos = data.cantidad_puntos
     }
     // mounted() {
     //     if (!this.user) {
