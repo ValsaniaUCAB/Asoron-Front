@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div v-else class="catalogo-container">
-                <div class="catalogo"> 
+                <div class="catalogo">
                     <li v-if="rones.length > 0" v-for="ron in rones" :key="ron.id">
                         <Ron :ron="ron" />
                     </li>
@@ -60,7 +60,7 @@ export default {
     },
     data() {
         return {
-            term: '',
+            term: ''
         }
     },
     methods: {
@@ -107,7 +107,8 @@ export default {
         ...mapState('catalogo', {
             rones: 'ronList',
             isLoading: 'isLoading',
-            pages: 'pages'
+            pages: 'pages',
+            busqueda: 'busqueda',
         }),
     },
     watch: {
@@ -118,6 +119,9 @@ export default {
                 this.cargarRones()
             }
         }
+    },
+    mounted() {
+        this.term = this.busqueda
     }
 }
 </script>
@@ -210,7 +214,7 @@ export default {
     font-weight: bold;
     color: #31212B;
     width: 40vw;
-    
+
 }
 
 li {

@@ -6,7 +6,7 @@
 
     <div class="banner">
         <div>
-            <button id="banner-button" class="button-18">COMPRAR</button>
+            <button id="banner-button" class="button-18" @click="goToSpaySide()">COMPRAR</button>
         </div>
     </div>
     <div id="spacer">
@@ -45,6 +45,7 @@
 import Navbar from '@/modules/shared/components/Navbar.vue'
 import RonMinimal from '@/modules/catalogo/components/RonMinimal'
 import getRones from '@/modules/catalogo/helpers/getRonesHome'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
     components: {
@@ -58,6 +59,13 @@ export default {
         }
     },
     methods: {
+        ...mapMutations('catalogo', ['setBusqueda']),
+        goToSpaySide() {
+            this.setBusqueda('Santa Teresa 1796 Speyside')
+            this.$router.push({
+                name: 'catalogo'
+            })
+        },
         getDiario() {
             this.$router.push({
                 name: 'diario-ronero'
