@@ -1,6 +1,5 @@
 <template>
     <div class="box">
-        <h1>CheckoutLayout</h1>
         <router-view></router-view>
     </div>
 </template>

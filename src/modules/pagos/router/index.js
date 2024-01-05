@@ -6,8 +6,13 @@ export default {
     children: [
         {
             path: '',
-            name: 'checkout-index',
-            component: () => import(/* webpackChunvkName: "checkout-index" */ '../pages/Checkout'),
+            name: 'checkout-cliente',
+            component: () => import(/* webpackChunvkName: "checkout-index" */ '../pages/CheckoutCliente'),
+        },
+        {
+            path: '',
+            name: 'checkout-empleado',
+            component: () => import(/* webpackChunvkName: "checkout-index" */ '../pages/CheckoutCliente'),
         },
         {
             path: 'addCard',

@@ -67,7 +67,7 @@ export default {
             this.changeMontoTotal(this.TotalFinal)
         },
         pushToCheckout() {
-            this.$router.push({ name: 'checkout' })
+            this.$router.push({ name: 'checkout-cliente' })
         }
 
     },
@@ -150,8 +150,8 @@ export default {
 
 .box {
     display: flex;
-    flex-direction: column;    
-    
+    flex-direction: column;
+
 }
 
 .encabezado {
@@ -160,6 +160,7 @@ export default {
     flex-direction: column;
     margin-bottom: 1%;
 }
+
 .items-container {
     max-height: 70vh;
     overflow-y: scroll;
