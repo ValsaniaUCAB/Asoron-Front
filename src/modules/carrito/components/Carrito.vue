@@ -131,7 +131,7 @@ export default {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 90vh;
+    
     z-index: 900;
     display: flex;
     background-color: rgba(0, 0, 0, 0.5);
@@ -146,6 +146,7 @@ export default {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     z-index: 900;
     padding: 20px;
+    
 }
 
 .box {
@@ -155,14 +156,14 @@ export default {
 }
 
 .encabezado {
-    height: 9%;
+    height: 8dvh;
     display: flex;
     flex-direction: column;
-    margin-bottom: 1%;
+    margin-bottom: 1dvh;
 }
 
 .items-container {
-    max-height: 70vh;
+    max-height: 70dvh;
     overflow-y: scroll;
 }
 
@@ -188,7 +189,7 @@ export default {
 .total-container {
     display: flex;
     flex-direction: column;
-    height: 10vh;
+    height: 8dvh;
 }
 
 .monto {
