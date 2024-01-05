@@ -112,9 +112,7 @@ export default {
     computed: {
         ...mapState('carrito', ['items', 'uuid']),
         ...mapState('auth', ['user']),
-        isLoading(venta) {
-            if (venta)
-                return true
+        isLoading() {
             if (!this.user || !this.items || this.items.length === 0 || this.listaTarjetas === null) {
                 new Swal({
                     title: 'Espere por favor',
