@@ -22,7 +22,7 @@
                 </div>
                 <div class="total-container" v-if="user">
                     <div class="monto"><span>Monto total:</span><span>${{ TotalFinal }}</span></div>
-                    <button>CHECKOUT</button>
+                    <button @click="pushToCheckout">CHECKOUT</button>
                 </div>
             </div>
         </div>
@@ -66,6 +66,9 @@ export default {
             this.TotalFinal = Math.round(this.TotalFinal * 100) / 100;
             this.changeMontoTotal(this.TotalFinal)
         },
+        pushToCheckout() {
+            this.$router.push({ name: 'checkout' })
+        }
 
     },
     unmounted() {

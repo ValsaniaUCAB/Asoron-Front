@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 
 export default {
     methods: {
-        ...mapMutations('carrito', ['vaciarCarrito']),
+        ...mapMutations('carrito', ['endCarrito']),
         ...mapActions('auth', ['logout']),
         async sendLogout() {
             new Swal({
@@ -17,7 +17,7 @@ export default {
             })
             Swal.showLoading()
             await this.logout()
-            await this.vaciarCarrito()
+
             Swal.fire({
                 title: 'Success',
                 text: 'Cerró sesión con éxito',
@@ -27,6 +27,7 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.$router.push({ name: 'home' });
+                    this.endCarrito()
                 }
             });
         }

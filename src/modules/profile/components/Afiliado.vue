@@ -9,11 +9,23 @@ import Swal from 'sweetalert2'
 export default {
     computed: {
         ...mapState('auth', ['user']),
-        ...mapState('carrito', ['uuid']),
+        ...mapState('carrito', ['uuid', 'items']),
     },
     methods: {
         ...mapActions('carrito', ['addAfiliadoCarrito']),
         async afiliacion() {
+            if (this.revisarEnCarrito()) {
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "Ya tiene una afiliacion en el carrito",
+                    background: "#0085FF",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+                return
+            }
             if (this.user.data.afiliado === false) {
                 Swal.fire({
                     title: 'No esta afiliado',
@@ -58,20 +70,20 @@ export default {
                 });
             }
         },
-        // revisarEnCarrito() {
-        //     const item = this.items.find((item) => {
-        //         console.log(item)
-        //         if (!item.afiliado) return
-        //         if (item.afiliado.id === this.user.id) {
-        //             return item
-        //         }
-        //     })
-        //     if (item) {
-        //         return true
-        //     } else {
-        //         return false
-        //     }
-        // },
+        revisarEnCarrito() {
+            const item = this.items.find((item) => {
+                console.log(item)
+                if (!item.afiliado) return
+                if (item.afiliado.id == 2) {
+                    return item
+                }
+            })
+            if (item) {
+                return true
+            } else {
+                return false
+            }
+        },
     },
 }
 </script>
