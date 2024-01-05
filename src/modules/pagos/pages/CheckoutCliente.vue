@@ -73,6 +73,7 @@
             </div>
             <div>
                 <hr>
+                <div class="monto-total">Bs. {{ montoTotal * valorDolar }}</div>
                 <div class="monto-total">${{ montoTotal.toFixed(2) }}</div>
                 <button @click="vender()">Pagar</button>
             </div>
@@ -89,6 +90,7 @@ import getTarjetas from '../helpers/getTarjetas'
 import Lugar from '@/modules/auth/components/Lugar'
 import getPrecioPuntos from '../helpers/getPrecioPuntos'
 import getPuntosInfo from '../helpers/getPuntosInfo'
+import getValorDolar from '../helpers/getValorDolar'
 import postVenta from '../helpers/postVenta'
 
 export default {
@@ -107,6 +109,7 @@ export default {
             puntosId: null,
             puntosPrecio: 15,
             maxPuntos: 0,
+            valorDolar: 0
         };
     },
     computed: {
@@ -214,6 +217,7 @@ export default {
     async mounted() {
         this.listaTarjetas = await getTarjetas()
         this.puntosPrecio = await getPrecioPuntos()
+        this.valorDolar = await getValorDolar()
         const data = await getPuntosInfo()
         this.puntosId = data.punt_id
         this.maxPuntos = data.cantidad_puntos

@@ -10,14 +10,9 @@ export default {
             component: () => import(/* webpackChunvkName: "checkout-index" */ '../pages/CheckoutCliente'),
         },
         {
-            path: '',
+            path: 'empleado',
             name: 'checkout-empleado',
-            component: () => import(/* webpackChunvkName: "checkout-index" */ '../pages/CheckoutCliente'),
+            component: () => import(/* webpackChunvkName: "checkout-index" */ '../pages/CheckoutEmpleado'),
         },
-        {
-            path: 'addCard',
-            name: 'addCard',
-            component: () => import(/* webpackChunvkName: "addCard" */ '../pages/AddCard'),
-        }
     ]
 }

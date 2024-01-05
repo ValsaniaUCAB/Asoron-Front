@@ -1,67 +1,76 @@
 <template>
-    <div>Enter Cliente Natural</div>
-
-    <div class="d-flex flex-column">
-        <div class="form-box">
-            <p>Username</p>
-            <input type="text" placeholder="Username" class="form" v-model="username" />
-        </div>
-        <div class="form-box">
-            <p>Contraseña</p>
-            <input type="text" placeholder="Contraseña" class="form" v-model="password" />
-        </div>
-        <div class="form-box">
-            <p>Correo Electronico</p>
-            <input type="text" placeholder="micorreo@gmail.com" class="form" v-model="email" />
-        </div>
-        <div class="form-box">
-            <p>Cedula de Identidad</p>
-            <input type="text" placeholder="2222226" class="form" v-model="cedula" />
-        </div>
-        <div class="form-box">
-            <p>RIF Personal</p>
-            <input type="text" placeholder="2222666-1" class="form" v-model="rif" />
-        </div>
-        <div class="form-box">
-            <p>Nombre</p>
-            <input type="text" placeholder="Nombre" class="form" v-model="nombre" />
-        </div>
-        <div class="form-box">
-            <p>Segundo Nombre</p>
-            <input type="text" placeholder="Nombre" class="form" v-model="segundoNombre" />
-        </div>
-        <div class="form-box">
-            <p>Apellido</p>
-            <input type="text" placeholder="Apellidos" class="form" v-model="apellido" />
-        </div>
-        <div class="form-box">
-            <p>Segundo Apellido</p>
-            <input type="text" placeholder="Apellidos" class="form" v-model="segundoApellido" />
-        </div>
-        <div class="form-box">
-            <p>Direccion</p>
-            <input type="text" placeholder="Calle locura, Apt 3" class="form" v-model="direccion" />
-            <Lugar @on-click="setParroquia"></Lugar>
-        </div>
-        <div class="form-box">
-            <p>Telefono</p>
-            <div class="form-telefono">
-                <CodigoTelefono @on-click="setCodigoTelefono"></CodigoTelefono>
-                <input type="text" placeholder="1234567" class="form" v-model="telefono" />
+    <div class="cuadro">
+        <!-- <img src="../assets/Logo.svg" class="my-4" /> -->
+        <div class="box">
+            <p class="titulo">Crear cuenta</p>
+            <div class="box2">
+                <div class="d-flex flex-column">
+                    <div class="form-box">
+                        <p>Username</p>
+                        <input type="text" placeholder="Username" class="form" v-model="username" />
+                    </div>
+                    <div class="form-box">
+                        <p>Contraseña</p>
+                        <input type="text" placeholder="Contraseña" class="form" v-model="password" />
+                    </div>
+                    <div class="form-box">
+                        <p>Correo Electronico</p>
+                        <input type="text" placeholder="micorreo@gmail.com" class="form" v-model="email" />
+                    </div>
+                    <div class="form-box">
+                        <p>Cedula de Identidad</p>
+                        <input type="text" placeholder="2222226" class="form" v-model="cedula" />
+                    </div>
+                    <div class="form-box">
+                        <p>RIF Personal</p>
+                        <input type="text" placeholder="2222666-1" class="form" v-model="rif" />
+                    </div>
+                    <div class="form-box">
+                        <p>Nombre</p>
+                        <input type="text" placeholder="Nombre" class="form" v-model="nombre" />
+                    </div>
+                    <div class="form-box">
+                        <p>Segundo Nombre</p>
+                        <input type="text" placeholder="Nombre" class="form" v-model="segundoNombre" />
+                    </div>
+                    <div class="form-box">
+                        <p>Apellido</p>
+                        <input type="text" placeholder="Apellidos" class="form" v-model="apellido" />
+                    </div>
+                    <div class="form-box">
+                        <p>Segundo Apellido</p>
+                        <input type="text" placeholder="Apellidos" class="form" v-model="segundoApellido" />
+                    </div>
+                    <div class="form-box">
+                        <p>Direccion</p>
+                        <input type="text" placeholder="Calle locura, Apt 3" class="form" v-model="direccion" />
+                        <Lugar @on-click="setParroquia"></Lugar>
+                    </div>
+                    <div class="form-box">
+                        <p>Telefono</p>
+                        <div class="form-telefono">
+                            <CodigoTelefono @on-click="setCodigoTelefono"></CodigoTelefono>
+                            <input type="text" placeholder="1234567" class="form" v-model="telefono" />
+                        </div>
+                    </div>
+                    <button class="boton" @click="registrarse">Registrarse</button>
+                </div>
             </div>
         </div>
-        <button class="boton" @click="registrarse">Registrarse</button>
     </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
-import CodigoTelefono from './CodigoTelefono';
-import Lugar from './Lugar.vue'
 import Swal from 'sweetalert2'
 
+import CodigoTelefono from '@/modules/auth/components/CodigoTelefono';
+import Lugar from '@/modules/auth/components/Lugar'
+
+import postClienteNatural from '@/modules/auth/helpers/postClienteNatural'
+
+
 export default {
+    emits: ['on-register'],
     components: {
         Lugar,
         CodigoTelefono
@@ -84,8 +93,6 @@ export default {
         }
     },
     methods: {
-        ...mapActions('auth', ['registerClienteNatural']),
-        ...mapActions('carrito', ['getCarritoCliente']),
         setParroquia(item) {
             this.parroquia = item
         },
@@ -221,11 +228,10 @@ export default {
             })
             Swal.showLoading()
             try {
-                await this.registerClienteNatural(data)
-                await this.getCarritoCliente()
+                const info = await postClienteNatural(data, false)
                 Swal.fire('Success', 'Registrado con exito', 'success').then((result) => {
                     if (result.isConfirmed) {
-                        this.$router.push({ name: 'home' });
+                        this.$emit('on-register', info)
                     }
                 });
             } catch (error) {
@@ -238,42 +244,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-telefono {
+.cuadro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 850px;
+    overflow-y: scroll;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding: 50px 120px;
+    border-radius: 50px;
+    margin: 20px;
+    width: 800px;
+    background-color: white;
+}
+
+.box {
+
     display: flex;
-    justify-content: space-between;
-
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.boton {
-    border: 2px solid;
-    background-color: #31212B;
-    color: white;
-    height: 56px;
-    width: 100%;
-    border-radius: 32px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-
-    &.select {
-        width: 200px;
-    }
-
-    &:hover {
-        background-color: #46303d;
-    }
-}
-
-p {
-    margin-bottom: 0;
-    font-size: 18px;
-    font-weight: bold;
-    color: #31212B;
-
+.box2 {
+    align-items: center;
+    width: 470px;
+    justify-content: center;
 }
 
 img {
     width: 260px;
     height: 60px;
+}
+
+.titulo {
+    font-weight: bold;
+    text-align: left;
+    font-size: 48px;
+    color: #31212B;
 }
 
 .form-box {
@@ -288,6 +297,29 @@ img {
     border: 2px solid;
     border-color: lightgray;
     border-radius: 16px;
+}
+
+.form-telefono {
+    display: flex;
+    justify-content: space-between;
+}
+
+.boton {
+    border: 2px solid;
+    background-color: #31212B;
+    color: white;
+    height: 56px;
+    border-radius: 32px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+
+    &.select {
+        width: 200px;
+    }
+
+    &:hover {
+        background-color: #46303d;
+    }
 }
 
 input {
