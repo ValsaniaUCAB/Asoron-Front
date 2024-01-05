@@ -24,6 +24,7 @@
                     <div class="monto"><span>Monto total:</span><span>${{ TotalFinal }}</span></div>
                     <button @click="pushToCheckout">CHECKOUT</button>
                 </div>
+                <div v-else class="total-container"></div>
             </div>
         </div>
 
@@ -131,7 +132,7 @@ export default {
     top: 0;
     left: 0;
     width: 100vw;
-    
+    height: 91dvh;
     z-index: 900;
     display: flex;
     background-color: rgba(0, 0, 0, 0.5);
@@ -163,7 +164,7 @@ export default {
 }
 
 .items-container {
-    max-height: 70dvh;
+    height: 70dvh;
     overflow-y: scroll;
 }
 
