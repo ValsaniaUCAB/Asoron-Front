@@ -1,6 +1,6 @@
 <template>
     <div v-if="item.afiliado" class="caja">
-        <div class="info">
+        <div class="info ">
             <img src="@/modules/shared/assets/Logo PNG.png" alt="Imagen que no carga">
             <div class="info-afiliado">
                 <div class="nombre">{{ item.afiliado.nombre }}</div>
@@ -14,7 +14,7 @@
             <hr>
             <div class="total">Total: ${{ calcularEventAfil(item.afiliado.precio) }}</div>
         </div>
-        <button class="title-btn cancel-btn" @click="deleteItem">
+        <button class="cancel-btn" @click="deleteItem">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -49,7 +49,7 @@
             <div v-if="oferta.selected === true" class="total">Total: ${{ calcularTotal(this.item.oferta.descuento) }}</div>
             <div v-else class="total">Total: ${{ calcularTotal() }}</div>
         </div>
-        <button class="title-btn cancel-btn" @click="deleteItem">
+        <button class="cancel-btn" @click="deleteItem">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -77,7 +77,7 @@
             <hr>
             <div class="total">Total: ${{ calcularEventAfil(item.evento.precio, item.cantidad) }}</div>
         </div>
-        <button class="title-btn cancel-btn" @click="deleteItem">
+        <button class="cancel-btn" @click="deleteItem">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -181,18 +181,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.box {
-    width: 100%;
-    height: 150px;
-    border: 1px solid lightgray;
-}
 
 .caja {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 250px;
-    border: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     padding: 10px;
 }
 
@@ -229,18 +225,14 @@ export default {
     color: red;
 }
 
-.oferta-box {
-    width: 100px;
-}
-
 img {
     width: 50px;
     height: 50px;
 }
-
-.title-btn {
-    padding: 0;
+.cancel-btn {
     background: none;
     border: none;
+    align-self: flex-start;
+    padding: 0;
 }
 </style>
