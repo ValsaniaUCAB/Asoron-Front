@@ -26,7 +26,7 @@
                 </div>
                 <div class="total-container" v-if="user">
                     <div class="monto"><span>Monto total:</span><span>${{ TotalFinal }}</span></div>
-                    <button @click="pushToCheckout">CHECKOUT</button>
+                    <button class="button-18 " @click="pushToCheckout">CHECKOUT</button>
                 </div>
                 <div v-else class="total-container"></div>
             </div>
@@ -129,7 +129,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .modal-background {
     position: fixed;
     margin-top: 92px;
@@ -157,6 +157,7 @@ export default {
 .box {
     display: flex;
     flex-direction: column;
+    color: #000;
 
 }
 
@@ -164,12 +165,13 @@ export default {
     height: 8dvh;
     display: flex;
     flex-direction: column;
-    margin-bottom: 1dvh;
+    border-bottom: 1px solid lightgray;
 }
 
 .items-container {
     height: 70dvh;
     overflow-y: scroll;
+    padding: 0 20px 0 10px;
 }
 .items-container-placeholder {
     display: flex;
@@ -179,6 +181,7 @@ export default {
     height: 70dvh;
     padding-top: 4dvh ;
     overflow: hidden;
+    
 }
 
 .items-container-placeholder svg{
@@ -219,8 +222,21 @@ export default {
 
 .total-container {
     display: flex;
+    border-top: 1px solid lightgray;
+    padding-top: 1dvh;
     flex-direction: column;
-    height: 8dvh;
+    height: 9dvh;
+    font-family: 'Brothers', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #31212B;
+    text-align: left;
+    margin: 0;
+}
+
+.total-container button {
+    width: 480px;
+    align-self: center;
 }
 
 .monto {
@@ -247,12 +263,65 @@ export default {
     -ms-animation: fadeIn ease-out 0.2s;
 }
 
+
 .items-container li {
     width: 100%;
     list-style: none;
     margin: 0;
-    padding: 0 20px 0 10px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
 
+.items-container li:first-child {
+    border-top: none;
+}
+.items-container li:last-child {
+    border-bottom: none;
+}
+.button-18 {
+    align-items: center;
+    background-color: #FDD08D;
+    border: 0;
+    border-radius: 100px;
+    box-sizing: border-box;
+    color: #000;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 480px;
+    min-height: 40px;
+    min-width: 0px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+
+    &:hover,
+    :focus {
+        background-color: #e6bd7f;
+        color: #000;
+    }
+
+    &:active {
+        background: #c09e6a;
+        color: rgb(255, 255, 255, .7);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background: rgba(0, 0, 0, .08);
+        color: rgba(0, 0, 0, .3);
+    }
 }
 
 @keyframes fadeIn {

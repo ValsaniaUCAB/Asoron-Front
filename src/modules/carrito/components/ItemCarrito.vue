@@ -1,8 +1,10 @@
 <template>
     <div v-if="item.afiliado" class="caja">
         <div class="info ">
-            <img src="@/modules/shared/assets/Logo PNG.png" alt="Imagen que no carga">
-            <div class="info-afiliado">
+            <div class="img-generada-container">
+                <img class="img-generada" src="@/modules/shared/assets/Logo PNG.png" alt="Imagen que no carga">
+            </div>
+            <div class="info-afiliado-only">
                 <div class="nombre">{{ item.afiliado.nombre }}</div>
             </div>
         </div>
@@ -23,7 +25,7 @@
         </button>
     </div>
 
-    <div v-if="item.botella" class="caja">
+    <div v-if="item.botella" class="caja caja-evento">
         <div class="info">
             <img :src="item.botella.images[0].img_url" alt="Imagen que no carga">
             <div class="info-afiliado">
@@ -60,7 +62,9 @@
 
     <div v-if="item.evento" class="caja">
         <div class="info">
-            <img src="@/modules/shared/assets/Evento PNG.png" alt="Imagen que no carga">
+            <div class="img-generada-container">
+                <img class="img-generada" src="@/modules/shared/assets/Evento PNG.png" alt="Imagen que no carga">
+            </div>
             <div class="info-afiliado">
                 <div class="nombre">{{ item.evento.nombre }}</div>
                 <div class="entrada"> {{ item.evento.entradaNombre }}</div>
@@ -184,12 +188,12 @@ export default {
 
 .caja {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
     height: 250px;
-    border-top: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
+    
     padding: 10px;
+    color: black;
 }
 
 .info {
@@ -204,6 +208,17 @@ export default {
     align-items: center;
     margin-left: 10px;
     width: 250px;
+    
+}
+
+.info-afiliado-only {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    width: 250px;
+    
 }
 
 .nombre {
@@ -218,6 +233,7 @@ export default {
     width: 90px;
     height: 100%;
     font-size: 16px;
+    // margin-left: auto;
 }
 
 .precio-sin-desc {
@@ -226,13 +242,30 @@ export default {
 }
 
 img {
-    width: 50px;
-    height: 50px;
+    height: 10dvh;
+    width: 10dvh;
+    align-self: center;
 }
+
+.img-generada-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10dvh;
+    width: 10dvh;
+}
+
+.img-generada {
+    height: 8dvh;
+    width: 7dvh;
+}
+
+
 .cancel-btn {
     background: none;
     border: none;
     align-self: flex-start;
     padding: 0;
+
 }
 </style>
