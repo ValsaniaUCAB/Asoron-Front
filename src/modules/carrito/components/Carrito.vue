@@ -4,15 +4,15 @@
         <div class="modal-container">
             <div class="box">
                 <div class="encabezado">
-                    <p class="asoron">ASORON</p>
+                    <h2 class="asoron">ASORON</h2>
                     <div v-if="user === null">
-                        <p class="enc-tit">Bienvenido! Guest</p>
+                        <h3 class="enc-tit">Bienvenido! Guest</h3>
                     </div>
                     <div v-else>
-                        <p v-if="user.fk_usua_clie_natu" class="enc-tit">Bienvenido! {{ user.data.nombre }} </p>
-                        <p v-if="user.fk_usua_clie_juri" class="enc-tit">Bienvenido! {{ user.data.razonSocial }} </p>
-                        <p v-if="user.fk_usua_clie_juri === null && user.fk_usua_clie_natu === null" class="enc-tit">
-                            Bienvenido! {{ user.data.nombre }} </p>
+                        <h3 v-if="user.fk_usua_clie_natu" class="enc-tit">Bienvenido! {{ user.data.nombre }} </h3>
+                        <h3 v-if="user.fk_usua_clie_juri" class="enc-tit">Bienvenido! {{ user.data.razonSocial }} </h3>
+                        <h3 v-if="user.fk_usua_clie_juri === null && user.fk_usua_clie_natu === null" class="enc-tit">
+                            Bienvenido! {{ user.data.nombre }} </h3>
                     </div>
                 </div>
                 <div class="items-container">
@@ -127,10 +127,11 @@ export default {
 <style scoped>
 .modal-background {
     position: fixed;
-    padding-top: 92px;
+    margin-top: 92px;
     top: 0;
     left: 0;
     width: 100vw;
+    height: 90vh;
     z-index: 900;
     display: flex;
     background-color: rgba(0, 0, 0, 0.5);
@@ -140,24 +141,25 @@ export default {
 
 .modal-container {
     width: 610px;
-    height: 100vh;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     z-index: 900;
+    padding: 20px;
 }
 
 .box {
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    justify-content: space-between;
+    flex-direction: column;    
+    
 }
 
 .encabezado {
-    height: 10vh;
+    height: 9%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1%;
 }
-
 .items-container {
     max-height: 70vh;
     overflow-y: scroll;
@@ -165,14 +167,12 @@ export default {
 
 .asoron {
     font-family: 'Brothers', sans-serif;
-    font-weight: bold;
+    font-weight: 800;
     font-size: 36px;
     color: #fdd08d;
-    text-align: left;
-}
-
-p {
-    margin: 5px;
+    align-self: flex-start;
+    margin: 0;
+    height: fit-content;
 }
 
 .enc-tit {
@@ -181,12 +181,13 @@ p {
     font-size: 24px;
     color: #31212B;
     text-align: left;
+    margin: 0;
 }
 
 .total-container {
     display: flex;
     flex-direction: column;
-    height: 5vh;
+    height: 10vh;
 }
 
 .monto {
