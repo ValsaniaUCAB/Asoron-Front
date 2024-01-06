@@ -13,6 +13,7 @@
 import Logout from '../components/Logout'
 import Afiliado from '../components/Afiliado'
 import Ventas from '../components/Ventas'
+import { mapState } from 'vuex'
 export default {
     data() {
         return {
