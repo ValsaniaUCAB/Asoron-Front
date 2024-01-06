@@ -48,7 +48,7 @@
                         <div class="producto-nombre">
                             <span v-if="item.afiliado">{{ item.afiliado.nombre }}</span>
                             <span v-if="item.botella">{{ item.botella.nombre }}</span>
-                            <span v-if="item.evento">{{ item.evento.nombre }}</span>
+                            <span v-if="item.evento">{{ item.evento.nombre }} | {{ item.evento.entradaNombre }}</span>
                         </div>
                         <div class="producto-precio">
                             <span v-if="item.afiliado">${{ item.afiliado.precio }}</span>
@@ -331,7 +331,7 @@ export default {
     border-radius: 8px;
     border: 1px solid #E3E5ED;
     padding: 0 12px;
-    
+
 }
 
 .tarjeta {
