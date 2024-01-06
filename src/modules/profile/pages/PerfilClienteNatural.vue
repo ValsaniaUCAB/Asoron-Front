@@ -1,9 +1,12 @@
 <template>
-    <h1>Soy Perfil del Cliente Natural</h1>
+    <div class="">
+        <h1>Mi perfil</h1>
+        <div class="hola">Hola, {{ user.data.nombre }}</div>
+    </div>
     <Afiliado></Afiliado>
     <Logout></Logout>
-    <button @click="changeShowVentas()">Ventas</button>
-    <Ventas v-if="showVentas" />
+    <button @click="changeShowVentas">Ventas</button>
+    <Ventas @on-close="changeShowVentas" v-if="showVentas" />
 </template>
 
 <script>
@@ -21,10 +24,13 @@ export default {
         Afiliado,
         Ventas
     },
+    computed: {
+        ...mapState('auth', ['user'])
+    },
     methods: {
         changeShowVentas() {
-            this.showVentas = true
-        }
+            this.showVentas = !this.showVentas
+        },
     }
 }
 </script>

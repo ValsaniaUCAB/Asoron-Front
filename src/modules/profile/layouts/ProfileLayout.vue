@@ -1,6 +1,6 @@
 <template>
     <Navbar />
-    <div class="container">Soy LayoutCliente</div>
+    <div class="container"></div>
     <router-view />
 </template>
 
