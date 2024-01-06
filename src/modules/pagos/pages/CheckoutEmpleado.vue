@@ -5,8 +5,9 @@
             <div class="encabezado">
                 <h1 class="titulo">Asoron</h1>
                 <button class="cancel-btn" @click="deleteItem">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                        stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
@@ -66,7 +67,6 @@
                     <input type="number" v-model="puntos" />
                 </div>
             </div>
-            <AddCard v-if="active" @on-close="closeAddCard"></AddCard>
         </div>
 
         <div class="datos-compra">
@@ -102,6 +102,7 @@
                 <button @click="vender()">Pagar</button>
             </div>
         </div>
+        <BackToHome />
     </div>
 </template>
 
@@ -111,10 +112,10 @@ import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 import Swal from 'sweetalert2'
 import { CDropdown } from '@coreui/vue';
 
-import AddCard from '../components/AddCard'
 import Lugar from '@/modules/auth/components/Lugar'
 import AddClienteNatural from '../components/AddClienteNatural'
 import AddClienteJuridico from '../components/AddClienteJuridico';
+import BackToHome from '@/modules/auth/components/BackToHome'
 
 import getTarjetas from '../helpers/getTarjetas'
 import postVenta from '../helpers/postVenta'
@@ -122,11 +123,11 @@ import { getInfoNatural, getInfoJuridico } from '../helpers/getInfoCliente'
 
 export default {
     components: {
-        AddCard,
         Lugar,
         CDropdown,
         AddClienteNatural,
         AddClienteJuridico,
+        BackToHome
     },
     data() {
         return {
@@ -200,6 +201,18 @@ export default {
                 allowOutsideClick: false,
             })
             Swal.showLoading()
+            if (this.cliente.tipo === null) {
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "Debe seleccionar el tipo de cliente",
+                    background: "#F94646",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+                return
+            }
             if (this.cliente.tipo === 'natural') {
                 try {
                     this.cliente.info = await getInfoNatural(this.credencialCliente)
@@ -523,6 +536,7 @@ export default {
     display: flex;
     width: 100%;
 }
+
 .cancel-btn {
     background: none;
     border: none;
@@ -530,5 +544,4 @@ export default {
     margin-left: auto;
 
 }
-
 </style>
