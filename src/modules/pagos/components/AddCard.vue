@@ -23,8 +23,8 @@
                     <label class="left">Fecha</label>
                     <div class="fechas-input">
                         <!-- <input type="text" placeholder="dia" class="form fecha" v-model="dia" /> -->
-                        <input type="text" placeholder="mes" class="form fecha" v-model="mes" />
-                        <input type="text" placeholder="año" class="form fecha" v-model="anio" />
+                        <input type="text" placeholder="mes: 01" class="form fecha" v-model="mes" />
+                        <input type="text" placeholder="año: 2024" class="form fecha" v-model="anio" />
                     </div>
                     <button class="boton" @click="addCard">Añadir tarjeta</button>
                 </div>
