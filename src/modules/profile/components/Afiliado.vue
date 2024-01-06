@@ -5,6 +5,7 @@
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
 import Swal from 'sweetalert2'
+import getCarnetAfiliado from '../helpers/getCarnetAfiliado'
 
 export default {
     computed: {
@@ -68,6 +69,25 @@ export default {
                         Swal.fire('No afiliado', '', 'info')
                     }
                 });
+            } else {
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "Descargando Carnet de Afiliación",
+                    background: "#0085FF",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+                const pdf = await getCarnetAfiliado()
+                const url = window.URL.createObjectURL(new Blob([pdf]));
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Carnet de Asociacion.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
             }
         },
         revisarEnCarrito() {
