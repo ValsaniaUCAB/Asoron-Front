@@ -2,17 +2,7 @@
     <div v-if="!isLoading"></div>
     <div v-else class="box">
         <div class="datos-cliente">
-            <div class="encabezado">
-                <h1 class="titulo">Asoron</h1>
-                <button class="cancel-btn" @click="deleteItem">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
-                        stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-x">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
+            <h1 class="titulo">Asoron</h1>
             <div class="subtitulo">
                 Checkout
             </div>
@@ -22,12 +12,12 @@
             <div v-else class="tarjetas-box">
                 <p>Seleccionar Tarjetas</p>
                 <div class="tarjetas">
-                    <div class="borde">
-                        <div class="tarjeta" v-for="tarjeta in listaTarjetas" :key="tarjeta.id">
+                    <ul class="borde">
+                        <li class="tarjeta" v-for="tarjeta in listaTarjetas" :key="tarjeta.id">
                             <input type="radio" name="tarjeta" v-model="tarjetaId" :id="tarjeta.id" :value="tarjeta.id">
                             <label for="tarjeta1">{{ tarjeta.numeroTarjeta }}</label>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="botones">
@@ -51,21 +41,16 @@
             </div>
             <AddCard v-if="active" @on-close="closeAddCard"></AddCard>
         </div>
-
         <div class="datos-compra">
             <div>
-                <div class="titulo">
-                    Productos
-                </div>
                 <div class="productos-box">
-                    <div class="producto" v-for="(item, index) in items" :key="item.id">
-                        <div>
-                            <span>{{ index + 1 }}.- </span>
+                    <div class="producto" v-for="(item, ) in items" :key="item.id">
+                        <div class="producto-nombre">
                             <span v-if="item.afiliado">{{ item.afiliado.nombre }}</span>
                             <span v-if="item.botella">{{ item.botella.nombre }}</span>
                             <span v-if="item.evento">{{ item.evento.nombre }}</span>
                         </div>
-                        <div>
+                        <div class="producto-precio">
                             <span v-if="item.afiliado">${{ item.afiliado.precio }}</span>
                             <span v-if="item.botella && !item.oferta">${{ item.botella.precio }}</span>
                             <span v-if="item.botella && item.oferta">
@@ -254,15 +239,14 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
     background-color: #fff;
-    padding: 80px 135px;
+    color: #000;
 }
 
 .datos-cliente {
-    border: 1px solid #000;
-    flex-grow: 2;
-    height: 100%;
+    width: 60dvw;
+    height: 100dvh;
+    padding: 4dvw 1dvw 0 7dvw;
     display: flex;
     flex-direction: column;
     justify-content: top;
@@ -270,12 +254,14 @@ export default {
 }
 
 .datos-compra {
-    border: 1px solid #000;
-    flex-grow: 1;
-    height: 100%;
+    width: 40dvw;
+    height: 100dvh;
+    padding: 4dvw 7dvw 0 1dvw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #F8F9FD;
+    padding: 135;
 
 }
 
@@ -299,11 +285,17 @@ export default {
 }
 
 .producto {
-    margin: 0 10px;
+    margin: 1dvh 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.producto-nombre {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .tarjetas-box {
@@ -338,6 +330,8 @@ export default {
     width: 100%;
     border-radius: 8px;
     border: 1px solid #E3E5ED;
+    padding: 0 12px;
+    
 }
 
 .tarjeta {
@@ -345,14 +339,20 @@ export default {
     flex-direction: row;
     justify-content: top;
     align-items: flex-start;
-    padding: 24px;
+    padding: 24px 12px;
     width: 100%;
     margin: 5px 0;
+    list-style-type: none;
+    border-top: 1px solid #E3E5ED;
 
     & input {
         margin-right: 16px;
         width: 20px;
         height: 20px;
+    }
+
+    &:first-child {
+        border-top: none;
     }
 }
 
@@ -430,18 +430,5 @@ export default {
         border: 1px solid #31212B;
         margin-right: 10px;
     }
-}
-
-.encabezado {
-    display: flex;
-    width: 100%;
-}
-
-.cancel-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    margin-left: auto;
-
 }
 </style>
