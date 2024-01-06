@@ -6,12 +6,12 @@
             <div class="subtitulo">
                 Checkout
             </div>
-            <div v-if="listaTarjetas.length === 0">
+            <div v-if="listaTarjetas.length === 0" class="tarjetas-box">
                 No posee tarjetas registradas
             </div>
             <div v-else class="tarjetas-box">
                 <p>Seleccionar Tarjetas</p>
-                <div class="tarjetas">
+                <div class="tarjetas-container">
                     <ul class="borde">
                         <li class="tarjeta" v-for="tarjeta in listaTarjetas" :key="tarjeta.id">
                             <input type="radio" name="tarjeta" v-model="tarjetaId" :id="tarjeta.id" :value="tarjeta.id">
@@ -24,8 +24,9 @@
                 <!-- <button class="button-18 eliminar">Eliminar Tarjeta</button> -->
                 <button class="button-18" @click="openAddCard">Añadir Tarjeta</button>
             </div>
-            <div class="tarjetas-box">
-                <p>Direccion</p>
+            
+            <div class="direccion-container">
+                <h2>Direccion</h2>
                 <div class="direccion">
                     <input type="text" v-model="direccion" />
                 </div>
@@ -305,25 +306,15 @@ export default {
     justify-content: top;
     align-items: flex-start;
     width: 100%;
-
-    & p {
-        font-size: 16px;
-        font-style: normal;
-        line-height: 16px;
-        margin-left: 0;
-    }
-
-
 }
 
-.tarjetas {
+.tarjetas-container {
     display: flex;
     flex-direction: column;
     justify-content: top;
     align-items: flex-start;
     width: 100%;
-    margin-bottom: 20px;
-    padding: 24px;
+    padding: 24px 24px 0 24px;
 }
 
 .borde {
@@ -331,6 +322,9 @@ export default {
     border-radius: 8px;
     border: 1px solid #E3E5ED;
     padding: 0 12px;
+    height: 240px;
+    overflow-y: scroll ;
+    margin: 0;
 
 }
 
@@ -362,6 +356,7 @@ export default {
     justify-content: flex-end;
     align-items: center;
     width: 100%;
+    margin: 3dvh 0;
 }
 
 .monto-total {
