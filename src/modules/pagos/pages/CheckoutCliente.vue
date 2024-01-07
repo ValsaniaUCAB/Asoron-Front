@@ -37,10 +37,14 @@
                 <h2>Puntos</h2>
                 <div class="puntos-border">
                     <div class="puntos">
-                        <span>Puntos Acumulados</span>
+                        <span>Puntos a pagar:</span>
                         <input type="number" v-model="puntos" min="0" :max="maxPuntos" />
                     </div>
                 </div>
+                <p>Puntos Acumulados: {{ this.maxPuntos }}</p>
+                <p>Valor de los puntos: ${{ puntosPrecio }}</p>
+                <p>Valor en dolares: ${{ montoPuntos }}</p>
+
             </div>
             <AddCard v-if="active" @on-close="closeAddCard"></AddCard>
         </div>
@@ -101,7 +105,6 @@ import getPuntosInfo from '../helpers/getPuntosInfo'
 import getValorDolar from '../helpers/getValorDolar'
 import postVenta from '../helpers/postVenta'
 import BackToHome from '@/modules/auth/components/BackToHome'
-import { watch } from 'vue'
 
 
 export default {
@@ -195,7 +198,7 @@ export default {
                     tarjeta_id: this.tarjetaId,
                     cantidad_tarjeta: Number.parseFloat(this.montoTarjeta.toFixed(2)),
                     puntos_id: this.puntosId,
-                    cantidad_puntos: this.montoPuntos
+                    cantidad_puntos: this.puntos
                 }
                 try {
                     console.log(data)
