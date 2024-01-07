@@ -259,7 +259,6 @@ export default {
     top: 50%;
     left: 50%;
     height: 850px;
-    overflow-y: scroll;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     padding: 50px 120px;
@@ -267,14 +266,15 @@ export default {
     margin: 20px;
     width: 800px;
     background-color: white;
+    z-index: 99;
 }
 
 .box {
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    overflow-y: scroll;
+    max-height: 750px;
 }
 
 .box2 {
@@ -345,6 +345,7 @@ input {
     background: none;
     border: none;
     padding: 0;
+    margin-right: 30px;
     margin-left: auto;
 
 }
