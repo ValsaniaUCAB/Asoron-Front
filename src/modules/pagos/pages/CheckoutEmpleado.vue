@@ -2,20 +2,8 @@
     <div v-if="!isLoading"></div>
     <div v-else class="box">
         <div class="datos-cliente">
-            <div class="encabezado">
-                <h1 class="titulo">Asoron</h1>
-                <button class="cancel-btn" @click="deleteItem">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
-                        stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-x">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
-            <div class="subtitulo">
-                Checkout
-            </div>
+            <h1 class="titulo">Asoron</h1>
+            <h1 class="subtitulo">Checkout</h1>
             <div class="tarjetas-box">
                 <p>Seleccionar cliente</p>
                 <CDropdown>
@@ -52,28 +40,29 @@
                     $
                 </div>
             </div>
-            <div class="tarjetas-box">
-                <p>Direccion</p>
-                <div class="direccion">
-                    <input type="text" v-model="direccion" />
+            <div class="direccion-container">
+                <h2>Dirección</h2>
+                <div class="direccion-border">
+                    <div class="direccion">
+                        <Lugar @on-click="setFkDireccion"></lugar>
+                        <input type="text" v-model="direccion" placeholder="Dirección" />
+                    </div>
                 </div>
-                <Lugar @on-click="setFkDireccion"></lugar>
             </div>
 
-            <div class="tarjetas-box">
-                <p>Puntos</p>
-                <div class="Puntos">
-                    <div>Puntos Acumulados</div>
-                    <input type="number" v-model="puntos" />
+            <div class="puntos-container">
+                <h2>Puntos</h2>
+                <div class="puntos-border">
+                    <div class="puntos">
+                        <span>Puntos Acumulados</span>
+                        <input type="number" v-model="puntos" min="0" :max="maxPuntos" />
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="datos-compra">
             <div>
-                <div class="titulo">
-                    Productos
-                </div>
                 <div class="productos-box">
                     <div class="producto" v-for="(item, index) in items" :key="item.id">
                         <div>
@@ -96,10 +85,22 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="pie-productos">
                 <hr>
-                <div class="monto-total">${{ montoTotal.toFixed(2) }}</div>
-                <button @click="vender()">Pagar</button>
+                <div class="subtotal-container">
+                    <h3>Subtotal</h3>
+                    <span>Bs. {{ montoTotal * valorDolar }}</span>
+                </div>
+                <div class="subtotal-container">
+                    <h3>Tasa de cambio</h3>
+                    <span>x {{ valorDolar }}</span>
+                </div>
+                <hr>
+                <div class="monto-total-container">
+                    <h2>Total</h2>
+                    <span>${{ montoTotal.toFixed(2) }}</span>
+                </div>
+                <button @click="vender()" class="button-18 pagar-btn">Pagar</button>
             </div>
         </div>
         <BackToHome />
@@ -354,15 +355,14 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
     background-color: #fff;
-    padding: 80px 135px;
+    color: #000;
 }
 
 .datos-cliente {
-    border: 1px solid #000;
-    flex-grow: 2;
-    height: 100%;
+    width: 60dvw;
+    height: 100dvh;
+    padding: 4dvw 1dvw 0 7dvw;
     display: flex;
     flex-direction: column;
     justify-content: top;
@@ -370,12 +370,13 @@ export default {
 }
 
 .datos-compra {
-    border: 1px solid #000;
-    flex-grow: 1;
-    height: 100%;
+     width: 40dvw;
+    height: 100dvh;
+    padding: 4dvw 7dvw 0 1dvw;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    background-color: #F8F9FD;
+    padding: 135;
 
 }
 
@@ -389,8 +390,11 @@ export default {
 }
 
 .subtitulo {
-    color: #02021D;
-    margin-top: 20px;
+    color: #535353;
+    margin-top: 10px;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
 }
 
 .productos-box {
@@ -477,6 +481,94 @@ export default {
     margin-bottom: 10px;
 }
 
+.direccion-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 3dvh;
+    padding: 0 24px 0 0;
+}
+
+.direccion-border {
+    width: 100%;
+    border: 1px solid #E3E5ED;
+    border-radius: 8px;
+    padding: 24px 12px;
+    align-self: flex-start;
+}
+
+.direccion {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.direccion input {
+    width: 65%;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    color: #2c384af2;
+    padding: 0;
+    margin: 0;
+}
+
+.direccion input:focus {
+    outline: none;
+}
+
+.direccion-container h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.puntos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 3dvh;
+    padding: 24px 24px 0 0;
+}
+
+.puntos-border {
+    width: 100%;
+    border: 1px solid #E3E5ED;
+    border-radius: 8px;
+    padding: 24px 12px;
+    align-self: flex-start;
+}
+
+.puntos {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.puntos span {
+    padding-right: 1dvw;
+}
+
+.puntos input {
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    color: #2c384af2;
+    margin: 0;
+    padding: 0;
+}
+
+.puntos input:focus {
+    outline: none;
+}
+
+.puntos-container h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
 .button-18 {
     align-items: center;
     background-color: #FDD08D;
@@ -532,16 +624,48 @@ export default {
     }
 }
 
-.encabezado {
+.monto-total-container {
     display: flex;
-    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px;
+
+    & h2 {
+        font-family: 'Inter', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    & span {
+        font-family: 'Inter', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+    }
 }
 
-.cancel-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    margin-left: auto;
+.subtotal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
 
+    & h3 {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    & span {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+    }
+}
+
+.pagar-btn {
+    margin-top: 4dvh;
 }
 </style>

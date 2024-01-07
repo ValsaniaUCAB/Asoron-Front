@@ -36,7 +36,7 @@
                         </g>
                     </svg>
                 </div>
-                <div class="total-container" v-if="user && items.length > 0">
+                <div class="total-container border-on" v-if="user && items.length > 0">
                     <div class="monto"><span>Monto total:</span><span>${{ TotalFinal }}</span></div>
                     <button class="button-18 " @click="pushToCheckout">CHECKOUT</button>
                 </div>
@@ -241,7 +241,6 @@ export default {
 
 .total-container {
     display: flex;
-    border-top: 1px solid lightgray;
     padding-top: 1dvh;
     flex-direction: column;
     height: 9dvh;
@@ -251,6 +250,10 @@ export default {
     color: #31212B;
     text-align: left;
     margin: 0;
+}
+
+.border-on {
+    border-top: 1px solid lightgray;
 }
 
 .total-container button {
