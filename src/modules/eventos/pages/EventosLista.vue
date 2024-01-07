@@ -1,5 +1,4 @@
 <template>
-    <div>Soy una lista de Eventos</div>
     <div class="eventos mx-5 col d-flex">
         <li v-for="evento in eventosList" :key="evento.id" class="event-tarjeta">
             <Evento :evento="evento" />
@@ -24,6 +23,7 @@ export default {
 
 <style scoped>
 .eventos {
+    margin-top: 110px;
     flex-direction: column;
     /* flex-wrap: nowrap; */
     align-items: flex-start;
