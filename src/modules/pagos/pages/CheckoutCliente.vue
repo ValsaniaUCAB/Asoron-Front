@@ -358,7 +358,7 @@ export default {
     border-radius: 8px;
     padding: 0 12px;
     border: 1px solid #E3E5ED;
-    height: 240px;
+    max-height: 240px;
     overflow-y: scroll;
     margin: 0;
 
