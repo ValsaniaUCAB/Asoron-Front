@@ -34,12 +34,7 @@
                     <div>{{ cliente.info.telefono }}</div>
                 </div>
             </div>
-            <div class="tarjetas-box">
-                <p>Seleccionar Tarjetas</p>
-                <div class="tarjetas">
-                    $
-                </div>
-            </div>
+            <Afiliado />
             <div class="direccion-container">
                 <h2>Dirección</h2>
                 <div class="direccion-border">
@@ -50,12 +45,56 @@
                 </div>
             </div>
 
+            <div class="efectivo-container">
+                <h2>Efectivo</h2>
+                <div class="efectivo-border">
+                    <div class="efectivo">
+                        <span>Monto en Efectivo $</span>
+                        <input type="number" v-model="montoEfectivo" @keypress.enter="changeMontoEfectivo$" />
+                    </div>
+                </div>
+                <div class="efectivo-border">
+                    <div class="efectivo">
+                        <span>Monto en Efectivo Bs.</span>
+                        <input type="number" v-model="montoEfectivoBs" @keypress.enter="changeMontoEfectivoBs" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="tarjeta-container">
+                <h2>Tarjeta</h2>
+                <div class="tarjeta-border">
+                    <div class="tarjeta">
+                        <span>Monto en Tarjeta $</span>
+                        <input type="number" v-model="montoTarjeta" @keypress.enter="changeMontoTarjeta$" />
+                    </div>
+                    <div class="tarjeta">
+                        <span>Monto en Tarjeta Bs</span>
+                        <input type="number" v-model="montoTarjetaBs" @keypress.enter="changeMontoTarjetaBs" />
+                    </div>
+                </div>
+            </div>
+
             <div class="puntos-container">
                 <h2>Puntos</h2>
                 <div class="puntos-border">
                     <div class="puntos">
                         <span>Puntos Acumulados</span>
-                        <input type="number" v-model="puntos" min="0" :max="maxPuntos" />
+                        <!-- TODO: Falta agregar el max -->
+                        <input type="number" v-model="cantidadPuntos" min="0" />
+                    </div>
+                </div>
+            </div>
+            <div class="cheque-container">
+                <h2>Cheque</h2>
+                <div class="cheque-border">
+                    <div class="cheque">
+                        <span>Monto en cheques $</span>
+                        <input type="number" v-model="montoCheque" @keypress.enter="changeMontoCheque$" />
+                    </div>
+                    <div class="cheque">
+                        <span>Monto en cheques Bs</span>
+                        <input type="number" v-model="montoChequeBs" @keypress.enter="changeMontoChequeBs" />
                     </div>
                 </div>
             </div>
@@ -97,6 +136,7 @@
                 </div>
                 <hr>
                 <div class="monto-total-container">
+                    <p>Suma acumulada: ${{ montoSumado }}</p>
                     <h2>Total</h2>
                     <span>${{ montoTotal.toFixed(2) }}</span>
                 </div>
@@ -117,10 +157,12 @@ import Lugar from '@/modules/auth/components/Lugar'
 import AddClienteNatural from '../components/AddClienteNatural'
 import AddClienteJuridico from '../components/AddClienteJuridico';
 import BackToHome from '@/modules/auth/components/BackToHome'
+import Afiliado from '@/modules/profile/components/Afiliado';
 
-import getTarjetas from '../helpers/getTarjetas'
 import postVenta from '../helpers/postVenta'
 import { getInfoNatural, getInfoJuridico } from '../helpers/getInfoCliente'
+import getValorDolar from '../helpers/getValorDolar'
+import getPrecioPuntos from '../helpers/getPrecioPuntos'
 
 export default {
     components: {
@@ -128,37 +170,51 @@ export default {
         CDropdown,
         AddClienteNatural,
         AddClienteJuridico,
-        BackToHome
+        BackToHome,
+        Afiliado
     },
     data() {
         return {
+            // Datos del cliente
             cliente: {
                 tipo: null,
                 nombre: 'Tipo de cliente',
                 info: {}
             },
 
+            // Datos de la compra $
+            direccion: '',
+            fkDireccion: '',
+            cantidadPuntos: 0,
+            montoTarjeta: 0,
+            montoCheque: 0,
+            montoEfectivo: 0,
+
+            // Datos de la compra en bs
+            montoEfectivoBs: 0,
+            montoTarjetaBs: 0,
+            montoChequeBs: 0,
+
+            // Abrir componentes
             activeClienteNatural: false,
             activeClienteJuridico: false,
 
+            // Credenciales a Buscar
             credencialCliente: '',
 
-            direccion: '',
-            fkDireccion: '',
-            puntos: 0,
-            active: false,
-            listaTarjetas: null,
-            tarjetaId: null,
-            puntosId: null,
-            puntosPrecio: 15,
+
+            // Datos fuera de la compra
+            puntosPrecio: 0,
             maxPuntos: 0,
+            valorDolar: 0,
+            pagado: false,
         };
     },
     computed: {
         ...mapState('carrito', ['items', 'uuid']),
         ...mapState('auth', ['user']),
         isLoading() {
-            if (!this.user || !this.items || this.items.length === 0) {
+            if ((!this.user || !this.items || this.items.length === 0) && this.pagado === false) {
                 new Swal({
                     title: 'Espere por favor',
                     allowOutsideClick: false,
@@ -184,14 +240,20 @@ export default {
         },
         montoPuntos() {
             let monto = 0
-            monto = this.puntos * this.puntosPrecio
+            monto = this.cantidadPuntos * this.puntosPrecio
             return monto
         },
-        montoTarjeta() {
+        montoSumado() {
             let monto = 0
-            monto = this.montoTotal - this.montoPuntos
-            return Number.parseFloat(monto.toFixed(2))
+            console.log(this.montoTarjeta, this.montoCheque, this.montoEfectivo, this.montoPuntos)
+            monto = this.cantidadPuntos + this.montoTarjeta + this.montoCheque + this.montoEfectivo
+            return monto
         }
+        // montoTarjeta() {
+        //     let monto = 0
+        //     monto = this.montoTotal - this.montoPuntos
+        //     return Number.parseFloat(monto.toFixed(2))
+        // }
     },
     methods: {
         ...mapMutations('carrito', ['endCarrito']),
@@ -272,16 +334,8 @@ export default {
         closeAniadirClienteJuridico() {
             this.activeClienteJuridico = false
         },
-        openAddCard() {
-            this.active = true
-        },
-        async closeAddCard() {
-            this.active = false
-            this.listaTarjetas = await getTarjetas()
-        },
         setFkDireccion(value) {
             this.fkDireccion = value
-            console.log(value)
         },
         async vender() {
             if (this.validar()) {
@@ -294,13 +348,22 @@ export default {
                     venta_direccion: this.direccion,
                     fk_vent_direccion: this.fkDireccion,
                     uuid_carrito: this.uuid,
-                    tarjeta_id: this.tarjetaId,
-                    cantidad_tarjeta: Number.parseFloat(this.montoTarjeta.toFixed(2)),
-                    puntos_id: this.puntosId,
-                    cantidad_puntos: this.montoPuntos
+                    cantidad_tarjeta: this.montoTarjeta,
+                    cantidad_puntos: this.cantidadPuntos,
+                    cantidad_cheque: this.montoCheque,
+                    cantidad_efectivo: this.montoEfectivo,
+                    usuario_natu: null,
+                    usuario_juri: null
+                }
+                if (this.cliente.tipo === 'natural') {
+                    data.usuario_natu = this.cliente.info.id
+                }
+                if (this.cliente.tipo === 'juridico') {
+                    data.usuario_juri = this.cliente.info.id
                 }
                 try {
                     console.log(data)
+                    this.pagado = true
                     await postVenta(data)
                     Swal.fire('Success', 'Pago realizado con exito', 'success').then((result) => {
                         if (result.isConfirmed) {
@@ -316,8 +379,23 @@ export default {
                 }
             }
         },
+        validarTodosLosCampos() {
+            if (this.cantidadPuntos === 0 && this.montoTarjeta === 0 && this.montoCheque === 0 && this.montoEfectivo === 0) {
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "Debe llenar al menos un campo",
+                    background: "#F94646",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+                return false
+            }
+            return true
+        },
         validar() {
-            if (this.direccion === '' || this.tarjetaId === null || this.fkDireccion === '' || this.puntosId === null) {
+            if (this.direccion === '' || !this.cliente.info.id || this.fkDireccion === '') {
                 Swal.fire({
                     position: "bottom-end",
                     title: "Debe llenar todos los campos",
@@ -329,12 +407,58 @@ export default {
                 });
                 return false
             }
+            if (!this.validarTodosLosCampos()) {
+                return false
+            }
+            if (this.montoSumado > this.montoTotal) {
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "El monto sumado es mayor al monto total",
+                    background: "#F94646",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+                return false
+            }
+            if (this.montoSumado < this.montoTotal) {
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "El monto sumado es menor al monto total",
+                    background: "#F94646",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+                return false
+            }
             return true
         },
+        changeMontoTarjetaBs() {
+            this.montoTarjeta = Math.round(this.montoTarjetaBs / this.valorDolar * 100) / 100;
+        },
+        changeMontoTarjeta$() {
+            this.montoTarjetaBs = Math.round(this.montoTarjeta * this.valorDolar * 100) / 100;
+        },
+        changeMontoChequeBs() {
+            this.montoCheque = Math.round(this.montoChequeBs / this.valorDolar * 100) / 100;
+        },
+        changeMontoCheque$() {
+            this.montoChequeBs = Math.round(this.montoCheque * this.valorDolar * 100) / 100;
+        },
+        changeMontoEfectivoBs() {
+            this.montoEfectivo = Math.round(this.montoEfectivoBs / this.valorDolar * 100) / 100;
+        },
+        changeMontoEfectivo$() {
+            this.montoEfectivoBs = Math.round(this.montoEfectivo * this.valorDolar * 100) / 100;
+        }
     },
     async mounted() {
-
-    }
+        this.puntosPrecio = await getPrecioPuntos()
+        this.valorDolar = await getValorDolar()
+    },
     // mounted() {
     //     if (!this.user) {
     //         this.$router.push({ name: 'login' })
@@ -370,7 +494,7 @@ export default {
 }
 
 .datos-compra {
-     width: 40dvw;
+    width: 40dvw;
     height: 100dvh;
     padding: 4dvw 7dvw 0 1dvw;
     display: flex;
@@ -444,21 +568,6 @@ export default {
     border: 1px solid #E3E5ED;
 }
 
-.tarjeta {
-    display: flex;
-    flex-direction: row;
-    justify-content: top;
-    align-items: flex-start;
-    padding: 24px;
-    width: 100%;
-    margin: 5px 0;
-
-    & input {
-        margin-right: 16px;
-        width: 20px;
-        height: 20px;
-    }
-}
 
 .botones {
     display: flex;
