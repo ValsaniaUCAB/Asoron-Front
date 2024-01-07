@@ -22,13 +22,13 @@
                 <!-- <button class="button-18 eliminar">Eliminar Tarjeta</button> -->
                 <button class="button-18" @click="openAddCard">Añadir Tarjeta</button>
             </div>
-            
+
             <div class="direccion-container">
                 <h2>Dirección</h2>
                 <div class="direccion-border">
                     <div class="direccion">
                         <Lugar @on-click="setFkDireccion"></lugar>
-                        <input type="text" v-model="direccion" placeholder="Dirección"/>
+                        <input type="text" v-model="direccion" placeholder="Dirección" />
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="puntos-border">
                     <div class="puntos">
                         <span>Puntos Acumulados</span>
-                        <input type="number" v-model="puntos" min="0" :max="cantidad_puntos"/>
+                        <input type="number" v-model="puntos" min="0" :max="maxPuntos" />
                     </div>
                 </div>
             </div>
@@ -101,6 +101,7 @@ import getPuntosInfo from '../helpers/getPuntosInfo'
 import getValorDolar from '../helpers/getValorDolar'
 import postVenta from '../helpers/postVenta'
 import BackToHome from '@/modules/auth/components/BackToHome'
+import { watch } from 'vue'
 
 
 export default {
@@ -183,6 +184,9 @@ export default {
                     allowOutsideClick: false,
                 })
                 Swal.showLoading()
+                if (this.puntos === '') {
+                    this.puntos = 0
+                }
                 const data = {
                     venta_direccion: this.direccion,
                     fk_vent_direccion: this.fkDireccion,
@@ -232,6 +236,15 @@ export default {
         const data = await getPuntosInfo()
         this.puntosId = data.punt_id
         this.maxPuntos = data.cantidad_puntos
+    },
+    watch: {
+        puntos(value) {
+            if (value > this.maxPuntos) {
+                this.puntos = this.maxPuntos
+            } else if (value < 0) {
+                this.puntos = 0
+            }
+        }
     }
     // mounted() {
     //     if (!this.user) {
@@ -346,7 +359,7 @@ export default {
     padding: 0 12px;
     border: 1px solid #E3E5ED;
     height: 240px;
-    overflow-y: scroll ;
+    overflow-y: scroll;
     margin: 0;
 
 }
@@ -411,7 +424,7 @@ export default {
     border-bottom: 1px solid #cccccc;
     color: #2c384af2;
     padding: 0;
-    margin:0;
+    margin: 0;
 }
 
 .direccion input:focus {
@@ -448,7 +461,7 @@ export default {
 }
 
 .puntos span {
-    padding-right: 1dvw ;
+    padding-right: 1dvw;
 }
 
 .puntos input {
