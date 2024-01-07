@@ -74,7 +74,7 @@
                     <span>Bs. {{ montoTotal * valorDolar }}</span>
                 </div>
                 <div class="subtotal-container">
-                    <h3>Taza de cambio</h3>
+                    <h3>Tasa de cambio</h3>
                     <span>x {{ valorDolar }}</span>
                 </div>
                 <hr>
@@ -121,14 +121,15 @@ export default {
             puntosId: null,
             puntosPrecio: 15,
             maxPuntos: 0,
-            valorDolar: 0
+            valorDolar: 0,
+            pagado: false
         };
     },
     computed: {
         ...mapState('carrito', ['items', 'uuid']),
         ...mapState('auth', ['user']),
         isLoading() {
-            if (!this.user || !this.items || this.items.length === 0 || this.listaTarjetas === null) {
+            if ((!this.user || !this.items || this.items.length === 0 || this.listaTarjetas === null) && this.pagado === false) {
                 new Swal({
                     title: 'Espere por favor',
                     allowOutsideClick: false,
@@ -199,6 +200,7 @@ export default {
                 try {
                     console.log(data)
                     await postVenta(data)
+                    this.pagado = true
                     Swal.fire('Success', 'Pago realizado con exito', 'success').then((result) => {
                         if (result.isConfirmed) {
                             this.endCarrito()

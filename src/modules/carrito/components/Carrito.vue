@@ -15,7 +15,7 @@
                             Bienvenido! {{ user.data.nombre }} </h3>
                     </div>
                 </div>
-                <div v-if="user" class="items-container">
+                <div v-if="user && items.length > 0" class="items-container">
                     <li v-for="(item, index) in items" :key="item.id">
                         <item @on-calcularTotal="addTotal" :item="item" :index="index"></item>
                     </li>
@@ -36,7 +36,7 @@
                         </g>
                     </svg>
                 </div>
-                <div class="total-container" v-if="user">
+                <div class="total-container" v-if="user && items.length > 0">
                     <div class="monto"><span>Monto total:</span><span>${{ TotalFinal }}</span></div>
                     <button class="button-18 " @click="pushToCheckout">CHECKOUT</button>
                 </div>
@@ -393,4 +393,5 @@ export default {
     100% {
         opacity: 1;
     }
-}</style>
+}
+</style>

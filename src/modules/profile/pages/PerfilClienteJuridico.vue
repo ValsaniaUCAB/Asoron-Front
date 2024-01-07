@@ -6,7 +6,7 @@
 
         <div class="">
             <h2>Mi perfil</h2>
-            <div class="hola">Hola, {{ user.data.denominacionComercial }}</div>
+            <div class="hola">Hola, {{ user.data.denominacionComercial }}!</div>
         </div>
         <div class="info">
             <ul>
