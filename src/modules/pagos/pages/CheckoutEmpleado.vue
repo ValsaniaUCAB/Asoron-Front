@@ -31,9 +31,11 @@
             <div class="botones">
                 <Afiliado />
                 <div class="add-botones">
-                    <AddClienteNatural v-if="activeClienteNatural" @on-register="closeAniadirClienteNatural" />
+                    <AddClienteNatural v-if="activeClienteNatural" @on-register="registerNatural"
+                        @on-close="closeAniadirClienteNatural" />
                     <button class="button-18" @click="openAniadirClienteNatural">Añadir Cliente Natural</button>
-                    <AddClienteJuridico v-if="activeClienteJuridico" @on-register="closeAniadirClienteJuridico" />
+                    <AddClienteJuridico v-if="activeClienteJuridico" @on-register="registerJuridico"
+                        @on-close="closeAniadirClienteJuridico" />
                     <button class="button-18" @click="openAniadirClienteJuridico">Añadir Cliente Juridico</button>
                 </div>
             </div>
@@ -369,6 +371,18 @@ export default {
         setFkDireccion(value) {
             this.fkDireccion = value
         },
+        registerJuridico(credential) {
+            this.credencialCliente = credential
+            this.cliente.tipo = 'juridico'
+            this.getInfo()
+            this.closeAniadirClienteJuridico()
+        },
+        registerNatural(credential) {
+            this.credencialCliente = credential
+            this.cliente.tipo = 'natural'
+            this.getInfo()
+            this.closeAniadirClienteNatural()
+        },
         async vender() {
             if (this.validar()) {
                 new Swal({
@@ -384,8 +398,8 @@ export default {
                     cantidad_puntos: this.cantidadPuntos,
                     cantidad_cheque: this.montoCheque,
                     cantidad_efectivo: this.montoEfectivo,
-                    usuario_natu: null,
-                    usuario_juri: null
+                    usuario_natu: '',
+                    usuario_juri: ''
                 }
                 if (this.cliente.tipo === 'natural') {
                     data.usuario_natu = this.cliente.info.id

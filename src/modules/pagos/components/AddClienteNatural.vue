@@ -7,7 +7,7 @@
                 <button class="cancel-btn" @click="deleteItem">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
                         stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-x" @click="$emit('on-register')">
+                        class="feather feather-x" @click="$emit('on-close')">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
@@ -18,10 +18,6 @@
                     <div class="form-box">
                         <p>Username</p>
                         <input type="text" placeholder="Username" class="form" v-model="username" />
-                    </div>
-                    <div class="form-box">
-                        <p>Contraseña</p>
-                        <input type="text" placeholder="Contraseña" class="form" v-model="password" />
                     </div>
                     <div class="form-box">
                         <p>Correo Electronico</p>
@@ -76,11 +72,11 @@ import Swal from 'sweetalert2'
 import CodigoTelefono from '@/modules/auth/components/CodigoTelefono';
 import Lugar from '@/modules/auth/components/Lugar'
 
-import postClienteNatural from '@/modules/auth/helpers/postClienteNatural'
+import postClienteNatural from '../helpers/postClienteNatural'
 
 
 export default {
-    emits: ['on-register'],
+    emits: ['on-register', 'on-close'],
     components: {
         Lugar,
         CodigoTelefono
@@ -88,7 +84,6 @@ export default {
     data() {
         return {
             username: '',
-            password: '',
             email: '',
             cedula: '',
             rif: '',
@@ -109,10 +104,6 @@ export default {
         setCodigoTelefono(item) {
             this.codigoTelefono = item.id
         },
-        validateNumericCharacters(password) {
-            const numericRegex = /\d/;
-            return numericRegex.test(password);
-        },
         validarCorreoElectronico(correo) {
             const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -130,18 +121,6 @@ export default {
             }
             if (this.username.length < 6) {
                 alert('El username debe tener al menos 6 caracteres')
-                return false
-            }
-            if (this.password === '') {
-                alert('Debe ingresar una contraseña')
-                return false
-            }
-            if (this.password.length < 9) {
-                alert('La contraseña debe tener al menos 9 caracteres')
-                return false
-            }
-            if (!this.validateNumericCharacters(this.password)) {
-                alert('La contraseña debe tener al menos un caracter numerico')
                 return false
             }
             if (this.email === '') {
@@ -218,7 +197,6 @@ export default {
             if (!this.validar()) return
             const data = {
                 username: this.username,
-                password: this.password,
                 email: this.email,
                 clie_natu_cedula_identidad: this.cedula,
                 clie_natu_rif: this.rif,
