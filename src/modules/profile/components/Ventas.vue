@@ -1,15 +1,15 @@
 <template>
     <div class="box">
-        <button class="cancel-btn" @click="deleteItem">
+        <button class="cancel-btn" @click="$emit('on-close')">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#31212b"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"
-                @click="$emit('on-close')">
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
         <div v-if="isLoading">cargando</div>
-        <div v-else>
+        <div v-if="!isLoading && ventasList.length === 0">No ha realizado ninguna compra :C</div>
+        <div v-if="!isLoading && ventasList.length > 0">
             <table>
                 <thead>
                     <tr>
@@ -17,6 +17,10 @@
                         <th>Fecha</th>
                         <th>Monto</th>
                         <th>Direccion</th>
+                        <th>Orden Recibida</th>
+                        <th>Orden Aprobada</th>
+                        <th>Orden En Camino</th>
+                        <th>Orden Entregada</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,6 +29,58 @@
                         <td>{{ venta.fecha }}</td>
                         <td>{{ venta.montoTotal }}</td>
                         <td>{{ venta.direccion }}</td>
+                        <td>
+                            <svg v-if="venta.status[0].status === true" xmlns="http://www.w3.org/2000/svg" width="36"
+                                height="36" viewBox="0 0 24 24" fill="none" stroke="#42FF00" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <svg v-else xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                                fill="none" stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-x">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </td>
+                        <td>
+                            <svg v-if="venta.status[1].status === true" xmlns="http://www.w3.org/2000/svg" width="36"
+                                height="36" viewBox="0 0 24 24" fill="none" stroke="#42FF00" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <svg v-else xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                                fill="none" stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-x">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </td>
+                        <td>
+                            <svg v-if="venta.status[2].status === true" xmlns="http://www.w3.org/2000/svg" width="36"
+                                height="36" viewBox="0 0 24 24" fill="none" stroke="#42FF00" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <svg v-else xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                                fill="none" stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-x">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </td>
+                        <td>
+                            <svg v-if="venta.status[3].status === true" xmlns="http://www.w3.org/2000/svg" width="36"
+                                height="36" viewBox="0 0 24 24" fill="none" stroke="#42FF00" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <svg v-else xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                                fill="none" stroke="#31212b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-x">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -40,6 +96,7 @@ import getVentaPdf from '../helpers/getVentaPdf'
 import Swal from 'sweetalert2'
 
 export default {
+    emits: ['on-close'],
     data() {
         return {
             isLoading: true,
