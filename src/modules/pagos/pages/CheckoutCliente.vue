@@ -70,7 +70,7 @@
                 <hr>
                 <div class="subtotal-container">
                     <h3>Subtotal Bs.</h3>
-                    <span>Bs. {{ montoTotal * valorDolar }}</span>
+                    <span>Bs. {{ (montoTotal * valorDolar).toFixed(2) }}</span>
                 </div>
                 <div class="subtotal-container">
                     <h3>Tasa de cambio</h3>
@@ -79,7 +79,7 @@
                 <hr>
                 <div class="subtotal-container">
                     <h3>Subtotal $</h3>
-                    <span>$ {{ montoTotal }}</span>
+                    <span>$ {{ montoTotal.toFixed(2) }}</span>
                 </div>
                 <div class="subtotal-container">
                     <h3>Puntos ({{puntosPrecio}}$ c/u)</h3>
@@ -321,7 +321,7 @@ export default {
 
 .productos-box {
     width: 100%;
-    max-height: 25dvh;
+    max-height: 45dvh;
     overflow-y: scroll ;
 
 }
