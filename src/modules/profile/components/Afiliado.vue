@@ -1,5 +1,5 @@
 <template>
-    <button @click="afiliacion()">Afiliacion</button>
+    <button @click="afiliacion()" class="button-18">Afiliacion</button>
 </template>
 
 <script>
@@ -108,4 +108,59 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.button-18 {
+    align-items: center;
+    background-color: #FDD08D;
+    border: 0;
+    border-radius: 100px;
+    box-sizing: border-box;
+    color: #000;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 480px;
+    min-height: 40px;
+    min-width: 0px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    margin-right: 20px;
+
+    &:hover,
+    :focus {
+        background-color: #e6bd7f;
+        color: #000;
+    }
+
+    &:active {
+        background: #c09e6a;
+        color: rgb(255, 255, 255, .7);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background: rgba(0, 0, 0, .08);
+        color: rgba(0, 0, 0, .3);
+    }
+
+    &.eliminar {
+        background-color: #fff;
+        color: #000;
+        margin-right: 0;
+        border: 1px solid #31212B;
+        margin-right: 10px;
+    }
+}
+</style>

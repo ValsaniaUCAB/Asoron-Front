@@ -3,38 +3,42 @@
     <div v-else class="box">
         <div class="datos-cliente">
             <h1 class="titulo">Asoron</h1>
-            <h1 class="subtitulo">Checkout</h1>
-            <div class="tarjetas-box">
-                <p>Seleccionar cliente</p>
-                <CDropdown>
-                    <CDropdownToggle>{{ cliente.nombre }}</CDropdownToggle>
-                    <CDropdownMenu>
-                        <CDropdownItem @click="changeTipoCliente('natural')">Cliente Natural</CDropdownItem>
-                        <CDropdownItem @click="changeTipoCliente('juridico')">Cliente Juridico</CDropdownItem>
-                    </CDropdownMenu>
-                </CDropdown>
-                <input type="text" v-model="credencialCliente" @keypress.enter="getInfo" />
-                <div class="botones">
-                    <AddClienteNatural v-if="activeClienteNatural" @on-register="closeAniadirClienteNatural" />
-                    <button class="button-18" @click="openAniadirClienteNatural">Añadir Cliente Natural</button>
-                    <AddClienteJuridico v-if="activeClienteJuridico" @on-register="closeAniadirClienteJuridico" />
-                    <button class="button-18" @click="openAniadirClienteJuridico">Añadir Cliente Juridico</button>
-                </div>
-                <div v-if="cliente.info.nombre">
-                    <div>{{ cliente.info.nombre }}</div>
-                    <div>{{ cliente.info.cedula }}</div>
-                    <div>{{ cliente.info.rif }}</div>
-                    <div>{{ cliente.info.direccion }}</div>
-                    <div>{{ cliente.info.telefono }}</div>
-                </div>
-                <div v-if="cliente.info.denominacionComercial">
-                    <div>{{ cliente.info.denominacionComercial }}</div>
-                    <div>{{ cliente.info.rif }}</div>
-                    <div>{{ cliente.info.direccion }}</div>
-                    <div>{{ cliente.info.telefono }}</div>
+            <div class="encabezado-container">
+                <div class="encabezado-border">
+                    <div class="encabezado">
+                        <div class="data-cliente" v-if="cliente.info.nombre">
+                            <span class="left-data"><b>Nombre : </b>{{ cliente.info.nombre }}</span>
+                            <span><b>Cedula : </b>{{ cliente.info.cedula }}</span>
+                        </div>
+                        <div class="data-cliente" v-if="cliente.info.denominacionComercial">
+                            <span class="left-data"><b>Razon Social : </b>{{ cliente.info.denominacionComercial }}</span>
+                            <span><b>RIF. :</b>{{ cliente.info.rif }}</span>
+                        </div>
+                        <div class="buscador-box">
+                            <CDropdown>
+                                <CDropdownToggle>{{ cliente.nombre }}</CDropdownToggle>
+                                <CDropdownMenu>
+                                    <CDropdownItem @click="changeTipoCliente('natural')">Cliente Natural</CDropdownItem>
+                                    <CDropdownItem @click="changeTipoCliente('juridico')">Cliente Juridico</CDropdownItem>
+                                </CDropdownMenu>
+                            </CDropdown>
+                            <input type="text" v-model="credencialCliente" @keypress.enter="getInfo" />
+                        </div>
+                    </div>
                 </div>
             </div>
-            <Afiliado />
+            
+                <div class="botones">
+                <Afiliado />
+                    <div class="add-botones">
+                        <AddClienteNatural v-if="activeClienteNatural" @on-register="closeAniadirClienteNatural" />
+                        <button class="button-18" @click="openAniadirClienteNatural">Añadir Cliente Natural</button>
+                        <AddClienteJuridico v-if="activeClienteJuridico" @on-register="closeAniadirClienteJuridico" />
+                        <button class="button-18" @click="openAniadirClienteJuridico">Añadir Cliente Juridico</button>
+                    </div>
+                </div>
+            
+            
             <div class="direccion-container">
                 <h2>Dirección</h2>
                 <div class="direccion-border">
@@ -45,56 +49,60 @@
                 </div>
             </div>
 
-            <div class="efectivo-container">
+            <div class="metodo-pago-container">
                 <h2>Efectivo</h2>
-                <div class="efectivo-border">
-                    <div class="efectivo">
-                        <span>Monto en Efectivo $</span>
-                        <input type="number" v-model="montoEfectivo" @keypress.enter="changeMontoEfectivo$" />
-                    </div>
-                </div>
-                <div class="efectivo-border">
-                    <div class="efectivo">
-                        <span>Monto en Efectivo Bs.</span>
-                        <input type="number" v-model="montoEfectivoBs" @keypress.enter="changeMontoEfectivoBs" />
+                <div class="metodo-pago-border">
+                    <div class="metodo-pago-box">
+                        <div class="metodo-pago ">
+                            <span>Monto en Efectivo $</span>
+                            <input type="number" v-model="montoEfectivo" @keypress.enter="changeMontoEfectivo$" />
+                        </div>
+                        <div class="metodo-pago right">
+                            <span>Monto en Efectivo Bs.</span>
+                            <input type="number" v-model="montoEfectivoBs" @keypress.enter="changeMontoEfectivoBs" />
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="tarjeta-container">
+            <div class="metodo-pago-container">
                 <h2>Tarjeta</h2>
-                <div class="tarjeta-border">
-                    <div class="tarjeta">
-                        <span>Monto en Tarjeta $</span>
-                        <input type="number" v-model="montoTarjeta" @keypress.enter="changeMontoTarjeta$" />
-                    </div>
-                    <div class="tarjeta">
-                        <span>Monto en Tarjeta Bs</span>
-                        <input type="number" v-model="montoTarjetaBs" @keypress.enter="changeMontoTarjetaBs" />
+                <div class="metodo-pago-border">
+                    <div class="metodo-pago-box">
+                        <div class="metodo-pago">
+                            <span>Monto en Tarjeta $</span>
+                            <input type="number" v-model="montoTarjeta" @keypress.enter="changeMontoTarjeta$" />
+                        </div>
+                        <div class="metodo-pago">
+                            <span>Monto en Tarjeta Bs</span>
+                            <input type="number" v-model="montoTarjetaBs" @keypress.enter="changeMontoTarjetaBs" />
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="puntos-container">
+            <div class="metodo-pago-container">
                 <h2>Puntos</h2>
-                <div class="puntos-border">
-                    <div class="puntos">
+                <div class="metodo-pago-border">
+                    <div class="metodo-pago">
                         <span>Puntos Acumulados</span>
-                        <!-- TODO: Falta agregar el max -->
                         <input type="number" v-model="cantidadPuntos" min="0" :max="maxPuntos" />
+                        <span class="acumulados">Puntos Acumulados: {{ this.maxPuntos }}</span>
                     </div>
                 </div>
             </div>
-            <div class="cheque-container">
+            <div class="metodo-pago-container">
                 <h2>Cheque</h2>
-                <div class="cheque-border">
-                    <div class="cheque">
-                        <span>Monto en cheques $</span>
-                        <input type="number" v-model="montoCheque" @keypress.enter="changeMontoCheque$" />
-                    </div>
-                    <div class="cheque">
-                        <span>Monto en cheques Bs</span>
-                        <input type="number" v-model="montoChequeBs" @keypress.enter="changeMontoChequeBs" />
+                <div class="metodo-pago-border">
+                    <div class="metodo-pago-box">
+                        <div class="metodo-pago">
+                            <span>Monto en cheques $</span>
+                            <input type="number" v-model="montoCheque" @keypress.enter="changeMontoCheque$" />
+                        </div>
+                        <div class="metodo-pago">
+                            <span>Monto en cheques Bs</span>
+                            <input type="number" v-model="montoChequeBs" @keypress.enter="changeMontoChequeBs" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -488,7 +496,7 @@ export default {
 .datos-cliente {
     width: 60dvw;
     height: 100dvh;
-    padding: 4dvw 1dvw 0 7dvw;
+    padding: 3dvw 1dvw 0 7dvw;
     display: flex;
     flex-direction: column;
     justify-content: top;
@@ -498,7 +506,7 @@ export default {
 .datos-compra {
     width: 40dvw;
     height: 100dvh;
-    padding: 4dvw 7dvw 0 1dvw;
+    padding: 3dvw 7dvw 0 1dvw;
     display: flex;
     flex-direction: column;
     background-color: #F8F9FD;
@@ -513,14 +521,7 @@ export default {
     font-style: normal;
     font-weight: 700;
     line-height: 32px;
-}
-
-.subtitulo {
-    color: #535353;
-    margin-top: 10px;
-    font-size: 24px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 200;
+    margin-bottom: 2dvh;
 }
 
 .productos-box {
@@ -554,6 +555,56 @@ export default {
 
 }
 
+.encabezado {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.encabezado-container {
+    width: 100%;
+    padding-right: 24px;
+    margin-bottom: 2dvh;
+}
+
+.encabezado-border {
+    width: 100%;
+    border: 1px solid #E3E5ED;
+    border-radius: 8px;
+    padding: 18px 24px 18px 12px;
+    align-self: flex-start;
+    
+}
+
+.buscador-box input {
+    width: 68%;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    color: #2c384af2;
+    padding: 0;
+    margin: 0;
+}
+
+.buscador-box input:focus {
+    outline: none;
+}
+
+.buscador-box {
+    display: flex;
+    
+}
+
+.data-cliente {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 12px;
+}
+
+.left-data {
+    margin-right: 20px;
+}
+
 .tarjetas {
     display: flex;
     flex-direction: column;
@@ -572,12 +623,14 @@ export default {
 
 
 .botones {
+    width: 100%;
+    margin-bottom: 2dvh;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
 }
+
 
 .monto-total {
     display: flex;
@@ -605,7 +658,7 @@ export default {
     width: 100%;
     border: 1px solid #E3E5ED;
     border-radius: 8px;
-    padding: 24px 12px;
+    padding: 18px 24px 18px 12px;
     align-self: flex-start;
 }
 
@@ -616,7 +669,7 @@ export default {
 }
 
 .direccion input {
-    width: 65%;
+    width: 68%;
     border: none;
     border-bottom: 1px solid #cccccc;
     color: #2c384af2;
@@ -634,35 +687,51 @@ export default {
     font-weight: 600;
 }
 
-.puntos-container {
+.metodo-pago-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     margin-bottom: 3dvh;
-    padding: 24px 24px 0 0;
+    padding: 0 24px 0 0;
 }
 
-.puntos-border {
+.metodo-pago-border {
     width: 100%;
     border: 1px solid #E3E5ED;
     border-radius: 8px;
-    padding: 24px 12px;
+    padding: 24px;
     align-self: flex-start;
 }
 
-.puntos {
+.metodo-pago-box {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
-.puntos span {
+.metodo-pago {
+    display: flex;
+    align-items: center;
+}
+
+.metodo-pago span {
     padding-right: 1dvw;
 }
 
-.puntos input {
-    width: 80%;
+.metodo-pago .acumulados {
+    margin-left: auto;
+    color: #2c384af2;
+    padding: 0;
+}
+
+.metodo-pago .right {
+    margin-left: auto;
+
+}
+
+.metodo-pago input {
+    text-align: center;
     border: none;
     border-bottom: 1px solid #cccccc;
     color: #2c384af2;
@@ -670,11 +739,11 @@ export default {
     padding: 0;
 }
 
-.puntos input:focus {
+.metodo-pago input:focus {
     outline: none;
 }
 
-.puntos-container h2 {
+.metodo-pago-container h2 {
     font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-weight: 600;
