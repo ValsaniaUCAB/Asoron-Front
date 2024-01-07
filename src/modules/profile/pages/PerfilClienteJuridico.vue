@@ -79,7 +79,7 @@ export default {
     computed: {
         ...mapState('auth', ['user']),
         isLoading() {
-            if (this.user !== null) {
+            if (this.user) {
                 return false
             } else {
                 return true
