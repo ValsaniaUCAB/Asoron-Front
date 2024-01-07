@@ -3,14 +3,12 @@
     <div v-else class="box">
         <div class="datos-cliente">
             <h1 class="titulo">Asoron</h1>
-            <div class="subtitulo">
-                Checkout
-            </div>
+            <h1 class="subtitulo">Checkout</h1>
             <div v-if="listaTarjetas.length === 0" class="tarjetas-box">
                 No posee tarjetas registradas
             </div>
             <div v-else class="tarjetas-box">
-                <p>Seleccionar Tarjetas</p>
+                <h2>Seleccionar Tarjetas</h2>
                 <div class="tarjetas-container">
                     <ul class="borde">
                         <li class="tarjeta" v-for="tarjeta in listaTarjetas" :key="tarjeta.id">
@@ -26,18 +24,22 @@
             </div>
             
             <div class="direccion-container">
-                <h2>Direccion</h2>
-                <div class="direccion">
-                    <input type="text" v-model="direccion" />
+                <h2>Dirección</h2>
+                <div class="direccion-border">
+                    <div class="direccion">
+                        <Lugar @on-click="setFkDireccion"></lugar>
+                        <input type="text" v-model="direccion" placeholder="Dirección"/>
+                    </div>
                 </div>
-                <Lugar @on-click="setFkDireccion"></lugar>
             </div>
 
-            <div class="tarjetas-box">
-                <p>Puntos</p>
-                <div class="Puntos">
-                    <div>Puntos Acumulados</div>
-                    <input type="number" v-model="puntos" />
+            <div class="puntos-container">
+                <h2>Puntos</h2>
+                <div class="puntos-border">
+                    <div class="puntos">
+                        <span>Puntos Acumulados</span>
+                        <input type="number" v-model="puntos" min="0" :max="cantidad_puntos"/>
+                    </div>
                 </div>
             </div>
             <AddCard v-if="active" @on-close="closeAddCard"></AddCard>
@@ -65,11 +67,22 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="pie-productos">
                 <hr>
-                <div class="monto-total">Bs. {{ montoTotal * valorDolar }}</div>
-                <div class="monto-total">${{ montoTotal.toFixed(2) }}</div>
-                <button @click="vender()">Pagar</button>
+                <div class="subtotal-container">
+                    <h3>Subtotal</h3>
+                    <span>Bs. {{ montoTotal * valorDolar }}</span>
+                </div>
+                <div class="subtotal-container">
+                    <h3>Taza de cambio</h3>
+                    <span>x {{ valorDolar }}</span>
+                </div>
+                <hr>
+                <div class="monto-total-container">
+                    <h2>Total</h2>
+                    <span>${{ montoTotal.toFixed(2) }}</span>
+                </div>
+                <button @click="vender()" class="button-18 pagar-btn">Pagar</button>
             </div>
         </div>
         <BackToHome />
@@ -254,13 +267,14 @@ export default {
     align-items: flex-start;
 }
 
+
+
 .datos-compra {
     width: 40dvw;
     height: 100dvh;
     padding: 4dvw 7dvw 0 1dvw;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background-color: #F8F9FD;
     padding: 135;
 
@@ -276,8 +290,11 @@ export default {
 }
 
 .subtitulo {
-    color: #02021D;
-    margin-top: 20px;
+    color: #535353;
+    margin-top: 10px;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
 }
 
 .productos-box {
@@ -308,20 +325,26 @@ export default {
     width: 100%;
 }
 
+.tarjetas-box h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
 .tarjetas-container {
     display: flex;
     flex-direction: column;
     justify-content: top;
     align-items: flex-start;
     width: 100%;
-    padding: 24px 24px 0 24px;
+    padding: 0 24px 0 0;
 }
 
 .borde {
     width: 100%;
     border-radius: 8px;
-    border: 1px solid #E3E5ED;
     padding: 0 12px;
+    border: 1px solid #E3E5ED;
     height: 240px;
     overflow-y: scroll ;
     margin: 0;
@@ -359,17 +382,92 @@ export default {
     margin: 3dvh 0;
 }
 
-.monto-total {
+.direccion-container {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 3dvh;
+    padding: 0 24px 0 0;
+}
+
+.direccion-border {
+    width: 100%;
+    border: 1px solid #E3E5ED;
+    border-radius: 8px;
+    padding: 24px 12px;
+    align-self: flex-start;
+}
+
+.direccion {
+    display: flex;
     align-items: center;
-    margin-right: 30px;
-    font-size: 16px;
-    font-style: normal;
-    line-height: 16px;
-    font-weight: 700;
-    margin-bottom: 10px;
+    justify-content: flex-start;
+}
+
+.direccion input {
+    width: 65%;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    color: #2c384af2;
+    padding: 0;
+    margin:0;
+}
+
+.direccion input:focus {
+    outline: none;
+}
+
+.direccion-container h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.puntos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 3dvh;
+    padding: 24px 24px 0 0;
+}
+
+.puntos-border {
+    width: 100%;
+    border: 1px solid #E3E5ED;
+    border-radius: 8px;
+    padding: 24px 12px;
+    align-self: flex-start;
+}
+
+.puntos {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.puntos span {
+    padding-right: 1dvw ;
+}
+
+.puntos input {
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    color: #2c384af2;
+    margin: 0;
+    padding: 0;
+}
+
+.puntos input:focus {
+    outline: none;
+}
+
+.puntos-container h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .button-18 {
@@ -425,5 +523,50 @@ export default {
         border: 1px solid #31212B;
         margin-right: 10px;
     }
+}
+
+.monto-total-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px;
+
+    & h2 {
+        font-family: 'Inter', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    & span {
+        font-family: 'Inter', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+    }
+}
+
+.subtotal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+
+    & h3 {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    & span {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+    }
+}
+
+.pagar-btn {
+    margin-top: 4dvh;
 }
 </style>
