@@ -81,7 +81,7 @@
                     <div class="puntos">
                         <span>Puntos Acumulados</span>
                         <!-- TODO: Falta agregar el max -->
-                        <input type="number" v-model="cantidadPuntos" min="0" />
+                        <input type="number" v-model="cantidadPuntos" min="0" :max="maxPuntos" />
                     </div>
                 </div>
             </div>
@@ -236,7 +236,7 @@ export default {
                 if (item.evento) montoFinal += item.evento.precio * item.cantidad
                 if (item.afiliado) montoFinal += item.afiliado.precio * item.cantidad
             }
-            return montoFinal
+            return Math.round(montoFinal * 100) / 100
         },
         montoPuntos() {
             let monto = 0
@@ -311,7 +311,9 @@ export default {
 
                     console.log(error)
                 }
+
             }
+            this.maxPuntos = this.cliente.info.puntos
         },
         changeTipoCliente(tipo) {
             this.cliente.tipo = tipo
