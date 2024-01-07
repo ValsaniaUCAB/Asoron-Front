@@ -1,6 +1,6 @@
 <template>
     <div class="button-container">
-        <button class="button-18" @click="backToHome()"><i class="fa fa-arrow-left"></i> <span>Ir a home</span></button>
+        <button class="button-18-custom" @click="backToHome()"><i class="fa fa-arrow-left"></i> <span>Ir a home</span></button>
     </div>
 </template>
 
@@ -21,17 +21,18 @@ export default {
     bottom: 20px;
 }
 
-.button-18 {
+.button-18-custom {
     align-items: center;
-    background-color: #31212b;
+    background: none;
     border: 0;
     border-radius: 100px;
     box-sizing: border-box;
-    color: #fff;
+    color: #31212b;
     cursor: pointer;
     display: absolute;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
+    font-weight: 800;
     justify-content: center;
     line-height: 20px;
     max-width: 480px;
@@ -56,7 +57,7 @@ export default {
 
     &:hover,
     :focus {
-        background-color: #e6bd7f;
+        background-color:whitesmoke;
         color: #000;
     }
 

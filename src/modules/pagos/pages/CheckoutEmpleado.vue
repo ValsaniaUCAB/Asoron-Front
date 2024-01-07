@@ -84,10 +84,12 @@
             <div class="metodo-pago-container">
                 <h2>Puntos</h2>
                 <div class="metodo-pago-border">
-                    <div class="metodo-pago">
-                        <span>Puntos Acumulados</span>
-                        <input type="number" v-model="cantidadPuntos" min="0" :max="maxPuntos" />
-                        <span class="acumulados">Puntos Acumulados: {{ this.maxPuntos }}</span>
+                    <div class="metodo-pago-box">
+                        <div class="metodo-pago">
+                            <span>Puntos Acumulados</span>
+                            <input type="number" v-model="cantidadPuntos" min="0" :max="maxPuntos" />
+                        </div>
+                        <span>Puntos Acumulados: {{ this.maxPuntos }}</span>
                     </div>
                 </div>
             </div>
@@ -135,18 +137,38 @@
             <div class="pie-productos">
                 <hr>
                 <div class="subtotal-container">
-                    <h3>Subtotal</h3>
-                    <span>Bs. {{ montoTotal * valorDolar }}</span>
+                    <h3>Subtotal Bs.</h3>
+                    <span>Bs. {{ (montoTotal * valorDolar).toFixed(2) }}</span>
                 </div>
                 <div class="subtotal-container">
                     <h3>Tasa de cambio</h3>
-                    <span>x {{ valorDolar }}</span>
+                    <span>÷ {{ valorDolar }}</span>
+                </div>
+                <hr>
+                <div class="subtotal-container">
+                    <h3>Subtotal $</h3>
+                    <span>$ {{ montoTotal.toFixed(2) }}</span>
+                </div>
+                <div class="subtotal-container">
+                    <h3>Efectivo:</h3>
+                    <span class="substract">- ${{ montoEfectivo }}</span>
+                </div>
+                <div class="subtotal-container">
+                    <h3>Tarjeta:</h3>
+                    <span class="substract">- ${{ montoTarjeta  }}</span>
+                </div>
+                <div class="subtotal-container">
+                    <h3>Puntos ({{puntosPrecio}}$ c/u)</h3>
+                    <span class="substract">- ${{ montoPuntos }}</span>
+                </div>
+                <div class="subtotal-container">
+                    <h3>Cheque:</h3>
+                    <span class="substract">- ${{ montoCheque }}</span>
                 </div>
                 <hr>
                 <div class="monto-total-container">
-                    <p>Suma acumulada: ${{ montoSumado }}</p>
                     <h2>Total</h2>
-                    <span>${{ montoTotal.toFixed(2) }}</span>
+                    <span>${{ (montoTotal- this.montoSumado ).toFixed(2) }}</span>
                 </div>
                 <button @click="vender()" class="button-18 pagar-btn">Pagar</button>
             </div>
@@ -254,7 +276,7 @@ export default {
         montoSumado() {
             let monto = 0
             console.log(this.montoTarjeta, this.montoCheque, this.montoEfectivo, this.montoPuntos)
-            monto = this.cantidadPuntos + this.montoTarjeta + this.montoCheque + this.montoEfectivo
+            monto = this.montoPuntos + this.montoTarjeta + this.montoCheque + this.montoEfectivo
             return monto
         }
         // montoTarjeta() {
@@ -526,6 +548,8 @@ export default {
 
 .productos-box {
     width: 100%;
+    max-height: 35dvh;
+    overflow-y: scroll ;
 
 }
 
@@ -719,12 +743,6 @@ export default {
     padding-right: 1dvw;
 }
 
-.metodo-pago .acumulados {
-    margin-left: auto;
-    color: #2c384af2;
-    padding: 0;
-}
-
 .metodo-pago .right {
     margin-left: auto;
 
@@ -843,9 +861,14 @@ export default {
         font-size: 18px;
         font-weight: 400;
     }
+
+    & .substract {
+        color: #F94646;
+    }
 }
 
 .pagar-btn {
     margin-top: 4dvh;
 }
+
 </style>
