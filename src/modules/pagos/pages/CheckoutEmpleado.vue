@@ -27,18 +27,18 @@
                     </div>
                 </div>
             </div>
-            
-                <div class="botones">
+
+            <div class="botones">
                 <Afiliado />
-                    <div class="add-botones">
-                        <AddClienteNatural v-if="activeClienteNatural" @on-register="closeAniadirClienteNatural" />
-                        <button class="button-18" @click="openAniadirClienteNatural">Añadir Cliente Natural</button>
-                        <AddClienteJuridico v-if="activeClienteJuridico" @on-register="closeAniadirClienteJuridico" />
-                        <button class="button-18" @click="openAniadirClienteJuridico">Añadir Cliente Juridico</button>
-                    </div>
+                <div class="add-botones">
+                    <AddClienteNatural v-if="activeClienteNatural" @on-register="closeAniadirClienteNatural" />
+                    <button class="button-18" @click="openAniadirClienteNatural">Añadir Cliente Natural</button>
+                    <AddClienteJuridico v-if="activeClienteJuridico" @on-register="closeAniadirClienteJuridico" />
+                    <button class="button-18" @click="openAniadirClienteJuridico">Añadir Cliente Juridico</button>
                 </div>
-            
-            
+            </div>
+
+
             <div class="direccion-container">
                 <h2>Dirección</h2>
                 <div class="direccion-border">
@@ -155,10 +155,10 @@
                 </div>
                 <div class="subtotal-container">
                     <h3>Tarjeta:</h3>
-                    <span class="substract">- ${{ montoTarjeta  }}</span>
+                    <span class="substract">- ${{ montoTarjeta }}</span>
                 </div>
                 <div class="subtotal-container">
-                    <h3>Puntos ({{puntosPrecio}}$ c/u)</h3>
+                    <h3>Puntos ({{ puntosPrecio }}$ c/u)</h3>
                     <span class="substract">- ${{ montoPuntos }}</span>
                 </div>
                 <div class="subtotal-container">
@@ -168,7 +168,7 @@
                 <hr>
                 <div class="monto-total-container">
                     <h2>Total</h2>
-                    <span>${{ (montoTotal- this.montoSumado ).toFixed(2) }}</span>
+                    <span>${{ (montoTotal - this.montoSumado).toFixed(2) }}</span>
                 </div>
                 <button @click="vender()" class="button-18 pagar-btn">Pagar</button>
             </div>
@@ -401,7 +401,7 @@ export default {
                         if (result.isConfirmed) {
                             this.endCarrito()
                             this.getCarritoCliente()
-                            this.$router.push({ name: 'home' });
+                            this.$router.push({ name: 'catalogo' });
                             Swal.close()
                         }
                     });
@@ -491,6 +491,23 @@ export default {
         this.puntosPrecio = await getPrecioPuntos()
         this.valorDolar = await getValorDolar()
     },
+    watch: {
+        montoTarjeta(value) {
+            if (value < 0 || value === '') {
+                this.montoTarjeta = 0
+            }
+        },
+        montoCheque(value) {
+            if (value < 0 || value === '') {
+                this.montoCheque = 0
+            }
+        },
+        montoEfectivo(value) {
+            if (value < 0 || value === '') {
+                this.montoEfectivo = 0
+            }
+        }
+    }
     // mounted() {
     //     if (!this.user) {
     //         this.$router.push({ name: 'login' })
@@ -549,7 +566,7 @@ export default {
 .productos-box {
     width: 100%;
     max-height: 35dvh;
-    overflow-y: scroll ;
+    overflow-y: scroll;
 
 }
 
@@ -597,7 +614,7 @@ export default {
     border-radius: 8px;
     padding: 18px 24px 18px 12px;
     align-self: flex-start;
-    
+
 }
 
 .buscador-box input {
@@ -615,7 +632,7 @@ export default {
 
 .buscador-box {
     display: flex;
-    
+
 }
 
 .data-cliente {
@@ -870,5 +887,4 @@ export default {
 .pagar-btn {
     margin-top: 4dvh;
 }
-
 </style>
