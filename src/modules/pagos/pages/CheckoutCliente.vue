@@ -39,52 +39,56 @@
                     <div class="puntos">
                         <span>Puntos a pagar:</span>
                         <input type="number" v-model="puntos" min="0" :max="maxPuntos" />
+                        <span class="acumulados">Puntos Acumulados: {{ this.maxPuntos }}</span>
                     </div>
                 </div>
-                <p>Puntos Acumulados: {{ this.maxPuntos }}</p>
-                <p>Valor de los puntos: ${{ puntosPrecio }}</p>
-                <p>Valor en dolares: ${{ montoPuntos }}</p>
-
             </div>
             <AddCard v-if="active" @on-close="closeAddCard"></AddCard>
         </div>
         <div class="datos-compra">
-            <div>
-                <div class="productos-box">
-                    <div class="producto" v-for="(item, ) in items" :key="item.id">
-                        <div class="producto-nombre">
-                            <span v-if="item.afiliado">{{ item.afiliado.nombre }}</span>
-                            <span v-if="item.botella">{{ item.botella.nombre }}</span>
-                            <span v-if="item.evento">{{ item.evento.nombre }} | {{ item.evento.entradaNombre }}</span>
-                        </div>
-                        <div class="producto-precio">
-                            <span v-if="item.afiliado">${{ item.afiliado.precio }}</span>
-                            <span v-if="item.botella && !item.oferta">${{ item.botella.precio }}</span>
-                            <span v-if="item.botella && item.oferta">
-                                <span class="precio-sin-desc">${{ item.botella.precio }}</span>
-                                ${{ (item.botella.precio - (item.botella.precio * item.oferta.descuento / 100)).toFixed(2)
-                                }}
-                            </span>
-                            <span v-if="item.evento">${{ item.evento.precio }}</span>
-                            <span> x{{ item.cantidad }}</span>
-                        </div>
+            <div class="productos-box">
+                <div class="producto" v-for="(item, ) in items" :key="item.id">
+                    <div class="producto-nombre">
+                        <span v-if="item.afiliado">{{ item.afiliado.nombre }}</span>
+                        <span v-if="item.botella">{{ item.botella.nombre }}</span>
+                        <span v-if="item.evento">{{ item.evento.nombre }} | {{ item.evento.entradaNombre }}</span>
+                    </div>
+                    <div class="producto-precio">
+                        <span v-if="item.afiliado">${{ item.afiliado.precio }}</span>
+                        <span v-if="item.botella && !item.oferta">${{ item.botella.precio }}</span>
+                        <span v-if="item.botella && item.oferta">
+                            <span class="precio-sin-desc">${{ item.botella.precio }}</span>
+                            ${{ (item.botella.precio - (item.botella.precio * item.oferta.descuento / 100)).toFixed(2)
+                            }}
+                        </span>
+                        <span v-if="item.evento">${{ item.evento.precio }}</span>
+                        <span> x{{ item.cantidad }}</span>
                     </div>
                 </div>
             </div>
             <div class="pie-productos">
                 <hr>
                 <div class="subtotal-container">
-                    <h3>Subtotal</h3>
+                    <h3>Subtotal Bs.</h3>
                     <span>Bs. {{ montoTotal * valorDolar }}</span>
                 </div>
                 <div class="subtotal-container">
                     <h3>Tasa de cambio</h3>
-                    <span>x {{ valorDolar }}</span>
+                    <span>÷ {{ valorDolar }}</span>
+                </div>
+                <hr>
+                <div class="subtotal-container">
+                    <h3>Subtotal $</h3>
+                    <span>$ {{ montoTotal }}</span>
+                </div>
+                <div class="subtotal-container">
+                    <h3>Puntos ({{puntosPrecio}}$ c/u)</h3>
+                    <span class="substract">- ${{ montoPuntos }}</span>
                 </div>
                 <hr>
                 <div class="monto-total-container">
                     <h2>Total</h2>
-                    <span>${{ montoTotal.toFixed(2) }}</span>
+                    <span>${{ (montoTotal-montoPuntos).toFixed(2) }}</span>
                 </div>
                 <button @click="vender()" class="button-18 pagar-btn">Pagar</button>
             </div>
@@ -317,6 +321,8 @@ export default {
 
 .productos-box {
     width: 100%;
+    max-height: 25dvh;
+    overflow-y: scroll ;
 
 }
 
@@ -455,7 +461,7 @@ export default {
     width: 100%;
     border: 1px solid #E3E5ED;
     border-radius: 8px;
-    padding: 24px 12px;
+    padding: 24px;
     align-self: flex-start;
 }
 
@@ -469,8 +475,14 @@ export default {
     padding-right: 1dvw;
 }
 
+.puntos .acumulados {
+    margin-left: auto;
+    color: #2c384af2;
+    padding: 0;
+}
+
 .puntos input {
-    width: 80%;
+    text-align: center;
     border: none;
     border-bottom: 1px solid #cccccc;
     color: #2c384af2;
@@ -582,9 +594,15 @@ export default {
         font-size: 18px;
         font-weight: 400;
     }
+
+    & .substract {
+        color: #F94646;
+    }
 }
 
 .pagar-btn {
     margin-top: 4dvh;
 }
+
+
 </style>
