@@ -29,13 +29,6 @@
                         <li> <b>Afiliacion: </b> <span v-if="user.data.afiliado === true">Activa</span> <span v-else>No activa</span></li>
                     </ul>
                 </div>
-                <div class="element-container">
-                    <h2>Afiliacion</h2>
-                    <div class="afiliacion element-box spacer">
-                        <p> Puede descargar su Carnet o Pagar su Afiliacion </p>
-                        <Afiliado></Afiliado>
-                    </div>
-                </div>
             </div>
 
             <div class="right-side">
@@ -53,6 +46,13 @@
                         <p> Puede ver sus compras aqui </p>
                         <button class="button-18-mod" @click="changeShowVentas()">Ver mis Compras</button>
                         <Ventas v-if="showVentas" @on-close="changeShowVentas" />
+                    </div>
+                </div>
+                <div class="element-container">
+                    <h2>Afiliacion</h2>
+                    <div class="afiliacion element-box spacer">
+                        <p> Puede descargar su Carnet o Pagar su Afiliacion </p>
+                        <Afiliado></Afiliado>
                     </div>
                 </div>
             </div>
@@ -188,6 +188,7 @@ export default {
     display: flex;
     flex-direction: column;
     width: 50%;
+    padding-left: 100px;
 }
 
 

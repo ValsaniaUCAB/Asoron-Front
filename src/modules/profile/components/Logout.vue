@@ -40,10 +40,10 @@ export default {
 .button-18 {
     align-items: center;
     background:none;
-    border: 0;
+    border: 1px solid #31212B;
     border-radius: 100px;
     box-sizing: border-box;
-    color: #000;
+    color: #31212B;
     cursor: pointer;
     display: inline-flex;
     font-family: 'Inter', sans-serif;
@@ -69,6 +69,7 @@ export default {
     &:hover,
     :focus {
         color: #000;
+        background-color: whitesmoke;
     }
 
     &:active {

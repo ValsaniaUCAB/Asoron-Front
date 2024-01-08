@@ -1,13 +1,16 @@
 <template>
     <div class="eventos" v-if="isLoading">Cargan2</div>
     <div class="eventos">
-        <CDropdown>
-            <CDropdownToggle>{{ tipo }}</CDropdownToggle>
-            <CDropdownMenu style="width:100%;">
-                <CDropdownItem @click="changeToActual">Eventos Actuales</CDropdownItem>
-                <CDropdownItem @click="changeToPasado">Eventos Pasados</CDropdownItem>
-            </CDropdownMenu>
-        </CDropdown>
+        <div class="sort">
+            <div class="titulo-barras">Ordenar</div>
+            <CDropdown class="barra-busqueda">
+                <CDropdownToggle>{{ tipo.toUpperCase() }}</CDropdownToggle>
+                <CDropdownMenu style="width:100%;">
+                    <CDropdownItem @click="changeToActual">Eventos Actuales</CDropdownItem>
+                    <CDropdownItem @click="changeToPasado">Eventos Pasados</CDropdownItem>
+                </CDropdownMenu>
+            </CDropdown>
+        </div>
     </div>
     <div v-if="tipo === 'actual'" class="eventos mx-5 col d-flex">
         <li v-for="evento in eventosList" :key="evento.id" class="event-tarjeta">
@@ -105,7 +108,6 @@ export default {
 
 <style scoped>
 .eventos {
-    margin-top: 110px;
     flex-direction: column;
     /* flex-wrap: nowrap; */
     align-items: flex-start;
@@ -124,5 +126,28 @@ a {
 
 .paginado-container {
     align-self: center;
+}
+
+.sort {
+    margin-top: 110px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 225px;
+    margin-left: 420px;
+}
+
+.titulo-barras {
+    color: #31212B;
+    width: 100%;
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.barra-busqueda {
+    height: 56px;
+    border: 3px solid #31212B;
+    border-radius: 16px;
 }
 </style>
