@@ -8,7 +8,7 @@
                 <h1>Mi perfil</h1>
                 <Logout></Logout>
             </div>
-            <h2 class="hola">Hola, {{ user.data.nombre }}!</h2>
+            <h2 class="hola">Hola, {{ user.data.denominacionComercial }}!</h2>
         </div>
         <div class="cuerpo-container">
             <div class="left-side">
