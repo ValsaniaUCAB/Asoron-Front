@@ -3,6 +3,7 @@ import api from '@/lib/api';
 //! Revisar que funcione
 
 function listaEvento(lista) {
+    if (lista === null) return []
     let listaA = []
     for (const e of lista) {
         let obj = {

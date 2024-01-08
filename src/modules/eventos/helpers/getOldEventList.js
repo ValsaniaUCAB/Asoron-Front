@@ -1,4 +1,5 @@
 import api from "@/lib/api";
+
 function listaImages(lista) {
     let listaA = []
     for (const e of lista) {
@@ -35,11 +36,10 @@ function arreglarLista(eventList) {
     return eventListArreglado
 }
 
-async function getEventList(page = '1') {
-    const { data } = await api.get(`/store/evento/?page=${page}`)
+export default async function getOldEventList(page = '1') {
+    const { data } = await api.get(`/store/evento/?page=${page}&pasados=true`)
     const { Paginacion, results } = data
-    if (data) return { paginacion: Paginacion, eventosList: arreglarLista(results) }
+    console.log(Paginacion, results)
+    if (data) return { paginacion: Paginacion, oldEventosList: arreglarLista(results) }
     else return []
 }
-
-export default getEventList

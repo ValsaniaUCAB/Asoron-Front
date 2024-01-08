@@ -9,6 +9,8 @@ export const getRonList = (state) => state.ronList
 
 export const getBusqueda = (state) => state.busqueda
 
+export const getPages = (state) => state.pages
+
 export const getActualPage = (state) => state.pages.actual
 
 export const getFiltros = (state) => state.filtros
