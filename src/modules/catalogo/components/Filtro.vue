@@ -46,7 +46,7 @@
         </div>
         <div class="filtro-container filtro-clasificacion">
             <input class="collapsible-input" type="checkbox" id="clasificacion-desplegable">
-            <label for="clasificacion-desplegable" class="filtro-label">Clasificacion{{ this.clasificacion }}</label>
+            <label for="clasificacion-desplegable" class="filtro-label">Clasificacion</label>
             <div class="collapsible-container">
                 <ul class="filtro-lista">
                     <li class="filtro_item">
