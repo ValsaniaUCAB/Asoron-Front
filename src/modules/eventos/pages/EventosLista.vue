@@ -13,13 +13,17 @@
         <li v-for="evento in eventosList" :key="evento.id" class="event-tarjeta">
             <Evento :evento="evento" />
         </li>
-        <Paginado v-if="eventosList.length > 0" @on-click="cambiarPagina" />
+        <div class="paginado-container">
+            <Paginado v-if="eventosList.length > 0" @on-click="cambiarPagina" />
+        </div>
     </div>
     <div v-if="tipo === 'pasado'" class="eventos mx-5 col d-flex">
         <li v-for="evento in oldEventosList" :key="evento.id" class="event-tarjeta">
             <Evento :evento="evento" />
         </li>
-        <Paginado v-if="oldEventosList.length > 0" @on-click="cambiarPaginaOld" />
+        <div class="paginado-container">
+            <Paginado v-if="oldEventosList.length > 0" @on-click="cambiarPaginaOld" />
+        </div>
     </div>
     <!-- <button @click="cargarEventosViejosEnElState">Cargar Eventos Pasados</button> -->
 </template>
@@ -105,6 +109,7 @@ export default {
     flex-direction: column;
     /* flex-wrap: nowrap; */
     align-items: flex-start;
+    margin-bottom: 40px;
 }
 
 li {
@@ -115,5 +120,9 @@ li {
 
 a {
     color: #2c3e50;
+}
+
+.paginado-container {
+    align-self: center;
 }
 </style>

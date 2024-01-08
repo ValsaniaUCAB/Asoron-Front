@@ -13,7 +13,7 @@ export default {
 <style>
 footer {
     width: 100%;
-    height: 241px;
+    height: 180px;
     background-color: #31212b;
 }
 
