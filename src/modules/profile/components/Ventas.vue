@@ -111,6 +111,18 @@ export default {
             this.isLoading = false
         },
         async descargarVenta() {
+            if (this.seleccionVenta === null) {
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "Debe seleccionar una venta",
+                    background: "#0085FF",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+                return
+            }
             Swal.fire({
                 position: "bottom-end",
                 title: "Descargando Factura",
