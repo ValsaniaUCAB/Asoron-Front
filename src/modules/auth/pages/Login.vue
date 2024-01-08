@@ -71,6 +71,7 @@ export default {
                 showCancelButton: true,
                 confirmButtonText: "Enviar",
                 showLoaderOnConfirm: true,
+                confirmButtonColor: "#31212b",
                 preConfirm: async (login) => {
                     const dataToSave = {
                         email: login
