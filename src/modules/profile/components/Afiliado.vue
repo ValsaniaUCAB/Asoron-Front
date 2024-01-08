@@ -1,5 +1,5 @@
 <template>
-    <button @click="afiliacion()" class="button-18">Afiliacion</button>
+    <button @click="afiliacion()" class="button-18">{{ texto }}</button>
 </template>
 
 <script>
@@ -11,6 +11,13 @@ export default {
     computed: {
         ...mapState('auth', ['user']),
         ...mapState('carrito', ['uuid', 'items']),
+        texto() {
+            if (this.user.data.afiliado === false) {
+                return 'Afiliarse'
+            } else {
+                return 'Descargar Carnet'
+            }
+        }
     },
     methods: {
         ...mapActions('carrito', ['addAfiliadoCarrito']),
