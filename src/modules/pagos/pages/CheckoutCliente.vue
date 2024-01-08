@@ -82,13 +82,13 @@
                     <span>$ {{ montoTotal.toFixed(2) }}</span>
                 </div>
                 <div class="subtotal-container">
-                    <h3>Puntos ({{puntosPrecio}}$ c/u)</h3>
+                    <h3>Puntos ({{ puntosPrecio }}$ c/u)</h3>
                     <span class="substract">- ${{ montoPuntos }}</span>
                 </div>
                 <hr>
                 <div class="monto-total-container">
                     <h2>Total</h2>
-                    <span>${{ (montoTotal-montoPuntos).toFixed(2) }}</span>
+                    <span>${{ (montoTotal - montoPuntos).toFixed(2) }}</span>
                 </div>
                 <button @click="vender()" class="button-18 pagar-btn">Pagar</button>
             </div>
@@ -253,6 +253,7 @@ export default {
             } else if (value < 0) {
                 this.puntos = 0
             }
+            this.puntos = Math.round(this.puntos)
         }
     }
     // mounted() {
@@ -322,7 +323,7 @@ export default {
 .productos-box {
     width: 100%;
     max-height: 45dvh;
-    overflow-y: scroll ;
+    overflow-y: scroll;
 
 }
 
@@ -603,6 +604,4 @@ export default {
 .pagar-btn {
     margin-top: 4dvh;
 }
-
-
 </style>

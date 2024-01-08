@@ -73,7 +73,8 @@
                     <div class="metodo-pago-box">
                         <div class="metodo-pago">
                             <span>Monto en Tarjeta $</span>
-                            <input type="number" v-model="montoTarjeta" @keypress.enter="changeMontoTarjeta$" />
+                            <input type="number" pattern="^\d+(?:\.\d{1,2})?$" v-model="montoTarjeta" step="0.01"
+                                @keypress.enter="changeMontoTarjeta$" />
                         </div>
                         <div class="metodo-pago">
                             <span>Monto en Tarjeta Bs</span>
@@ -510,16 +511,28 @@ export default {
             if (value < 0 || value === '') {
                 this.montoTarjeta = 0
             }
+            this.montoTarjeta = Math.round(this.montoTarjeta * 100) / 100;
         },
         montoCheque(value) {
             if (value < 0 || value === '') {
                 this.montoCheque = 0
             }
+            this.montoCheque = Math.round(this.montoCheque * 100) / 100;
         },
         montoEfectivo(value) {
             if (value < 0 || value === '') {
                 this.montoEfectivo = 0
             }
+            this.montoEfectivo = Math.round(this.montoEfectivo * 100) / 100;
+        },
+        cantidadPuntos(value) {
+            if (value < 0 || value === '') {
+                this.cantidadPuntos = 0
+            }
+            if (value > this.maxPuntos) {
+                this.cantidadPuntos = this.maxPuntos
+            }
+            this.cantidadPuntos = Math.round(this.cantidadPuntos);
         }
     }
     // mounted() {
