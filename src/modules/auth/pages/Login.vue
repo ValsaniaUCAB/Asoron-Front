@@ -159,6 +159,12 @@ img {
     text-align: left;
 }
 
+.link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 input {
     text-indent: 20px;
 }
