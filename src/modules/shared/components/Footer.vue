@@ -3,9 +3,9 @@
         <span class="derechos">© 2024 - Todos los derechos reservados</span>
         <div class="footer-container">
             <span>Elaborado por:</span>
-            <a href="https://www.instagram.com/gustavoff7/" class="Gustavo link"> Gustavo Freitas</a>
-            <a href="https://www.instagram.com/sandrovalsania/" class="Valsania link">Alessandro Valsania</a>
-            <a href="https://www.instagram.com/christiangomesp/" class="Christian link">Christian Gomes</a>
+            <a href="https://www.instagram.com/gustavoff7/" target=”_blank” class="Gustavo link"> Gustavo Freitas</a>
+            <a href="https://www.instagram.com/sandrovalsania/" target=”_blank” class="Valsania link">Alessandro Valsania</a>
+            <a href="https://www.instagram.com/christiangomesp/" target=”_blank” class="Christian link">Christian Gomes</a>
         </div>
     </footer>
 </template>
