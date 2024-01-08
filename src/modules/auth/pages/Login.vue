@@ -11,6 +11,8 @@
                     <button class="boton" @click="sendLogin">Inicar Sesion</button>
                     <p class="left">Nuevo en Asoron? <router-link :to="{ name: 'register' }">Crear una cuenta</router-link>
                     </p>
+                    <p class="left">Se olvidó de su contraseña? <span class="link" @click="submitCorreo()">Click
+                            Aqui!</span></p>
                 </div>
             </div>
         </div>
@@ -22,6 +24,7 @@
 import { mapActions, mapState } from 'vuex'
 import Swal from 'sweetalert2'
 import BackToHome from '../components/BackToHome.vue'
+import api from '@/lib/api'
 
 export default {
     components: {
@@ -57,8 +60,37 @@ export default {
             } catch (error) {
                 Swal.fire('Error', 'Sesion no encontrada', 'error', this.username = '', this.password = '')
             }
-
-
+        },
+        submitCorreo() {
+            Swal.fire({
+                title: "Escriba el correo asociado a su cuenta",
+                input: "text",
+                inputAttributes: {
+                    autocapitalize: "off"
+                },
+                showCancelButton: true,
+                confirmButtonText: "Enviar",
+                showLoaderOnConfirm: true,
+                preConfirm: async (login) => {
+                    const dataToSave = {
+                        email: login
+                    }
+                    try {
+                        const { data } = await api.post('/auth/users/reset_password/', dataToSave)
+                        return data;
+                    } catch (error) {
+                        Swal.showValidationMessage(`Correo no encontrado`);
+                    }
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: `Correo Enviado`,
+                        imageUrl: 'Revise su correo y siga los pasos'
+                    });
+                }
+            });
         }
     },
 }
