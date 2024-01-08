@@ -157,12 +157,15 @@ img {
 
 .left {
     text-align: left;
+    margin-bottom: 0;
+    margin-top: 5px;
 }
 
 .link {
     color: blue;
     text-decoration: underline;
     cursor: pointer;
+    margin-top: 0px;
 }
 
 input {
