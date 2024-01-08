@@ -37,12 +37,13 @@
         </div>
         <router-link :to="{ name: 'catalogo' }"><button class="button-18 catalogo">VER MAS</button></router-link>
     </div>
-    <footer></footer>
+    <Footer/>
 </template>
 
 <script>
 
 import Navbar from '@/modules/shared/components/Navbar.vue'
+import Footer from '@/modules/shared/components/Footer.vue'
 import RonMinimal from '@/modules/catalogo/components/RonMinimal'
 import getRones from '@/modules/catalogo/helpers/getRonesHome'
 import { mapMutations, mapState } from 'vuex'
@@ -50,6 +51,7 @@ import { mapMutations, mapState } from 'vuex'
 export default {
     components: {
         Navbar,
+        Footer,
         RonMinimal
     },
     data() {

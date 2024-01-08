@@ -26,6 +26,7 @@ footer {
     align-items: center;
     justify-content: flex-end;
     padding-right: 30px;
+    padding-left: 30px;
 }
 
 .footer-container {

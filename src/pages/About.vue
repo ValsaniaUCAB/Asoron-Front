@@ -39,7 +39,7 @@
             <img class="img-filler" src="@/assets/about_whyron.jpg">
         </div>
     </div>
-    <footer></footer>
+    <Footer/>
     
 
 
@@ -49,10 +49,12 @@
 <script>
 
 import Navbar from '@/modules/shared/components/Navbar.vue'
+import Footer from '@/modules/shared/components/Footer.vue'
 
 export default {
     components: {
-        Navbar
+        Navbar,
+        Footer
     }
 }
 </script>
