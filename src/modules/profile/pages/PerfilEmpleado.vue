@@ -1,19 +1,17 @@
 <template>
     <div v-if="isLoading">Cargando</div>
     <div class="main-container" v-else>
-        <div class="header-container"> 
-            <div class="filtrado-container"> 
+        <div class="header-container">
+            <div class="filtrado-container">
                 <div class="busqueda">
                     <div class="titulo-barras">Fecha Inicial</div>
-                    <input class="barra-busqueda" type="text" placeholder="aaaa-mm-dd" v-model="term"
-                    @keypress.enter="cargarRonesConBusqueda">
+                    <input class="barra-busqueda" type="text" placeholder="aaaa-mm-dd" v-model="fechaInicio">
                 </div>
                 <div class="busqueda">
                     <div class="titulo-barras">Fecha Final</div>
-                    <input class="barra-busqueda" type="text" placeholder="aaaa-mm-dd" v-model="term"
-                    @keypress.enter="cargarRonesConBusqueda">
+                    <input class="barra-busqueda" type="text" placeholder="aaaa-mm-dd" v-model="fechaFin">
                 </div>
-                <button class="button-18">Filtrar</button>
+                <button class="button-18" @click="getInfo">Filtrar</button>
             </div>
             <Logout></Logout>
         </div>
@@ -22,8 +20,8 @@
             <div class="left-side">
                 <div class="top-parroquias">
                     <h2><b>Top 10 Parroquias</b> - Ventas Online</h2>
-                    <h3></h3>
-                    <ul>
+                    <h3 v-if="topParroquias.length === 0">No hay ventas online en este rango de fechas</h3>
+                    <ul v-else>
                         <li v-for="parroquia in topParroquias" :key="parroquia.id">
                             <b>{{ parroquia.parroquia }}</b>
                             <hr>
@@ -52,15 +50,17 @@
 
             </div>
             <div class="right-side">
+                <h2 class="top-rones"><b>Rones mas vendidos en tienda física</b></h2>
                 <div class="canvas-box">
                     <canvas id="chart"></canvas>
                 </div>
                 <div class="top-producto">
                     <h2>Producto mas vendido</h2>
-                    <div v-if="productoMasVendido">{{ productoMasVendido.nombre }} ==> {{ productoMasVendido.cantidad }}</div>
+                    <div v-if="productoMasVendido">{{ productoMasVendido.nombre }} ==> {{ productoMasVendido.cantidad }}
+                    </div>
                 </div>
                 <div class="info-restante">
-                    <h2>Ventas realizadas este mes: {{ ventasEsteMes }} </h2>
+                    <h2>Ventas realizadas: {{ ventasEsteMes }} </h2>
                     <h2>Puntos canjeados ==> {{ puntosCanjeados }}</h2>
                     <h2>Puntos otorgados ==> {{ puntosOtorgados }}</h2>
                     <h2>Ordenes atrasadas ==> {{ ordenesAtrasadas }}</h2>
@@ -68,7 +68,6 @@
             </div>
         </div>
     </div>
-    
 </template>
 
 <script>
@@ -89,7 +88,7 @@ export default {
             fechaInicio: '2024-01-01',
             fechaFin: '2024-01-31',
 
-            topParroquias: null,
+            topParroquias: [],
             productoMasVendido: null,
             ventasEsteMes: null,
             ordenesStatus: null,
@@ -97,6 +96,7 @@ export default {
             puntosOtorgados: null,
             ordenesAtrasadas: null,
             productosTop: null,
+            chart: null
         }
     },
     methods: {
@@ -141,8 +141,12 @@ export default {
             return array
         },
         getChart() {
+
             const ctx = document.getElementById('chart')
-            new Chart(ctx, {
+            if (this.chart) {
+                this.chart.destroy()
+            }
+            this.chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: this.getProductosArray(),
@@ -161,23 +165,31 @@ export default {
                 }
             })
         },
+        getInfo() {
+            console.log('Hago una peticion')
+            this.getParroquiasTop()
+            this.getProducto()
+            this.getVentasEsteMes()
+            this.getOrdenesStatus()
+            this.getCanjeados()
+            this.getOtorgados()
+            this.getAtrasadas()
+            this.getProductosTop()
+        }
     },
     computed: {
         ...mapState('auth', ['user']),
         isLoading() {
             if (this.user) {
-                this.getParroquiasTop()
-                this.getProducto()
-                this.getVentasEsteMes()
-                this.getOrdenesStatus()
-                this.getCanjeados()
-                this.getOtorgados()
-                this.getAtrasadas()
-                this.getProductosTop()
                 return false
             } else {
                 return true
             }
+        }
+    },
+    watch: {
+        user() {
+            this.getInfo()
         }
     }
 }
@@ -195,7 +207,9 @@ export default {
 }
 
 .canvas-box {
-    width: 700px
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 16px;
 }
 
 .titulo {
@@ -213,7 +227,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-right: 40px ;
+    padding-right: 40px;
 }
 
 .filtrado-container {
@@ -244,7 +258,7 @@ export default {
     height: 56px;
     border: 3px solid #31212B;
     border-radius: 16px;
-    padding-left: 20px ;
+    padding-left: 20px;
 }
 
 .dashboard-container {
@@ -267,6 +281,14 @@ export default {
     margin-bottom: 20px;
 }
 
+.top-rones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
 .top-parroquias ul {
     display: flex;
     flex-direction: column;
@@ -274,7 +296,7 @@ export default {
     align-items: flex-start;
     color: #000;
     gap: 0;
-    
+
 }
 
 .top-parroquias h2 {
@@ -305,7 +327,7 @@ export default {
 
 
 .button-18 {
-    margin-left: 20px ;
+    margin-left: 20px;
     align-items: center;
     background-color: #31212B;
     border: 0;
@@ -357,5 +379,4 @@ export default {
         color: rgba(0, 0, 0, .3);
     }
 }
-
 </style>
