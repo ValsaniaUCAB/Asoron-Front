@@ -1,20 +1,23 @@
 <template>
     <div v-if="isLoading">Cargando</div>
     <div class="main-container" v-else>
-        <div class="filtrado-container">  
-            <div class="busqueda">
-                <div class="titulo-barras">Fecha Inicial</div>
-                <input class="barra-busqueda" type="text" placeholder="aaaa-mm-dd" v-model="term"
-                @keypress.enter="cargarRonesConBusqueda">
+        <div class="header-container"> 
+            <div class="filtrado-container"> 
+                <div class="busqueda">
+                    <div class="titulo-barras">Fecha Inicial</div>
+                    <input class="barra-busqueda" type="text" placeholder="aaaa-mm-dd" v-model="term"
+                    @keypress.enter="cargarRonesConBusqueda">
+                </div>
+                <div class="busqueda">
+                    <div class="titulo-barras">Fecha Final</div>
+                    <input class="barra-busqueda" type="text" placeholder="aaaa-mm-dd" v-model="term"
+                    @keypress.enter="cargarRonesConBusqueda">
+                </div>
+                <button class="button-18">Filtrar</button>
             </div>
-            <div class="busqueda">
-                <div class="titulo-barras">Fecha Final</div>
-                <input class="barra-busqueda" type="text" placeholder="aaaa-mm-dd" v-model="term"
-                @keypress.enter="cargarRonesConBusqueda">
-            </div>
-            <button class="button-18">Filtrar</button>
+            <Logout></Logout>
         </div>
-        <h1>Dashboard</h1>
+        <h1 class="titulo">Dashboard</h1>
         <div class="dashboard-container">
             <div class="left-side">
                 <div class="top-parroquias">
@@ -22,7 +25,7 @@
                     <h3></h3>
                     <ul>
                         <li v-for="parroquia in topParroquias" :key="parroquia.id">
-                            <span>{{ parroquia.parroquia }}</span>
+                            <b>{{ parroquia.parroquia }}</b>
                             <hr>
                             <span>{{ parroquia.cantidad }}</span>
                         </li>
@@ -65,7 +68,6 @@
             </div>
         </div>
     </div>
-    <Logout></Logout>
     
 </template>
 
@@ -196,6 +198,24 @@ export default {
     width: 700px
 }
 
+.titulo {
+    color: #31212B;
+    text-align: center;
+    font-family: 'Brothers', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 20px;
+
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 40px ;
+}
+
 .filtrado-container {
     display: flex;
     flex-direction: row;
@@ -254,6 +274,7 @@ export default {
     align-items: flex-start;
     color: #000;
     gap: 0;
+    
 }
 
 .top-parroquias h2 {
