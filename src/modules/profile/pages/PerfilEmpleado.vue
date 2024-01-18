@@ -21,7 +21,9 @@
                     <h2><b>Top 10 Parroquias</b> - Ventas Online</h2>
                     <h3></h3>
                     <ul>
-                        <li v-for="parroquia in topParroquias" :key="parroquia.id"><span>{{ parroquia.parroquia }}</span>==>
+                        <li v-for="parroquia in topParroquias" :key="parroquia.id">
+                            <span>{{ parroquia.parroquia }}</span>
+                            <hr>
                             <span>{{ parroquia.cantidad }}</span>
                         </li>
                     </ul>
@@ -248,13 +250,24 @@ export default {
 .top-parroquias ul {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
     color: #000;
+    gap: 0;
 }
 
 .top-parroquias h2 {
     font-family: 'Inter', sans-serif;
     color: #31212B;
+}
+
+.top-parroquias ul li {
+    display: flex;
+    padding: 10px;
+    width: 450px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #31212B;
 }
 
 .right-side {
