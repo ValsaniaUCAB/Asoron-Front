@@ -36,7 +36,8 @@
                 <!-- <hr> -->
                 <div class="ordenes-status">
                     <h2>Ordenes por status</h2>
-                    <ul v-if="ordenesStatus">
+                    <ul
+                        v-if="ordenesStatus.ordenRecibida !== 0 || ordenesStatus.ordenAprovada !== 0 || ordenesStatus.ordenEnCamino !== 0 || ordenesStatus.ordenEntregada !== 0">
                         <li>
                             <b>Orden Recibida</b><span>{{ ordenesStatus.ordenRecibida }}</span>
                         </li>
@@ -109,7 +110,7 @@ export default {
             topParroquias: [],
             productoMasVendido: {},
             ventasEsteMes: null,
-            ordenesStatus: null,
+            ordenesStatus: { ordenEntregada: 0, ordenRecibida: 0, ordenEnCamino: 0, ordenAprovada: 0 },
             puntosCanjeados: null,
             puntosOtorgados: null,
             ordenesAtrasadas: null,
@@ -237,8 +238,8 @@ export default {
         }
     },
     watch: {
-        user() {
-            this.getInfo()
+        user(value) {
+            if (value) this.getInfo()
         }
     },
     mounted() {
