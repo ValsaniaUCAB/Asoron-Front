@@ -113,7 +113,7 @@
                                                 :id=ronDetallado.ron.anejamiento.barril.indexOf(barril)>
                                             <label class="collapsible-label internal-label add-label-padding"
                                                 :for=ronDetallado.ron.anejamiento.barril.indexOf(barril)>
-                                                Barril {{ ronDetallado.ron.anejamiento.barril.indexOf(barril) }}
+                                                Barril {{ ronDetallado.ron.anejamiento.barril.indexOf(barril) + 1}}
                                             </label>
                                             <div class="collapsible-text internal-list">
                                                 <ul class="collapsible-text-list internal-list add-list-padding">
