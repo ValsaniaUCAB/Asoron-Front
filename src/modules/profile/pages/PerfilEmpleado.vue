@@ -78,6 +78,8 @@ import {
     getPuntosCanjeados, getPuntosOtorgados, getOrdenesAtrasadas, getTop10Productos
 } from '../helpers/getDashboardData'
 import { mapState } from 'vuex';
+import Swal from 'sweetalert2'
+
 
 export default {
     components: {
@@ -141,7 +143,6 @@ export default {
             return array
         },
         getChart() {
-
             const ctx = document.getElementById('chart')
             if (this.chart) {
                 this.chart.destroy()
@@ -166,7 +167,7 @@ export default {
             })
         },
         getInfo() {
-            console.log('Hago una peticion')
+            if (!this.validarFechas()) return
             this.getParroquiasTop()
             this.getProducto()
             this.getVentasEsteMes()
@@ -175,6 +176,38 @@ export default {
             this.getOtorgados()
             this.getAtrasadas()
             this.getProductosTop()
+        },
+        validarFechas() {
+            if (this.validarFormatoFecha(this.fechaInicio) && this.validarFormatoFecha(this.fechaFin)) {
+                if (this.fechaFin >= this.fechaInicio) {
+                    return true
+                } else {
+                    Swal.fire({
+                        position: "bottom-end",
+                        title: "La fecha final no puede ser menor que la fecha inicial",
+                        background: "#F94646",
+                        color: "#fff",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        backdrop: false
+                    });
+                }
+            } else {
+                Swal.fire({
+                    position: "bottom-end",
+                    title: "Formato de fecha inválido",
+                    background: "#F94646",
+                    color: "#fff",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    backdrop: false
+                });
+            }
+            return false
+        },
+        validarFormatoFecha(fecha) {
+            const regexFecha = /^\d{4}-\d{2}-\d{2}$/;
+            return regexFecha.test(fecha);
         }
     },
     computed: {
