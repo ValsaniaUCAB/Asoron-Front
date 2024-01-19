@@ -16,7 +16,7 @@
             </div>
             <Logout></Logout>
         </div>
-        
+
         <div class="dashboard-container">
             <div class="left-side">
                 <div class="top-parroquias">
@@ -61,14 +61,15 @@
             <div class="right-side">
                 <div class="top-producto">
                     <h2>Producto mas vendido</h2>
-                    <span v-if="productoMasVendido">{{ productoMasVendido.nombre }} ==> {{ productoMasVendido.cantidad }}U.</span>
+                    <span v-if="productoMasVendido.nombre">{{ productoMasVendido.nombre }} ==> {{
+                        productoMasVendido.cantidad }}U.</span>
                     <div class="top-producto-placehold" v-else>
                         <span>No hay un producto mas vendido en este rango de fechas</span>
                     </div>
                 </div>
                 <!-- <hr> -->
                 <div class="top-rones">
-                    <h2 ><b>Rones mas vendidos </b> - Tienda Física</h2>
+                    <h2><b>Rones mas vendidos </b> - Tienda Física</h2>
                     <div class="canvas-box">
                         <canvas id="chart"></canvas>
                     </div>
@@ -106,7 +107,7 @@ export default {
             fechaFin: '2024-01-31',
 
             topParroquias: [],
-            productoMasVendido: null,
+            productoMasVendido: {},
             ventasEsteMes: null,
             ordenesStatus: null,
             puntosCanjeados: null,
@@ -239,6 +240,11 @@ export default {
         user() {
             this.getInfo()
         }
+    },
+    mounted() {
+        if (this.user) {
+            this.getInfo()
+        }
     }
 }
 </script>
@@ -317,7 +323,7 @@ export default {
 }
 
 .left-side hr {
-    width :80%;
+    width: 80%;
 }
 
 .top-parroquias {
@@ -325,7 +331,7 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     padding: 20px;
-    
+
 }
 
 .top-parroquias ul {
@@ -395,7 +401,7 @@ export default {
 }
 
 .right-side hr {
-    width :80%;
+    width: 80%;
 }
 
 .top-rones {
