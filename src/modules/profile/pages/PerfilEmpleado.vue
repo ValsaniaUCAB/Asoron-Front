@@ -1,6 +1,7 @@
 <template>
     <div v-if="isLoading">Cargando</div>
     <div class="main-container" v-else>
+        <h1 class="titulo">Dashboard</h1>
         <div class="header-container">
             <div class="filtrado-container">
                 <div class="busqueda">
@@ -15,55 +16,69 @@
             </div>
             <Logout></Logout>
         </div>
-        <h1 class="titulo">Dashboard</h1>
+        
         <div class="dashboard-container">
             <div class="left-side">
                 <div class="top-parroquias">
                     <h2><b>Top 10 Parroquias</b> - Ventas Online</h2>
-                    <h3 v-if="topParroquias.length === 0">No hay ventas online en este rango de fechas</h3>
+                    <ul v-if="topParroquias.length === 0">
+                        <li style="border:none; font-size:20px">
+                            No hay ventas online en este rango de fechas
+                        </li>
+                    </ul>
                     <ul v-else>
                         <li v-for="parroquia in topParroquias" :key="parroquia.id">
                             <b>{{ parroquia.parroquia }}</b>
-                            <hr>
                             <span>{{ parroquia.cantidad }}</span>
                         </li>
                     </ul>
                 </div>
-                <hr>
+                <!-- <hr> -->
                 <div class="ordenes-status">
                     <h2>Ordenes por status</h2>
                     <ul v-if="ordenesStatus">
                         <li>
-                            <span>Orden Recibida</span><span>{{ ordenesStatus.ordenRecibida }}</span>
+                            <b>Orden Recibida</b><span>{{ ordenesStatus.ordenRecibida }}</span>
                         </li>
                         <li>
-                            <span>Orden Aprobada</span><span>{{ ordenesStatus.ordenAprovada }}</span>
+                            <b>Orden Aprobada</b><span>{{ ordenesStatus.ordenAprovada }}</span>
                         </li>
                         <li>
-                            <span>Orden En Camino</span><span>{{ ordenesStatus.ordenEnCamino }}</span>
+                            <b>Orden En Camino</b><span>{{ ordenesStatus.ordenEnCamino }}</span>
                         </li>
                         <li>
-                            <span>Orden Entregada</span><span>{{ ordenesStatus.ordenEntregada }}</span>
+                            <b>Orden Entregada</b><span>{{ ordenesStatus.ordenEntregada }}</span>
+                        </li>
+                    </ul>
+                    <ul v-else>
+                        <li style="border:none; font-size: 20px;">
+                            No hay Ordenes con estatus en este rango de fechas
                         </li>
                     </ul>
                 </div>
 
             </div>
             <div class="right-side">
-                <h2 class="top-rones"><b>Rones mas vendidos en tienda física</b></h2>
-                <div class="canvas-box">
-                    <canvas id="chart"></canvas>
-                </div>
                 <div class="top-producto">
                     <h2>Producto mas vendido</h2>
-                    <div v-if="productoMasVendido">{{ productoMasVendido.nombre }} ==> {{ productoMasVendido.cantidad }}
+                    <span v-if="productoMasVendido">{{ productoMasVendido.nombre }} ==> {{ productoMasVendido.cantidad }}U.</span>
+                    <div class="top-producto-placehold" v-else>
+                        <span>No hay un producto mas vendido en este rango de fechas</span>
                     </div>
                 </div>
+                <!-- <hr> -->
+                <div class="top-rones">
+                    <h2 ><b>Rones mas vendidos </b> - Tienda Física</h2>
+                    <div class="canvas-box">
+                        <canvas id="chart"></canvas>
+                    </div>
+                </div>
+                <!-- <hr> -->
                 <div class="info-restante">
-                    <h2>Ventas realizadas: {{ ventasEsteMes }} </h2>
-                    <h2>Puntos canjeados ==> {{ puntosCanjeados }}</h2>
-                    <h2>Puntos otorgados ==> {{ puntosOtorgados }}</h2>
-                    <h2>Ordenes atrasadas ==> {{ ordenesAtrasadas }}</h2>
+                    <h2 v-if="ventasEsteMes"><b>Ventas realizadas : </b>{{ ventasEsteMes }}</h2>
+                    <h2 v-if="puntosCanjeados"><b>Puntos canjeados : </b>{{ puntosCanjeados }}</h2>
+                    <h2 v-if="puntosOtorgados"><b>Puntos otorgados : </b>{{ puntosOtorgados }}</h2>
+                    <h2 v-if="ordenesAtrasadas"><b>Ordenes atrasadas : </b>{{ ordenesAtrasadas }}</h2>
                 </div>
             </div>
         </div>
@@ -239,19 +254,13 @@ export default {
     padding: 10px 20px;
 }
 
-.canvas-box {
-    width: 100%;
-    border: 1px solid lightgray;
-    border-radius: 16px;
-}
-
 .titulo {
     color: #31212B;
     text-align: center;
     font-family: 'Brothers', sans-serif;
     font-size: 40px;
     font-weight: 800;
-    margin-bottom: 20px;
+    margin: 150px 0 20px 0;
 
 }
 
@@ -302,8 +311,13 @@ export default {
 .left-side {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 50%;
-    padding: 20px 40px;
+    padding: 20px 0 20px 40px;
+}
+
+.left-side hr {
+    width :80%;
 }
 
 .top-parroquias {
@@ -311,15 +325,7 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     padding: 20px;
-    margin-bottom: 20px;
-}
-
-.top-rones {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    margin-bottom: 20px;
+    
 }
 
 .top-parroquias ul {
@@ -346,17 +352,109 @@ export default {
     border-bottom: 1px solid #31212B;
 }
 
-.right-side {
+.ordenes-status {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    align-items: flex-start;
     padding: 20px;
+    margin-bottom: 20px;
+}
+
+.ordenes-status ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: #000;
+    gap: 0;
+
+}
+
+.ordenes-status h2 {
+    font-family: 'Inter', sans-serif;
+    color: #31212B;
+    font-weight: 800;
+}
+
+.ordenes-status ul li {
+    display: flex;
+    padding: 10px;
+    width: 450px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #31212B;
 }
 
 
+.right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 20px 0;
+}
 
+.right-side hr {
+    width :80%;
+}
 
+.top-rones {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+.top-rones h2 {
+    font-family: 'Inter', sans-serif;
+    color: #31212B;
+}
+
+.canvas-box {
+    width: 80%;
+    border-radius: 16px;
+    margin-right: 40px;
+}
+
+.top-producto {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.top-producto h2 {
+    font-family: 'Inter', sans-serif;
+    color: #31212B;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.top-producto span {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    color: #31212B;
+    font-weight: 400;
+}
+
+.top-producto-placehold {
+    height: 90px;
+}
+
+.info-restante {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.info-restante h2 {
+    font-family: 'Inter', sans-serif;
+    color: #31212B;
+    margin-bottom: 10px;
+}
 
 
 .button-18 {
